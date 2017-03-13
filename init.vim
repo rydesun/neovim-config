@@ -49,6 +49,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 call plug#end()
 " theme appearence
 set background=dark
