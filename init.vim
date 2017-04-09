@@ -120,6 +120,8 @@ map ? <plug>(incsearch-backward)
 
 " Neomake {{{1
 autocmd! BufWritePost * Neomake
+let g:neomake_c_enabled_makers = ['clang']
+let g:neomake_cpp_enabled_makers = ['clang']
 
 " Jedi-vim {{{1
 let g:jedi#completions_enabled = 0
