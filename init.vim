@@ -26,6 +26,9 @@ autocmd FileType c,cpp,yaml setl sw=4 ts=4 et
 autocmd FileType javascript,xml,html,css setl sw=2
 
 
+let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash=sh']
+
+
 call plug#begin('~/.local/share/nvim/plugged')
 " Appearance {{{1
 Plug 'morhetz/gruvbox'
