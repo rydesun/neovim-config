@@ -41,6 +41,7 @@ Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 
@@ -120,6 +121,10 @@ nmap f <plug>(easymotion-overwin-f)
 nnoremap <esc><esc> :nohlsearch<CR>
 map / <plug>(incsearch-forward)
 map ? <plug>(incsearch-backward)
+
+" Vim-easy-align {{{1
+xmap <leader>a <Plug>(EasyAlign)
+nmap <leader>a <Plug>(EasyAlign)
 
 " Neomake {{{1
 autocmd! BufWritePost * Neomake
