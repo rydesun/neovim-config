@@ -46,7 +46,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 
 " Programming {{{1
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/clang_complete'
 Plug 'davidhalter/jedi-vim'
@@ -125,11 +125,6 @@ map ? <plug>(incsearch-backward)
 " Vim-easy-align {{{1
 xmap <leader>a <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)
-
-" Neomake {{{1
-autocmd! BufWritePost * Neomake
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_cpp_enabled_makers = ['clang']
 
 " Jedi-vim {{{1
 let g:jedi#completions_enabled = 0
