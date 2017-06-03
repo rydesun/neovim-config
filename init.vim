@@ -38,6 +38,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
+" }}}
 
 " Operation {{{1
 Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
@@ -47,6 +48,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
+" }}}
 
 " Programming {{{1
 Plug 'w0rp/ale'
@@ -56,10 +58,12 @@ Plug 'davidhalter/jedi-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
+" }}}
 
 " Git {{{1
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" }}}
 
 " Other {{{1
 Plug 'tpope/vim-repeat'
@@ -74,6 +78,7 @@ colorscheme gruvbox
 highlight Normal guibg=#160a04
 highlight Folded guibg=#1a2422
 highlight SignColumn guibg=#1a2422
+" }}}
 
 " Appearance tweak {{{1
 set termguicolors
@@ -81,6 +86,7 @@ set fillchars=vert:│
 highlight VertSplit ctermbg=None guibg=None
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 noremap <F1> :TagbarToggle<CR>
+" }}}
 
 " Airline {{{1
 let g:airline_powerline_fonts = 1
@@ -97,9 +103,11 @@ let g:airline_symbols = {'linenr': '', 'whitespace': '', 'maxlinenr': 'L'}
 let g:airline_mode_map = {'n': 'N', 'i': 'I', 'R': 'R', 'c': 'C', 'v': 'V', 's': 'S'}
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#tagbar#flags = 'f'
+" }}}
 
 " Rainbow parentheses {{{1
 let g:rainbow_active = 1
+" }}}
 
 " Denite {{{1
 call denite#custom#var('file_rec', 'command',
@@ -110,6 +118,7 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
+" }}}
 
 " Easymotion {{{1
 let g:EasyMotion_keys = 'asdghklqweruiopvnfj;'
@@ -119,15 +128,18 @@ let g:EasyMotion_use_smartsign_us = 1
 let g:EasyMotion_do_shade = 0
 map  f <plug>(easymotion-bd-f)
 nmap f <plug>(easymotion-overwin-f)
+" }}}
 
 " Incsearch {{{1
 nnoremap <esc><esc> :nohlsearch<CR>
 map / <plug>(incsearch-forward)
 map ? <plug>(incsearch-backward)
+" }}}
 
 " Vim-easy-align {{{1
 xmap <leader>a <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)
+" }}}
 
 " Jedi-vim {{{1
 let g:jedi#completions_enabled = 0
@@ -137,11 +149,13 @@ let g:jedi#documentation_command = ""
 let g:jedi#usages_command = ""
 let g:jedi#completions_command = ""
 let g:jedi#rename_command = "<leader>r"
+" }}}
 
 " Ultisnips {{{1
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
+" }}}
 
 " nerdcommenter {{{1
 map <leader>cc <plug>NERDCommenterToggle
