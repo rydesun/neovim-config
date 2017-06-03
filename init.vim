@@ -4,24 +4,27 @@ set scrolloff=5
 set hidden
 
 let mapleader=" " | noremap <space> <nop>
-map  <C-a> ^
-imap <C-a> <Esc>^i
-map  <C-e> <End>
-imap <C-e> <End>
-noremap ; :
-noremap : ;
-noremap  <silent>p p`]
-vnoremap <silent>y y`]
+let maplocalleader="-" | noremap - <nop>
+noremap  <C-a>  ^
+inoremap <C-a>  <Esc>^i
+noremap  <C-e>  <End>
+inoremap <C-e>  <End>
+noremap  ;  :
+noremap  :  ;
+noremap  <silent>p  p`]
+vnoremap <silent>y  y`]
+noremap  H  :bp<CR>
+noremap  L  :bn<CR>
 
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-cnoremap ww         w !sudo tee % >/dev/null
-cnoremap <expr>%%   expand('%:h').'/'
+cnoremap <C-p>  <Up>
+cnoremap <C-n>  <Down>
+cnoremap <expr>%%  expand('%:h').'/'
+cabbrev  ww  w !sudo tee % >/dev/null
 
 
-cabbrev i2 setl sw=2 ts=8 noet
-cabbrev i4 setl sw=4 ts=4 et
-cabbrev i8 setl sw=8 ts=8 noet
+cabbrev i2  setl sw=2 ts=8 noet
+cabbrev i4  setl sw=4 ts=4 et
+cabbrev i8  setl sw=8 ts=8 noet
 autocmd FileType c,cpp,yaml setl sw=4 ts=4 et
 autocmd FileType javascript,xml,html,css setl sw=2
 
