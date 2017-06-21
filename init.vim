@@ -83,8 +83,8 @@ highlight SignColumn guibg=#1a2422
 " Appearance tweak {{{1
 set termguicolors
 set fillchars=vert:│
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 highlight VertSplit ctermbg=None guibg=None
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 noremap <F1> :TagbarToggle<CR>
 " }}}
 
