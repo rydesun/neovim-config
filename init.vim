@@ -2,6 +2,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set ignorecase smartcase
 set scrolloff=5
 set hidden
+set mouse=a
 
 let mapleader=" " | noremap <space> <nop>
 let maplocalleader="-" | noremap - <nop>
