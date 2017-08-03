@@ -141,6 +141,10 @@ xmap <leader>a <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)
 " }}}
 
+" nvim-completion-manager {{{1
+let g:cm_matcher = {"module": "cm_matchers.fuzzy_matcher"}
+" }}}
+
 " Jedi-vim {{{1
 let g:jedi#completions_enabled = 0
 let g:jedi#goto_command = "<leader>j"
