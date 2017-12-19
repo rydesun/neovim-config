@@ -23,11 +23,11 @@ cnoremap <expr>%%  expand('%:h').'/'
 cabbrev  ww  w !sudo tee % >/dev/null
 
 
-cabbrev i2  setl sw=2 ts=8 noet
+cabbrev i2  setl sw=2 ts=8 et
 cabbrev i4  setl sw=4 ts=4 et
 cabbrev i8  setl sw=8 ts=8 noet
-autocmd FileType c,cpp,yaml setl sw=4 ts=4 et
-autocmd FileType javascript,xml,html,css setl sw=2
+autocmd FileType c,cpp setl sw=4 ts=4 et
+autocmd FileType javascript,xml,html,css,vue,yaml setl sw=2 et
 
 
 let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash=sh']
