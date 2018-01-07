@@ -1,1 +1,4 @@
-.netrwhist
+.*
+init.vim.bak
+site/
+autoload/
