@@ -170,8 +170,9 @@ call plug#end()
 set background=dark	" 暗色背景
 set termguicolors	" 使用GUI配色
 silent! colorscheme gruvbox	" 配色主题
-highlight SignColumn guibg=#1a2422
-highlight Folded guibg=#1a2422
+highlight Normal guibg=#161616
+highlight SignColumn guibg=#1a2020
+highlight Folded guibg=#1a2020
 
 
 " vim: foldmethod=marker:foldmarker=<<<---,>>>---
