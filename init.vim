@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " 配置初始化
 let s:confdir = expand('<sfile>:p:h')	" confdir 配置文件路径
 let s:plugdir = s:confdir.'/site'	" plugdir 插件路径
@@ -5,12 +6,12 @@ let s:plugdir = s:confdir.'/site'	" plugdir 插件路径
 " 函数 <<<------------------------------
 func SignColumnToggle()
 " 切换侧边栏
-	if &signcolumn == "auto"
+	if &signcolumn ==# 'auto'
 		setlocal signcolumn=no
-		echom "SignColumn disabled"
+		echom 'SignColumn disabled'
 	else
 		setlocal signcolumn=auto
-		echom "SignColumn enabled"
+		echom 'SignColumn enabled'
 	endif
 endfunc
 " >>>-----------------------------------
@@ -23,7 +24,12 @@ set scrolloff=5	" 滚动时光标到上下边缘的预留行数
 set hidden	" 保存修改到内存
 set title	" 设置虚拟终端的标题
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式的可见字符
-set wildignore+=*~,*.swp,*.bak,*.py[co],__pycache__	" vim内置通配符的过滤
+set wildmode=list:longest,full	" 命令行补全方式为列表
+set wildignorecase	" 命令行补全文件名时无视大小写
+set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__	" vim内置通配符的过滤
+set splitbelow	" 水平分割的新窗口在下面
+set splitright	" 垂直分割的新窗口在右边
+set mouse=a	" 所有模式开启鼠标支持
 
 " 键位
 noremap  ;  :
@@ -40,12 +46,14 @@ nnoremap <silent>  <F3>        :set wrap! wrap?<CR>
 nnoremap <silent>  <F5>        :call SignColumnToggle()<CR>
 nnoremap <silent>  <F6>        :IndentLinesToggle<CR>
 
-let mapleader=' ' | noremap <Space> <Nop>
+let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <Leader>y   "+y
+nnoremap <silent>  <Leader>p   "+p
+nnoremap <silent>  <Leader>P   "+P
 nnoremap <silent>  <Leader>j   :call LanguageClient_textDocument_definition()<CR>
 map                <Leader>c   <Plug>NERDCommenterToggle
-for i in [1,2,3,4,5,6,7,8,9]
-	execute "map <Leader>".i. " " ."<Plug>AirlineSelectTab".i
+for s:i in [1,2,3,4,5,6,7,8,9]
+	execute 'map <Leader>'.s:i. ' ' .'<Plug>AirlineSelectTab'.s:i
 endfor
 
 " 命令行
@@ -55,12 +63,13 @@ cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
 cabbrev  <silent>  ww          w !sudo tee % >/dev/null
+cabbrev  <silent>  i2          setlocal shiftwidth=2 tabstop=2 expandtab
 cabbrev  <silent>  i4          setlocal shiftwidth=4 tabstop=4 expandtab
 cabbrev  <silent>  i8          setlocal shiftwidth=8 tabstop=8 noexpandtab
 cabbrev  <silent>  rename      call LanguageClient_textDocument_rename()
 
 " 插件管理器 vim-plug
-let g:plug_window = 'new'
+let g:plug_window = 'new'	" 控制台打开方式
 
 call plug#begin(s:plugdir)
 Plug 'morhetz/gruvbox', {'as': 'theme-gruvbox'}						" 配色主题
@@ -91,7 +100,7 @@ Plug 'vim-airline/vim-airline', {'as': 'airline'}					" 状态栏
 		\ ['x', 'y', 'b', 'z', 'error', 'warning']
 	\ ]
 	" 内容调整
-	let g:airline_section_z = "%p%% %l/%L:%v"
+	let g:airline_section_z = '%p%% %l/%L:%2v'
 	" >>>-----------------------------------
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}					" 可视化缩进
 	" <<<-----------------------------------
@@ -111,12 +120,12 @@ Plug 'haya14busa/incsearch.vim', {'as': 'incsearch'}					" 增量搜索
 	" >>>-----------------------------------
 Plug 'Shougo/denite.nvim', {'as': 'denite', 'do': ':UpdateRemotePlugins'}		" 搜索
 Plug 'autozimu/LanguageClient-neovim', {'as': 'language-client',
-	\ 'branch': 'next', 'do': 'install.sh'}						" LSP
+	\ 'branch': 'next', 'do': 'install.sh'}						" LSP客户端
 	" <<<-----------------------------------
 	" [c/c++]: `pacman -S clang-tools-extra`
 	" [python]: `pip install --user python-language-server jedi rope pyflakes mccabe pycodestyle pydocstyle yapf`
 	" [go]: `go get -u github.com/sourcegraph/go-langserver github.com/nsf/gocode`
-	" [javascript]: `npm install javascript-typescript-langserver`
+	" [javascript/typescript]: `npm install javascript-typescript-langserver`
 	" [html]: `npm install vscode-html-languageserver-bin`
 	" [css]: `npm install vscode-css-languageserver-bin`
 	" [vue]: `npm install vue-language-server`
@@ -128,13 +137,53 @@ Plug 'autozimu/LanguageClient-neovim', {'as': 'language-client',
 		\ 'python': ['pyls'],
 		\ 'go': ['go-langserver', '-gocodecompletion'],
 		\ 'javascript': ['javascript-typescript-stdio'],
+		\ 'typescript': ['javascript-typescript-stdio'],
 		\ 'html': ['html-languageserver', '--stdio'],
 		\ 'css': ['css-languageserver', '--stdio'],
 		\ 'vue': ['vls'],
 		\ 'dockerfile': ['docker-langserver', '--stdio'],
 		\ 'json': ['json-languageserver', '--stdio'],
 	\ }
-	set formatexpr=LanguageClient_textDocument_rangeFormatting()
+	" 设置符号
+	let g:LanguageClient_diagnosticsDisplay = {
+		\ 1: {
+		\ 'name': 'Error',
+		\ 'texthl': 'ALEError',
+		\ 'signText': 'ⓧ',
+		\ 'signTexthl': 'ALEErrorSign',
+		\ },
+		\ 3: {
+		\ 'name': 'Information',
+		\ 'texthl': 'ALEInfo',
+		\ 'signText': 'ⓘ',
+		\ 'signTexthl': 'ALEInfoSign',
+		\ },
+	\ }
+	set formatexpr=LanguageClient_textDocument_rangeFormatting()	" 通过gp命令修改代码风格的必设项
+	" >>>-----------------------------------
+Plug 'w0rp/ale'										" ALE语法检测
+	" <<<-----------------------------------
+	" 必须显式启用linter, 防止与LSP客户端冲突
+	let g:ale_linters_explicit = 1
+	" 启用以下linter
+	" [shell]: `pacman -S shellcheck`
+	" [go]: `go get -u github.com/golang/lint/golint`
+	" [vimscript]: `pip install --user vim-vint`
+	" [coffeescript]: `npm install coffeelint`
+	" [makefile]: `go get github.com/mrtazz/checkmake`
+	" [yaml]: `pip install --user yamllint`
+	let g:ale_linters = {
+		\ 'sh': ['shellcheck'],
+		\ 'go': ['go build', 'golint'],
+		\ 'vim': ['vint'],
+		\ 'coffee': ['coffeelint'],
+		\ 'make': ['checkmake'],
+		\ 'yaml': ['yamllint'],
+	\}
+	" 设置符号
+	let g:ale_sign_error = 'ⓧ'
+	let g:ale_sign_warning = '⚠'
+	let g:ale_sign_info = 'ⓘ '
 	" >>>-----------------------------------
 Plug 'roxma/nvim-completion-manager', {'as': 'ncm'}					" 补全管理器
 	" <<<-----------------------------------
@@ -145,7 +194,7 @@ Plug 'roxma/nvim-completion-manager', {'as': 'ncm'}					" 补全管理器
 		\ 'cm-css': {'enable': 0},
 	\ }
 	" 使用模糊匹配
-	let g:cm_matcher = {"module": "cm_matchers.fuzzy_matcher"}
+	let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher'}
 	" 按优先级设置激活长度
 	let g:cm_refresh_length = [[1,3],[9,2]]
 	" 多线程数
@@ -160,10 +209,13 @@ Plug 'scrooloose/nerdcommenter'								" 快速注释
 	let g:NERDSpaceDelims = 1
 	let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
 	" 注释符号左对齐
-	let g:NERDDefaultAlign="left"
+	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
 Plug 'airblade/vim-gitgutter', {'as': 'gitgutter'}					" git侧边栏
 Plug 'tpope/vim-fugitive', {'as': 'fugitive'}						" git命令封装
+Plug 'kchmck/vim-coffee-script', {'as': 'coffeescript'}					" coffeescript
+Plug 'HerringtonDarkholme/yats.vim', {'as': 'typescript'}				" typescript
+Plug 'cespare/vim-toml', {'as': 'toml'}							" toml
 call plug#end()
 
 " 样式
@@ -173,6 +225,9 @@ silent! colorscheme gruvbox	" 配色主题
 highlight Normal guibg=#161616
 highlight SignColumn guibg=#1a2020
 highlight Folded guibg=#1a2020
+highlight! link ALEError GruvboxRedSign
+highlight! link ALEWarning GruvboxYellowSign
+highlight! link ALEInfo GruvboxBlueSign
 
 
 " vim: foldmethod=marker:foldmarker=<<<---,>>>---
