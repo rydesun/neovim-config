@@ -7,6 +7,4 @@ My neovim config file. Use [vim-plug](https://github.com/junegunn/vim-plug) to m
     curl -fLo ~/.config/nvim/init.vim \
         https://raw.githubusercontent.com/rydesun/neovim-config/master/init.vim
 
-    sudo pacman -S python-jedi clang ctags
-
     nvim --headless -c "PlugInstall | q"

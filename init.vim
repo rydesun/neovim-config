@@ -38,8 +38,13 @@ noremap  L  $
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 map                /           <Plug>(incsearch-forward)
 map                ?           <Plug>(incsearch-backward)
-nnoremap <silent>  K           :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent>  gq          :call LanguageClient_textDocument_formatting()<CR>
+map      <silent>  K           :call <SID>show_documentation()<CR>
+map                [g          <Plug>(coc-diagnostic-prev)
+map                ]g          <Plug>(coc-diagnostic-next)
+map                gd          <Plug>(coc-definition)
+map                gy          <Plug>(coc-type-definition)
+map                gi          <Plug>(coc-implementation)
+map                gr          <Plug>(coc-references)
 
 nnoremap <silent>  <F2>        :set list! list?<CR>
 nnoremap <silent>  <F3>        :set wrap! wrap?<CR>
@@ -66,7 +71,6 @@ cabbrev  <silent>  ww          w !sudo tee % >/dev/null
 cabbrev  <silent>  i2          setlocal shiftwidth=2 tabstop=2 expandtab
 cabbrev  <silent>  i4          setlocal shiftwidth=4 tabstop=4 expandtab
 cabbrev  <silent>  i8          setlocal shiftwidth=8 tabstop=8 noexpandtab
-cabbrev  <silent>  rename      call LanguageClient_textDocument_rename()
 
 " 插件管理器 vim-plug
 let g:plug_window = 'new'	" 控制台打开方式
@@ -118,89 +122,23 @@ Plug 'haya14busa/incsearch.vim', {'as': 'incsearch'}					" 增量搜索
 	" 不显示光标
 	highlight link IncSearchCursor IncSearch
 	" >>>-----------------------------------
-Plug 'Shougo/denite.nvim', {'as': 'denite', 'do': ':UpdateRemotePlugins'}		" 搜索
-Plug 'autozimu/LanguageClient-neovim', {'as': 'language-client',
-	\ 'branch': 'next', 'do': 'install.sh'}						" LSP客户端
+Plug 'neoclide/coc.nvim', {'branch': 'release'}						" LSP客户端
 	" <<<-----------------------------------
-	" [c/c++]: `pacman -S clang-tools-extra`
-	" [python]: `pip install --user python-language-server jedi rope pyflakes mccabe pycodestyle pydocstyle yapf`
-	" [go]: `go get -u github.com/sourcegraph/go-langserver github.com/nsf/gocode`
-	" [javascript/typescript]: `npm install javascript-typescript-langserver`
-	" [html]: `npm install vscode-html-languageserver-bin`
-	" [css]: `npm install vscode-css-languageserver-bin`
-	" [vue]: `npm install vue-language-server`
-	" [dockerfile]: `npm install dockerfile-language-server-nodejs`
-	" [json]: `npm install vscode-json-languageserver-bin`
-	let g:LanguageClient_serverCommands = {
-		\ 'c': ['clangd'],
-		\ 'cpp': ['clangd'],
-		\ 'python': ['pyls'],
-		\ 'go': ['go-langserver', '-gocodecompletion'],
-		\ 'javascript': ['javascript-typescript-stdio'],
-		\ 'typescript': ['javascript-typescript-stdio'],
-		\ 'html': ['html-languageserver', '--stdio'],
-		\ 'css': ['css-languageserver', '--stdio'],
-		\ 'vue': ['vls'],
-		\ 'dockerfile': ['docker-langserver', '--stdio'],
-		\ 'json': ['json-languageserver', '--stdio'],
-	\ }
-	" 设置符号
-	let g:LanguageClient_diagnosticsDisplay = {
-		\ 1: {
-		\ 'name': 'Error',
-		\ 'texthl': 'ALEError',
-		\ 'signText': 'ⓧ',
-		\ 'signTexthl': 'ALEErrorSign',
-		\ },
-		\ 3: {
-		\ 'name': 'Information',
-		\ 'texthl': 'ALEInfo',
-		\ 'signText': 'ⓘ',
-		\ 'signTexthl': 'ALEInfoSign',
-		\ },
-	\ }
-	set formatexpr=LanguageClient_textDocument_rangeFormatting()	" 通过gp命令修改代码风格的必设项
+	" 强制选项
+	set hidden nobackup nowritebackup
+	" 推荐选项
+	" set cmdheight=2
+	set updatetime=300
+	" 高亮光标下的符号
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+	func! s:show_documentation()
+		if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		else
+			call CocAction('doHover')
+		endif
+	endfunc
 	" >>>-----------------------------------
-Plug 'w0rp/ale'										" ALE语法检测
-	" <<<-----------------------------------
-	" 必须显式启用linter, 防止与LSP客户端冲突
-	let g:ale_linters_explicit = 1
-	" 启用以下linter
-	" [shell]: `pacman -S shellcheck`
-	" [go]: `go get -u github.com/golang/lint/golint`
-	" [vimscript]: `pip install --user vim-vint`
-	" [coffeescript]: `npm install coffeelint`
-	" [makefile]: `go get github.com/mrtazz/checkmake`
-	" [yaml]: `pip install --user yamllint`
-	let g:ale_linters = {
-		\ 'sh': ['shellcheck'],
-		\ 'go': ['go build', 'golint'],
-		\ 'vim': ['vint'],
-		\ 'coffee': ['coffeelint'],
-		\ 'make': ['checkmake'],
-		\ 'yaml': ['yamllint'],
-	\}
-	" 设置符号
-	let g:ale_sign_error = 'ⓧ'
-	let g:ale_sign_warning = '⚠'
-	let g:ale_sign_info = 'ⓘ '
-	" >>>-----------------------------------
-Plug 'roxma/nvim-completion-manager', {'as': 'ncm'}					" 补全管理器
-	" <<<-----------------------------------
-	" 取消默认源，启用LSP补全
-	let g:cm_sources_override = {
-		\ 'cm-jedi': {'enable': 0},
-		\ 'cm-gocode': {'enable': 0},
-		\ 'cm-css': {'enable': 0},
-	\ }
-	" 使用模糊匹配
-	let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher'}
-	" 按优先级设置激活长度
-	let g:cm_refresh_length = [[1,3],[9,2]]
-	" 多线程数
-	let g:cm_multi_threading = 4
-	" >>>-----------------------------------
-Plug 'SirVer/ultisnips'									" 代码片段补全
 Plug 'scrooloose/nerdcommenter'								" 快速注释
 	" <<<-----------------------------------
 	" 取消所有预设键位映射
@@ -213,9 +151,6 @@ Plug 'scrooloose/nerdcommenter'								" 快速注释
 	" >>>-----------------------------------
 Plug 'airblade/vim-gitgutter', {'as': 'gitgutter'}					" git侧边栏
 Plug 'tpope/vim-fugitive', {'as': 'fugitive'}						" git命令封装
-Plug 'kchmck/vim-coffee-script', {'as': 'coffeescript'}					" coffeescript
-Plug 'HerringtonDarkholme/yats.vim', {'as': 'typescript'}				" typescript
-Plug 'cespare/vim-toml', {'as': 'toml'}							" toml
 call plug#end()
 
 " 样式
