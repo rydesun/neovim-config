@@ -63,9 +63,9 @@ endfor
 let g:plug_window = 'new'	" 控制台打开方式
 
 call plug#begin(s:plugdir)
-Plug 'morhetz/gruvbox', {'as': 'theme-gruvbox'}						" 配色主题
+Plug 'hzchirs/vim-material', {'as': 'theme-material'}					" 配色主题
 	" <<<-----------------------------------
-	let g:gruvbox_invert_selection = 0	" V模式不反色
+	let g:airline_theme='material'
 	" >>>-----------------------------------
 Plug 'vim-airline/vim-airline', {'as': 'airline'}					" 状态栏
 	" <<<-----------------------------------
@@ -84,7 +84,7 @@ Plug 'vim-airline/vim-airline', {'as': 'airline'}					" 状态栏
 	if !exists('g:airline_symbols')
 		let g:airline_symbols = {}
 	endif
-	let g:airline_symbols.branch = '⎇'
+	let g:airline_symbols.branch = '⎇ '
 	" 状态栏布局调整
 	let g:airline#extensions#default#layout = [
 		\ ['a', 'c'],
@@ -143,13 +143,7 @@ call plug#end()
 " 样式
 set background=dark	" 暗色背景
 set termguicolors	" 使用GUI配色
-silent! colorscheme gruvbox	" 配色主题
-highlight Normal guibg=#161616
-highlight SignColumn guibg=#1a2020
-highlight Folded guibg=#1a2020
-highlight! link ALEError GruvboxRedSign
-highlight! link ALEWarning GruvboxYellowSign
-highlight! link ALEInfo GruvboxBlueSign
+silent! colorscheme vim-material	" 配色主题
 
 " 函数 <<<------------------------------
 func s:signColumn_toggle()
