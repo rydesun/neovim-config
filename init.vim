@@ -1,21 +1,7 @@
 scriptencoding utf-8
-" 配置初始化
-let s:plugdir = stdpath('data').'/plugged'	" plugdir 插件路径
-
-" 函数 <<<------------------------------
-func SignColumnToggle()
-" 切换侧边栏
-	if &signcolumn ==# 'auto'
-		setlocal signcolumn=no
-		echom 'SignColumn disabled'
-	else
-		setlocal signcolumn=auto
-		echom 'SignColumn enabled'
-	endif
-endfunc
-" >>>-----------------------------------
 
 " 基本配置
+let s:plugdir = stdpath('data').'/plugged'	" plugdir 插件路径
 set fileencodings=ucs-bom,utf-8,gbk,gb18030,latin1	" 常见文件编码(中文用户)
 set ignorecase smartcase	" 大小写智能搜索
 set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
@@ -37,28 +23,27 @@ noremap  L  $
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 map                /           <Plug>(incsearch-forward)
 map                ?           <Plug>(incsearch-backward)
-map      <silent>  K           :call <SID>show_documentation()<CR>
-map                [g          <Plug>(coc-diagnostic-prev)
-map                ]g          <Plug>(coc-diagnostic-next)
-map                gd          <Plug>(coc-definition)
-map                gy          <Plug>(coc-type-definition)
-map                gi          <Plug>(coc-implementation)
-map                gr          <Plug>(coc-references)
-
-nnoremap <silent>  <F2>        :set list! list?<CR>
-nnoremap <silent>  <F3>        :set wrap! wrap?<CR>
-nnoremap <silent>  <F5>        :call SignColumnToggle()<CR>
-nnoremap <silent>  <F6>        :IndentLinesToggle<CR>
+nnoremap <silent>  K           :call <SID>show_documentation()<CR>
+nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
+nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
+nmap     <silent>  gd          <Plug>(coc-definition)
+nmap     <silent>  gy          <Plug>(coc-type-definition)
+nmap     <silent>  gi          <Plug>(coc-implementation)
+nmap     <silent>  gr          <Plug>(coc-references)
 
 let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <Leader>y   "+y
 nnoremap <silent>  <Leader>p   "+p
 nnoremap <silent>  <Leader>P   "+P
-nnoremap <silent>  <Leader>j   :call LanguageClient_textDocument_definition()<CR>
 map                <Leader>c   <Plug>NERDCommenterToggle
 for s:i in [1,2,3,4,5,6,7,8,9]
-	execute 'map <Leader>'.s:i. ' ' .'<Plug>AirlineSelectTab'.s:i
+	" s=1时等同于map  <Leader>1  <Plug>AirlineSelectTab1
+	execute 'map <Leader>'.s:i.' <Plug>AirlineSelectTab'.s:i
 endfor
+nnoremap           <Leader>tl  :set list! list?<CR>
+nnoremap           <Leader>tw  :set wrap! wrap?<CR>
+nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
+nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
 
 " 命令行
 cnoremap           <C-a>       <Home>
@@ -67,9 +52,12 @@ cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
 cabbrev  <silent>  ww          w !sudo tee % >/dev/null
-cabbrev  <silent>  i2          setlocal shiftwidth=2 tabstop=2 expandtab
-cabbrev  <silent>  i4          setlocal shiftwidth=4 tabstop=4 expandtab
-cabbrev  <silent>  i8          setlocal shiftwidth=8 tabstop=8 noexpandtab
+for s:i in [2,4,8]
+	" s=2时等同于cabbrev  <silent>  i2   setlocal shiftwidth=2 tabstop=2 expandtab
+	execute 'ca <silent> i'.s:i.'  setl sw='.s:i.' ts='.s:i.' et'
+	" s=2时等同于cabbrev  <silent>  i2t  setlocal shiftwidth=2 tabstop=2 noexpandtab
+	execute 'ca <silent> i'.s:i.'t setl sw='.s:i.' ts='.s:i.' noet'
+endfor
 
 " 插件管理器 vim-plug
 let g:plug_window = 'new'	" 控制台打开方式
@@ -162,6 +150,19 @@ highlight Folded guibg=#1a2020
 highlight! link ALEError GruvboxRedSign
 highlight! link ALEWarning GruvboxYellowSign
 highlight! link ALEInfo GruvboxBlueSign
+
+" 函数 <<<------------------------------
+func s:signColumn_toggle()
+" 切换侧边栏
+	if &signcolumn ==# 'auto'
+		setlocal signcolumn=no
+		echom 'SignColumn disabled'
+	else
+		setlocal signcolumn=auto
+		echom 'SignColumn enabled'
+	endif
+endfunc
+" >>>-----------------------------------
 
 
 " vim: foldmethod=marker:foldmarker=<<<---,>>>---
