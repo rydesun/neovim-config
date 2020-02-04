@@ -6,6 +6,11 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "args": ["--stdio"],
+      "filetypes": ["dockerfile"]
+    },
     "golang": {
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
