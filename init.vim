@@ -1,7 +1,6 @@
 scriptencoding utf-8
 " 配置初始化
-let s:confdir = expand('<sfile>:p:h')	" confdir 配置文件路径
-let s:plugdir = s:confdir.'/site'	" plugdir 插件路径
+let s:plugdir = stdpath('data').'/plugged'	" plugdir 插件路径
 
 " 函数 <<<------------------------------
 func SignColumnToggle()

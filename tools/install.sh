@@ -10,22 +10,19 @@ die() {
 }
 
 conf=$1
-confdir=${2:-"${HOME}/.config/nvim"}
+confdir=${XDG_CONFIG_HOME:-"${HOME}/.config"}/nvim
+datadir=${XDG_DATA_HOME:-"${HOME}/.data"}/nvim
 
 if [[ ! -f $conf ]]; then
 	die "wrong init.vim"
 fi
-if [[ -e $confdir && ! -d $confdir ]]; then
-	die "wrong config dir"
-else
-	mkdir -p ${confdir}
-fi
 
-# auto backup
+mkdir -p ${confdir}
+# backup file will be generated
 cp "${conf}" "${confdir}/init.vim" -S .bak -v >&2
 
 msg "Download plugin manager..."
-curl -o "${confdir}/autoload/plug.vim" --create-dirs --silent \
+curl -fLo "${datadir}/site/autoload/plug.vim" --create-dirs --silent \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 msg "Install plugin..."
