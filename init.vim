@@ -109,12 +109,14 @@ Plug 'haya14busa/incsearch.vim', {'as': 'incsearch'}					" 增量搜索
 	" 不显示光标
 	highlight link IncSearchCursor IncSearch
 	" >>>-----------------------------------
+Plug 'sheerun/vim-polyglot'								" 语言补充
 Plug 'neoclide/coc.nvim', {'branch': 'release'}						" LSP客户端
 	" <<<-----------------------------------
 	" 强制选项
 	set hidden nobackup nowritebackup
 	" 推荐选项
 	" set cmdheight=2
+	set signcolumn=yes
 	set updatetime=300
 	" 高亮光标下的符号
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -138,10 +140,29 @@ Plug 'scrooloose/nerdcommenter'								" 快速注释
 	" >>>-----------------------------------
 Plug 'airblade/vim-gitgutter', {'as': 'gitgutter'}					" git侧边栏
 Plug 'tpope/vim-fugitive', {'as': 'fugitive'}						" git命令封装
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }			" 浏览器内嵌neovim
+	" <<<-----------------------------------
+	let g:firenvim_config = {
+		\ 'globalSettings': {
+			\ 'alt': 'all',
+		\  },
+		\ 'localSettings': {
+			\ '.*': {
+				\ 'cmdline': 'neovim',
+				\ 'priority': 0,
+				\ 'selector': 'textarea',
+				\ 'takeover': 'never',
+			\ },
+		\ }
+	\ }
+	if exists('g:started_by_firenvim')
+		set background=light
+		au BufEnter github.com_*.txt set filetype=markdown
+	endif
+	" >>>-----------------------------------
 call plug#end()
 
 " 样式
-set background=dark	" 暗色背景
 set termguicolors	" 使用GUI配色
 silent! colorscheme vim-material	" 配色主题
 
