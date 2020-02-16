@@ -72,31 +72,37 @@ Plug 'hzchirs/vim-material', {'as': 'theme-material'}					" 配色主题
 	" <<<-----------------------------------
 	let g:airline_theme='material'
 	" >>>-----------------------------------
-Plug 'vim-airline/vim-airline', {'as': 'airline'}					" 状态栏
+Plug 'itchyny/lightline.vim', {'as': 'lightline'}					" 状态栏
 	" <<<-----------------------------------
-	" 开启标签栏
-	let g:airline#extensions#tabline#enabled = 1
-	" 标签栏类型的提示字符
-	let g:airline#extensions#tabline#buffers_label = 'Buf'
-	let g:airline#extensions#tabline#tabs_label = 'Tab'
-	" 标签压缩名字算法
-	let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-	" 不显示utf-8[unix]
-	let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-	" 模式的提示字符
-	let g:airline_mode_map = {'n': 'N', 'i': 'I', 'R': 'R', 'c': 'C', 'v': 'V', 's': 'S'}
-	" 修改符号
-	if !exists('g:airline_symbols')
-		let g:airline_symbols = {}
-	endif
-	let g:airline_symbols.branch = '⎇ '
-	" 状态栏布局调整
-	let g:airline#extensions#default#layout = [
-		\ ['a', 'c'],
-		\ ['x', 'y', 'b', 'z', 'error', 'warning']
-	\ ]
-	" 内容调整
-	let g:airline_section_z = '%p%% %l/%L:%2v'
+	let g:lightline = {
+	\ 'active': {
+	\ 	'left': [ [ 'mode', 'paste' ],
+	\ 	[ 'gitbranch', 'winnr', 'readonly', 'absolutepath', 'modified' ] ]
+	\ },
+	\ 'component': {
+	\   'lineinfo': '%2l:%-2v',
+	\ },
+	\ 'component_function': {
+	\	'readonly': 'Lightline_readonly',
+	\ 	'gitbranch': 'Lightline_gitbranch'
+	\ },
+	\ 'mode_map': {'n':'N', 'i':'I', 'R':'R', 'v':'V', 'V':'V', "\<C-v>":'V',
+	\              'c':'C', 's':'S', 'S':'SL', "\<C-s>":'S', 't':'T'},
+	\ }
+	func! Lightline_readonly()
+		return &readonly ? '' : ''
+	endfunc
+	func! Lightline_gitbranch()
+		if !exists('*FugitiveHead')
+			return ''
+		endif
+		let branch = FugitiveHead()
+		if branch ==# ''
+			return ''
+		endif
+		let branch_abbr = branch ==# 'master' ? 'M' : branch
+		return '⎇  '.branch_abbr
+	endfunc
 	" >>>-----------------------------------
 Plug 'preservim/nerdtree'								" 文件管理
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}					" 可视化缩进
