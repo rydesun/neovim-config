@@ -46,6 +46,7 @@ nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
 nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
+nnoremap <silent>  <Leader>tt  :NERDTreeToggle<CR>
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
@@ -97,6 +98,7 @@ Plug 'vim-airline/vim-airline', {'as': 'airline'}					" 状态栏
 	" 内容调整
 	let g:airline_section_z = '%p%% %l/%L:%2v'
 	" >>>-----------------------------------
+Plug 'preservim/nerdtree'								" 文件管理
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}					" 可视化缩进
 	" <<<-----------------------------------
 	" 更精细的缩进线
