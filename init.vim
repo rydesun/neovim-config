@@ -21,8 +21,6 @@ noremap  ;  :
 noremap  H  ^
 noremap  L  $
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-map                /           <Plug>(incsearch-forward)
-map                ?           <Plug>(incsearch-backward)
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
@@ -116,11 +114,6 @@ Plug 'tpope/vim-repeat', {'as': 'repeat'}						" 重复支持
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}						" fcitx切换
 Plug 'jiangmiao/auto-pairs'								" 成对符号
 Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}				" 多重光标
-Plug 'haya14busa/incsearch.vim', {'as': 'incsearch'}					" 增量搜索
-	" <<<-----------------------------------
-	" 不显示光标
-	highlight link IncSearchCursor IncSearch
-	" >>>-----------------------------------
 Plug 'sheerun/vim-polyglot'								" 语言补充
 Plug 'neoclide/coc.nvim', {'branch': 'release'}						" LSP客户端
 	" <<<-----------------------------------
