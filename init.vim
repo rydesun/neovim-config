@@ -17,11 +17,11 @@ set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 " 函数 <<<------------------------------
 " 切换侧边栏
 function s:signColumn_toggle() abort
-	if &signcolumn ==# 'auto'
+	if &signcolumn ==# 'yes'
 		setlocal signcolumn=no
 		echom 'SignColumn disabled'
 	else
-		setlocal signcolumn=auto
+		setlocal signcolumn=yes
 		echom 'SignColumn enabled'
 	endif
 endfunction
