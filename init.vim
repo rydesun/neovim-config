@@ -66,13 +66,11 @@ endfor
 let g:plug_window = 'new'	" 控制台打开方式
 
 call plug#begin(s:plugdir)
-Plug 'hzchirs/vim-material', {'as': 'theme-material'}					" 配色主题
-	" <<<-----------------------------------
-	let g:airline_theme='material'
-	" >>>-----------------------------------
+Plug 'kaicataldo/material.vim', {'as': 'theme-material'}				" 配色主题
 Plug 'itchyny/lightline.vim', {'as': 'lightline'}					" 状态栏
 	" <<<-----------------------------------
 	let g:lightline = {
+	\ 'colorscheme': 'material',
 	\ 'active': {
 	\ 	'left': [ [ 'mode', 'paste' ],
 	\ 	[ 'gitbranch', 'winnr', 'readonly', 'absolutepath', 'modified' ] ]
@@ -168,8 +166,13 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }			" 浏览器�
 call plug#end()
 
 " 样式
-set termguicolors	" 使用GUI配色
-silent! colorscheme vim-material	" 配色主题
+if (has('termguicolors'))
+	set termguicolors
+endif
+silent! colorscheme material	" 配色主题
+exec "highlight IncSearch ctermfg=11 ctermbg=0
+	\ guifg="g:material_colorscheme_map.comments"
+	\ guibg="g:material_colorscheme_map.white
 
 " 函数 <<<------------------------------
 func s:signColumn_toggle()
