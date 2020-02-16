@@ -1,4 +1,5 @@
 {
+  "list.source.files.args": ["--hidden", "--files"],
   "languageserver": {
     "bash": {
       "command": "bash-language-server",

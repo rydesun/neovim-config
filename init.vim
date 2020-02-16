@@ -31,19 +31,23 @@ nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
 nmap     <silent>  gr          <Plug>(coc-references)
 
+" Leader
 let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <Leader>y   "+y
 nnoremap <silent>  <Leader>p   "+p
 nnoremap <silent>  <Leader>P   "+P
 map                <Leader>c   <Plug>NERDCommenterToggle
-for s:i in [1,2,3,4,5,6,7,8,9]
-	" s=1时等同于map  <Leader>1  <Plug>AirlineSelectTab1
-	execute 'map <Leader>'.s:i.' <Plug>AirlineSelectTab'.s:i
-endfor
+
+" coclist
+nnoremap <silent>  <Leader>;   :CocList cmdhistory<CR>
+
+" toggle
 nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
 nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
+
+imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
 " 命令行
 cnoremap           <C-a>       <Home>
