@@ -26,6 +26,13 @@
       "initializationOptions": {
         "usePlaceholders": true
       }
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "filetypes": [
+        "markdown",
+        "vim"
+      ]
     }
   }
 }
