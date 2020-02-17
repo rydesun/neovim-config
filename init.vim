@@ -179,10 +179,10 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支
 call plug#end()
 
 " 样式
-if (has('termguicolors'))
+silent! colorscheme material
+if $TERM != 'linux'
 	set termguicolors
 endif
-silent! colorscheme material
 exec "highlight IncSearch ctermfg=11 ctermbg=0
 	\ guifg="g:material_colorscheme_map.comments"
 	\ guibg="g:material_colorscheme_map.white
