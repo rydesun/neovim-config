@@ -49,12 +49,12 @@ nnoremap <silent>  <Leader>;   :CocList cmdhistory<CR>
 map                <Leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
+nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
 
 nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
 nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
-nnoremap <silent>  <Leader>tt  :NERDTreeToggle<CR>
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
@@ -112,7 +112,6 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 		return '⎇  '.branch_abbr
 	endfunction
 	" >>>-----------------------------------
-Plug 'preservim/nerdtree'						" 文件浏览
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 	" <<<-----------------------------------
 	" 更精细的缩进线
