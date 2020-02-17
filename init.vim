@@ -153,7 +153,9 @@ Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 	" 更精细的缩进线
 	let g:indentLine_char = '┊'
 	" 修复indentLine导致JSON文件的引号无法显示的问题
-	autocmd Filetype json let g:indentLine_enabled = 0
+	autocmd Filetype json IndentLinesDisable
+	" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
+	autocmd Filetype markdown IndentLinesDisable
 	" >>>-----------------------------------
 
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 重复支持
