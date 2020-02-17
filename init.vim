@@ -158,7 +158,6 @@ Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 重复支持
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx
-Plug 'jiangmiao/auto-pairs'						" 成对符号
 Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
 Plug 'sheerun/vim-polyglot'						" 语言包
