@@ -61,6 +61,7 @@ nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
 nmap               <Leader>gs  <Plug>(coc-git-chunkinfo)
 nmap               <Leader>gc  <Plug>(coc-git-commit)
+nmap               <leader>rn  <Plug>(coc-rename)
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
@@ -221,6 +222,16 @@ endif
 exec "highlight IncSearch ctermfg=11 ctermbg=0
 	\ guifg="g:material_colorscheme_map.comments"
 	\ guibg="g:material_colorscheme_map.white
+
+highlight link CocErrorSign CocGitRemovedSign
+highlight link CocWarningSign CocGitChangedSign
+highlight link CocInfoSign CocGitaddedSign
+highlight link CocHintSign CocGitaddedSign
+
+highlight link CocErrorHighlight ErrorMsg
+highlight link CocWarningHighlight WarningMsg
+highlight link CocInfoHighlight MoreMsg
+highlight link CocHintHighlight MoreMsg
 
 
 " vim: foldmethod=marker:foldmarker=<<<---,>>>---

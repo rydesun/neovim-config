@@ -1,4 +1,7 @@
 {
+  "diagnostic.errorSign": "ⓧ",
+  "diagnostic.infoSign": "ⓘ",
+  "diagnostic.hintSign": "ⓗ",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "list.source.files.args": ["--hidden", "--files"],
   "explorer.width": 30,
