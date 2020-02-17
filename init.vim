@@ -36,6 +36,8 @@ nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
+nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
+nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
 nmap     <silent>  gd          <Plug>(coc-definition)
 nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
@@ -55,6 +57,10 @@ nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
 nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
+nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
+nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
+nmap               <Leader>gs  <Plug>(coc-git-chunkinfo)
+nmap               <Leader>gc  <Plug>(coc-git-commit)
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
@@ -83,33 +89,42 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	" <<<-----------------------------------
 	let g:lightline = {
 	\ 'colorscheme': 'material',
+	\ 'subseparator': {'left': '', 'right': ''},
 	\ 'active': {
-	\ 	'left': [ [ 'mode', 'paste' ],
-	\ 	[ 'gitbranch', 'winnr', 'readonly', 'absolutepath', 'modified' ] ]
+	\ 	'left': [
+	\	['mode', 'paste'],
+	\ 	['gitBranch', 'gitStatus'],
+	\	['readonly', 'absolutepath', 'modified']],
+	\	'right': [
+	\	['postion'],
+	\	['fileformat', 'filetype'],
+	\	['gitBlame']],
 	\ },
 	\ 'component': {
-	\   'lineinfo': '%2l:%-2v',
+	\	'postion': '%2l:%-2v %2p%%',
+	\ 	'fileformat': '%{&ff!=#"unix"?&ff:""}',
+	\	'filetype': '%{&ft!=#""?&ft:""}',
 	\ },
 	\ 'component_function': {
+	\ 	'gitBranch': 'Lightline_gitBranch',
+	\ 	'gitStatus': 'Lightline_gitStatus',
+	\ 	'gitBlame': 'Lightline_gitBlame',
 	\	'readonly': 'Lightline_readonly',
-	\ 	'gitbranch': 'Lightline_gitbranch'
 	\ },
 	\ 'mode_map': {'n':'N', 'i':'I', 'R':'R', 'v':'V', 'V':'V', "\<C-v>":'V',
-	\              'c':'C', 's':'S', 'S':'SL', "\<C-s>":'S', 't':'T'},
+	\              'c':'C', 's':'S', 'S':'S', "\<C-s>":'S', 't':'T'},
 	\ }
 	function! Lightline_readonly() abort
 		return &readonly ? '' : ''
 	endfunction
-	function! Lightline_gitbranch() abort
-		if !exists('*FugitiveHead')
-			return ''
-		endif
-		let branch = FugitiveHead()
-		if branch ==# ''
-			return ''
-		endif
-		let branch_abbr = branch ==# 'master' ? 'M' : branch
-		return '⎇  '.branch_abbr
+	function! Lightline_gitBranch() abort
+		return get(g:, 'coc_git_status', '')
+	endfunction
+	function! Lightline_gitStatus() abort
+		return get(b:, 'coc_git_status', '')
+	endfunction
+	function! Lightline_gitBlame() abort
+		return get(b:, 'coc_git_blame', '')
 	endfunction
 	" >>>-----------------------------------
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
@@ -153,8 +168,6 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" 注释符号左对齐
 	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
-Plug 'airblade/vim-gitgutter', {'as': 'gitgutter'}			" git侧边栏
-Plug 'tpope/vim-fugitive', {'as': 'fugitive'}				" git命令封装
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支持嵌入neovim
 	" <<<-----------------------------------
