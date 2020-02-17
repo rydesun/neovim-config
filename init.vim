@@ -97,8 +97,9 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\	['readonly', 'absolutepath', 'modified']],
 	\	'right': [
 	\	['postion'],
+	\	['diagnostic', 'gitBlame'],
 	\	['fileformat', 'filetype'],
-	\	['gitBlame']],
+	\	['currentFunc']],
 	\ },
 	\ 'component': {
 	\	'postion': '%2l:%-2v %2p%%',
@@ -110,6 +111,8 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\ 	'gitStatus': 'Lightline_gitStatus',
 	\ 	'gitBlame': 'Lightline_gitBlame',
 	\	'readonly': 'Lightline_readonly',
+	\	'currentFunc': 'Lightline_currentFunc',
+	\	'diagnostic': 'Lightline_diagnostic',
 	\ },
 	\ 'mode_map': {'n':'N', 'i':'I', 'R':'R', 'v':'V', 'V':'V', "\<C-v>":'V',
 	\              'c':'C', 's':'S', 'S':'S', "\<C-s>":'S', 't':'T'},
@@ -125,6 +128,24 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	endfunction
 	function! Lightline_gitBlame() abort
 		return get(b:, 'coc_git_blame', '')
+	endfunction
+	function! Lightline_currentFunc() abort
+		return get(b:, 'coc_current_function', '')
+	endfunction
+	function! Lightline_diagnostic() abort
+		let info = get(b:, 'coc_diagnostic_info', {})
+		if empty(info) | return '' | endif
+		let msgs = []
+		if get(info, 'error', 0)
+			call add(msgs, 'E' . info['error'])
+		endif
+		if get(info, 'warning', 0)
+			call add(msgs, 'W' . info['warning'])
+		endif
+		if get(info, 'hint', 0)
+			call add(msgs, 'H' . info['hint'])
+		endif
+		return join(msgs, ' ')
 	endfunction
 	" >>>-----------------------------------
 Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
