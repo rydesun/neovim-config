@@ -214,6 +214,9 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支
 	" >>>-----------------------------------
 call plug#end()
 
+" coc: 配置使用jsonc格式
+autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
+
 " 样式
 silent! colorscheme material
 if $TERM != 'linux'

@@ -2,13 +2,16 @@
   "diagnostic.errorSign": "ⓧ",
   "diagnostic.infoSign": "ⓘ",
   "diagnostic.hintSign": "ⓗ",
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
   // coc-list
   "session.directory": "~/.data/nvim/sessions",
-  "list.source.files.args": ["--hidden", "--files"],
+  "list.source.files.args": ["--hidden", "--files"],	// rg参数
+  // coc-explorer
   "explorer.width": 30,
   "explorer.sources": [{"name": "buffer", "expand": true}, {"name": "file", "expand": true}],
+  // coc-git
   "git.branchCharacter": "⎇ ",
+  // lsp
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
