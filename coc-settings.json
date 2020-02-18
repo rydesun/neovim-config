@@ -3,6 +3,8 @@
   "diagnostic.infoSign": "ⓘ",
   "diagnostic.hintSign": "ⓗ",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  // coc-list
+  "session.directory": "~/.data/nvim/sessions",
   "list.source.files.args": ["--hidden", "--files"],
   "explorer.width": 30,
   "explorer.sources": [{"name": "buffer", "expand": true}, {"name": "file", "expand": true}],
