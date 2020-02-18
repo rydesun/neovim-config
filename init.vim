@@ -181,6 +181,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}				" 补全和LSP
 		endif
 	endfunction
 	" >>>-----------------------------------
+Plug 'puremourning/vimspector', {'do': './install_gadget.py
+			\ --enable-go --enable-python --enable-bash'}	" 调试工具
+	" <<<-----------------------------------
+	let g:vimspector_enable_mappings = 'HUMAN'
+	" >>>-----------------------------------
 Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" <<<-----------------------------------
 	" 取消所有预设键位映射
