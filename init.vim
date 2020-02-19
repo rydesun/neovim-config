@@ -159,6 +159,7 @@ Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 	" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
 	autocmd Filetype markdown IndentLinesDisable
 	" >>>-----------------------------------
+Plug 'psliwka/vim-smoothie'						" 平滑滚动
 
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 重复支持
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx
