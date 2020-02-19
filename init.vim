@@ -9,6 +9,7 @@ set mouse=a		" 所有模式下支持鼠标
 set signcolumn=yes	" 始终开启侧边栏
 set scrolloff=5		" 滚动时光标到上下边缘的预留行数
 set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
+set diffopt+=vertical	" diff模式默认以垂直方式分割
 set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
@@ -163,6 +164,7 @@ Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 重复支持
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx
 Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
+Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
 Plug 'sheerun/vim-polyglot'						" 语言包
 Plug 'neoclide/coc.nvim', {'branch': 'release'}				" 补全和LSP
 	" <<<-----------------------------------
