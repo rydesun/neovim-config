@@ -67,7 +67,10 @@ nmap               <leader>rn  <Plug>(coc-rename)
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
 cnoremap           <C-a>       <Home>
-cnoremap           <C-e>       <End>
+cnoremap           <C-b>       <Left>
+cnoremap           <C-f>       <Right>
+cnoremap           <M-b>       <C-Left>
+cnoremap           <M-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
