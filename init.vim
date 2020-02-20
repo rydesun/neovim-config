@@ -157,10 +157,11 @@ Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 	" <<<-----------------------------------
 	" 更精细的缩进线
 	let g:indentLine_char = '┊'
-	" 修复indentLine导致JSON文件的引号无法显示的问题
-	autocmd Filetype json IndentLinesDisable
-	" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
-	autocmd Filetype markdown IndentLinesDisable
+	augroup myconfig_indentLine
+		autocmd!
+		" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
+		autocmd Filetype markdown let g:indentLine_enabled = 0
+	augroup END
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie'						" 平滑滚动
 
@@ -178,8 +179,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}				" 补全和LSP
 	" 推荐选项
 	" set cmdheight=2
 	set updatetime=300
-	" 高亮光标下的符号
-	autocmd CursorHold * silent call CocActionAsync('highlight')
+	augroup myconfig_coc
+		autocmd!
+		" coc的配置文件使用jsonc格式
+		autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
+	augroup END
 	function! s:show_documentation() abort
 		if (index(['vim','help'], &filetype) >= 0)
 			execute 'h '.expand('<cword>')
@@ -220,23 +224,28 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支
 	\ 	}
 	\ }
 	if exists('g:started_by_firenvim')
-		set background=light
-		au BufEnter github.com_*.txt set filetype=markdown
+		set termguicolors
+		let g:material_theme_style = 'lighter'
+		set guifont=monospace:h15.5
+		augroup myconfig_firenvim
+			autocmd!
+			autocmd BufEnter github.com_*.txt set filetype=markdown
+		augroup END
 	endif
 	" >>>-----------------------------------
 call plug#end()
 
-" coc: 配置使用jsonc格式
-autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
 
 " 样式
 silent! colorscheme material
 if $TERM != 'linux'
 	set termguicolors
 endif
-exec "highlight IncSearch ctermfg=11 ctermbg=0
-	\ guifg="g:material_colorscheme_map.comments"
-	\ guibg="g:material_colorscheme_map.white
+if exists('g:material_colorscheme_map')
+	exec "highlight IncSearch ctermfg=11 ctermbg=0
+		\ guifg="g:material_colorscheme_map.comments"
+		\ guibg="g:material_colorscheme_map.white
+endif
 
 highlight link CocErrorSign CocGitRemovedSign
 highlight link CocWarningSign CocGitChangedSign

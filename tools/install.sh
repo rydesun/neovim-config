@@ -11,7 +11,7 @@ die() {
 
 conf=$1
 confdir=${XDG_CONFIG_HOME:-"${HOME}/.config"}/nvim
-datadir=${XDG_DATA_HOME:-"${HOME}/.data"}/nvim
+datadir=${XDG_DATA_HOME:-"${HOME}/.local/share"}/nvim
 
 if [[ ! -f $conf ]]; then
 	die "wrong init.vim"
