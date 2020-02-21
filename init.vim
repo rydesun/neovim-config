@@ -109,7 +109,6 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\ 'component': {
 	\	'postion': '%2l:%-2v %2p%%',
 	\ 	'fileformat': '%{&ff!=#"unix"?&ff:""}',
-	\	'filetype': '%{&ft!=#""?&ft:""}',
 	\ },
 	\ 'component_function': {
 	\ 	'gitBranch': 'Lightline_gitBranch',
@@ -118,6 +117,7 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\	'readonly': 'Lightline_readonly',
 	\	'currentFunc': 'Lightline_currentFunc',
 	\	'diagnostic': 'Lightline_diagnostic',
+	\	'filetype': 'Lightline_filetype',
 	\ },
 	\ 'mode_map': {'n':'N', 'i':'I', 'R':'R', 'v':'V', 'V':'V', "\<C-v>":'V',
 	\              'c':'C', 's':'S', 'S':'S', "\<C-s>":'S', 't':'T'},
@@ -152,6 +152,9 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 		endif
 		return join(msgs, ' ')
 	endfunction
+	function! Lightline_filetype()
+		return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
+	endfunction
 	" >>>-----------------------------------
 Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 	" <<< indentLine -----------------------
@@ -164,6 +167,7 @@ Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 	augroup END
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
+Plug 'ryanoasis/vim-devicons', {'as': 'devicons'}			" 集成devicons字体
 
 Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" <<< coc -----------------------------

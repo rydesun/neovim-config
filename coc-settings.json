@@ -9,6 +9,7 @@
   // coc-explorer
   "explorer.width": 30,
   "explorer.sources": [{"name": "buffer", "expand": true}, {"name": "file", "expand": true}],
+  "explorer.icon.enableNerdfont": true,
   // coc-git
   "git.branchCharacter": "⎇ ",
   // lsp
