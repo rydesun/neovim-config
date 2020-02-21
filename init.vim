@@ -91,7 +91,7 @@ let g:plug_window = 'new'			" 控制台位置
 call plug#begin(s:plugdir)
 Plug 'kaicataldo/material.vim', {'as': 'theme-material'}		" 配色主题
 Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
-	" <<<-----------------------------------
+	" <<< lightline------------------------
 	let g:lightline = {
 	\ 'colorscheme': 'material',
 	\ 'subseparator': {'left': '', 'right': ''},
@@ -153,8 +153,8 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 		return join(msgs, ' ')
 	endfunction
 	" >>>-----------------------------------
-Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
-	" <<<-----------------------------------
+Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
+	" <<< indentLine -----------------------
 	" 更精细的缩进线
 	let g:indentLine_char = '┊'
 	augroup myconfig_indentLine
@@ -163,17 +163,10 @@ Plug 'Yggdroot/indentLine', {'as': 'indent-line'}			" 缩进线
 		autocmd Filetype markdown let g:indentLine_enabled = 0
 	augroup END
 	" >>>-----------------------------------
-Plug 'psliwka/vim-smoothie'						" 平滑滚动
+Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
 
-Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 重复支持
-Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx
-Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}	" markdown预览
-
-Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
-Plug 'sheerun/vim-polyglot'						" 语言包
-Plug 'neoclide/coc.nvim', {'branch': 'release'}				" 补全和LSP
-	" <<<-----------------------------------
+Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
+	" <<< coc -----------------------------
 	" 强制选项
 	set hidden nobackup nowritebackup
 	" 推荐选项
@@ -192,13 +185,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}				" 补全和LSP
 		endif
 	endfunction
 	" >>>-----------------------------------
-Plug 'puremourning/vimspector', {'do': './install_gadget.py
-			\ --enable-go --enable-python --enable-bash'}	" 调试工具
-	" <<<-----------------------------------
-	let g:vimspector_enable_mappings = 'HUMAN'
-	" >>>-----------------------------------
+
+Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
+Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
 Plug 'scrooloose/nerdcommenter'						" 快速注释
-	" <<<-----------------------------------
+	" <<< nerdcommenter --------------------
 	" 取消所有预设键位映射
 	let g:NERDCreateDefaultMappings = 0
 	" 注释符号后面添加空格
@@ -207,9 +198,21 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" 注释符号左对齐
 	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
+Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
+Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
+Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
+Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
+			\ 'do': 'cd app & yarn install'}		" markdown预览
+Plug 'puremourning/vimspector', {'do': './install_gadget.py
+			\ --enable-go --enable-python --enable-bash'}	" 调试工具
+	" <<< vimspector -----------------------
+	let g:vimspector_enable_mappings = 'HUMAN'
+	" >>>-----------------------------------
+
+Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx自动切换语言
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支持嵌入neovim
-	" <<<-----------------------------------
+	" <<< firenvim -------------------------
 	let g:firenvim_config = {
 	\ 	'globalSettings': {
 	\ 		'alt': 'all',
@@ -258,4 +261,4 @@ highlight link CocInfoHighlight MoreMsg
 highlight link CocHintHighlight MoreMsg
 
 
-" vim: foldmethod=marker:foldmarker=<<<---,>>>---
+" vim: foldmethod=marker:foldmarker=<<<,>>>
