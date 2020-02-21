@@ -184,6 +184,20 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 			call CocAction('doHover')
 		endif
 	endfunction
+		" <<< coc扩展 --------------------------
+		" :CocInstall coc-explorer	" 文件浏览
+		" :CocInstall coc-git		" git侧边栏
+		" :CocInstall coc-highlight	" 显示颜色
+		" :CocInstall coc-lists		" 额外的coc源
+		" :CocInstall coc-pairs		" 成对符号
+		" :CocInstall coc-snippets	" 代码片段
+
+		" :CocInstall coc-html
+		" :CocInstall coc-json
+		" :CocInstall coc-python
+		" :CocInstall coc-tsserver
+		" :CocInstall coc-yaml
+		" >>>-----------------------------------
 	" >>>-----------------------------------
 
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
