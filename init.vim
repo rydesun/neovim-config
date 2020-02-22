@@ -268,6 +268,9 @@ if exists('g:material_colorscheme_map')
 		\ guifg="g:material_colorscheme_map.comments"
 		\ guibg="g:material_colorscheme_map.white
 endif
+if g:material_theme_style == "default"
+	highlight VertSplit guifg=black
+endif
 
 highlight link CocErrorSign CocGitRemovedSign
 highlight link CocWarningSign CocGitChangedSign
