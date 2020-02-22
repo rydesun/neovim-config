@@ -12,6 +12,11 @@
   "explorer.icon.enableNerdfont": true,
   // coc-git
   "git.branchCharacter": "⎇ ",
+  // coc-python
+  "python.jediEnabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
   // lsp
   "languageserver": {
     "bash": {
