@@ -176,11 +176,6 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" 推荐选项
 	" set cmdheight=2
 	set updatetime=300
-	augroup myconfig_coc
-		autocmd!
-		" coc的配置文件使用jsonc格式
-		autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
-	augroup END
 	function! s:show_documentation() abort
 		if (index(['vim','help'], &filetype) >= 0)
 			execute 'h '.expand('<cword>')
@@ -256,6 +251,14 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支
 	endif
 	" >>>-----------------------------------
 call plug#end()
+
+
+" 自动命令
+augroup myconfig_coc	" 插件coc配置
+	autocmd!
+	" coc的配置文件使用jsonc格式
+	autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
+augroup END
 
 
 " 样式
