@@ -147,6 +147,9 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 		if get(info, 'warning', 0)
 			call add(msgs, 'W' . info['warning'])
 		endif
+		if get(info, 'information', 0)
+			call add(msgs, 'I' . info['information'])
+		endif
 		if get(info, 'hint', 0)
 			call add(msgs, 'H' . info['hint'])
 		endif
@@ -289,15 +292,15 @@ if exists('g:material_colorscheme_map')
 		\ guibg="s:color_contrast
 	" coc warning
 	exec "highlight CocWarningSign
-		\ guifg="g:material_colorscheme_map.purple
+		\ guifg="g:material_colorscheme_map.brown
 	exec "highlight CocWarningHighlight
-		\ guifg="g:material_colorscheme_map.purple"
+		\ guifg="g:material_colorscheme_map.brown"
 		\ guibg="s:color_contrast
 	" coc info
 	exec "highlight CocInfoSign
-		\ guifg="g:material_colorscheme_map.brown
+		\ guifg="g:material_colorscheme_map.purple
 	exec "highlight CocInfoHighlight
-		\ guifg="g:material_colorscheme_map.brown"
+		\ guifg="g:material_colorscheme_map.purple"
 		\ guibg="s:color_contrast
 	" coc hint
 	exec "highlight CocHintSign

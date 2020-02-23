@@ -1,8 +1,8 @@
 {
   "diagnostic.errorSign": "●",
-  "diagnostic.warningSign": "▲",
+  "diagnostic.warningSign": "▶",
   "diagnostic.infoSign": "▣",
-  "diagnostic.hintSign": "▣",
+  "diagnostic.hintSign": "□",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
   // coc-list
   "session.directory": "~/.data/nvim/sessions",
