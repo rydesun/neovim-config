@@ -262,28 +262,49 @@ augroup END
 
 
 " 样式
-silent! colorscheme material
 if $TERM != 'linux'
 	set termguicolors
 endif
+silent! colorscheme material
+let s:color_accent="#009688"
+let s:color_contrast="#13272c"
+
+if g:material_theme_style == "default"
+	" 垂直分割条
+	highlight VertSplit guifg=black
+	" 色柱
+	exec "highlight ColorColumn guibg="s:color_contrast
+endif
+
 if exists('g:material_colorscheme_map')
+	" 高亮搜索光标处
 	exec "highlight IncSearch ctermfg=11 ctermbg=0
 		\ guifg="g:material_colorscheme_map.comments"
 		\ guibg="g:material_colorscheme_map.white
+	" coc error
+	exec "highlight CocErrorSign
+		\ guifg="g:material_colorscheme_map.pink
+	exec "highlight CocErrorHighlight
+		\ guifg="g:material_colorscheme_map.pink"
+		\ guibg="s:color_contrast
+	" coc warning
+	exec "highlight CocWarningSign
+		\ guifg="g:material_colorscheme_map.purple
+	exec "highlight CocWarningHighlight
+		\ guifg="g:material_colorscheme_map.purple"
+		\ guibg="s:color_contrast
+	" coc info
+	exec "highlight CocInfoSign
+		\ guifg="g:material_colorscheme_map.brown
+	exec "highlight CocInfoHighlight
+		\ guifg="g:material_colorscheme_map.brown"
+		\ guibg="s:color_contrast
+	" coc hint
+	exec "highlight CocHintSign
+		\ guifg="s:color_accent
+	exec "highlight CocHintHighlight
+		\ guifg="s:color_accent"
+		\ guibg="s:color_contrast
 endif
-if g:material_theme_style == "default"
-	highlight VertSplit guifg=black
-endif
-
-highlight link CocErrorSign CocGitRemovedSign
-highlight link CocWarningSign CocGitChangedSign
-highlight link CocInfoSign CocGitaddedSign
-highlight link CocHintSign CocGitaddedSign
-
-highlight link CocErrorHighlight ErrorMsg
-highlight link CocWarningHighlight WarningMsg
-highlight link CocInfoHighlight MoreMsg
-highlight link CocHintHighlight MoreMsg
-
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>
