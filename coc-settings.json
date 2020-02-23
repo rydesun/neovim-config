@@ -14,8 +14,8 @@
   // coc-git
   "git.branchCharacter": "⎇ ",
   // coc-python
-  "python.jediEnabled": false,
-  "python.linting.pylintEnabled": false,
+  "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
+  "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
   // lsp
