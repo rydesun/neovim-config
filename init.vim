@@ -26,6 +26,19 @@ function s:signColumn_toggle() abort
 		echom 'SignColumn enabled'
 	endif
 endfunction
+
+" 切换工作模式: 默认git
+function s:work_mode_toggle() abort
+	if !exists('b:work_mode') || b:work_mode == '' || b:work_mode == 'git'
+		let b:work_mode = 'diagnostic'
+		nmap <buffer><silent>  <C-k>  <Plug>(coc-diagnostic-prev)
+		nmap <buffer><silent>  <C-j>  <Plug>(coc-diagnostic-next)
+	else
+		let b:work_mode = ''
+		nunmap <buffer> <C-k>
+		nunmap <buffer> <C-j>
+	endif
+endfunction
 " >>>-----------------------------------
 
 
@@ -37,6 +50,8 @@ nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
+nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
+nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
 nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
 nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
 nmap     <silent>  gd          <Plug>(coc-definition)
@@ -54,6 +69,7 @@ xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
 
+nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
 nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
@@ -97,7 +113,7 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\ 'subseparator': {'left': '', 'right': ''},
 	\ 'active': {
 	\ 	'left': [
-	\	['mode', 'paste'],
+	\	['mode', 'paste', 'work_mode'],
 	\ 	['gitBranch', 'gitStatus'],
 	\	['readonly', 'absolutepath', 'modified']],
 	\	'right': [
@@ -107,6 +123,7 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\	['currentFunc']],
 	\ },
 	\ 'component': {
+	\	'work_mode': '%{get(b:, "work_mode", "")}',
 	\	'postion': '%2l:%-2v %2p%%',
 	\ 	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\ },
