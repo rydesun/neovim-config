@@ -117,14 +117,21 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\ 	['gitBranch', 'gitStatus'],
 	\	['readonly', 'absolutepath', 'modified']],
 	\	'right': [
-	\	['postion'],
+	\	['winnr', 'postion'],
 	\	['diagnostic', 'gitBlame'],
 	\	['fileformat', 'filetype'],
 	\	['currentFunc']],
 	\ },
+	\ 'inactive': {
+	\ 	'left': [['readonly', 'absolutepath', 'modified']],
+	\	'right': [
+	\	['winnr', 'postion'],
+	\	['fileformat', 'filetype']],
+	\ },
 	\ 'component': {
 	\	'work_mode': '%{get(b:, "work_mode", "")}',
 	\	'postion': '%2l:%-2v %2p%%',
+	\	'winnr': '%{winnr()}',
 	\ 	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\ },
 	\ 'component_function': {
