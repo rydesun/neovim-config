@@ -69,6 +69,14 @@ xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
 
+nnoremap <silent>  <Leader>lm  :CocList mru -A<CR>
+nnoremap <silent>  <Leader>lf  :CocList files<CR>
+nnoremap <silent>  <Leader>ls  :CocList grep<CR>
+nnoremap <silent>  <Leader>ll  :CocList lines<CR>
+nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
+nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
+nnoremap <silent>  <Leader>lp  :CocListResume<CR>
+
 nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
 nnoremap           <Leader>tl  :set list! list?<CR>
 nnoremap           <Leader>tw  :set wrap! wrap?<CR>
