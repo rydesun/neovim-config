@@ -75,6 +75,7 @@ nnoremap <silent>  <Leader>ls  :CocList grep<CR>
 nnoremap <silent>  <Leader>ll  :CocList lines<CR>
 nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
 nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
+nnoremap <silent>  <Leader>ly  :CocList --number-select yank<CR>
 nnoremap <silent>  <Leader>lp  :CocListResume<CR>
 
 nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
@@ -225,6 +226,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 		" :CocInstall coc-lists		" 额外的coc源
 		" :CocInstall coc-pairs		" 成对符号
 		" :CocInstall coc-snippets	" 代码片段
+		" :CocInstall coc-yank		" 复制历史
 
 		" :CocInstall coc-html
 		" :CocInstall coc-json

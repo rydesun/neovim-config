@@ -13,6 +13,8 @@
   "explorer.icon.enableNerdfont": true,
   // coc-git
   "git.branchCharacter": "⎇ ",
+  // coc-yank
+  "yank.highlight.duration": 100,
   // coc-python
   "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
