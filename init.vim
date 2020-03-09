@@ -14,6 +14,12 @@ set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 
+" 与当前主机相关的配置
+let s:confdir = expand('<sfile>:p:h')
+let s:hostrc = s:confdir.'/hostrc.vim'
+if filereadable(s:hostrc)
+	exec 'source' s:hostrc
+endif
 
 " 函数 <<<------------------------------
 " 切换侧边栏
@@ -253,6 +259,7 @@ Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
 Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
+if !exists('g:HOST_NO_DEV')
 Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
 			\ 'do': 'cd app & yarn install'}		" markdown预览
 Plug 'puremourning/vimspector', {'do': './install_gadget.py
@@ -260,7 +267,9 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py
 	" <<< vimspector -----------------------
 	let g:vimspector_enable_mappings = 'HUMAN'
 	" >>>-----------------------------------
+endif
 
+if !exists('g:HOST_NO_X')
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx自动切换语言
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支持嵌入neovim
 	" <<< firenvim -------------------------
@@ -287,6 +296,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支
 		augroup END
 	endif
 	" >>>-----------------------------------
+endif
 call plug#end()
 
 
