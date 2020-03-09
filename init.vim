@@ -306,7 +306,7 @@ silent! colorscheme material
 let s:color_accent="#009688"
 let s:color_contrast="#13272c"
 
-if g:material_theme_style == "default"
+if exists('g:material_theme_style') && g:material_theme_style == "default"
 	" 垂直分割条
 	highlight VertSplit guifg=black
 	" 色柱
