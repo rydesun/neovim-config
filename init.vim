@@ -326,25 +326,25 @@ endif
 if exists('g:material_colorscheme_map')
 	" 高亮搜索光标处
 	exec "highlight IncSearch ctermfg=11 ctermbg=0
-		\ guifg="g:material_colorscheme_map.comments"
-		\ guibg="g:material_colorscheme_map.white
+		\ guifg="g:material_colorscheme_map.comments.gui"
+		\ guibg="g:material_colorscheme_map.white.gui
 	" coc error
 	exec "highlight CocErrorSign
-		\ guifg="g:material_colorscheme_map.pink
+		\ guifg="g:material_colorscheme_map.pink.gui
 	exec "highlight CocErrorHighlight
-		\ guifg="g:material_colorscheme_map.pink"
+		\ guifg="g:material_colorscheme_map.pink.gui"
 		\ guibg="s:color_contrast
 	" coc warning
 	exec "highlight CocWarningSign
-		\ guifg="g:material_colorscheme_map.brown
+		\ guifg="g:material_colorscheme_map.brown.gui
 	exec "highlight CocWarningHighlight
-		\ guifg="g:material_colorscheme_map.brown"
+		\ guifg="g:material_colorscheme_map.brown.gui"
 		\ guibg="s:color_contrast
 	" coc info
 	exec "highlight CocInfoSign
-		\ guifg="g:material_colorscheme_map.purple
+		\ guifg="g:material_colorscheme_map.purple.gui
 	exec "highlight CocInfoHighlight
-		\ guifg="g:material_colorscheme_map.purple"
+		\ guifg="g:material_colorscheme_map.purple.gui"
 		\ guibg="s:color_contrast
 	" coc hint
 	exec "highlight CocHintSign
