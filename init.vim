@@ -271,31 +271,6 @@ endif
 
 if !exists('g:HOST_NO_X')
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx自动切换语言
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }	" 浏览器支持嵌入neovim
-	" <<< firenvim -------------------------
-	let g:firenvim_config = {
-	\ 	'globalSettings': {
-	\ 		'alt': 'all',
-	\ 	},
-	\ 	'localSettings': {
-	\ 		'.*': {
-	\ 		'cmdline': 'neovim',
-	\ 		'priority': 0,
-	\ 		'selector': 'textarea',
-	\ 		'takeover': 'never',
-	\ 		},
-	\ 	}
-	\ }
-	if exists('g:started_by_firenvim')
-		set termguicolors
-		let g:material_theme_style = 'lighter'
-		set guifont=monospace:h15.5
-		augroup myconfig_firenvim
-			autocmd!
-			autocmd BufEnter github.com_*.txt set filetype=markdown
-		augroup END
-	endif
-	" >>>-----------------------------------
 endif
 call plug#end()
 
