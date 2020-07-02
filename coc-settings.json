@@ -33,14 +33,6 @@
       "args": ["--stdio"],
       "filetypes": ["dockerfile"]
     },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
-    },
     "efm": {
       "command": "efm-langserver",
       "filetypes": [
