@@ -28,23 +28,10 @@
   "python.linting.mypyEnabled": true,
   // lsp
   "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
     "dockerfile": {
       "command": "docker-langserver",
       "args": ["--stdio"],
       "filetypes": ["dockerfile"]
-    },
-    "efm": {
-      "command": "efm-langserver",
-      "filetypes": [
-        "markdown",
-        "vim"
-      ]
     }
   }
 }

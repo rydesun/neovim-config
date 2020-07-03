@@ -234,7 +234,10 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\	"coc-yank",
 	\	"coc-snippets",
 	\	"coc-template",
-	\	"coc-html", "coc-json", "coc-go", "coc-python", "coc-tsserver", "coc-yaml",
+	\	"coc-go", "coc-python", "coc-sh", "coc-vimlsp",
+	\	"coc-tsserver", "coc-eslint",
+	\	"coc-html", "coc-css",
+	\	"coc-json", "coc-yaml", "coc-markdownlint",
 	\ ]
 	" >>>-----------------------------------
 
