@@ -4,6 +4,8 @@
   "diagnostic.infoSign": "▣",
   "diagnostic.hintSign": "□",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
+  "suggest.snippetIndicator" : " [+]",
+  "coc.preferences.formatOnSaveFiletypes": ["go"],
   // coc-list
   "session.directory": "~/.data/nvim/sessions",
   "list.source.files.args": ["--hidden", "--files"],	// rg参数
