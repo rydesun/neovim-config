@@ -17,6 +17,10 @@
   "git.branchCharacter": "⎇ ",
   // coc-yank
   "yank.highlight.duration": 100,
+  // coc-template
+  "template.templatesDirectory": "~/.config/coc/templates",
+  // coc-html
+  "html.autoClosingTags": true,
   // coc-python
   "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
