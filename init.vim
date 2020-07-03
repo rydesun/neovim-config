@@ -232,8 +232,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\	"coc-lists",
 	\	"coc-pairs",
 	\	"coc-yank",
-	\	"coc-snippets",
-	\	"coc-template",
+	\	"coc-snippets",	"coc-template",	"coc-emmet",
 	\	"coc-go", "coc-python", "coc-sh", "coc-vimlsp",
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-html", "coc-css",
@@ -241,6 +240,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\ ]
 	" >>>-----------------------------------
 
+Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
 Plug 'tpope/vim-sleuth', {'as': 'autoIndent'}                           " 自动设置缩进
