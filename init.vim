@@ -82,6 +82,7 @@ nnoremap <silent>  <Leader>ll  :CocList lines<CR>
 nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
 nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
 nnoremap <silent>  <Leader>ly  :CocList --number-select yank<CR>
+nnoremap <silent>  <Leader>lt  :CocList --number-select tasks<CR>
 nnoremap <silent>  <Leader>lp  :CocListResume<CR>
 
 nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
@@ -225,7 +226,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 			call CocAction('doHover')
 		endif
 	endfunction
-	let s:coc_sources = ["coc-lists", "coc-yank"]
+	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
 	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator"]
 	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
 	let s:coc_lsp = [
@@ -261,6 +262,16 @@ Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
 if !exists('g:HOST_NO_DEV')
 Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
 			\ 'do': 'cd app & yarn install'}		" markdown预览
+Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
+	" <<< asynctasks -----------------------
+	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
+	" >>>-----------------------------------
+
+Plug 'skywind3000/asyncrun.vim'						" 异步执行命令
+	" <<< asyncrun -------------------------
+	let g:asyncrun_open = 6
+	" >>>-----------------------------------
+
 Plug 'puremourning/vimspector', {'do': './install_gadget.py
 			\ --enable-go --enable-python --enable-bash'}	" 调试工具
 	" <<< vimspector -----------------------
