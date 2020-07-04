@@ -19,6 +19,8 @@
   "yank.highlight.duration": 100,
   // coc-template
   "template.templatesDirectory": "~/.config/coc/templates",
+  // coc-pairs
+  "pairs.disableLanguages": ["html"],           // 使用coc-html自动闭合标签
   // coc-html
   "html.autoClosingTags": true,
   // coc-python
