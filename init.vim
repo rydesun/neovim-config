@@ -225,19 +225,19 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 			call CocAction('doHover')
 		endif
 	endfunction
-	let g:coc_global_extensions = [
-	\	"coc-explorer",
-	\	"coc-git",
-	\	"coc-highlight",
-	\	"coc-lists",
-	\	"coc-pairs",
-	\	"coc-yank",
-	\	"coc-snippets",	"coc-template",	"coc-emmet",
+	let s:coc_sources = ["coc-lists", "coc-yank"]
+	let s:coc_integration = ["coc-git", "coc-explorer"]
+	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
+	let s:coc_lsp = [
 	\	"coc-go", "coc-python", "coc-sh", "coc-vimlsp",
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-html", "coc-css",
 	\	"coc-json", "coc-yaml", "coc-markdownlint",
 	\ ]
+	let g:coc_global_extensions = [
+	\	"coc-highlight",
+	\	"coc-pairs",
+	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 	" >>>-----------------------------------
 
 Plug 'mattn/emmet-vim'							" emmet展开缩写
