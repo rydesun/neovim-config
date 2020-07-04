@@ -13,6 +13,8 @@
   "explorer.width": 30,
   "explorer.sources": [{"name": "buffer", "expand": true}, {"name": "file", "expand": true}],
   "explorer.icon.enableNerdfont": true,
+  // coc-translator
+  "translator.engines": ["bing"],
   // coc-git
   "git.branchCharacter": "⎇ ",
   // coc-yank
