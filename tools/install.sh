@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 msg() {
-	echo $@ >&2
+	echo "$@" >&2
 }
-
 die() {
-	msg $@
+	msg "$@"
 	exit 1
 }
 
@@ -17,7 +16,7 @@ if [[ ! -f $conf ]]; then
 	die "wrong init.vim"
 fi
 
-mkdir -p ${confdir}
+mkdir -p "${confdir}"
 # backup file will be generated
 cp "${conf}" "${confdir}/init.vim" -S .bak -v >&2
 
