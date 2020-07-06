@@ -257,6 +257,13 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" >>>-----------------------------------
 Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
+Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
+	" <<< asyncrun -------------------------
+	" quickfix窗口的默认高度
+	let g:asyncrun_open = 6
+	" 在firefox中搜索当前单词
+	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
+	" >>>-----------------------------------
 Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
 if !exists('g:HOST_NO_DEV')
@@ -265,11 +272,6 @@ Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
 Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
-	" >>>-----------------------------------
-
-Plug 'skywind3000/asyncrun.vim'						" 异步执行命令
-	" <<< asyncrun -------------------------
-	let g:asyncrun_open = 6
 	" >>>-----------------------------------
 
 Plug 'puremourning/vimspector', {'do': './install_gadget.py
