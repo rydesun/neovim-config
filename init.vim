@@ -294,8 +294,7 @@ Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
 	" >>>-----------------------------------
 
-Plug 'puremourning/vimspector', {'do': './install_gadget.py
-			\ --enable-go --enable-python --enable-bash'}	" 调试工具
+Plug 'puremourning/vimspector'						" 调试工具
 	" <<< vimspector -----------------------
 	let g:vimspector_enable_mappings = 'HUMAN'
 	" >>>-----------------------------------
