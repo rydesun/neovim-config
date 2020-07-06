@@ -75,6 +75,7 @@ nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
 nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
 nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
 nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
+nmap     <silent>  <C-d>       <Plug>(coc-cursors-word)*
 nmap     <silent>  gd          <Plug>(coc-definition)
 nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
@@ -275,7 +276,6 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" 注释符号左对齐
 	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
-Plug 'terryma/vim-multiple-cursors', {'as': 'multiple-cursors'}		" 多重光标
 
 Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
 	" <<< asyncrun -------------------------
@@ -328,6 +328,8 @@ if exists('g:material_theme_style') && g:material_theme_style == "default"
 	highlight VertSplit guifg=black
 	" 色柱
 	exec "highlight ColorColumn guibg="s:color_contrast
+	" coc多重光标
+	highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
 endif
 
 if exists('g:material_colorscheme_map')
