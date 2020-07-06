@@ -45,6 +45,21 @@ function s:work_mode_toggle() abort
 		nunmap <buffer> <C-j>
 	endif
 endfunction
+
+" 封装Gina
+function s:gina_wrapper(cmd) abort
+	let l:cmd = get({
+	\ 'd': 'diff',
+	\ 'ds': 'diff --staged',
+	\ 'show': 'show',
+	\ 'c': 'commit',
+	\ }, a:cmd, '')
+	if l:cmd == ''
+		return
+	else
+		execute 'Gina'.' '.l:cmd
+	endif
+endfunction
 " >>>-----------------------------------
 
 
@@ -83,6 +98,7 @@ nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
 nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
 nnoremap <silent>  <Leader>ly  :CocList --number-select yank<CR>
 nnoremap <silent>  <Leader>lt  :CocList --number-select tasks<CR>
+nnoremap <silent>  <Leader>lg  :CocList --number-select gstatus<CR>
 nnoremap <silent>  <Leader>lp  :CocListResume<CR>
 
 nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
@@ -92,7 +108,7 @@ nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
 nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
 nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
-nmap               <Leader>gs  <Plug>(coc-git-chunkinfo)
+nmap               <Leader>gi  <Plug>(coc-git-chunkinfo)
 nmap               <Leader>gc  <Plug>(coc-git-commit)
 nmap               <leader>rn  <Plug>(coc-rename)
 
@@ -113,6 +129,8 @@ for s:i in [2,4,8]
 	" s=2时等同于cabbrev  <silent>  i2t  setlocal shiftwidth=2 tabstop=2 noexpandtab
 	execute 'ca <silent> i'.s:i.'t setl sw='.s:i.' ts='.s:i.' noet'
 endfor
+command -nargs=1  G  call s:gina_wrapper(<f-args>)
+cabbrev <silent> g G
 " >>>-----------------------------------
 
 
