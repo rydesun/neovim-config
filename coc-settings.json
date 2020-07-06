@@ -3,6 +3,7 @@
   "diagnostic.warningSign": "▶",
   "diagnostic.infoSign": "▣",
   "diagnostic.hintSign": "□",
+  "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
   "suggest.snippetIndicator" : " [+]",
   "coc.preferences.formatOnSaveFiletypes": ["go"],
