@@ -232,6 +232,8 @@ Plug 'ryanoasis/vim-devicons', {'as': 'devicons'}			" 集成devicons字体
 
 Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" <<< coc -----------------------------
+	" 修改coc数据目录, 默认值是XDG config目录
+	let g:coc_data_home = stdpath('data').'/coc'
 	" 强制选项
 	set hidden nobackup nowritebackup
 	" 推荐选项
