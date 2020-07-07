@@ -137,7 +137,7 @@ for s:i in [2,4,8]
 				\ && getcmdline() =~ '^i".s:i."t$')?
 				\ 'setl sw=".s:i." ts=".s:i." noet' : 'i".s:i."t'"
 endfor
-command  -nargs=1  G           call s:gina_wrapper(<f-args>)
+command  -nargs=*  G           call s:gina_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 " >>>-----------------------------------
 
