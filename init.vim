@@ -123,15 +123,20 @@ cnoremap           <M-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
-cabbrev  <silent>  ww          w !sudo tee % >/dev/null
+cabbrev  <expr>    ww          (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
+				\ 'w !sudo tee % >/dev/null' : 'ww'
 for s:i in [2,4,8]
-	" s=2时等同于cabbrev  <silent>  i2   setlocal shiftwidth=2 tabstop=2 expandtab
-	execute 'ca <silent> i'.s:i.'  setl sw='.s:i.' ts='.s:i.' et'
-	" s=2时等同于cabbrev  <silent>  i2t  setlocal shiftwidth=2 tabstop=2 noexpandtab
-	execute 'ca <silent> i'.s:i.'t setl sw='.s:i.' ts='.s:i.' noet'
+	" s=2时等同于cnoreabb  <expr>  i2   setlocal shiftwidth=2 tabstop=2 expandtab
+	execute "cnoreabb <expr> i".s:i."  (getcmdtype() == ':'
+				\ && getcmdline() =~ '^i".s:i."$')?
+				\ 'setl sw=".s:i." ts=".s:i." et' : 'i".s:i."'"
+	" s=2时等同于cnoreabb  <expr>  i2t  setlocal shiftwidth=2 tabstop=2 noexpandtab
+	execute "cnoreabb <expr> i".s:i."t (getcmdtype() == ':'
+				\ && getcmdline() =~ '^i".s:i."t$')?
+				\ 'setl sw=".s:i." ts=".s:i." noet' : 'i".s:i."t'"
 endfor
-command -nargs=1  G  call s:gina_wrapper(<f-args>)
-cabbrev <silent> g G
+command  -nargs=1  G           call s:gina_wrapper(<f-args>)
+cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 " >>>-----------------------------------
 
 
