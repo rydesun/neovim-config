@@ -33,6 +33,8 @@
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
+  // coc-rls
+  "rust-client.disableRustup": true,
   // coc-diagnostic
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"

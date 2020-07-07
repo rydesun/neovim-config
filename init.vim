@@ -263,7 +263,8 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator"]
 	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
 	let s:coc_lsp = [
-	\	"coc-go", "coc-python", "coc-sh", "coc-vimlsp", "coc-diagnostic",
+	\	"coc-go", "coc-python", "coc-rls",
+	\	"coc-sh", "coc-vimlsp", "coc-diagnostic",
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-css", "coc-stylelint",
 	\	"coc-html", "coc-json", "coc-yaml", "coc-markdownlint",
