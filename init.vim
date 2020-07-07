@@ -73,6 +73,8 @@ nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
 nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
 nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
+nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
+nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
 nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
 nmap     <silent>  <C-d>       <Plug>(coc-cursors-word)*
@@ -232,6 +234,11 @@ Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 		" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
 		autocmd Filetype markdown let g:indentLine_enabled = 0
 	augroup END
+	" >>>-----------------------------------
+Plug 'ntpeters/vim-better-whitespace'					" 处理空白符
+	" <<< vim-better-whitespace ------------
+	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help']
+	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
 Plug 'ryanoasis/vim-devicons', {'as': 'devicons'}			" 集成devicons字体
