@@ -139,6 +139,7 @@ for s:i in [2,4,8]
 endfor
 command  -nargs=*  G           call s:gina_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
+command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " >>>-----------------------------------
 
 
@@ -335,6 +336,9 @@ silent! colorscheme material
 let s:color_accent="#009688"
 let s:color_contrast="#13272c"
 
+let s:color_material_red="#ff9800"
+let s:color_material_green="#9bc34a"
+
 if exists('g:material_theme_style') && g:material_theme_style == "default"
 	" 垂直分割条
 	highlight VertSplit guifg=black
@@ -374,5 +378,8 @@ if exists('g:material_colorscheme_map')
 		\ guifg="s:color_accent"
 		\ guibg="s:color_contrast
 endif
+
+exec "highlight DiffDelete guifg="s:color_material_red
+exec "highlight DiffAdd guifg="s:color_material_green
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>
