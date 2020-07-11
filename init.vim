@@ -96,11 +96,12 @@ nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
 nnoremap <silent>  <Leader>lm  :CocList mru -A<CR>
 nnoremap <silent>  <Leader>lf  :CocList files<CR>
 nnoremap <silent>  <Leader>ls  :CocList grep<CR>
+nnoremap <silent>  <Leader>lt  :CocList symbols<CR>
+nnoremap <silent>  <Leader>lo  :CocList outline<CR>
 nnoremap <silent>  <Leader>ll  :CocList lines<CR>
 nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
 nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
 nnoremap <silent>  <Leader>ly  :CocList --number-select yank<CR>
-nnoremap <silent>  <Leader>lt  :CocList --number-select tasks<CR>
 nnoremap <silent>  <Leader>lg  :CocList --number-select gstatus<CR>
 nnoremap <silent>  <Leader>lp  :CocListResume<CR>
 
@@ -113,6 +114,8 @@ nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
 nmap               <Leader>gi  <Plug>(coc-git-chunkinfo)
 nmap               <Leader>gc  <Plug>(coc-git-commit)
+
+nnoremap <silent>  <Leader>rt  :CocList --number-select tasks<CR>
 nmap               <leader>rn  <Plug>(coc-rename)
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
