@@ -33,6 +33,8 @@
   "pairs.disableLanguages": ["html"],           // 使用coc-html自动闭合标签
   // coc-html
   "html.autoClosingTags": true,
+  // coc-go
+  "go.goplsArgs": ["-remote", "unix;/tmp/gopls-daemon-socket"],
   // coc-python
   "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
