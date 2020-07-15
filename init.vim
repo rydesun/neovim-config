@@ -246,6 +246,7 @@ Plug 'ntpeters/vim-better-whitespace'					" 处理空白符
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
 Plug 'ryanoasis/vim-devicons', {'as': 'devicons'}			" 集成devicons字体
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" <<< coc -----------------------------
@@ -283,6 +284,7 @@ Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
 Plug 'tpope/vim-sleuth', {'as': 'autoIndent'}                           " 自动设置缩进
+Plug 'AndrewRadev/splitjoin.vim', {'as': 'splitjoin'}
 Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" <<< nerdcommenter --------------------
 	" 取消所有预设键位映射
