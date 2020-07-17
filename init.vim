@@ -358,6 +358,10 @@ if exists('g:material_colorscheme_map')
 	exec "highlight IncSearch ctermfg=11 ctermbg=0
 		\ guifg="g:material_colorscheme_map.comments.gui"
 		\ guibg="g:material_colorscheme_map.white.gui
+	" 颠倒成对符号的高亮
+	exec "highlight MatchParen
+		\ guifg="g:material_colorscheme_map.cyan.gui"
+		\ guibg="g:material_colorscheme_map.comments.gui
 	" coc error
 	exec "highlight CocErrorSign
 		\ guifg="g:material_colorscheme_map.pink.gui
