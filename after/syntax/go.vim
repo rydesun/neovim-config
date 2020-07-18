@@ -1,7 +1,3 @@
-if exists('b:current_syntax')
-  finish
-endif
-
 syn match       goIfErrNotNil       "\s*if err != nil "
 syn match       goBracket           "("
 syn match       goBracket           ")"
