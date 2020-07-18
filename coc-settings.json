@@ -34,7 +34,8 @@
   // coc-html
   "html.autoClosingTags": true,
   // coc-go
-  "go.goplsArgs": ["-remote", "unix;/tmp/gopls-daemon-socket"],
+  "go.goplsArgs": ["-remote", "auto"],		// 自动开启共享gopls
+  "go.goplsPath": "gopls",			// 使用${PATH}中的gopls
   // coc-python
   "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
