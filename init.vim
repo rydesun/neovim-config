@@ -82,7 +82,8 @@ nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
 nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
-nmap     <silent>  <C-d>       <Plug>(coc-cursors-word)*
+nmap     <silent>  <C-c>       <Plug>(coc-cursors-position)
+nmap     <silent>  <C-s>       <Plug>(coc-cursors-word)*
 nmap     <silent>  gd          <Plug>(coc-definition)
 nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
