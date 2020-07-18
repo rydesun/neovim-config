@@ -14,12 +14,17 @@ set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 
+let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
+let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
+let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/插件目录
 " 与当前主机相关的配置
-let s:confdir = expand('<sfile>:p:h')
 let s:hostrc = s:confdir.'/hostrc.vim'
 if filereadable(s:hostrc)
 	exec 'source' s:hostrc
 endif
+
+" netrwhist文件位置
+let g:netrw_home=s:datadir
 
 " 函数 <<<------------------------------
 " 切换侧边栏
@@ -147,7 +152,6 @@ command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDatt
 
 
 " 插件管理器 vim-plug
-let s:plugdir = stdpath('data').'/plugged'	" 插件目录
 let g:plug_window = 'new'			" 控制台位置
 
 call plug#begin(s:plugdir)
