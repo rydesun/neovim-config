@@ -274,7 +274,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 		endif
 	endfunction
 	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator"]
+	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator", "coc-fzf-preview"]
 	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
 	let s:coc_lsp = [
 	\	"coc-go", "coc-python", "coc-rls",
@@ -287,6 +287,9 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\	"coc-highlight",
 	\	"coc-pairs",
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
+
+	" Arch包fzf自带vim插件, 无需安装vim插件junegunn/fzf
+	" 安装coc插件coc-fzf-preview, 无需安装vim插件yuki-ycino/fzf-preview.vim
 	" >>>-----------------------------------
 
 Plug 'mattn/emmet-vim'							" emmet展开缩写
