@@ -99,23 +99,6 @@ xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
 
-nnoremap <silent>  <Leader>lm  :CocList mru -A<CR>
-nnoremap <silent>  <Leader>lf  :CocList files<CR>
-nnoremap <silent>  <Leader>ls  :CocList grep<CR>
-nnoremap <silent>  <Leader>lt  :CocList symbols<CR>
-nnoremap <silent>  <Leader>lo  :CocList outline<CR>
-nnoremap <silent>  <Leader>ll  :CocList lines<CR>
-nnoremap <silent>  <Leader>lw  :CocList --number-select windows<CR>
-nnoremap <silent>  <Leader>lb  :CocList --number-select buffers<CR>
-nnoremap <silent>  <Leader>ly  :CocList --number-select yank<CR>
-nnoremap <silent>  <Leader>lg  :CocList --number-select gstatus<CR>
-nnoremap <silent>  <Leader>lp  :CocListResume<CR>
-
-nnoremap <silent>  <Leader>tc  :call <SID>work_mode_toggle()<CR>
-nnoremap           <Leader>tl  :set list! list?<CR>
-nnoremap           <Leader>tw  :set wrap! wrap?<CR>
-nnoremap <silent>  <Leader>ts  :call <SID>signColumn_toggle()<CR>
-nnoremap <silent>  <Leader>ti  :IndentLinesToggle<CR>
 nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
 nmap               <Leader>gi  <Plug>(coc-git-chunkinfo)
@@ -123,6 +106,27 @@ nmap               <Leader>gc  <Plug>(coc-git-commit)
 
 nnoremap <silent>  <Leader>rt  :CocList --number-select tasks<CR>
 nmap               <leader>rn  <Plug>(coc-rename)
+
+nmap     <Leader>l [coclist]
+nnoremap <silent>  [coclist]m  :CocList mru -A<CR>
+nnoremap <silent>  [coclist]f  :CocList files<CR>
+nnoremap <silent>  [coclist]s  :CocList grep<CR>
+nnoremap <silent>  [coclist]t  :CocList symbols<CR>
+nnoremap <silent>  [coclist]o  :CocList outline<CR>
+nnoremap <silent>  [coclist]l  :CocList lines<CR>
+nnoremap <silent>  [coclist]w  :CocList --number-select windows<CR>
+nnoremap <silent>  [coclist]b  :CocList --number-select buffers<CR>
+nnoremap <silent>  [coclist]y  :CocList --number-select yank<CR>
+nnoremap <silent>  [coclist]g  :CocList --number-select gstatus<CR>
+nnoremap <silent>  [coclist]p  :CocListResume<CR>
+
+nmap     <Leader>t [toggle]
+nnoremap <silent>  [toggle]c   :call <SID>work_mode_toggle()<CR>
+nnoremap           [toggle]l   :set list! list?<CR>
+nnoremap           [toggle]w   :set wrap! wrap?<CR>
+nnoremap <silent>  [toggle]s   :call <SID>signColumn_toggle()<CR>
+nnoremap <silent>  [toggle]i   :IndentLinesToggle<CR>
+
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
