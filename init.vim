@@ -1,4 +1,4 @@
-set fileencodings=ucs-bom,utf-8,gbk,gb18030,latin1	" 常见文件编码(中文用户)
+set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中文用户)
 set ignorecase smartcase	" 大小写模糊搜索
 set wildignorecase	" 命令行补全文件名时无视大小写
 set title		" 设置虚拟终端的标题
