@@ -307,6 +307,32 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" 注释符号左对齐
 	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
+Plug 'tenfyzhong/axring.vim'						" 切换单词
+	" <<< axring ---------------------------
+	let g:axring_rings = [
+	\ ['&&', '||'],
+	\ ['&', '|', '^'],
+	\ ['&=', '|=', '^='],
+	\ ['>>', '<<'],
+	\ ['>>=', '<<='],
+	\ ['==', '!='],
+	\ ['===', '!=='],
+	\ ['>', '<', '>=', '<='],
+	\ ['++', '--'],
+	\ ['true', 'false'],
+	\ ['verbose', 'debug', 'info', 'warn', 'error', 'fatal'],
+	\ ]
+	let g:axring_rings_go = [
+	\ [':=', '='],
+	\ ['byte', 'rune'],
+	\ ['complex64', 'complex128'],
+	\ ['int', 'int8', 'int16', 'int32', 'int64'],
+	\ ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
+	\ ['float32', 'float64'],
+	\ ['interface', 'struct'],
+	\ ['debug', 'info', 'warn', 'error', 'panic', 'fatal'],
+	\ ]
+	" >>>-----------------------------------
 
 Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
 	" <<< asyncrun -------------------------
