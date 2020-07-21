@@ -26,47 +26,6 @@ endif
 " netrwhist文件位置
 let g:netrw_home=s:datadir
 
-" 函数 <<<------------------------------
-" 切换侧边栏
-function s:signColumn_toggle() abort
-	if &signcolumn ==# 'yes'
-		setlocal signcolumn=no
-		echom 'SignColumn disabled'
-	else
-		setlocal signcolumn=yes
-		echom 'SignColumn enabled'
-	endif
-endfunction
-
-" 切换工作模式: 默认git
-function s:work_mode_toggle() abort
-	if !exists('b:work_mode') || b:work_mode == '' || b:work_mode == 'git'
-		let b:work_mode = 'diagnostic'
-		nmap <buffer><silent>  <C-k>  <Plug>(coc-diagnostic-prev)
-		nmap <buffer><silent>  <C-j>  <Plug>(coc-diagnostic-next)
-	else
-		let b:work_mode = ''
-		nunmap <buffer> <C-k>
-		nunmap <buffer> <C-j>
-	endif
-endfunction
-
-" 封装Gina
-function s:gina_wrapper(cmd) abort
-	let l:cmd = get({
-	\ 'd': 'diff',
-	\ 'ds': 'diff --staged',
-	\ 'show': 'show',
-	\ 'c': 'commit',
-	\ }, a:cmd, '')
-	if l:cmd == ''
-		return
-	else
-		execute 'Gina'.' '.l:cmd
-	endif
-endfunction
-" >>>-----------------------------------
-
 
 " 键位 <<<------------------------------
 noremap  ;  :
@@ -121,10 +80,10 @@ nnoremap <silent>  [coclist]g  :CocList --number-select gstatus<CR>
 nnoremap <silent>  [coclist]p  :CocListResume<CR>
 
 nmap     <Leader>t [toggle]
-nnoremap <silent>  [toggle]c   :call <SID>work_mode_toggle()<CR>
+nnoremap <silent>  [toggle]c   :call utils#work_mode_toggle()<CR>
 nnoremap           [toggle]l   :set list! list?<CR>
 nnoremap           [toggle]w   :set wrap! wrap?<CR>
-nnoremap <silent>  [toggle]s   :call <SID>signColumn_toggle()<CR>
+nnoremap <silent>  [toggle]s   :call utils#signColumn_toggle()<CR>
 nnoremap <silent>  [toggle]i   :IndentLinesToggle<CR>
 
 
@@ -150,7 +109,7 @@ for s:i in [2,4,8]
 				\ && getcmdline() =~ '^i".s:i."t$')?
 				\ 'setl sw=".s:i." ts=".s:i." noet' : 'i".s:i."t'"
 endfor
-command  -nargs=*  G           call s:gina_wrapper(<f-args>)
+command  -nargs=*  G           call utils#gina_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " >>>-----------------------------------
