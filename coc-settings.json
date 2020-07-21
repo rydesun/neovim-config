@@ -58,6 +58,13 @@
   },
   // lsp
   "languageserver": {
+    // AUR: lua-language-server-git
+    "lua-language-server": {
+      "cwd": "/usr/share/lua-language-server",
+      "command": "/usr/lib/lua-language-server/lua-language-server",
+      "args": ["-E", "-e", "LANG='zh-cn'", "./main.lua"],
+      "filetypes": ["lua"]
+    },
     "dockerfile": {
       "command": "docker-langserver",
       "args": ["--stdio"],
