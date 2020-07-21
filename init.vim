@@ -80,10 +80,10 @@ nnoremap <silent>  [coclist]g  :CocList --number-select gstatus<CR>
 nnoremap <silent>  [coclist]p  :CocListResume<CR>
 
 nmap     <Leader>t [toggle]
-nnoremap <silent>  [toggle]c   :call utils#work_mode_toggle()<CR>
+nnoremap <silent>  [toggle]c   :call utils#toggle_workmode()<CR>
 nnoremap           [toggle]l   :set list! list?<CR>
 nnoremap           [toggle]w   :set wrap! wrap?<CR>
-nnoremap <silent>  [toggle]s   :call utils#signColumn_toggle()<CR>
+nnoremap <silent>  [toggle]s   :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  [toggle]i   :IndentLinesToggle<CR>
 
 
@@ -109,7 +109,7 @@ for s:i in [2,4,8]
 				\ && getcmdline() =~ '^i".s:i."t$')?
 				\ 'setl sw=".s:i." ts=".s:i." noet' : 'i".s:i."t'"
 endfor
-command  -nargs=*  G           call utils#gina_wrapper(<f-args>)
+command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " >>>-----------------------------------
