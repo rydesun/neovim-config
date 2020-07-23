@@ -31,10 +31,14 @@ let g:netrw_home=s:datadir
 noremap  ;  :
 noremap  H  ^
 noremap  L  $
+noremap  '  `
+noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
+nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
+nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
 nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
 nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
@@ -48,43 +52,47 @@ nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
 nmap     <silent>  gr          <Plug>(coc-references)
 
+xmap     if        <Plug>(coc-funcobj-i)
+omap     if        <Plug>(coc-funcobj-i)
+xmap     af        <Plug>(coc-funcobj-a)
+omap     af        <Plug>(coc-funcobj-a)
+
 let g:mapleader=' ' | noremap <Space> <Nop>
-vnoremap <silent>  <Leader>y   "+y
-nnoremap <silent>  <Leader>p   "+p
-nnoremap <silent>  <Leader>P   "+P
-nnoremap <silent>  <Leader>;   :CocList cmdhistory<CR>
-map                <Leader>c   <Plug>NERDCommenterToggle
+vnoremap <silent>  <leader>y   "+y
+nnoremap <silent>  <leader>p   "+p
+nnoremap <silent>  <leader>P   "+P
+nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
+map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <Leader>e   :CocCommand explorer<CR>
+nnoremap <silent>  <leader>e   :CocCommand explorer<CR>
 
-nnoremap           <Leader>hs  :CocCommand git.chunkStage<CR>
-nnoremap           <Leader>hu  :CocCommand git.chunkUndo<CR>
-nmap               <Leader>gi  <Plug>(coc-git-chunkinfo)
-nmap               <Leader>gc  <Plug>(coc-git-commit)
+nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
+nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
+nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
+nmap               <leader>hc  <Plug>(coc-git-commit)
 
-nnoremap <silent>  <Leader>rt  :CocList --number-select tasks<CR>
 nmap               <leader>rn  <Plug>(coc-rename)
+nmap               <leader>rf  <Plug>(coc-refactor)
 
-nmap     <Leader>l [coclist]
-nnoremap <silent>  [coclist]m  :CocList mru -A<CR>
-nnoremap <silent>  [coclist]f  :CocList files<CR>
-nnoremap <silent>  [coclist]s  :CocList grep<CR>
-nnoremap <silent>  [coclist]t  :CocList symbols<CR>
-nnoremap <silent>  [coclist]o  :CocList outline<CR>
-nnoremap <silent>  [coclist]l  :CocList lines<CR>
-nnoremap <silent>  [coclist]w  :CocList --number-select windows<CR>
-nnoremap <silent>  [coclist]b  :CocList --number-select buffers<CR>
-nnoremap <silent>  [coclist]y  :CocList --number-select yank<CR>
-nnoremap <silent>  [coclist]g  :CocList --number-select gstatus<CR>
-nnoremap <silent>  [coclist]p  :CocListResume<CR>
+nnoremap <silent>  <leader>lm  :CocList mru -A<CR>
+nnoremap <silent>  <leader>lf  :CocList files<CR>
+nnoremap <silent>  <leader>ls  :CocList grep<CR>
+nnoremap <silent>  <leader>lt  :CocList symbols<CR>
+nnoremap <silent>  <leader>lo  :CocList outline<CR>
+nnoremap <silent>  <leader>ll  :CocList lines<CR>
+nnoremap <silent>  <leader>lw  :CocList --number-select windows<CR>
+nnoremap <silent>  <leader>lb  :CocList --number-select buffers<CR>
+nnoremap <silent>  <leader>ly  :CocList --number-select yank<CR>
+nnoremap <silent>  <leader>lg  :CocList --number-select gstatus<CR>
+nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
+nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
-nmap     <Leader>t [toggle]
-nnoremap <silent>  [toggle]c   :call utils#toggle_workmode()<CR>
-nnoremap           [toggle]l   :set list! list?<CR>
-nnoremap           [toggle]w   :set wrap! wrap?<CR>
-nnoremap <silent>  [toggle]s   :call utils#toggle_signcolumn()<CR>
-nnoremap <silent>  [toggle]i   :IndentLinesToggle<CR>
+nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
+nnoremap           <leader>tl  :set list! list?<CR>
+nnoremap           <leader>tw  :set wrap! wrap?<CR>
+nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
+nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
