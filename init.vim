@@ -94,6 +94,12 @@ nnoremap           <leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
+augroup golang_keymapping
+	autocmd!
+	autocmd FileType go nmap <leader>pa  <Plug>(go-alternate-edit)
+	autocmd FileType go nmap <leader>pt  <Plug>(go-test)
+	autocmd FileType go nmap <leader>pc  <Plug>(go-coverage-toggle)
+augroup END
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
@@ -316,6 +322,26 @@ Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
 Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
+	" >>>-----------------------------------
+Plug 'fatih/vim-go'
+	" <<< vim-go ---------------------------
+	" 优先使用coc-go提供的功能
+	" 关闭gopls
+	let g:go_gopls_enabled = 0
+	" 禁用omnifunc补全
+	let g:go_code_completion_enabled = 0
+	" 关闭vim-go的按键映射
+	let g:go_doc_keywordprg_enabled = 0 " 查看文档
+	let g:go_def_mapping_enabled = 0 " 跳转定义
+	let g:go_textobj_enabled = 0 " omap函数对象
+	" 禁止在保存时自动执行gofmt和goimports
+	let g:go_fmt_autosave = 0
+	let g:go_imports_autosave = 0
+
+	" 添加高亮组
+	let g:go_highlight_function_calls = 1
+	let g:go_highlight_function_parameters = 1
+	let g:go_highlight_operators = 1
 	" >>>-----------------------------------
 
 Plug 'puremourning/vimspector'						" 调试工具
