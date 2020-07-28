@@ -96,9 +96,10 @@ nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
 augroup golang_keymapping
 	autocmd!
-	autocmd FileType go nmap <leader>pa  <Plug>(go-alternate-edit)
-	autocmd FileType go nmap <leader>pt  <Plug>(go-test-func)
-	autocmd FileType go nmap <leader>pc  <Plug>(go-coverage-toggle)
+	autocmd FileType go nmap <leader>wa  <Plug>(go-alternate-edit)
+	autocmd FileType go nmap <leader>wt  <Plug>(go-test-func)
+	autocmd FileType go nmap <leader>wc  <Plug>(go-coverage-toggle)
+	autocmd FileType go nmap <leader>wi  <Plug>(go-imports)
 augroup END
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
