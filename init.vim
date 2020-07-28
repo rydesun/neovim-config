@@ -97,7 +97,7 @@ nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 augroup golang_keymapping
 	autocmd!
 	autocmd FileType go nmap <leader>pa  <Plug>(go-alternate-edit)
-	autocmd FileType go nmap <leader>pt  <Plug>(go-test)
+	autocmd FileType go nmap <leader>pt  <Plug>(go-test-func)
 	autocmd FileType go nmap <leader>pc  <Plug>(go-coverage-toggle)
 augroup END
 
@@ -223,7 +223,7 @@ Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 	" >>>-----------------------------------
 Plug 'ntpeters/vim-better-whitespace'					" 处理空白符
 	" <<< vim-better-whitespace ------------
-	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help']
+	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf']
 	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
