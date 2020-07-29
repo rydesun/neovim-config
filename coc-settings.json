@@ -10,7 +10,7 @@
     "function": "", "module": "", "file": "", "folder": "",
     "snippet": "", "color": ""
   },
-  "coc.preferences.formatOnSaveFiletypes": ["go"],
+  "coc.preferences.formatOnSaveFiletypes": ["go", "rust"],
   // coc-list
   "session.directory": "~/.data/nvim/sessions",
   "list.source.files.args": ["--hidden", "--files"],	// rg参数
@@ -41,8 +41,6 @@
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
-  // coc-rls
-  "rust-client.disableRustup": true,
   // coc-diagnostic
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
