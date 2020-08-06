@@ -251,7 +251,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator", "coc-fzf-preview"]
 	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
 	let s:coc_lsp = [
-	\	"coc-go", "coc-python", "coc-rust-analyzer",
+	\	"coc-go", "coc-python", "coc-rust-analyzer", "coc-clangd",
 	\	"coc-sh", "coc-vimlsp", "coc-diagnostic",
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-css", "coc-stylelint",
@@ -265,6 +265,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" Arch包fzf自带vim插件, 无需安装vim插件junegunn/fzf
 	" 安装coc插件coc-fzf-preview, 无需安装vim插件yuki-ycino/fzf-preview.vim
 	" >>>-----------------------------------
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 
 Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号

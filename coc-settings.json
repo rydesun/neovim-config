@@ -38,6 +38,8 @@
   "go.goplsPath": "gopls",			// 使用${PATH}中的gopls
   // coc-rust-analyzer
   "rust-analyzer.serverPath": "rust-analyzer",
+  // coc-clangd
+  "clangd.semanticHighlighting": true,
   // coc-python
   "python.jediEnabled": true,                   // 使用jedi取代MPLS: MPLS有bug
   "python.linting.pylintEnabled": false,        // 关闭pylint: 延迟过高
