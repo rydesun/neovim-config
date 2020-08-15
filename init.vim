@@ -224,7 +224,7 @@ Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 	" >>>-----------------------------------
 Plug 'ntpeters/vim-better-whitespace'					" 处理空白符
 	" <<< vim-better-whitespace ------------
-	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf']
+	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout']
 	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
@@ -248,7 +248,8 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 		endif
 	endfunction
 	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator", "coc-fzf-preview"]
+	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator", "coc-fzf-preview",
+				\ "coc-db"]
 	let s:coc_snippets = ["coc-snippets",	"coc-template",	"coc-emmet"]
 	let s:coc_lsp = [
 	\	"coc-go", "coc-python", "coc-rust-analyzer", "coc-clangd",
@@ -351,6 +352,17 @@ Plug 'puremourning/vimspector'						" 调试工具
 	let g:vimspector_enable_mappings = 'HUMAN'
 	" >>>-----------------------------------
 endif
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+	" <<< vim-dadbod-ui --------------------
+	let g:db_ui_save_location = s:datadir.'/db_ui'
+	let g:db_ui_use_nerd_fonts = 1
+	augroup myconfig_dbui
+		autocmd!
+		autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
+	augroup END
+	" >>>-----------------------------------
 
 if !exists('g:HOST_NO_X')
 Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx自动切换语言
