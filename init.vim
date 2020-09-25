@@ -320,6 +320,7 @@ Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
 Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
 if !exists('g:HOST_NO_DEV')
+Plug 'mzlogin/vim-markdown-toc'						" 为md自动生成TOC
 Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
 			\ 'do': 'cd app & yarn install'}		" markdown预览
 Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
