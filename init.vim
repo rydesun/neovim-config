@@ -257,6 +257,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-css", "coc-stylelint",
 	\	"coc-html", "coc-json", "coc-yaml", "coc-markdownlint",
+	\	"coc-xml", "coc-svg",
 	\ ]
 	let g:coc_global_extensions = [
 	\	"coc-highlight",
