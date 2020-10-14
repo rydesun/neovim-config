@@ -373,6 +373,14 @@ call plug#end()
 
 
 " 自动命令
+augroup myconfig_term	" 终端模式
+	autocmd!
+	" 打开终端时开启插入模式
+	autocmd TermOpen * startinsert
+	" 关闭zsh时不显示exit code
+	autocmd TermClose term://.//*:*zsh bd!
+augroup END
+
 augroup myconfig_coc	" 插件coc配置
 	autocmd!
 	" coc的配置文件使用jsonc格式
