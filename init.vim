@@ -438,4 +438,24 @@ endif
 exec "highlight DiffDelete guifg="s:color_material_red
 exec "highlight DiffAdd guifg="s:color_material_green
 
+" 终端中的配色
+let g:terminal_color_background = "#263238"
+let g:terminal_color_foreground = "#eceff1"
+let g:terminal_color_0 = "#505070"
+let g:terminal_color_1 = "#ff9800"
+let g:terminal_color_2 = "#8bc34a"
+let g:terminal_color_3 = "#ffc107"
+let g:terminal_color_4 = "#03a9f4"
+let g:terminal_color_5 = "#e91e63"
+let g:terminal_color_6 = "#009688"
+let g:terminal_color_7 = "#cfd8dc"
+let g:terminal_color_8 = "#507070"
+let g:terminal_color_9 = "#ffa74d"
+let g:terminal_color_10 = "#9ccc65"
+let g:terminal_color_11 = "#ffa000"
+let g:terminal_color_12 = "#81d4fa"
+let g:terminal_color_13 = "#ad1457"
+let g:terminal_color_14 = "#26a69a"
+let g:terminal_color_15 = "#eceff1"
+
 " vim: foldmethod=marker:foldmarker=<<<,>>>
