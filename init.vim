@@ -425,25 +425,21 @@ if exists('g:material_colorscheme_map')
 	exec "highlight CocErrorSign
 		\ guifg="g:material_colorscheme_map.pink.gui
 	exec "highlight CocErrorHighlight
-		\ guifg="g:material_colorscheme_map.pink.gui"
 		\ guibg="s:color_contrast
 	" coc warning
 	exec "highlight CocWarningSign
 		\ guifg="g:material_colorscheme_map.brown.gui
 	exec "highlight CocWarningHighlight
-		\ guifg="g:material_colorscheme_map.brown.gui"
 		\ guibg="s:color_contrast
 	" coc info
 	exec "highlight CocInfoSign
 		\ guifg="g:material_colorscheme_map.purple.gui
 	exec "highlight CocInfoHighlight
-		\ guifg="g:material_colorscheme_map.purple.gui"
 		\ guibg="s:color_contrast
 	" coc hint
 	exec "highlight CocHintSign
 		\ guifg="s:color_accent
 	exec "highlight CocHintHighlight
-		\ guifg="s:color_accent"
 		\ guibg="s:color_contrast
 endif
 
