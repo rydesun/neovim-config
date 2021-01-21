@@ -94,13 +94,7 @@ nnoremap           <leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
-augroup golang_keymapping
-	autocmd!
-	autocmd FileType go nmap <leader>wa  <Plug>(go-alternate-edit)
-	autocmd FileType go nmap <leader>wt  <Plug>(go-test-func)
-	autocmd FileType go nmap <leader>wc  <Plug>(go-coverage-toggle)
-	autocmd FileType go nmap <leader>wi  <Plug>(go-imports)
-augroup END
+" 注意：ftplugin/{filetype}_keymap.vim文件占用了 <leader>w 开头的映射
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
