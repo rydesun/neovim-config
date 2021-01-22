@@ -135,9 +135,9 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\ 'colorscheme': 'material',
 	\ 'subseparator': {'left': '', 'right': ''},
 	\ 'active': {
-	\ 	'left': [
+	\	'left': [
 	\	['mode', 'paste', 'work_mode'],
-	\ 	['gitBranch', 'gitStatus'],
+	\	['gitBranch', 'gitStatus'],
 	\	['readonly', 'absolutepath', 'modified']],
 	\	'right': [
 	\	['winnr', 'postion'],
@@ -146,7 +146,7 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\	['currentFunc']],
 	\ },
 	\ 'inactive': {
-	\ 	'left': [['readonly', 'absolutepath', 'modified']],
+	\	'left': [['readonly', 'absolutepath', 'modified']],
 	\	'right': [
 	\	['winnr', 'postion'],
 	\	['fileformat', 'filetype']],
@@ -155,12 +155,12 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 	\	'work_mode': '%{get(b:, "work_mode", "")}',
 	\	'postion': '%2l:%-2v %2p%%',
 	\	'winnr': '%{winnr()}',
-	\ 	'fileformat': '%{&ff!=#"unix"?&ff:""}',
+	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\ },
 	\ 'component_function': {
-	\ 	'gitBranch': 'Lightline_gitBranch',
-	\ 	'gitStatus': 'Lightline_gitStatus',
-	\ 	'gitBlame': 'Lightline_gitBlame',
+	\	'gitBranch': 'Lightline_gitBranch',
+	\	'gitStatus': 'Lightline_gitStatus',
+	\	'gitBlame': 'Lightline_gitBlame',
 	\	'readonly': 'Lightline_readonly',
 	\	'currentFunc': 'Lightline_currentFunc',
 	\	'diagnostic': 'Lightline_diagnostic',
