@@ -247,11 +247,11 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
 	let s:coc_lsp = [
 	\	"coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
-	\	"coc-sh", "coc-vimlsp", "coc-diagnostic",
+	\	"coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-css", "coc-stylelint",
-	\	"coc-html", "coc-json", "coc-yaml", "coc-markdownlint",
-	\	"coc-xml", "coc-svg",
+	\	"coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
+	\	"coc-xml", "coc-svg", "coc-docker",
 	\ ]
 	let g:coc_global_extensions = [
 	\	"coc-highlight",
