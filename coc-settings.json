@@ -41,6 +41,11 @@
   "rust-analyzer.server.path": "rust-analyzer",
   // coc-clangd
   "clangd.semanticHighlighting": true,
+  // coc-markdownlint
+  "markdownlint.config": {
+    "line-length": false,
+    "first-line-heading": false
+  },
   // coc-diagnostic
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
