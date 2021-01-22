@@ -38,7 +38,7 @@
   "go.goplsArgs": ["-remote", "auto"],		// 自动开启共享gopls
   "go.goplsPath": "gopls",			// 使用${PATH}中的gopls
   // coc-rust-analyzer
-  "rust-analyzer.serverPath": "rust-analyzer",
+  "rust-analyzer.server.path": "rust-analyzer",
   // coc-clangd
   "clangd.semanticHighlighting": true,
   // coc-diagnostic
