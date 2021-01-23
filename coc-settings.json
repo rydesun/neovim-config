@@ -43,6 +43,7 @@
   "clangd.semanticHighlighting": true,
   // coc-markdownlint
   "markdownlint.config": {
+    "single-trailing-newline": false,
     "line-length": false,
     "first-line-heading": false
   },
