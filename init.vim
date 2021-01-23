@@ -65,7 +65,7 @@ nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <leader>e   :exec Run_coc_explorer()<CR>
+nnoremap <silent>  <leader>e   :exec <SID>coc_explorer()<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
@@ -266,7 +266,7 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\ '/usr/lib/python[23]\.[0-9]\+/[^/]*/',
 	\ '/usr/lib/python[23]\.[0-9]\+/',
 	\ ]
-	function! Run_coc_explorer() abort
+	function! s:coc_explorer() abort
 		exec 'CocCommand explorer ' .. utils#rootpath(s:rootpath_patterns)
 	endfunction
 	" >>>-----------------------------------
