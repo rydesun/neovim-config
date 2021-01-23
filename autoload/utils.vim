@@ -36,3 +36,19 @@ function utils#git_wrapper(cmd) abort
 		execute 'Gina'.' '.l:cmd
 	endif
 endfunction
+
+" 工作目录
+function! utils#rootpath(patterns) abort
+        if exists("b:rootpath")
+                return b:rootpath
+        endif
+	for l:pattern in a:patterns
+		let l:res = matchstr(expand('%:p:h').'/', l:pattern)
+		if !empty(l:res)
+                        let b:rootpath = l:res
+                        return b:rootpath
+		endif
+	endfor
+        let b:rootpath = ''
+        return b:rootpath
+endfunction

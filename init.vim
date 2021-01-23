@@ -65,7 +65,7 @@ nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <leader>e   :CocCommand explorer<CR>
+nnoremap <silent>  <leader>e   :exec Run_coc_explorer()<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
@@ -260,6 +260,15 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 
 	" Arch包fzf自带vim插件, 无需安装vim插件junegunn/fzf
 	" 安装coc插件coc-fzf-preview, 无需安装vim插件yuki-ycino/fzf-preview.vim
+
+	let s:rootpath_patterns = [
+	\ '/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
+	\ '/usr/lib/python[23]\.[0-9]\+/[^/]*/',
+	\ '/usr/lib/python[23]\.[0-9]\+/',
+	\ ]
+	function! Run_coc_explorer() abort
+		exec 'CocCommand explorer ' .. utils#rootpath(s:rootpath_patterns)
+	endfunction
 	" >>>-----------------------------------
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 
