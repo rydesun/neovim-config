@@ -270,10 +270,10 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	\ '^/usr/lib/python[23]\.[0-9]\+/',
 	\ ]
 	function! s:coc_explorer() abort
-		exec 'CocCommand explorer ' .. utils#rootpath(s:rootpath_patterns)
+		exec 'CocCommand explorer ' . utils#rootpath(s:rootpath_patterns)
 	endfunction
 	" >>>-----------------------------------
-Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
@@ -339,7 +339,7 @@ Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
 	" >>>-----------------------------------
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 	" <<< vim-go ---------------------------
 	" 优先使用coc-go提供的功能
 	" 关闭gopls
