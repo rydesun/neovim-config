@@ -262,9 +262,12 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" 安装coc插件coc-fzf-preview, 无需安装vim插件yuki-ycino/fzf-preview.vim
 
 	let s:rootpath_patterns = [
-	\ '/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
-	\ '/usr/lib/python[23]\.[0-9]\+/[^/]*/',
-	\ '/usr/lib/python[23]\.[0-9]\+/',
+	\ '^/etc/[^/]*/',
+	\ '^/etc/',
+	\ '^/usr/share/[^/]*/',
+	\ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
+	\ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
+	\ '^/usr/lib/python[23]\.[0-9]\+/',
 	\ ]
 	function! s:coc_explorer() abort
 		exec 'CocCommand explorer ' .. utils#rootpath(s:rootpath_patterns)
