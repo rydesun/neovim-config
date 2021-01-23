@@ -278,7 +278,6 @@ Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
-Plug 'tpope/vim-sleuth', {'as': 'autoIndent'}                           " 自动设置缩进
 Plug 'AndrewRadev/splitjoin.vim', {'as': 'splitjoin'}
 Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" <<< nerdcommenter --------------------
@@ -329,6 +328,8 @@ Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
 	" <<< vim-polyglot ---------------------
 	" 防止 gohtmltmpl 被检测成 html
 	let g:polyglot_disabled = ['html']
+	" 禁止使用自带的插件vim-sensible
+	let g:polyglot_disabled = ['sensible']
 	" >>>-----------------------------------
 if !exists('g:HOST_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'						" 为md自动生成TOC
