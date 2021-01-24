@@ -10,5 +10,9 @@ msg "Downloading plugin manager..."
 curl -fLo "${datadir}/site/autoload/plug.vim" --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+msg
 msg "Installing plugins..."
 nvim --headless +PlugInstall +qa
+
+msg
+msg "Done."
