@@ -326,10 +326,9 @@ Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
 Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
 	" <<< vim-polyglot ---------------------
-	" 防止 gohtmltmpl 被检测成 html
-	let g:polyglot_disabled = ['html']
-	" 禁止使用自带的插件vim-sensible
-	let g:polyglot_disabled = ['sensible']
+	" go: 优先使用vim-go
+	" sensible: 禁止使用自带的插件vim-sensible
+	let g:polyglot_disabled = ['go', 'sensible']
 	" >>>-----------------------------------
 if !exists('g:HOST_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'						" 为md自动生成TOC
