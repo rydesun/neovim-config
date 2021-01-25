@@ -338,9 +338,9 @@ Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
 	" >>>-----------------------------------
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries guru motion'}
 	" <<< vim-go ---------------------------
-	" 优先使用coc-go提供的功能
+	" 只安装特定工具，优先使用coc-go提供的功能
 	" 关闭gopls
 	let g:go_gopls_enabled = 0
 	" 禁用omnifunc补全
@@ -348,10 +348,8 @@ Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 	" 关闭vim-go的按键映射
 	let g:go_doc_keywordprg_enabled = 0 " 查看文档
 	let g:go_def_mapping_enabled = 0 " 跳转定义
-	let g:go_textobj_enabled = 0 " omap函数对象
-	" 禁止在保存时自动执行gofmt和goimports
+	" 禁止在保存时自动执行GoFmt
 	let g:go_fmt_autosave = 0
-	let g:go_imports_autosave = 0
 
 	" 添加高亮组
 	let g:go_highlight_function_calls = 1

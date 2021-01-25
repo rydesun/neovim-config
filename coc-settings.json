@@ -35,7 +35,6 @@
   "xml.server.workDir": "~/.cache/lemminx",
   "xml.validation.enabled": false,              // 似乎有bug：XML catalog无效
   // coc-go
-  "go.goplsArgs": ["-remote", "auto"],		// 自动开启共享gopls
   "go.goplsPath": "gopls",			// 使用${PATH}中的gopls
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
