@@ -125,11 +125,11 @@ command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDatt
 
 
 " 插件管理器 vim-plug
-let g:plug_window = 'new'			" 控制台位置
+let g:plug_window = 'new'		" 控制台位置
 
 call plug#begin(s:plugdir)
-Plug 'kaicataldo/material.vim', {'as': 'theme-material'}		" 配色主题
-Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
+Plug 'kaicataldo/material.vim'		" 配色主题
+Plug 'itchyny/lightline.vim'		" 状态栏
 	" <<< lightline------------------------
 	let g:lightline = {
 	\ 'colorscheme': 'material',
@@ -206,7 +206,7 @@ Plug 'itchyny/lightline.vim', {'as': 'lightline'}			" 状态栏
 		return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
 	endfunction
 	" >>>-----------------------------------
-Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
+Plug 'Yggdroot/indentLine'		" 缩进线
 	" <<< indentLine -----------------------
 	" 更精细的缩进线
 	let g:indentLine_char = '┊'
@@ -216,16 +216,17 @@ Plug 'Yggdroot/indentLine', {'as': 'indentLine'}			" 缩进线
 		autocmd Filetype markdown let g:indentLine_enabled = 0
 	augroup END
 	" >>>-----------------------------------
-Plug 'ntpeters/vim-better-whitespace'					" 处理空白符
+Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 	" <<< vim-better-whitespace ------------
 	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout']
 	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
-Plug 'psliwka/vim-smoothie', {'as': 'smoothie'}				" 平滑滚动
-Plug 'ryanoasis/vim-devicons', {'as': 'devicons'}			" 集成devicons字体
+Plug 'psliwka/vim-smoothie'		" 平滑滚动
+Plug 'ryanoasis/vim-devicons'		" 集成devicons字体
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
+Plug 'neoclide/coc.nvim',		" coc框架
+	\ {'branch': 'release'}
 	" <<< coc -----------------------------
 	" 修改coc数据目录, 默认值是XDG config目录
 	let g:coc_data_home = stdpath('data').'/coc'
@@ -275,12 +276,12 @@ Plug 'neoclide/coc.nvim', {'as': 'coc', 'branch': 'release'}		" coc框架
 	" >>>-----------------------------------
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-Plug 'mattn/emmet-vim'							" emmet展开缩写
-Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
-Plug 'tpope/vim-unimpaired'						" 快速跳转
-Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
-Plug 'AndrewRadev/splitjoin.vim', {'as': 'splitjoin'}
-Plug 'scrooloose/nerdcommenter'						" 快速注释
+Plug 'mattn/emmet-vim'			" emmet展开缩写
+Plug 'tpope/vim-surround'		" 修改成对符号
+Plug 'tpope/vim-unimpaired'		" 快速跳转
+Plug 'tpope/vim-repeat'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'scrooloose/nerdcommenter'		" 快速注释
 	" <<< nerdcommenter --------------------
 	" 取消所有预设键位映射
 	let g:NERDCreateDefaultMappings = 0
@@ -290,7 +291,7 @@ Plug 'scrooloose/nerdcommenter'						" 快速注释
 	" 注释符号左对齐
 	let g:NERDDefaultAlign='left'
 	" >>>-----------------------------------
-Plug 'tenfyzhong/axring.vim'						" 切换单词
+Plug 'tenfyzhong/axring.vim'		" 切换单词
 	" <<< axring ---------------------------
 	let g:axring_rings = [
 	\ ['&&', '||'],
@@ -317,29 +318,30 @@ Plug 'tenfyzhong/axring.vim'						" 切换单词
 	\ ]
 	" >>>-----------------------------------
 
-Plug 'skywind3000/asyncrun.vim'						" 异步执行外部命令
+Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	" <<< asyncrun -------------------------
 	" quickfix窗口的默认高度
 	let g:asyncrun_open = 6
 	" 在firefox中搜索当前单词
 	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
 	" >>>-----------------------------------
-Plug 'lambdalisue/gina.vim', {'as': 'gina'}				" git命令
-Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}				" 补充语言包
+Plug 'lambdalisue/gina.vim'		" git命令
+Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" <<< vim-polyglot ---------------------
 	" go: 优先使用vim-go
 	" sensible: 禁止使用自带的插件vim-sensible
 	let g:polyglot_disabled = ['go', 'sensible']
 	" >>>-----------------------------------
 if !exists('g:HOST_NO_DEV')
-Plug 'mzlogin/vim-markdown-toc'						" 为md自动生成TOC
-Plug 'iamcco/markdown-preview.nvim', {'as': 'markdown-preview',
-			\ 'do': 'cd app & yarn install'}		" markdown预览
-Plug 'skywind3000/asynctasks.vim'					" 构建任务系统
+Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
+Plug 'iamcco/markdown-preview.nvim',	" markdown预览
+	\ {'do': 'cd app & yarn install'}
+Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
 	" >>>-----------------------------------
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries guru motion'}
+Plug 'fatih/vim-go',
+	\ {'do': ':GoUpdateBinaries guru motion'}
 	" <<< vim-go ---------------------------
 	" 只安装特定工具，优先使用coc-go提供的功能
 	" 关闭gopls
@@ -358,7 +360,7 @@ Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries guru motion'}
 	let g:go_highlight_operators = 1
 	" >>>-----------------------------------
 
-Plug 'puremourning/vimspector'						" 调试工具
+Plug 'puremourning/vimspector'		" 调试工具
 	" <<< vimspector -----------------------
 	let g:vimspector_enable_mappings = 'HUMAN'
 	" >>>-----------------------------------
@@ -376,7 +378,7 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 	" >>>-----------------------------------
 
 if !exists('g:HOST_NO_X')
-Plug 'lilydjwg/fcitx.vim' , {'as': 'fcitx'}				" fcitx自动切换语言
+Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换语言
 endif
 call plug#end()
 
