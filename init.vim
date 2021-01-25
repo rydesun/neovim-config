@@ -277,6 +277,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'mattn/emmet-vim'							" emmet展开缩写
 Plug 'tpope/vim-surround', {'as': 'surround'}				" 修改成对符号
+Plug 'tpope/vim-unimpaired'						" 快速跳转
 Plug 'tpope/vim-repeat', {'as': 'repeat'}				" 配合surround插件支持dot重复
 Plug 'AndrewRadev/splitjoin.vim', {'as': 'splitjoin'}
 Plug 'scrooloose/nerdcommenter'						" 快速注释
