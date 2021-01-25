@@ -225,8 +225,8 @@ Plug 'psliwka/vim-smoothie'		" 平滑滚动
 Plug 'ryanoasis/vim-devicons'		" 集成devicons字体
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'neoclide/coc.nvim',		" coc框架
-	\ {'branch': 'release'}
+Plug 'neoclide/coc.nvim',
+	\ {'branch': 'release'}		" coc框架
 	" <<< coc -----------------------------
 	" 修改coc数据目录, 默认值是XDG config目录
 	let g:coc_data_home = stdpath('data').'/coc'
@@ -334,8 +334,8 @@ Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" >>>-----------------------------------
 if !exists('g:HOST_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
-Plug 'iamcco/markdown-preview.nvim',	" markdown预览
-	\ {'do': 'cd app & yarn install'}
+Plug 'iamcco/markdown-preview.nvim',
+	\ {'do': 'cd app & yarn install'}	" markdown预览
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
