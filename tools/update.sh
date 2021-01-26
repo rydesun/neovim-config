@@ -1,19 +1,15 @@
 #!/bin/bash -e
 
-msg() {
-	echo "$@" >&2
-}
-
-msg "Updating plugins..."
+echo "Updating plugins..."
 nvim --headless +PlugUpdate +qa
 
-msg
-msg "Updating plugin manager..."
+echo
+echo "Updating plugin manager..."
 nvim --headless +PlugUpgrade +qa
 
-msg
-msg "Updating coc extensions..."
+echo
+echo "Updating coc extensions..."
 nvim --headless +CocUpdateSync +qa
 
-msg
-msg "Done."
+echo
+echo "Done."
