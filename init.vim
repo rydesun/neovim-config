@@ -34,6 +34,8 @@ noremap  L  $
 noremap  '  `
 noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
+map                f           <Plug>Sneak_s
+map                F           <Plug>Sneak_S
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
@@ -276,6 +278,13 @@ Plug 'neoclide/coc.nvim',
 	" >>>-----------------------------------
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
+Plug 'justinmk/vim-sneak'		" 光标定位
+	" <<< vim-sneak -----------------------
+	" 类似于EasyMotion的标签模式
+	let g:sneak#label = 1
+	" 智能大小写
+	let g:sneak#use_ic_scs = 1
+	" >>> ---------------------------------
 Plug 'mattn/emmet-vim'			" emmet展开缩写
 Plug 'tpope/vim-surround'		" 修改成对符号
 Plug 'tpope/vim-unimpaired'		" 快速跳转
@@ -424,6 +433,9 @@ if exists('g:material_colorscheme_map')
 	exec "highlight IncSearch ctermfg=11 ctermbg=0
 		\ guifg="g:material_colorscheme_map.comments.gui"
 		\ guibg="g:material_colorscheme_map.white.gui
+	" sneak
+	exec "highlight Sneak
+		\ guibg="g:material_colorscheme_map.violet.gui
 	" 颠倒成对符号的高亮
 	exec "highlight MatchParen
 		\ guifg="g:material_colorscheme_map.cyan.gui"
