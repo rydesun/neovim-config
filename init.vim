@@ -34,6 +34,7 @@ noremap  L  $
 noremap  '  `
 noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
+nnoremap           s           :Clap<CR>
 map                f           <Plug>Sneak_s
 map                F           <Plug>Sneak_S
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
@@ -77,16 +78,7 @@ nmap               <leader>hc  <Plug>(coc-git-commit)
 nmap               <leader>rn  <Plug>(coc-rename)
 nmap               <leader>rf  <Plug>(coc-refactor)
 
-nnoremap <silent>  <leader>lm  :CocList mru -A<CR>
-nnoremap <silent>  <leader>lf  :CocList files<CR>
-nnoremap <silent>  <leader>ls  :CocList grep<CR>
-nnoremap <silent>  <leader>lt  :CocList symbols<CR>
 nnoremap <silent>  <leader>lo  :CocList outline<CR>
-nnoremap <silent>  <leader>ll  :CocList lines<CR>
-nnoremap <silent>  <leader>lw  :CocList --number-select windows<CR>
-nnoremap <silent>  <leader>lb  :CocList --number-select buffers<CR>
-nnoremap <silent>  <leader>ly  :CocList --number-select yank<CR>
-nnoremap <silent>  <leader>lg  :CocList --number-select gstatus<CR>
 nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
@@ -245,7 +237,7 @@ Plug 'neoclide/coc.nvim',
 		endif
 	endfunction
 	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator", "coc-fzf-preview",
+	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
 				\ "coc-db"]
 	let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
 	let s:coc_lsp = [
@@ -261,9 +253,6 @@ Plug 'neoclide/coc.nvim',
 	\	"coc-pairs",
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 
-	" Arch包fzf自带vim插件, 无需安装vim插件junegunn/fzf
-	" 安装coc插件coc-fzf-preview, 无需安装vim插件yuki-ycino/fzf-preview.vim
-
 	let s:rootpath_patterns = [
 	\ '^/etc/[^/]*/',
 	\ '^/etc/',
@@ -276,6 +265,14 @@ Plug 'neoclide/coc.nvim',
 		exec 'CocCommand explorer ' . utils#rootpath(s:rootpath_patterns)
 	endfunction
 	" >>>-----------------------------------
+Plug 'liuchengxu/vim-clap',
+	\ { 'do': ':Clap install-binary!' }
+	" <<< vim-clap -------------------------
+	let g:clap_layout = {'relative': 'editor'}
+	" 无normal模式(Esc立即退出)
+	let g:clap_insert_mode_only = v:true
+	" >>>-----------------------------------
+Plug 'vn-ki/coc-clap'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'justinmk/vim-sneak'		" 光标定位
