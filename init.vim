@@ -82,6 +82,7 @@ nnoremap <silent>  <leader>lo  :CocList outline<CR>
 nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
+nnoremap           <Leader>tt  :call <SID>open_floaterm()<CR>
 nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
 nnoremap           <leader>tl  :set list! list?<CR>
 nnoremap           <leader>tw  :set wrap! wrap?<CR>
@@ -116,6 +117,16 @@ command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " >>>-----------------------------------
+
+
+let s:rootpath_patterns = [
+\ '^/etc/[^/]*/',
+\ '^/etc/',
+\ '^/usr/share/[^/]*/',
+\ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
+\ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
+\ '^/usr/lib/python[23]\.[0-9]\+/',
+\ ]
 
 
 " 插件管理器 vim-plug
@@ -253,14 +264,6 @@ Plug 'neoclide/coc.nvim',
 	\	"coc-pairs",
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 
-	let s:rootpath_patterns = [
-	\ '^/etc/[^/]*/',
-	\ '^/etc/',
-	\ '^/usr/share/[^/]*/',
-	\ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
-	\ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
-	\ '^/usr/lib/python[23]\.[0-9]\+/',
-	\ ]
 	function! s:coc_explorer() abort
 		exec 'CocCommand explorer ' . utils#rootpath(s:rootpath_patterns)
 	endfunction
@@ -324,6 +327,17 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	\ ]
 	" >>>-----------------------------------
 
+Plug 'voldikss/vim-floaterm'
+	" <<< vim-floaterm ---------------------
+	function! s:open_floaterm() abort
+		let l:rootpath = utils#clap_rootpath(s:rootpath_patterns)
+		if !empty(l:rootpath)
+			exec 'FloatermNew --cwd='.l:rootpath
+		else
+			exec 'FloatermNew'
+		endif
+	endfunction
+	" >>>-----------------------------------
 Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	" <<< asyncrun -------------------------
 	" quickfix窗口的默认高度
@@ -395,7 +409,7 @@ augroup myconfig_term	" 终端模式
 	" 打开终端时开启插入模式
 	autocmd TermOpen * startinsert
 	" 关闭zsh时不显示exit code
-	autocmd TermClose term://.//*:*zsh bd!
+	" autocmd TermClose term://.//*:*zsh bd!
 augroup END
 
 augroup myconfig_coc	" 插件coc配置

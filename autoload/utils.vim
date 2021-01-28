@@ -52,3 +52,13 @@ function! utils#rootpath(patterns) abort
         let b:rootpath = ''
         return b:rootpath
 endfunction
+
+" 依赖vim-clap产生的工作目录
+function! utils#clap_rootpath(patterns) abort
+	let l:rootpath = utils#rootpath(a:patterns)
+	if empty(l:rootpath)
+		let l:nr = bufnr('%')
+		let l:rootpath = clap#path#find_project_root(l:nr)
+	endif
+	return l:rootpath
+endfunction
