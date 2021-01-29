@@ -123,6 +123,7 @@ let s:rootpath_patterns = [
 \ '^/etc/[^/]*/',
 \ '^/etc/',
 \ '^/usr/share/[^/]*/',
+\ '^/usr/lib/go/src/[^/]*',
 \ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
 \ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
 \ '^/usr/lib/python[23]\.[0-9]\+/',
@@ -145,7 +146,7 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\	['gitBranch', 'gitStatus'],
 	\	['readonly', 'absolutepath', 'modified']],
 	\	'right': [
-	\	['winnr', 'postion'],
+	\	['postion'],
 	\	['diagnostic', 'gitBlame'],
 	\	['fileformat', 'filetype'],
 	\	['currentFunc']],
@@ -167,7 +168,6 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\	'gitStatus': 'Lightline_gitStatus',
 	\	'gitBlame': 'Lightline_gitBlame',
 	\	'readonly': 'Lightline_readonly',
-	\	'currentFunc': 'Lightline_currentFunc',
 	\	'diagnostic': 'Lightline_diagnostic',
 	\	'filetype': 'Lightline_filetype',
 	\ },
@@ -181,13 +181,10 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 		return get(g:, 'coc_git_status', '')
 	endfunction
 	function! Lightline_gitStatus() abort
-		return get(b:, 'coc_git_status', '')
+		return trim(get(b:, 'coc_git_status', ''))
 	endfunction
 	function! Lightline_gitBlame() abort
 		return get(b:, 'coc_git_blame', '')
-	endfunction
-	function! Lightline_currentFunc() abort
-		return get(b:, 'coc_current_function', '')
 	endfunction
 	function! Lightline_diagnostic() abort
 		let info = get(b:, 'coc_diagnostic_info', {})
