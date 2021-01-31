@@ -29,12 +29,14 @@ let g:netrw_home=s:datadir
 
 " 键位 <<<------------------------------
 noremap  ;  :
+noremap  :  ;
 noremap  H  ^
 noremap  L  $
 noremap  '  `
 noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 nnoremap           s           :Clap<CR>
+nnoremap           S           :Clap blines<CR>
 map                f           <Plug>Sneak_s
 map                F           <Plug>Sneak_S
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
@@ -69,6 +71,7 @@ map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <leader>e   :exec <SID>coc_explorer()<CR>
+nnoremap           <leader>b   :Clap buffers<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
@@ -116,6 +119,8 @@ endfor
 command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+tnoremap <M-space>  <c-\><c-n>
 " >>>-----------------------------------
 
 
@@ -262,7 +267,8 @@ Plug 'neoclide/coc.nvim',
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 
 	function! s:coc_explorer() abort
-		exec 'CocCommand explorer ' . utils#rootpath(s:rootpath_patterns)
+		exec 'CocCommand explorer --position floating --floating-width 90 '.
+					\ utils#rootpath(s:rootpath_patterns)
 	endfunction
 	" >>>-----------------------------------
 Plug 'liuchengxu/vim-clap',
@@ -404,8 +410,9 @@ call plug#end()
 " 自动命令
 augroup myconfig_term	" 终端模式
 	autocmd!
-	" 打开终端时开启插入模式
+	" 进入终端时开启插入模式
 	autocmd TermOpen * startinsert
+	autocmd BufWinEnter,WinEnter term://* startinsert
 	" 关闭zsh时不显示exit code
 	" autocmd TermClose term://.//*:*zsh bd!
 augroup END
