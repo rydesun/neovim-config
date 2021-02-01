@@ -410,11 +410,14 @@ call plug#end()
 " 自动命令
 augroup myconfig_term	" 终端模式
 	autocmd!
+	" 修复闪烁
+	autocmd TermEnter * setlocal scrolloff=0
+	autocmd TermLeave * setlocal scrolloff=5
 	" 进入终端时开启插入模式
 	autocmd TermOpen * startinsert
 	autocmd BufWinEnter,WinEnter term://* startinsert
-	" 关闭zsh时不显示exit code
-	" autocmd TermClose term://.//*:*zsh bd!
+	" 退出唯一的shell时，自动退出整个vim
+	autocmd TermClose * if utils#buflen() == 1 | q | endif
 augroup END
 
 augroup myconfig_coc	" 插件coc配置

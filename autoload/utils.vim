@@ -62,3 +62,8 @@ function! utils#clap_rootpath(patterns) abort
 	endif
 	return l:rootpath
 endfunction
+
+" 依赖vim-clap
+function! utils#buflen() abort
+	return len(clap#util#buflisted(v:false))
+endfunction
