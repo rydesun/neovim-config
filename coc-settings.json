@@ -44,6 +44,7 @@
   "markdownlint.config": {
     "single-trailing-newline": false,
     "line-length": false,
+    "no-duplicate-heading": false,
     "first-line-heading": false
   },
   // coc-diagnostic
