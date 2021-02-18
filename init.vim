@@ -231,6 +231,10 @@ Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
 Plug 'ryanoasis/vim-devicons'		" 集成devicons字体
 Plug 'editorconfig/editorconfig-vim'
+Plug 'fidian/hexmode'			" 编辑16进制文件
+	" <<< hexmode --------------------------
+	let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+	" >>>-----------------------------------
 
 Plug 'neoclide/coc.nvim',
 	\ {'branch': 'release'}		" coc框架
