@@ -23,6 +23,11 @@
   "translator.engines": ["bing"],
   // coc-git
   "git.branchCharacter": "⎇ ",
+  "git.changedSign.hlGroup": "GitChange",
+  "git.addedSign.hlGroup": "GitAdd",
+  "git.removedSign.hlGroup": "GitDelete",
+  "git.topRemovedSign.hlGroup": "GitDelete",
+  "git.changeRemovedSign.hlGroup": "GitChange",
   // coc-yank
   "yank.highlight.duration": 100,
   // coc-snippets

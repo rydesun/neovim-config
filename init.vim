@@ -231,6 +231,12 @@ Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
 Plug 'ryanoasis/vim-devicons'		" 集成devicons字体
 Plug 'editorconfig/editorconfig-vim'
+Plug 'chrisbra/vim-diff-enhanced'	" 增强diff算法
+	" <<< vim-diff-enhanced ----------------
+	if &diff
+		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+	endif
+	" >>>-----------------------------------
 Plug 'fidian/hexmode'			" 编辑16进制文件
 	" <<< hexmode --------------------------
 	let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
@@ -439,9 +445,6 @@ silent! colorscheme material
 let s:color_accent="#009688"
 let s:color_contrast="#13272c"
 
-let s:color_material_red="#ff9800"
-let s:color_material_green="#9bc34a"
-
 if exists('g:material_theme_style') && g:material_theme_style == "default"
 	" 垂直分割条
 	highlight VertSplit guifg=black
@@ -485,8 +488,14 @@ if exists('g:material_colorscheme_map')
 		\ guibg="s:color_contrast
 endif
 
-exec "highlight DiffDelete guifg="s:color_material_red
-exec "highlight DiffAdd guifg="s:color_material_green
+highlight DiffAdd	guibg=#8b873c guifg=#ffffff
+highlight DiffChange	guibg=#4b473c
+highlight DiffDelete	guifg=#4b473c guibg=#4b473c
+highlight DiffText	guifg=#ffffff guibg=#9b473c
+
+highlight GitDelete	guifg=#ff9800
+highlight GitAdd	guifg=#9bc34a
+highlight GitChange	guifg=#ffb62c
 
 " 终端中的配色
 let g:terminal_color_background = "#263238"
