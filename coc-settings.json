@@ -41,6 +41,9 @@
   "xml.validation.enabled": false,              // 似乎有bug：XML catalog无效
   // coc-go
   "go.goplsPath": "gopls",			// 使用${PATH}中的gopls
+  // coc-pyright
+  "python.analysis.diagnosticMode": "workspace",
+  "python.linting.flake8Enabled": true,
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
   // coc-clangd
