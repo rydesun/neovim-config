@@ -93,6 +93,7 @@ nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
 " 注意：ftplugin/{filetype}_keymap.vim文件占用了 <leader>w 开头的映射
+nnoremap <silent>  <leader>wf  :call CocAction('format')<CR>
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
