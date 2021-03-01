@@ -72,6 +72,7 @@ xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <leader>e   :exec <SID>coc_explorer()<CR>
 nnoremap           <leader>b   :Clap buffers<CR>
+nnoremap           <leader>k   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>

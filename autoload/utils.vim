@@ -53,6 +53,16 @@ function! utils#rootpath(patterns) abort
         return b:rootpath
 endfunction
 
+" 浏览dash文档
+function! utils#doc_dash(language, keyword) abort
+	if empty(a:language)
+		let l:url = 'dash://'.a:keyword
+	else
+		let l:url = 'dash://'.a:language.':'.a:keyword
+	endif
+	call netrw#BrowseX(l:url, netrw#CheckIfRemote())
+endfunction
+
 " 依赖vim-clap产生的工作目录
 function! utils#clap_rootpath(patterns) abort
 	let l:rootpath = utils#rootpath(a:patterns)
