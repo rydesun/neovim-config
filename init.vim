@@ -50,8 +50,6 @@ nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
 nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
-nmap     <silent>  <C-c>       <Plug>(coc-cursors-position)
-nmap     <silent>  <C-s>       <Plug>(coc-cursors-word)*
 nmap     <silent>  gd          <Plug>(coc-definition)
 nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
@@ -300,6 +298,10 @@ Plug 'justinmk/vim-sneak'		" 光标定位
 	" 智能大小写
 	let g:sneak#use_ic_scs = 1
 	" >>> ---------------------------------
+Plug 'mg979/vim-visual-multi'		" 多重光标
+	" <<< vim-visual-multi ----------------
+	let g:VM_Extend_hl = 'CursorRange'
+	" >>> ---------------------------------
 Plug 'mattn/emmet-vim'			" emmet展开缩写
 Plug 'tpope/vim-surround'		" 修改成对符号
 Plug 'tpope/vim-unimpaired'		" 快速跳转
@@ -452,8 +454,8 @@ if exists('g:material_theme_style') && g:material_theme_style == "default"
 	highlight VertSplit guifg=black
 	" 色柱
 	exec "highlight ColorColumn guibg="s:color_contrast
-	" coc多重光标
-	highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
+	" 多重光标
+	highlight CursorRange guibg=#b16286 guifg=#ebdbb2
 endif
 
 if exists('g:material_colorscheme_map')
