@@ -7,7 +7,7 @@ function M.add_indent_cmds()
 		"'setl sw=%1 ts=%1 et' : 'i%1'"
 	local cmd_i_noet = "cnoreabb <expr> i%1t "..
 		"(getcmdtype() == ':' && getcmdline() =~ '^i%1t$')? "..
-		"'setl sw=%1 ts=%1 noet' : 'i%1'"
+		"'setl sw=%1 ts=%1 noet' : 'i%1t'"
 	for _, count in ipairs(indent_counts) do
 		local cmd_i_et = string.gsub(count, "(%d)", cmd_i_et)
 		local cmd_i_noet = string.gsub(count, "(%d)", cmd_i_noet)
