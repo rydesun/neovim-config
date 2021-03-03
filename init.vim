@@ -113,7 +113,7 @@ command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDatt
 
 tnoremap <M-space>  <c-\><c-n>
 
-lua require('keymap')
+lua require('keymap').add_indent_cmds()
 " >>>-----------------------------------
 
 
