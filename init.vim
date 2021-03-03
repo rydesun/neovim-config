@@ -106,21 +106,14 @@ cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
 cabbrev  <expr>    ww          (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 				\ 'w !sudo tee % >/dev/null' : 'ww'
-for s:i in [2,4,8]
-	" s=2时等同于cnoreabb  <expr>  i2   setlocal shiftwidth=2 tabstop=2 expandtab
-	execute "cnoreabb <expr> i".s:i."  (getcmdtype() == ':'
-				\ && getcmdline() =~ '^i".s:i."$')?
-				\ 'setl sw=".s:i." ts=".s:i." et' : 'i".s:i."'"
-	" s=2时等同于cnoreabb  <expr>  i2t  setlocal shiftwidth=2 tabstop=2 noexpandtab
-	execute "cnoreabb <expr> i".s:i."t (getcmdtype() == ':'
-				\ && getcmdline() =~ '^i".s:i."t$')?
-				\ 'setl sw=".s:i." ts=".s:i." noet' : 'i".s:i."t'"
-endfor
+
 command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
 tnoremap <M-space>  <c-\><c-n>
+
+lua require('keymap')
 " >>>-----------------------------------
 
 
