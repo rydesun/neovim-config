@@ -153,8 +153,7 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\	'right': [
 	\	['postion'],
 	\	['diagnostic', 'gitBlame'],
-	\	['fileformat', 'filetype'],
-	\	['currentFunc']],
+	\	['fileformat', 'filetype']],
 	\ },
 	\ 'inactive': {
 	\	'left': [['readonly', 'absolutepath', 'modified']],
@@ -255,7 +254,7 @@ Plug 'neoclide/coc.nvim',
 	function! s:show_documentation() abort
 		if (index(['vim','help'], &filetype) >= 0)
 			execute 'h '.expand('<cword>')
-		else
+		elseif (coc#rpc#ready())
 			call CocAction('doHover')
 		endif
 	endfunction
