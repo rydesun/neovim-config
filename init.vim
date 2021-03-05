@@ -283,7 +283,6 @@ Plug 'liuchengxu/vim-clap',
 	let g:clap_insert_mode_only = v:true
 	" >>>-----------------------------------
 Plug 'vn-ki/coc-clap'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'justinmk/vim-sneak'		" 光标定位
 	" <<< vim-sneak -----------------------
@@ -358,11 +357,14 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
 	" >>>-----------------------------------
 Plug 'lambdalisue/gina.vim'		" git命令
+if has('nvim-0.5.0')
+Plug 'nvim-treesitter/nvim-treesitter',
+	\ {'do': ':TSUpdate'}		" treesitter支持
+endif
 Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" <<< vim-polyglot ---------------------
-	" go: 优先使用vim-go
 	" sensible: 禁止使用自带的插件vim-sensible
-	let g:polyglot_disabled = ['go', 'sensible']
+	let g:polyglot_disabled = ['markdown', 'sensible']
 	" >>>-----------------------------------
 if !exists('g:HOST_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
@@ -385,11 +387,6 @@ Plug 'fatih/vim-go',
 	let g:go_def_mapping_enabled = 0 " 跳转定义
 	" 禁止在保存时自动执行GoFmt
 	let g:go_fmt_autosave = 0
-
-	" 添加高亮组
-	let g:go_highlight_function_calls = 1
-	let g:go_highlight_function_parameters = 1
-	let g:go_highlight_operators = 1
 	" >>>-----------------------------------
 
 Plug 'puremourning/vimspector'		" 调试工具
@@ -413,6 +410,15 @@ if !exists('g:HOST_NO_X')
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换语言
 endif
 call plug#end()
+
+" nvim-treesitter
+if has('nvim-0.5.0')
+	try
+		lua require('treesitter')
+	catch
+		echomsg "nvim-treesitter is not installed"
+	endtry
+endif
 
 
 " 自动命令

@@ -46,8 +46,6 @@
   "python.linting.flake8Enabled": true,
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
-  // coc-clangd
-  "clangd.semanticHighlighting": true,
   // coc-markdownlint
   "markdownlint.config": {
     "single-trailing-newline": false,
