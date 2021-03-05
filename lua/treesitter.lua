@@ -12,4 +12,7 @@ require'nvim-treesitter.configs'.setup {
       node_decremental = "grm",
     },
   },
+  rainbow = {
+    enable = true
+  },
 }

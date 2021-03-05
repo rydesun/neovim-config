@@ -361,6 +361,7 @@ Plug 'lambdalisue/gina.vim'		" git命令
 if has('nvim-0.5.0')
 Plug 'nvim-treesitter/nvim-treesitter',
 	\ {'do': ':TSUpdate'}		" treesitter支持
+Plug 'p00f/nvim-ts-rainbow'		" 括号彩虹色
 endif
 Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" <<< vim-polyglot ---------------------
