@@ -205,16 +205,18 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 		return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
 	endfunction
 	" >>>-----------------------------------
-Plug 'Yggdroot/indentLine'		" 缩进线
-	" <<< indentLine -----------------------
-	" 更精细的缩进线
+
+if has('nvim-0.5.0')
+Plug 'lukas-reineke/indent-blankline.nvim',
+	\ {'branch': 'lua'}		" 缩进线
+	" <<< indent-blankline.nvim ------------
+	" 缩进线字符
 	let g:indentLine_char = '┊'
-	augroup myconfig_indentLine
-		autocmd!
-		" FIXME: 在markdown中与vim-polyglot不兼容; 以及其他bug
-		autocmd Filetype markdown let g:indentLine_enabled = 0
-	augroup END
+	" 不显示空白符
+        let g:indent_blankline_space_char = ' '
 	" >>>-----------------------------------
+endif
+
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 	" <<< vim-better-whitespace ------------
 	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout']
