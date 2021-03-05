@@ -297,6 +297,7 @@ Plug 'mg979/vim-visual-multi'		" 多重光标
 	" >>> ---------------------------------
 Plug 'mattn/emmet-vim'			" emmet展开缩写
 Plug 'tpope/vim-surround'		" 修改成对符号
+Plug 'wellle/targets.vim'		" 文本对象
 Plug 'tpope/vim-unimpaired'		" 快速跳转
 Plug 'jeetsukumaran/vim-indentwise'	" 缩进跳转
 Plug 'tpope/vim-repeat'
