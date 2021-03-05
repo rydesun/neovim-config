@@ -338,6 +338,7 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	\ ]
 	" >>>-----------------------------------
 
+Plug 'wellle/context.vim'		" 预览上下文
 Plug 'voldikss/vim-floaterm'
 	" <<< vim-floaterm ---------------------
 	function! s:open_floaterm() abort
