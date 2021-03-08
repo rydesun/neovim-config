@@ -214,6 +214,9 @@ Plug 'lukas-reineke/indent-blankline.nvim',
 	let g:indentLine_char = '┊'
 	" 不显示空白符
         let g:indent_blankline_space_char = ' '
+	" 排除类型
+	let g:indent_blankline_filetype_exclude = ['help']
+	let g:indent_blankline_buftype_exclude = ['terminal']
 	" >>>-----------------------------------
 endif
 
@@ -340,6 +343,9 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	" >>>-----------------------------------
 
 Plug 'wellle/context.vim'		" 预览上下文
+	" <<< context.vim ----------------------
+	let g:context_add_mappings = 0
+	" >>>-----------------------------------
 Plug 'voldikss/vim-floaterm'
 	" <<< vim-floaterm ---------------------
 	function! s:open_floaterm() abort
@@ -434,6 +440,8 @@ augroup myconfig_term	" 终端模式
 	" 进入终端时开启插入模式
 	autocmd TermOpen * startinsert
 	autocmd BufWinEnter,WinEnter term://* startinsert
+	" 鼠标左击后进入插入模式
+	autocmd TermOpen * nnoremap <buffer> <LeftRelease> <LeftRelease>i
 	" 退出唯一的shell时，自动退出整个vim
 	autocmd TermClose * if utils#buflen() == 1 | q | endif
 augroup END
