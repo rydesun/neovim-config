@@ -13,6 +13,7 @@ set diffopt+=vertical	" diff模式默认以垂直方式分割
 set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
+set inccommand=nosplit	" 替换过程可视化
 
 let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
 let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
