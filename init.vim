@@ -111,6 +111,7 @@ cabbrev  <expr>    ww          (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+command  CountZhCharacters     lua require('count'):cmd_count_zh()
 
 tnoremap <M-space>  <c-\><c-n>
 
