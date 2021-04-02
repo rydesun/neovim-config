@@ -268,7 +268,7 @@ Plug 'neoclide/coc.nvim',
 	\	"coc-tsserver", "coc-eslint",
 	\	"coc-css", "coc-stylelint",
 	\	"coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
-	\	"coc-xml", "coc-svg", "coc-docker",
+	\	"coc-xml", "coc-svg", "coc-docker", "coc-texlab",
 	\ ]
 	let g:coc_global_extensions = [
 	\	"coc-highlight",
@@ -344,10 +344,6 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	\ ]
 	" >>>-----------------------------------
 
-Plug 'wellle/context.vim'		" 预览上下文
-	" <<< context.vim ----------------------
-	let g:context_add_mappings = 0
-	" >>>-----------------------------------
 Plug 'voldikss/vim-floaterm'
 	" <<< vim-floaterm ---------------------
 	function! s:open_floaterm() abort
@@ -370,6 +366,8 @@ Plug 'lambdalisue/gina.vim'		" git命令
 if has('nvim-0.5.0')
 Plug 'nvim-treesitter/nvim-treesitter',
 	\ {'do': ':TSUpdate'}		" treesitter支持
+Plug 'nvim-treesitter/playground'	" 调试CST
+Plug 'romgrk/nvim-treesitter-context'	" 预览上下文
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'	" 文本对象
 Plug 'p00f/nvim-ts-rainbow'		" 括号彩虹色
 endif
@@ -382,6 +380,7 @@ if !exists('g:HOST_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
 Plug 'iamcco/markdown-preview.nvim',
 	\ {'do': 'cd app & yarn install'}	" markdown预览
+Plug 'lervag/vimtex'			" latex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 	" <<< asynctasks -----------------------
 	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
