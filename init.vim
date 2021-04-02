@@ -420,6 +420,48 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 
 if !exists('g:HOST_NO_X')
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换语言
+Plug 'glacambre/firenvim',
+	\ { 'do': { _ -> firenvim#install(0) } }	" 浏览器嵌入neovim
+	" <<< firenvim -------------------------
+	let g:firenvim_config = {
+	\	'globalSettings': {
+	\		'alt': 'all',
+	\	},
+	\	'localSettings': {
+	\		'.*': {
+	\		'cmdline': 'firenvim',
+	\		'priority': 0,
+	\		'selector': 'textarea',
+	\		'takeover': 'never',
+	\		},
+	\	}
+	\ }
+
+	function! OnUIEnter(event) abort
+		if !s:IsFirenvimActive(a:event)
+			return
+		endif
+		set laststatus=0
+		if &lines < 10
+			set lines=10
+		endif
+		augroup myconfig_firenvim
+			autocmd!
+			autocmd BufEnter github.com_*.txt set filetype=markdown
+			autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
+		augroup END
+	endfunction
+	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+
+	function! s:IsFirenvimActive(event) abort
+		if !exists('*nvim_get_chan_info')
+			return 0
+		endif
+		let l:ui = nvim_get_chan_info(a:event.chan)
+		return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
+		\ l:ui.client.name =~? 'Firenvim'
+	endfunction
+	" >>>-----------------------------------
 endif
 call plug#end()
 
