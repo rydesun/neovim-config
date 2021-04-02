@@ -61,6 +61,8 @@ omap     if        <Plug>(coc-funcobj-i)
 xmap     af        <Plug>(coc-funcobj-a)
 omap     af        <Plug>(coc-funcobj-a)
 
+vnoremap //        y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
@@ -217,14 +219,14 @@ Plug 'lukas-reineke/indent-blankline.nvim',
 	" 不显示空白符
         let g:indent_blankline_space_char = ' '
 	" 排除类型
-	let g:indent_blankline_filetype_exclude = ['help']
+	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer']
 	let g:indent_blankline_buftype_exclude = ['terminal']
 	" >>>-----------------------------------
 endif
 
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 	" <<< vim-better-whitespace ------------
-	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout']
+	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer']
 	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
