@@ -477,6 +477,12 @@ endif
 
 
 " 自动命令
+augroup myconfig
+	" 修复尺寸
+	" https://github.com/neovim/neovim/issues/11330#issuecomment-723667383
+	autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+augroup END
+
 augroup myconfig_term	" 终端模式
 	autocmd!
 	" 修复闪烁
