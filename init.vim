@@ -210,9 +210,7 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	endfunction
 	" >>>-----------------------------------
 
-if has('nvim-0.5.0')
-Plug 'lukas-reineke/indent-blankline.nvim',
-	\ {'branch': 'lua'}		" 缩进线
+Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 	" <<< indent-blankline.nvim ------------
 	" 缩进线字符
 	let g:indentLine_char = '┊'
@@ -222,8 +220,6 @@ Plug 'lukas-reineke/indent-blankline.nvim',
 	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer']
 	let g:indent_blankline_buftype_exclude = ['terminal']
 	" >>>-----------------------------------
-endif
-
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 	" <<< vim-better-whitespace ------------
 	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer']
@@ -365,14 +361,12 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
 	" >>>-----------------------------------
 Plug 'lambdalisue/gina.vim'		" git命令
-if has('nvim-0.5.0')
 Plug 'nvim-treesitter/nvim-treesitter',
 	\ {'do': ':TSUpdate'}		" treesitter支持
 Plug 'nvim-treesitter/playground'	" 调试CST
 Plug 'romgrk/nvim-treesitter-context'	" 预览上下文
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'	" 文本对象
 Plug 'p00f/nvim-ts-rainbow'		" 括号彩虹色
-endif
 Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" <<< vim-polyglot ---------------------
 	" sensible: 禁止使用自带的插件vim-sensible
@@ -466,14 +460,13 @@ Plug 'glacambre/firenvim',
 endif
 call plug#end()
 
-" nvim-treesitter
-if has('nvim-0.5.0')
-	try
-		lua require('treesitter')
-	catch
-		echomsg "nvim-treesitter is not installed"
-	endtry
-endif
+
+" 插件加载后
+try
+	lua require('treesitter')
+catch
+	echomsg "nvim-treesitter is not loaded"
+endtry
 
 
 " 自动命令
