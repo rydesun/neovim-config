@@ -150,7 +150,7 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\	'right': [
 	\	['postion'],
 	\	['diagnostic', 'gitBlame'],
-	\	['fileformat', 'filetype']],
+	\	['fileformat', 'fileencoding', 'filetype']],
 	\ },
 	\ 'inactive': {
 	\	'left': [['readonly', 'absolutepath', 'modified']],
@@ -163,6 +163,7 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\	'postion': '%2l:%-2v %2p%%',
 	\	'winnr': '%{winnr()}',
 	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
+	\	'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 	\ },
 	\ 'component_function': {
 	\	'gitBranch': 'Lightline_gitBranch',
