@@ -223,7 +223,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 	" >>>-----------------------------------
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
 	" <<< vim-better-whitespace ------------
-	let g:better_whitespace_filetypes_blacklist = ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer']
+	let g:better_whitespace_filetypes_blacklist =
+		\ ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer', 'xxd']
 	let g:show_spaces_that_precede_tabs = 1
 	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
