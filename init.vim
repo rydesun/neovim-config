@@ -14,6 +14,9 @@ set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 set inccommand=nosplit	" 替换过程可视化
+if $TERM != 'linux'
+	set termguicolors
+endif
 
 let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
 let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
@@ -136,11 +139,10 @@ let s:rootpath_patterns = [
 let g:plug_window = 'new'		" 控制台位置
 
 call plug#begin(s:plugdir)
-Plug 'kaicataldo/material.vim'		" 配色主题
+Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 	" <<< lightline------------------------
 	let g:lightline = {
-	\ 'colorscheme': 'material',
 	\ 'subseparator': {'left': '', 'right': ''},
 	\ 'active': {
 	\	'left': [
@@ -500,83 +502,10 @@ augroup END
 
 
 " 样式
-if $TERM != 'linux'
-	set termguicolors
-endif
-silent! colorscheme material
-let s:color_accent="#009688"
-let s:color_contrast="#13272c"
-
-if exists('g:material_theme_style') && g:material_theme_style == "default"
-	" 垂直分割条
-	highlight VertSplit guifg=black
-	" 色柱
-	exec "highlight ColorColumn guibg="s:color_contrast
-	" 多重光标
-	highlight CursorRange guibg=#b16286 guifg=#ebdbb2
-endif
-
-if exists('g:material_colorscheme_map')
-	" 高亮搜索光标处
-	exec "highlight IncSearch ctermfg=11 ctermbg=0
-		\ guifg="g:material_colorscheme_map.comments.gui"
-		\ guibg="g:material_colorscheme_map.white.gui
-	" sneak
-	exec "highlight Sneak
-		\ guibg="g:material_colorscheme_map.violet.gui
-	" 颠倒成对符号的高亮
-	exec "highlight MatchParen
-		\ guifg="g:material_colorscheme_map.cyan.gui"
-		\ guibg="g:material_colorscheme_map.comments.gui
-	" coc error
-	exec "highlight CocErrorSign
-		\ guifg="g:material_colorscheme_map.pink.gui
-	exec "highlight CocErrorHighlight
-		\ guibg="s:color_contrast
-	" coc warning
-	exec "highlight CocWarningSign
-		\ guifg="g:material_colorscheme_map.brown.gui
-	exec "highlight CocWarningHighlight
-		\ guibg="s:color_contrast
-	" coc info
-	exec "highlight CocInfoSign
-		\ guifg="g:material_colorscheme_map.purple.gui
-	exec "highlight CocInfoHighlight
-		\ guibg="s:color_contrast
-	" coc hint
-	exec "highlight CocHintSign
-		\ guifg="s:color_accent
-	exec "highlight CocHintHighlight
-		\ guibg="s:color_contrast
-endif
-
-highlight DiffAdd	guibg=#8b873c guifg=#ffffff
-highlight DiffChange	guibg=#4b473c
-highlight DiffDelete	guifg=#4b473c guibg=#4b473c
-highlight DiffText	guifg=#ffffff guibg=#9b473c
-
-highlight GitDelete	guifg=#ff9800
-highlight GitAdd	guifg=#9bc34a
-highlight GitChange	guifg=#ffb62c
-
-" 终端中的配色
-let g:terminal_color_background = "#263238"
-let g:terminal_color_foreground = "#eceff1"
-let g:terminal_color_0 = "#505070"
-let g:terminal_color_1 = "#ff9800"
-let g:terminal_color_2 = "#8bc34a"
-let g:terminal_color_3 = "#ffc107"
-let g:terminal_color_4 = "#03a9f4"
-let g:terminal_color_5 = "#e91e63"
-let g:terminal_color_6 = "#009688"
-let g:terminal_color_7 = "#cfd8dc"
-let g:terminal_color_8 = "#507070"
-let g:terminal_color_9 = "#ffa74d"
-let g:terminal_color_10 = "#9ccc65"
-let g:terminal_color_11 = "#ffa000"
-let g:terminal_color_12 = "#81d4fa"
-let g:terminal_color_13 = "#ad1457"
-let g:terminal_color_14 = "#26a69a"
-let g:terminal_color_15 = "#eceff1"
+let g:everforest_background = 'hard'
+let g:everforest_sign_column_background = 'none'
+let g:everforest_disable_italic_comment = 1
+silent! colorscheme everforest
+let g:lightline.colorscheme = 'everforest'
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>
