@@ -17,7 +17,13 @@
   "list.source.grep.args": ["-workspace"],
   // coc-explorer
   "explorer.width": 30,
-  "explorer.sources": [{"name": "buffer", "expand": true}, {"name": "file", "expand": true}],
+  "explorer.sources": [{"name": "file","expand": true}],
+  "explorer.keyMappings.global": {
+    "<c-j>": "gitNext",
+    "<c-k>": "gitPrev",
+    "]g": "diagnosticNext",
+    "[g": "diagnosticPrev"
+  },
   "explorer.icon.enableNerdfont": true,
   // coc-translator
   "translator.engines": ["bing"],

@@ -74,8 +74,8 @@ nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <leader>e   :exec <SID>coc_explorer()<CR>
-nnoremap           <leader>b   :Clap buffers<CR>
+nnoremap <silent>  <leader>e   :CocCommand explorer<CR>
+nnoremap           <leader>b   :CocCommand explorer --preset buffer<CR>
 nnoremap           <leader>k   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
@@ -282,10 +282,14 @@ Plug 'neoclide/coc.nvim',
 	\	"coc-pairs",
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 
-	function! s:coc_explorer() abort
-		exec 'CocCommand explorer --position floating --floating-width 90 '.
-					\ utils#rootpath(s:rootpath_patterns)
-	endfunction
+	" coc-explorer
+	let g:coc_explorer_global_presets = {
+		\ 'buffer': {
+			\ 'sources': [{'name': 'buffer', 'expand': v:true}],
+			\ 'position': 'floating',
+			\ 'floating-position': 'center-top',
+		\ },
+	\ }
 	" >>>-----------------------------------
 Plug 'liuchengxu/vim-clap',
 	\ { 'do': ':Clap install-binary!' }
@@ -476,6 +480,17 @@ try
 catch
 	echomsg "nvim-treesitter is not loaded"
 endtry
+" coc-explorer
+silent! call coc#config("explorer.file.root.template",
+	\ " [git & 1][hidden & 1][root]")
+silent! call coc#config("explorer.file.child.template",
+	\ "[git | 2][selection | clip | 1] ".
+	\ "[indent][icon | 1] [filename omitCenter 1] ".
+	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
+silent! call coc#config("explorer.buffer.root.template",
+	\ " [title] [hidden & 1]")
+silent! call coc#config("explorer.buffer.child.template",
+	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
 
 
 " 自动命令
