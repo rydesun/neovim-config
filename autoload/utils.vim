@@ -73,7 +73,12 @@ function! utils#clap_rootpath(patterns) abort
 	return l:rootpath
 endfunction
 
-" 依赖vim-clap
-function! utils#buflen() abort
-	return len(clap#util#buflisted(v:false))
+" 终端中的git命令
+function! utils#term_git(cmd, cur) abort
+	let l:cmd = "edit term://".expand('%:p:h')."//git -c delta.paging=never ".a:cmd
+	if a:cur
+		let l:cmd = cmd." ".expand('%:p:t')
+	endif
+	exec l:cmd
+	nnoremap <buffer><silent> q :bd!<CR>
 endfunction

@@ -83,6 +83,11 @@ nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
 nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
 nmap               <leader>hc  <Plug>(coc-git-commit)
 
+nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
+nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
+nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
+nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
+
 nmap               <leader>rn  <Plug>(coc-rename)
 nmap               <leader>rf  <Plug>(coc-refactor)
 
@@ -482,16 +487,8 @@ augroup END
 
 augroup myconfig_term	" 终端模式
 	autocmd!
-	" 修复闪烁
-	autocmd TermEnter * setlocal scrolloff=0
-	autocmd TermLeave * setlocal scrolloff=5
-	" 进入终端时开启插入模式
-	autocmd TermOpen * startinsert
-	autocmd BufWinEnter,WinEnter term://* startinsert
-	" 鼠标左击后进入插入模式
-	autocmd TermOpen * nnoremap <buffer> <LeftRelease> <LeftRelease>i
-	" 退出唯一的shell时，自动退出整个vim
-	autocmd TermClose * if utils#buflen() == 1 | q | endif
+	" 不需要侧边栏
+	autocmd TermOpen * setlocal signcolumn=no
 augroup END
 
 augroup myconfig_coc	" 插件coc配置
