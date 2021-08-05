@@ -39,11 +39,15 @@ noremap  L  $
 noremap  '  `
 noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-nnoremap           s           :Clap<CR>
-nnoremap           S           :Clap blines<CR>
 map                f           <Plug>Sneak_s
 map                F           <Plug>Sneak_S
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
+nnoremap           s           <NOP>
+nnoremap <silent>  sc          :exec 'Clap bcommits '.<SID>rootpath()<CR>
+nnoremap <silent>  sf          :exec 'Clap files '.<SID>rootpath()<CR>
+nnoremap <silent>  sg          :exec 'Clap grep2 '.<SID>rootpath()<CR>
+nnoremap <silent>  sl          :Clap blines<CR>
+nnoremap <silent>  s;          :Clap command_history<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
 nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
@@ -70,7 +74,6 @@ let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
@@ -262,7 +265,7 @@ Plug 'neoclide/coc.nvim',
 		if (index(['vim','help'], &filetype) >= 0)
 			execute 'h '.expand('<cword>')
 		elseif (coc#rpc#ready())
-			call CocAction('doHover')
+			call CocActionAsync('doHover')
 		endif
 	endfunction
 	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
