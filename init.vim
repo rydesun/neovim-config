@@ -379,7 +379,6 @@ Plug 'nvim-treesitter/nvim-treesitter',
 Plug 'nvim-treesitter/playground'	" 调试CST
 Plug 'romgrk/nvim-treesitter-context'	" 预览上下文
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'	" 文本对象
-Plug 'p00f/nvim-ts-rainbow'		" 括号彩虹色
 Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" <<< vim-polyglot ---------------------
 	" sensible: 禁止使用自带的插件vim-sensible
