@@ -502,6 +502,15 @@ augroup myconfig_coc	" 插件coc配置
 	autocmd!
 	" coc的配置文件使用jsonc格式
 	autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
+
+	" coc-explorer界面
+	autocmd filetype coc-explorer setlocal fcs=eob:\ 
+
+	" 用coc-explorer替换netrw
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+		\ | exe 'CocCommand explorer --position floating' argv()[0]
+		\ | wincmd p | bd | endif
 augroup END
 
 
