@@ -74,8 +74,8 @@ nnoremap <silent>  <leader>;   :CocList cmdhistory<CR>
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <leader>e   :CocCommand explorer<CR>
-nnoremap           <leader>b   :CocCommand explorer --preset buffer<CR>
+nnoremap <silent>  <leader>e   :exec 'CocCommand explorer '.<SID>rootpath()<CR>
+nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nnoremap           <leader>k   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
@@ -95,7 +95,7 @@ nnoremap <silent>  <leader>lo  :CocList outline<CR>
 nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
-nnoremap           <Leader>tt  :call <SID>open_floaterm()<CR>
+nnoremap <silent>  <Leader>tt  :exec 'FloatermNew --autoclose=1 --cwd='.<SID>rootpath()<CR>
 nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
 nnoremap           <leader>tl  :set list! list?<CR>
 nnoremap           <leader>tw  :set wrap! wrap?<CR>
@@ -130,14 +130,14 @@ lua require('keymap').add_indent_cmds()
 
 
 let s:rootpath_patterns = [
-\ '^/etc/[^/]*/',
-\ '^/etc/',
-\ '^/usr/share/[^/]*/',
 \ '^/usr/lib/go/src/[^/]*',
 \ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
 \ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
 \ '^/usr/lib/python[23]\.[0-9]\+/',
 \ ]
+function! s:rootpath() abort
+	return utils#rootpath(s:rootpath_patterns)
+endfunction
 
 
 " 插件管理器 vim-plug
@@ -356,16 +356,6 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	" >>>-----------------------------------
 
 Plug 'voldikss/vim-floaterm'
-	" <<< vim-floaterm ---------------------
-	function! s:open_floaterm() abort
-		let l:rootpath = utils#clap_rootpath(s:rootpath_patterns)
-		if !empty(l:rootpath)
-			exec 'FloatermNew --cwd='.l:rootpath
-		else
-			exec 'FloatermNew'
-		endif
-	endfunction
-	" >>>-----------------------------------
 Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	" <<< asyncrun -------------------------
 	" quickfix窗口的默认高度

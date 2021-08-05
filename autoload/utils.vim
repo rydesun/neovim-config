@@ -38,19 +38,37 @@ function utils#git_wrapper(cmd) abort
 endfunction
 
 " 工作目录
+" 依赖coc workspace
 function! utils#rootpath(patterns) abort
         if exists("b:rootpath")
                 return b:rootpath
         endif
+	let l:dir = expand('%:p:h')
+	let l:home = '/'.trim($HOME, '/')
+
 	for l:pattern in a:patterns
-		let l:res = matchstr(expand('%:p:h').'/', l:pattern)
+		let l:res = matchstr(l:dir.'/', l:pattern)
 		if !empty(l:res)
                         let b:rootpath = l:res
                         return b:rootpath
 		endif
 	endfor
-        let b:rootpath = ''
-        return b:rootpath
+
+	if !exists("g:WorkspaceFolders")
+		return l:dir
+	endif
+	for l:workspace_folder in g:WorkspaceFolders
+		" 无视coc workspace中的家目录
+		if l:workspace_folder == l:home
+			continue
+		endif
+		if stridx(l:dir, l:workspace_folder) == 0
+			let b:rootpath = l:workspace_folder
+			return b:rootpath
+		endif
+	endfor
+
+        return l:dir
 endfunction
 
 " 浏览dash文档
@@ -61,16 +79,6 @@ function! utils#doc_dash(language, keyword) abort
 		let l:url = 'dash://'.a:language.':'.a:keyword
 	endif
 	call netrw#BrowseX(l:url, netrw#CheckIfRemote())
-endfunction
-
-" 依赖vim-clap产生的工作目录
-function! utils#clap_rootpath(patterns) abort
-	let l:rootpath = utils#rootpath(a:patterns)
-	if empty(l:rootpath)
-		let l:nr = bufnr('%')
-		let l:rootpath = clap#path#find_project_root(l:nr)
-	endif
-	return l:rootpath
 endfunction
 
 " 终端中的git命令
