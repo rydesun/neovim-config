@@ -517,7 +517,22 @@ augroup END
 let g:everforest_background = 'hard'
 let g:everforest_sign_column_background = 'none'
 let g:everforest_disable_italic_comment = 1
+
+function! s:colorscheme_everforest_custom() abort
+	let l:palette = everforest#get_palette(g:everforest_background)
+
+	let g:better_whitespace_guicolor = l:palette.none[0]
+	call everforest#highlight('ExtraWhitespace',
+		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
+endfunction
+
+augroup colorscheme
+	autocmd!
+	autocmd ColorScheme everforest let g:lightline.colorscheme = 'everforest'
+	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
+augroup END
+
 silent! colorscheme everforest
-let g:lightline.colorscheme = 'everforest'
+
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>
