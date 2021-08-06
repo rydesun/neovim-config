@@ -125,6 +125,8 @@ command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command  CountZhCharacters     lua require('count'):cmd_count_zh()
+command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
+	\ call s:set_lightline_colorscheme(<q-args>)
 
 tnoremap <M-space>  <c-\><c-n>
 
@@ -154,13 +156,12 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\ 'inactive': {
 	\	'left': [['readonly', 'absolutepath', 'modified']],
 	\	'right': [
-	\	['winnr', 'postion'],
+	\	['postion'],
 	\	['fileformat', 'filetype']],
 	\ },
 	\ 'component': {
 	\	'work_mode': '%{get(b:, "work_mode", "")}',
 	\	'postion': '%2l:%-2v %2p%%',
-	\	'winnr': '%{winnr()}',
 	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\	'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 	\ },
@@ -208,6 +209,19 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	function! Lightline_filetype()
 		return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
 	endfunction
+
+	function! s:set_lightline_colorscheme(name) abort
+		let g:lightline.colorscheme = a:name
+		call lightline#init()
+		call lightline#colorscheme()
+		call lightline#update()
+	endfunction
+	function! s:lightline_colorschemes(...) abort
+		return join(map(
+		\ globpath(&rtp, "autoload/lightline/colorscheme/*.vim", 1, 1),
+		\ "fnamemodify(v:val, ':t:r')"),
+		\ "\n")
+		endfunction
 	" >>>-----------------------------------
 
 Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
@@ -217,7 +231,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 	" 不显示空白符
         let g:indent_blankline_space_char = ' '
 	" 排除类型
-	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer']
+	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer', 'popup']
 	let g:indent_blankline_buftype_exclude = ['terminal']
 	" >>>-----------------------------------
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
@@ -504,6 +518,7 @@ augroup myconfig_coc	" 插件coc配置
 
 	" coc-explorer界面
 	autocmd filetype coc-explorer setlocal fcs=eob:\ 
+	autocmd User CocExplorerOpenPost setlocal statusline=%#NonText#
 
 	" 用coc-explorer替换netrw
 	autocmd StdinReadPre * let s:std_in=1

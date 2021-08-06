@@ -25,15 +25,14 @@
     "[g": "diagnosticPrev"
   },
   "explorer.icon.enableNerdfont": true,
+  "explorer.git.icon.status.ignored": " ",
   // coc-translator
   "translator.engines": ["bing"],
   // coc-git
-  "git.branchCharacter": "⎇ ",
-  "git.changedSign.hlGroup": "GitChange",
-  "git.addedSign.hlGroup": "GitAdd",
-  "git.removedSign.hlGroup": "GitDelete",
-  "git.topRemovedSign.hlGroup": "GitDelete",
-  "git.changeRemovedSign.hlGroup": "GitChange",
+  "git.signPriority": 100,
+  "git.branchCharacter": "",
+  "git.stagedDecorator": "+",
+  "git.untrackedDecorator": "%",
   // coc-yank
   "yank.highlight.duration": 100,
   // coc-snippets
