@@ -43,9 +43,9 @@ map                f           <Plug>Sneak_s
 map                F           <Plug>Sneak_S
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nnoremap           s           <NOP>
-nnoremap <silent>  sc          :exec 'Clap bcommits '.<SID>rootpath()<CR>
-nnoremap <silent>  sf          :exec 'Clap files '.<SID>rootpath()<CR>
-nnoremap <silent>  sg          :exec 'Clap grep2 '.<SID>rootpath()<CR>
+nnoremap <silent>  sc          :Clap bcommits<CR>
+nnoremap <silent>  sf          :Clap files<CR>
+nnoremap <silent>  sg          :Clap grep2<CR>
 nnoremap <silent>  sl          :Clap blines<CR>
 nnoremap <silent>  s;          :Clap command_history<CR>
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
@@ -77,7 +77,7 @@ nnoremap <silent>  <leader>P   "+P
 map                <leader>c   <Plug>NERDCommenterToggle
 xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
-nnoremap <silent>  <leader>e   :exec 'CocCommand explorer '.<SID>rootpath()<CR>
+nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nnoremap           <leader>k   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
@@ -98,7 +98,7 @@ nnoremap <silent>  <leader>lo  :CocList outline<CR>
 nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
-nnoremap <silent>  <Leader>tt  :exec 'FloatermNew --autoclose=1 --cwd='.<SID>rootpath()<CR>
+nnoremap <silent>  <Leader>tt  :FloatermNew --autoclose=1<CR>
 nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
 nnoremap           <leader>tl  :set list! list?<CR>
 nnoremap           <leader>tw  :set wrap! wrap?<CR>
@@ -130,17 +130,6 @@ tnoremap <M-space>  <c-\><c-n>
 
 lua require('keymap').add_indent_cmds()
 " >>>-----------------------------------
-
-
-let s:rootpath_patterns = [
-\ '^/usr/lib/go/src/[^/]*',
-\ '^/usr/lib/python[23]\.[0-9]\+/site-packages/[^/]*',
-\ '^/usr/lib/python[23]\.[0-9]\+/[^/]*/',
-\ '^/usr/lib/python[23]\.[0-9]\+/',
-\ ]
-function! s:rootpath() abort
-	return utils#rootpath(s:rootpath_patterns)
-endfunction
 
 
 " 插件管理器 vim-plug
@@ -297,6 +286,7 @@ Plug 'neoclide/coc.nvim',
 Plug 'liuchengxu/vim-clap',
 	\ { 'do': ':Clap install-binary!' }
 	" <<< vim-clap -------------------------
+	let g:clap_disable_run_rooter = v:true
 	let g:clap_layout = {'relative': 'editor'}
 	" 无normal模式(Esc立即退出)
 	let g:clap_insert_mode_only = v:true
@@ -486,10 +476,19 @@ silent! call coc#config("explorer.buffer.child.template",
 
 
 " 自动命令
+let g:rootpath_patterns = [
+\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
+\ ]
+
 augroup myconfig
 	" 修复尺寸
 	" https://github.com/neovim/neovim/issues/11330#issuecomment-723667383
 	autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+	" 自动设置工作目录
+	autocmd VimEnter,BufReadPost,BufEnter *
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
+	autocmd BufWritePost * call utils#rootpath_clear() |
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
 augroup END
 
 augroup myconfig_term	" 终端模式
@@ -509,6 +508,7 @@ augroup myconfig_coc	" 插件coc配置
 	" 用coc-explorer替换netrw
 	autocmd StdinReadPre * let s:std_in=1
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+		\ | exe 'cd '.argv()[0]
 		\ | exe 'CocCommand explorer --position floating' argv()[0]
 		\ | wincmd p | bd | endif
 augroup END

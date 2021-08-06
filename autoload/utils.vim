@@ -38,37 +38,28 @@ function utils#git_wrapper(cmd) abort
 endfunction
 
 " 工作目录
-" 依赖coc workspace
 function! utils#rootpath(patterns) abort
-        if exists("b:rootpath")
+	" 终端shell自动设置工作目录
+        if &buftype == 'terminal'
+                return getcwd()
+        endif
+
+        if exists('b:rootpath') && !empty('b:rootpath')
                 return b:rootpath
         endif
+
 	let l:dir = expand('%:p:h')
-	let l:home = '/'.trim($HOME, '/')
-
-	for l:pattern in a:patterns
-		let l:res = matchstr(l:dir.'/', l:pattern)
-		if !empty(l:res)
-                        let b:rootpath = l:res
-                        return b:rootpath
-		endif
-	endfor
-
-	if !exists("g:WorkspaceFolders")
-		return l:dir
+	let l:res = rooter#match_all(l:dir, a:patterns)
+	if !empty(l:res)
+		let b:rootpath = l:res
+		return b:rootpath
 	endif
-	for l:workspace_folder in g:WorkspaceFolders
-		" 无视coc workspace中的家目录
-		if l:workspace_folder == l:home
-			continue
-		endif
-		if stridx(l:dir, l:workspace_folder) == 0
-			let b:rootpath = l:workspace_folder
-			return b:rootpath
-		endif
-	endfor
 
-        return l:dir
+	let b:rootpath = l:dir
+	return b:rootpath
+endfunction
+function! utils#rootpath_clear() abort
+	let b:rootpath = ''
 endfunction
 
 " 浏览dash文档
