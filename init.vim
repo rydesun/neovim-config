@@ -227,6 +227,8 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 		\ "\n")
 		endfunction
 	" >>>-----------------------------------
+Plug 'rrethy/vim-hexokinase',
+	\ {'do': 'make hexokinase'}	" 显示颜色
 
 Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 	" <<< indent-blankline.nvim ------------
@@ -289,7 +291,6 @@ Plug 'neoclide/coc.nvim',
 	\	"coc-xml", "coc-svg", "coc-docker", "coc-texlab",
 	\ ]
 	let g:coc_global_extensions = [
-	\	"coc-highlight",
 	\	"coc-pairs",
 	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
 
