@@ -105,7 +105,7 @@ nnoremap           <leader>tw  :set wrap! wrap?<CR>
 nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
-" 注意：ftplugin/{filetype}_keymap.vim文件占用了 <leader>w 开头的映射
+" 注意：ftplugin中的文件占用了 <leader>w 开头的映射
 nnoremap <silent>  <leader>wf  :call CocAction('format')<CR>
 
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
@@ -124,9 +124,11 @@ cabbrev  <expr>    ww          (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 command  -nargs=*  G           call utils#git_wrapper(<f-args>)
 cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-command  CountZhCharacters     lua require('count'):cmd_count_zh()
+command  CountZhCharacters     lua require('counter'):cmd_count_zh()
 command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
 	\ call s:set_lightline_colorscheme(<q-args>)
+command! -nargs=0 Typography call typography#format()
+command! -nargs=0 TypographyHugo call typography#format_hugo()
 
 tnoremap <M-space>  <c-\><c-n>
 
