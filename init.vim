@@ -147,28 +147,28 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	\ 'active': {
 	\	'left': [
 	\	['mode', 'paste'],
-	\	['gitBranch', 'gitStatus'],
+	\	['gitStatus'],
 	\	['modified', 'readonly', 'absolutepath']],
 	\	'right': [
 	\	['postion'],
-	\	['diagnostic'],
-	\	['fileformat', 'fileencoding', 'filetype']],
+	\	['diagnostic', 'filetype'],
+	\	['fileformat', 'fileencoding']],
 	\ },
 	\ 'inactive': {
 	\	'left': [['modified', 'readonly', 'absolutepath']],
 	\	'right': [
-	\	['postion'],
-	\	['fileformat', 'fileencoding', 'filetype']],
+	\	['postionPe'],
+	\	['fileformat', 'fileencoding']],
 	\ },
 	\ 'component': {
 	\	'absolutepath': '%<%F',
 	\	'postion': '%2l:%-2v %2p%%',
+	\	'postionPe': '%2p%%',
 	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\	'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 	\ },
 	\ 'component_function': {
 	\	'mode': 'Lightline_mode',
-	\	'gitBranch': 'Lightline_gitBranch',
 	\	'gitStatus': 'Lightline_gitStatus',
 	\	'gitBlame': 'Lightline_gitBlame',
 	\	'modified': 'Lightline_modified',
@@ -185,11 +185,9 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	function! Lightline_modified() abort
 		return &modified ? '' : ''
 	endfunction
-	function! Lightline_gitBranch() abort
-		return get(g:, 'coc_git_status', '')
-	endfunction
 	function! Lightline_gitStatus() abort
-		return !empty(get(b:, 'coc_git_status', '')) ? '': ''
+		return get(g:, 'coc_git_status', '').(
+			\ !empty(get(b:, 'coc_git_status', '')) ? ' ': '')
 	endfunction
 	function! Lightline_diagnostic() abort
 		let info = get(b:, 'coc_diagnostic_info', {})
