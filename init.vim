@@ -234,7 +234,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 	" 不显示空白符
         let g:indent_blankline_space_char = ' '
 	" 排除类型
-	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer', 'popup']
+	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
+		\ 'popup', 'clap_input', 'clap_action']
 	let g:indent_blankline_buftype_exclude = ['terminal']
 	" >>>-----------------------------------
 Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
@@ -303,8 +304,12 @@ Plug 'neoclide/coc.nvim',
 Plug 'liuchengxu/vim-clap',
 	\ { 'do': ':Clap install-binary!' }
 	" <<< vim-clap -------------------------
+	" 只使用cwd
 	let g:clap_disable_run_rooter = v:true
+	" 样式
+	let g:clap_prompt_format = ' %provider_id% %forerunner_status% '
 	let g:clap_layout = {'relative': 'editor'}
+	let g:clap_preview_direction = 'UD'
 	" 无normal模式(Esc立即退出)
 	let g:clap_insert_mode_only = v:true
 	" >>>-----------------------------------
