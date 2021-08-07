@@ -508,9 +508,6 @@ let g:rootpath_patterns = [
 
 augroup myconfig
 	autocmd!
-	" 修复尺寸
-	" https://github.com/neovim/neovim/issues/11330#issuecomment-723667383
-	autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 	" 自动设置工作目录
 	autocmd VimEnter,BufReadPost,BufEnter *
 		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
