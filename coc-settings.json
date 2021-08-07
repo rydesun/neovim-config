@@ -49,6 +49,8 @@
   // coc-pyright
   "python.analysis.diagnosticMode": "workspace",
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8CategorySeverity.E": "Information",
+  "python.linting.flake8CategorySeverity.W": "Hint",
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
   // coc-markdownlint

@@ -529,6 +529,9 @@ augroup myconfig_coc	" 插件coc配置
 		\ | exe 'cd '.argv()[0]
 		\ | exe 'CocCommand explorer --position floating' argv()[0]
 		\ | wincmd p | bd | endif
+
+	" readonly文件不显示diagnostic
+	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
 augroup END
 
 
