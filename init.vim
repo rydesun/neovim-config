@@ -143,50 +143,53 @@ Plug 'itchyny/lightline.vim'		" 状态栏
 	" <<< lightline------------------------
 	let g:lightline = {
 	\ 'subseparator': {'left': '', 'right': ''},
+	\ 'separator': {'left': '', 'right': ''},
 	\ 'active': {
 	\	'left': [
-	\	['mode', 'paste', 'work_mode'],
+	\	['mode', 'paste'],
 	\	['gitBranch', 'gitStatus'],
-	\	['readonly', 'absolutepath', 'modified']],
+	\	['modified', 'readonly', 'absolutepath']],
 	\	'right': [
 	\	['postion'],
-	\	['diagnostic', 'gitBlame'],
+	\	['diagnostic'],
 	\	['fileformat', 'fileencoding', 'filetype']],
 	\ },
 	\ 'inactive': {
-	\	'left': [['readonly', 'absolutepath', 'modified']],
+	\	'left': [['modified', 'readonly', 'absolutepath']],
 	\	'right': [
 	\	['postion'],
-	\	['fileformat', 'filetype']],
+	\	['fileformat', 'fileencoding', 'filetype']],
 	\ },
 	\ 'component': {
-	\	'work_mode': '%{get(b:, "work_mode", "")}',
+	\	'absolutepath': '%<%F',
 	\	'postion': '%2l:%-2v %2p%%',
 	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
 	\	'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 	\ },
 	\ 'component_function': {
+	\	'mode': 'Lightline_mode',
 	\	'gitBranch': 'Lightline_gitBranch',
 	\	'gitStatus': 'Lightline_gitStatus',
 	\	'gitBlame': 'Lightline_gitBlame',
+	\	'modified': 'Lightline_modified',
 	\	'readonly': 'Lightline_readonly',
 	\	'diagnostic': 'Lightline_diagnostic',
 	\	'filetype': 'Lightline_filetype',
-	\ },
-	\ 'mode_map': {'n':'N', 'i':'I', 'R':'R', 'v':'V', 'V':'V', "\<C-v>":'V',
-	\              'c':'C', 's':'S', 'S':'S', "\<C-s>":'S', 't':'T'},
-	\ }
+	\ }}
+	function! Lightline_mode() abort
+		return lightline#mode()[0]
+	endfunction
 	function! Lightline_readonly() abort
-		return &readonly ? '' : ''
+		return &readonly ? '' : ''
+	endfunction
+	function! Lightline_modified() abort
+		return &modified ? '' : ''
 	endfunction
 	function! Lightline_gitBranch() abort
 		return get(g:, 'coc_git_status', '')
 	endfunction
 	function! Lightline_gitStatus() abort
-		return trim(get(b:, 'coc_git_status', ''))
-	endfunction
-	function! Lightline_gitBlame() abort
-		return get(b:, 'coc_git_blame', '')
+		return !empty(get(b:, 'coc_git_status', '')) ? '': ''
 	endfunction
 	function! Lightline_diagnostic() abort
 		let info = get(b:, 'coc_diagnostic_info', {})
