@@ -449,6 +449,11 @@ Plug 'glacambre/firenvim',
 	\	}
 	\ }
 
+	augroup myconfig_firenvim_init
+		autocmd!
+		autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+	augroup END
+
 	function! OnUIEnter(event) abort
 		if !s:IsFirenvimActive(a:event)
 			return
@@ -463,7 +468,6 @@ Plug 'glacambre/firenvim',
 			autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
 		augroup END
 	endfunction
-	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
 	function! s:IsFirenvimActive(event) abort
 		if !exists('*nvim_get_chan_info')
@@ -503,6 +507,7 @@ let g:rootpath_patterns = [
 \ ]
 
 augroup myconfig
+	autocmd!
 	" 修复尺寸
 	" https://github.com/neovim/neovim/issues/11330#issuecomment-723667383
 	autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"

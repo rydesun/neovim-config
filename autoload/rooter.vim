@@ -7,7 +7,7 @@ function! rooter#match_all(dir, patterns) abort
 	endfor
 endfunction
 
-function rooter#match(dir, pattern) abort
+function! rooter#match(dir, pattern) abort
 	let l:dir = a:dir
 	while 1
 		if rooter#has(l:dir, a:pattern)
@@ -18,10 +18,10 @@ function rooter#match(dir, pattern) abort
 	endwhile
 endfunction
 
-function rooter#has(dir, pattern) abort
+function! rooter#has(dir, pattern) abort
 	return !empty(globpath(escape(a:dir, '?*[]'), a:pattern, 1))
 endfunction
 
-function s:parent(path) abort
+function! s:parent(path) abort
 	return fnamemodify(a:path, ':h')
 endfunction
