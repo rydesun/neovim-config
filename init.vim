@@ -422,7 +422,8 @@ Plug 'fatih/vim-go',
 	let g:go_fmt_autosave = 0
 	" >>>-----------------------------------
 
-Plug 'puremourning/vimspector'		" 调试工具
+Plug 'puremourning/vimspector'
+	\, {'on': []}			" 调试工具
 	" <<< vimspector -----------------------
 	let g:vimspector_enable_mappings = 'HUMAN'
 	" >>>-----------------------------------
