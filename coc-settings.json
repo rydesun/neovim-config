@@ -37,8 +37,6 @@
   "yank.highlight.duration": 100,
   // coc-snippets
   "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips",
-  // coc-pairs
-  "pairs.disableLanguages": ["html"],           // 使用coc-html自动闭合标签
   // coc-html
   "html.autoClosingTags": true,
   // coc-xml

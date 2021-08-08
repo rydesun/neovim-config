@@ -302,6 +302,13 @@ Plug 'neoclide/coc.nvim',
 			\ 'floating-position': 'center-top',
 		\ },
 	\ }
+
+	" coc-pairs
+	augroup myconfig_coc-pairs
+		autocmd!
+		" 使用coc-html自动闭合tag
+		autocmd FileType html let b:coc_pairs_disabled = ['<']
+	augroup END
 	" >>>-----------------------------------
 Plug 'liuchengxu/vim-clap',
 	\ { 'do': ':Clap install-binary!' }
