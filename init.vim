@@ -388,6 +388,8 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
 	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
 	" >>>-----------------------------------
 Plug 'lambdalisue/gina.vim'		" git命令
+
+if !exists('$NVIM_NO_FT')
 Plug 'nvim-treesitter/nvim-treesitter',
 	\ {'do': ':TSUpdate'}		" treesitter支持
 Plug 'nvim-treesitter/playground'	" 调试CST
@@ -398,7 +400,9 @@ Plug 'sheerun/vim-polyglot'		" 补充语言包
 	" sensible: 禁止使用自带的插件vim-sensible
 	let g:polyglot_disabled = ['markdown', 'sensible']
 	" >>>-----------------------------------
-if !exists('g:HOST_NO_DEV')
+endif
+
+if !exists('$NVIM_NO_DEV')
 Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
 Plug 'iamcco/markdown-preview.nvim',
 	\ {'do': 'cd app & yarn install'}	" markdown预览
@@ -440,7 +444,7 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 	augroup END
 	" >>>-----------------------------------
 
-if !exists('g:HOST_NO_X')
+if !exists('$NVIM_NO_X')
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换语言
 Plug 'glacambre/firenvim',
 	\ { 'do': { _ -> firenvim#install(0) } }	" 浏览器嵌入neovim
@@ -493,11 +497,7 @@ call plug#end()
 
 
 " 插件加载后
-try
-	lua require('treesitter')
-catch
-	echomsg "nvim-treesitter is not loaded"
-endtry
+silent! lua require('treesitter')
 " coc-explorer
 silent! call coc#config("explorer.file.root.template",
 	\ " [git & 1][hidden & 1][root]")
