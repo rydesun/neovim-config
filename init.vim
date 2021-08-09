@@ -1,3 +1,22 @@
+" <<< 环境
+let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
+let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
+let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
+
+let s:enable_plugin = !getenv('NVIM_NO_PLUG')
+let s:plugin_ui = !getenv('NVIM_NO_UI')
+let s:plugin_view = !getenv('NVIM_NO_VIEW')
+let s:plugin_ft = !getenv('NVIM_NO_FT')
+let s:plugin_op = !getenv('NVIM_NO_OP')
+let s:plugin_proj = !getenv('NVIM_NO_PROJ')
+let s:plugin_dev = !getenv('NVIM_NO_DEV')
+let s:plugin_cmd = !getenv('NVIM_NO_CMD')
+let s:plugin_x = !getenv('NVIM_NO_X')
+let s:plugin_misc = !getenv('NVIM_NO_MISC')
+" >>>-----------------------------------
+
+
+" <<< 选项
 set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中文用户)
 set ignorecase smartcase	" 大小写模糊搜索
 set wildignorecase	" 命令行补全文件名时无视大小写
@@ -17,21 +36,11 @@ set inccommand=nosplit	" 替换过程可视化
 if $TERM != 'linux'
 	set termguicolors
 endif
-
-let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
-let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
-let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/插件目录
-" 与当前主机相关的配置
-let s:hostrc = s:confdir.'/hostrc.vim'
-if filereadable(s:hostrc)
-	exec 'source' s:hostrc
-endif
-
-" netrwhist文件位置
-let g:netrw_home=s:datadir
+let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
+" >>>-----------------------------------
 
 
-" 键位 <<<------------------------------
+" <<< 键位
 noremap  ;  :
 noremap  :  ;
 noremap  H  ^
@@ -124,246 +133,275 @@ cnoremap           <M-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
-cabbrev  <expr>    ww          (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
-				\ 'w !sudo tee % >/dev/null' : 'ww'
-
-command  -nargs=*  G           call utils#git_wrapper(<f-args>)
-cnoreabb <expr>    g           (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
-command  GetHighlight          echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-command  CountZhCharacters     lua require('counter'):cmd_count_zh()
-command! -nargs=1 -complete=custom,s:lightline_colorschemes LightlineColorscheme
-	\ call s:set_lightline_colorscheme(<q-args>)
-command! -nargs=0 Typography call typography#format()
-command! -nargs=0 TypographyHugo call typography#format_hugo()
 
 tnoremap <M-space>  <c-\><c-n>
+" >>>-----------------------------------
+
+
+" <<< 命令
+command  -nargs=*  G  call utils#git_wrapper(<f-args>)
+
+command  GetHighlight
+	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+command  CountZhCharacters  lua require('counter'):cmd_count_zh()
+
+command! -nargs=0  Typography  call typography#format()
+command! -nargs=0  TypographyHugo  call typography#format_hugo()
+
+command! -nargs=1 -complete=custom,s:lightline_colorschemes
+	\ LightlineColorscheme  call s:set_lightline_colorscheme(<q-args>)
+
+cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
+cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
+	\ 'w !sudo tee % >/dev/null' : 'ww'
+cabbrev  <expr>   g       (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 
 lua require('keymap').add_indent_cmds()
 " >>>-----------------------------------
 
 
-" 插件管理器 vim-plug
-let g:plug_window = 'new'		" 控制台位置
-
+" <<< 插件
+if s:enable_plugin
 call plug#begin(s:plugdir)
-Plug 'dstein64/vim-startuptime'		" 检查启动时间
-Plug 'sainnhe/everforest'		" 配色主题
-	" <<< everforest -----------------------
-	let g:everforest_better_performance = 1
-	" >>>-----------------------------------
-Plug 'itchyny/lightline.vim'		" 状态栏
-	" <<< lightline------------------------
-	let g:lightline = {
-	\ 'subseparator': {'left': '', 'right': ''},
-	\ 'separator': {'left': '', 'right': ''},
-	\ 'active': {
-	\	'left': [
-	\	['mode', 'paste'],
-	\	['gitStatus'],
-	\	['modified', 'readonly', 'absolutepath']],
-	\	'right': [
-	\	['postion'],
-	\	['diagnostic', 'filetype'],
-	\	['fileformat', 'fileencoding']],
-	\ },
-	\ 'inactive': {
-	\	'left': [['modified', 'readonly', 'absolutepath']],
-	\	'right': [
-	\	['postionPe'],
-	\	['fileformat', 'fileencoding']],
-	\ },
-	\ 'component': {
-	\	'absolutepath': '%<%F',
-	\	'postion': '%2l:%-2v %2p%%',
-	\	'postionPe': '%2p%%',
-	\	'fileformat': '%{&ff!=#"unix"?&ff:""}',
-	\	'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
-	\ },
-	\ 'component_function': {
-	\	'mode': 'Lightline_mode',
-	\	'gitStatus': 'Lightline_gitStatus',
-	\	'gitBlame': 'Lightline_gitBlame',
-	\	'modified': 'Lightline_modified',
-	\	'readonly': 'Lightline_readonly',
-	\	'diagnostic': 'Lightline_diagnostic',
-	\	'filetype': 'Lightline_filetype',
-	\ }}
-	function! Lightline_mode() abort
-		return lightline#mode()[0]
-	endfunction
-	function! Lightline_readonly() abort
-		return &readonly ? '' : ''
-	endfunction
-	function! Lightline_modified() abort
-		return &modified ? '' : ''
-	endfunction
-	function! Lightline_gitStatus() abort
-		return get(g:, 'coc_git_status', '').(
-			\ !empty(get(b:, 'coc_git_status', '')) ? ' ': '')
-	endfunction
-	function! Lightline_diagnostic() abort
-		let info = get(b:, 'coc_diagnostic_info', {})
-		if empty(info) | return '' | endif
-		let msgs = []
-		if get(info, 'error', 0)
-			call add(msgs, 'E' . info['error'])
-		endif
-		if get(info, 'warning', 0)
-			call add(msgs, 'W' . info['warning'])
-		endif
-		if get(info, 'information', 0)
-			call add(msgs, 'I' . info['information'])
-		endif
-		if get(info, 'hint', 0)
-			call add(msgs, 'H' . info['hint'])
-		endif
-		return join(msgs, ' ')
-	endfunction
-	function! Lightline_filetype()
-		return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
-	endfunction
 
-	function! s:set_lightline_colorscheme(name) abort
-		let g:lightline.colorscheme = a:name
-		call lightline#init()
-		call lightline#colorscheme()
-		call lightline#update()
-	endfunction
-	function! s:lightline_colorschemes(...) abort
-		return join(map(
-		\ globpath(&rtp, "autoload/lightline/colorscheme/*.vim", 1, 1),
-		\ "fnamemodify(v:val, ':t:r')"),
-		\ "\n")
-		endfunction
-	" >>>-----------------------------------
+if s:plugin_ui
+Plug 'sainnhe/everforest'		" 配色主题
+Plug 'itchyny/lightline.vim'		" 状态栏
+Plug 'ryanoasis/vim-devicons'		" 图标字体
+endif
+
+if s:plugin_view
+Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
+Plug 'ntpeters/vim-better-whitespace'	" 空白符
 Plug 'rrethy/vim-hexokinase',
 	\ {'do': 'make hexokinase'}	" 显示颜色
-
-Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
-	" <<< indent-blankline.nvim ------------
-	" 缩进线字符
-	let g:indentLine_char = '┊'
-	" 不显示空白符
-        let g:indent_blankline_space_char = ' '
-	" 排除类型
-	let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
-		\ 'popup', 'clap_input', 'clap_action']
-	let g:indent_blankline_buftype_exclude = ['terminal']
-	" >>>-----------------------------------
-Plug 'ntpeters/vim-better-whitespace'	" 处理空白符
-	" <<< vim-better-whitespace ------------
-	let g:better_whitespace_filetypes_blacklist =
-		\ ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer', 'xxd']
-	let g:show_spaces_that_precede_tabs = 1
-	" >>>-----------------------------------
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
-Plug 'ryanoasis/vim-devicons'		" 集成devicons字体
-Plug 'editorconfig/editorconfig-vim'
-Plug 'chrisbra/vim-diff-enhanced'	" 增强diff算法
-	" <<< vim-diff-enhanced ----------------
-	if &diff
-		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
-	endif
-	" >>>-----------------------------------
-Plug 'fidian/hexmode'			" 编辑16进制文件
-	" <<< hexmode --------------------------
-	let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-	" >>>-----------------------------------
+Plug 'fidian/hexmode'			" 查看16进制
+endif
 
-Plug 'neoclide/coc.nvim',
-	\ {'branch': 'release'}		" coc框架
-	" <<< coc -----------------------------
-	" 修改coc数据目录, 默认值是XDG config目录
-	let g:coc_data_home = stdpath('data').'/coc'
-	" 强制选项
-	set hidden nobackup nowritebackup
-	" 推荐选项
-	" set cmdheight=2
-	set updatetime=300
-	function! s:show_documentation() abort
-		if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-		elseif (coc#rpc#ready())
-			call CocActionAsync('doHover')
-		endif
-	endfunction
-	let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-	let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
-				\ "coc-db"]
-	let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
-	let s:coc_lsp = [
-	\	"coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
-	\	"coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
-	\	"coc-tsserver", "coc-eslint",
-	\	"coc-css", "coc-stylelint",
-	\	"coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
-	\	"coc-xml", "coc-svg", "coc-docker", "coc-texlab",
-	\ ]
-	let g:coc_global_extensions = [
-	\	"coc-pairs",
-	\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
+if s:plugin_ft
+Plug 'nvim-treesitter/nvim-treesitter',
+	\ {'do': ':TSUpdate'} |
+	\ Plug 'nvim-treesitter/playground' |
+	\ Plug 'romgrk/nvim-treesitter-context' |
+	\ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" vim-polyglot 自带缩进检测插件autoindent
+" 禁止使用自带的插件sensible
+let g:polyglot_disabled = ['sensible']
+Plug 'sheerun/vim-polyglot'
+endif
 
-	" coc-explorer
-	let g:coc_explorer_global_presets = {
-		\ 'buffer': {
-			\ 'sources': [{'name': 'buffer', 'expand': v:true}],
-			\ 'position': 'floating',
-			\ 'floating-position': 'center-top',
-		\ },
-	\ }
-
-	" coc-pairs
-	augroup myconfig_coc-pairs
-		autocmd!
-		" 使用coc-html自动闭合tag
-		autocmd FileType html let b:coc_pairs_disabled = ['<']
-	augroup END
-	" >>>-----------------------------------
-Plug 'liuchengxu/vim-clap',
-	\ { 'do': ':Clap install-binary!' }
-	" <<< vim-clap -------------------------
-	" 只使用cwd
-	let g:clap_disable_run_rooter = v:true
-	" 样式
-	let g:clap_prompt_format = ' %provider_id% %forerunner_status% '
-	let g:clap_layout = {'relative': 'editor'}
-	let g:clap_preview_direction = 'UD'
-	" 无normal模式(Esc立即退出)
-	let g:clap_insert_mode_only = v:true
-	" >>>-----------------------------------
-Plug 'vn-ki/coc-clap'
-
-Plug 'justinmk/vim-sneak'		" 光标定位
-	" <<< vim-sneak -----------------------
-	" 类似于EasyMotion的标签模式
-	let g:sneak#label = 1
-	" 智能大小写
-	let g:sneak#use_ic_scs = 1
-	" >>> ---------------------------------
-Plug 'mg979/vim-visual-multi'		" 多重光标
-	" <<< vim-visual-multi ----------------
-	let g:VM_Extend_hl = 'CursorRange'
-	" >>> ---------------------------------
-Plug 'mattn/emmet-vim'			" emmet展开缩写
-Plug 'tpope/vim-surround'		" 修改成对符号
+if s:plugin_op
 Plug 'wellle/targets.vim'		" 文本对象
 Plug 'tpope/vim-unimpaired'		" 快速跳转
 Plug 'jeetsukumaran/vim-indentwise'	" 缩进跳转
-Plug 'tpope/vim-repeat'
-Plug 'AndrewRadev/splitjoin.vim'
+Plug 'justinmk/vim-sneak'		" 光标定位
+Plug 'mg979/vim-visual-multi'		" 多重光标
+Plug 'tpope/vim-surround'		" 成对符号
+Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
 Plug 'scrooloose/nerdcommenter'		" 快速注释
-	" <<< nerdcommenter --------------------
-	" 取消所有预设键位映射
-	let g:NERDCreateDefaultMappings = 0
-	" 注释符号后面添加空格
-	let g:NERDSpaceDelims = 1
-	let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
-	" 注释符号左对齐
-	let g:NERDDefaultAlign='left'
-	" >>>-----------------------------------
 Plug 'tenfyzhong/axring.vim'		" 切换单词
-	" <<< axring ---------------------------
-	let g:axring_rings = [
+Plug 'tpope/vim-repeat'			" 重复执行
+Plug 'mattn/emmet-vim'			" 展开缩写
+endif
+
+if s:plugin_proj
+Plug 'neoclide/coc.nvim',
+	\ {'branch': 'release'}		" coc
+Plug 'liuchengxu/vim-clap',
+	\ {'do': ':Clap install-binary!'} |
+	\ Plug 'vn-ki/coc-clap'		" Finder
+Plug 'editorconfig/editorconfig-vim'	" EditorConfig
+endif
+
+if s:plugin_dev
+Plug 'iamcco/markdown-preview.nvim',
+	\ {'do': 'cd app & yarn install'}	" markdown预览
+Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
+Plug 'lervag/vimtex'			" LaTex
+Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
+Plug 'fatih/vim-go',
+	\ {'do': ':GoUpdateBinaries guru motion'}
+Plug 'puremourning/vimspector',
+	\ {'on': []}			" 调试工具
+endif
+
+if s:plugin_cmd
+Plug 'skywind3000/asyncrun.vim'		" 异步执行
+Plug 'voldikss/vim-floaterm'		" 终端窗口
+Plug 'lambdalisue/gina.vim'		" 集成Git
+Plug 'tpope/vim-dadbod'	|
+	\ Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库
+endif
+
+if s:plugin_x
+Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
+Plug 'glacambre/firenvim',
+	\ {'do': { _ -> firenvim#install(0) }}	" 浏览器嵌入
+endif
+
+if s:plugin_misc
+Plug 'chrisbra/vim-diff-enhanced'	" 增强diff算法
+Plug 'dstein64/vim-startuptime'		" 检查启动时间
+endif
+
+call plug#end()
+endif
+" >>>-----------------------------------
+
+if s:enable_plugin
+if s:plugin_ui
+" <<< everforest (var, au)
+let g:everforest_better_performance = 1
+let g:everforest_background = 'hard'
+let g:everforest_sign_column_background = 'none'
+let g:everforest_disable_italic_comment = 1
+
+function! s:colorscheme_everforest_custom() abort
+	let l:palette = everforest#get_palette(g:everforest_background)
+
+	let g:better_whitespace_guicolor = l:palette.none[0]
+	call everforest#highlight('ExtraWhitespace',
+		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
+endfunction
+
+augroup colorscheme_everforest
+	autocmd!
+	autocmd ColorScheme everforest let g:lightline.colorscheme = 'everforest'
+	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
+augroup END
+" >>>-----------------------------------
+" <<< lightline (var, func)
+let g:lightline = {
+	\ 'separator': {'left': '', 'right': ''},
+	\ 'subseparator': {'left': '', 'right': ''},
+	\ 'active': {
+		\ 'left': [['mode', 'paste'],
+			\ ['gitStatus'],
+			\ ['modified', 'readonly', 'absolutepath']],
+		\ 'right': [['postion'],
+			\ ['diagnostic', 'filetype'],
+			\ ['fileformat', 'fileencoding']],
+	\ },
+	\ 'inactive': {
+		\ 'left': [['modified', 'readonly', 'absolutepath']],
+		\ 'right': [['postionPe'],
+			\ ['fileformat', 'fileencoding']],
+	\ },
+	\ 'component': {
+		\ 'absolutepath': '%<%F',
+		\ 'postion': '%2l:%-2v %2p%%',
+		\ 'postionPe': '%2p%%',
+		\ 'fileformat': '%{&ff!=#"unix"?&ff:""}',
+		\ 'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
+		\ },
+	\ 'component_function': {
+		\ 'mode': 'Lightline_mode',
+		\ 'gitStatus': 'Lightline_gitStatus',
+		\ 'gitBlame': 'Lightline_gitBlame',
+		\ 'modified': 'Lightline_modified',
+		\ 'readonly': 'Lightline_readonly',
+		\ 'diagnostic': 'Lightline_diagnostic',
+		\ 'filetype': 'Lightline_filetype',
+	\ }
+\ }
+
+function! Lightline_mode() abort
+	return lightline#mode()[0]
+endfunction
+function! Lightline_readonly() abort
+	return &readonly ? '' : ''
+endfunction
+function! Lightline_modified() abort
+	return &modified ? '' : ''
+endfunction
+function! Lightline_gitStatus() abort
+	return get(g:, 'coc_git_status', '').(
+		\ !empty(get(b:, 'coc_git_status', '')) ? ' ': '')
+endfunction
+function! Lightline_diagnostic() abort
+	let info = get(b:, 'coc_diagnostic_info', {})
+	if empty(info) | return '' | endif
+	let msgs = []
+	if get(info, 'error', 0)
+		call add(msgs, 'E' . info['error'])
+	endif
+	if get(info, 'warning', 0)
+		call add(msgs, 'W' . info['warning'])
+	endif
+	if get(info, 'information', 0)
+		call add(msgs, 'I' . info['information'])
+	endif
+	if get(info, 'hint', 0)
+		call add(msgs, 'H' . info['hint'])
+	endif
+	return join(msgs, ' ')
+endfunction
+function! Lightline_filetype()
+	return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
+endfunction
+
+function! s:set_lightline_colorscheme(name) abort
+	let g:lightline.colorscheme = a:name
+	call lightline#init()
+	call lightline#colorscheme()
+	call lightline#update()
+endfunction
+function! s:lightline_colorschemes(...) abort
+	return join(map(
+		\ globpath(&rtp, "autoload/lightline/colorscheme/*.vim", 1, 1),
+		\ "fnamemodify(v:val, ':t:r')"),
+		\ "\n")
+endfunction
+" >>>-----------------------------------
+endif
+if s:plugin_view
+" <<< indent-blankline (var)
+" 缩进线字符
+let g:indentLine_char = '┊'
+" 不显示空白符
+let g:indent_blankline_space_char = ' '
+" 排除类型
+let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
+	\ 'popup', 'clap_input', 'clap_action']
+let g:indent_blankline_buftype_exclude = ['terminal']
+" >>>-----------------------------------
+" <<< vim-better-whitespace (var)
+let g:better_whitespace_filetypes_blacklist =
+	\ ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer', 'xxd']
+let g:show_spaces_that_precede_tabs = 1
+" >>>-----------------------------------
+" <<< hexmode (var)
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+" >>>-----------------------------------
+endif
+if s:plugin_ft
+" <<< nvim-treesitter (exec)
+lua require('treesitter')
+" >>>-----------------------------------
+endif
+if s:plugin_op
+" <<< vim-sneak (var)
+" 类似于EasyMotion的标签模式
+let g:sneak#label = 1
+" 智能大小写
+let g:sneak#use_ic_scs = 1
+" >>> ---------------------------------
+" <<< vim-visual-multi (var)
+let g:VM_Extend_hl = 'CursorRange'
+" >>> ---------------------------------
+" <<< nerdcommenter (var)
+" 取消所有预设键位映射
+let g:NERDCreateDefaultMappings = 0
+" 注释符号后面添加空格
+let g:NERDSpaceDelims = 1
+let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
+" 注释符号左对齐
+let g:NERDDefaultAlign='left'
+" >>>-----------------------------------
+" <<< axring (var)
+let g:axring_rings = [
 	\ ['&&', '||'],
 	\ ['&', '|', '^'],
 	\ ['&=', '|=', '^='],
@@ -375,8 +413,8 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	\ ['++', '--'],
 	\ ['true', 'false'],
 	\ ['verbose', 'debug', 'info', 'warn', 'error', 'fatal'],
-	\ ]
-	let g:axring_rings_go = [
+\ ]
+let g:axring_rings_go = [
 	\ [':=', '='],
 	\ ['byte', 'rune'],
 	\ ['complex64', 'complex128'],
@@ -385,166 +423,53 @@ Plug 'tenfyzhong/axring.vim'		" 切换单词
 	\ ['float32', 'float64'],
 	\ ['interface', 'struct'],
 	\ ['debug', 'info', 'warn', 'error', 'panic', 'fatal'],
-	\ ]
-	" >>>-----------------------------------
-
-Plug 'voldikss/vim-floaterm'
-Plug 'skywind3000/asyncrun.vim'		" 异步执行外部命令
-	" <<< asyncrun -------------------------
-	" quickfix窗口的默认高度
-	let g:asyncrun_open = 6
-	" 在firefox中搜索当前单词
-	cabbrev <silent> Search AsyncRun -silent firefox -search <cword>
-	" >>>-----------------------------------
-Plug 'lambdalisue/gina.vim'		" git命令
-
-if !exists('$NVIM_NO_FT')
-Plug 'nvim-treesitter/nvim-treesitter',
-	\ {'do': ':TSUpdate'}		" treesitter支持
-Plug 'nvim-treesitter/playground'	" 调试CST
-Plug 'romgrk/nvim-treesitter-context'	" 预览上下文
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'	" 文本对象
-Plug 'sheerun/vim-polyglot'		" 补充语言包
-	" <<< vim-polyglot ---------------------
-	" sensible: 禁止使用自带的插件vim-sensible
-	let g:polyglot_disabled = ['markdown', 'sensible']
-	" >>>-----------------------------------
-endif
-
-if !exists('$NVIM_NO_DEV')
-Plug 'mzlogin/vim-markdown-toc'		" 为md自动生成TOC
-Plug 'iamcco/markdown-preview.nvim',
-	\ {'do': 'cd app & yarn install'}	" markdown预览
-Plug 'lervag/vimtex'			" latex
-Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
-	" <<< asynctasks -----------------------
-	let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
-	" >>>-----------------------------------
-Plug 'fatih/vim-go',
-	\ {'do': ':GoUpdateBinaries guru motion'}
-	" <<< vim-go ---------------------------
-	" 只安装特定工具，优先使用coc-go提供的功能
-	" 关闭gopls
-	let g:go_gopls_enabled = 0
-	" 禁用omnifunc补全
-	let g:go_code_completion_enabled = 0
-	" 关闭vim-go的按键映射
-	let g:go_doc_keywordprg_enabled = 0 " 查看文档
-	let g:go_def_mapping_enabled = 0 " 跳转定义
-	" 禁止在保存时自动执行GoFmt
-	let g:go_fmt_autosave = 0
-	" >>>-----------------------------------
-
-Plug 'puremourning/vimspector'
-	\, {'on': []}			" 调试工具
-	" <<< vimspector -----------------------
-	let g:vimspector_enable_mappings = 'HUMAN'
-	" >>>-----------------------------------
-endif
-
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-	" <<< vim-dadbod-ui --------------------
-	let g:db_ui_save_location = s:datadir.'/db_ui'
-	let g:db_ui_use_nerd_fonts = 1
-	augroup myconfig_dbui
-		autocmd!
-		autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
-	augroup END
-	" >>>-----------------------------------
-
-if !exists('$NVIM_NO_X')
-Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换语言
-Plug 'glacambre/firenvim',
-	\ { 'do': { _ -> firenvim#install(0) } }	" 浏览器嵌入neovim
-	" <<< firenvim -------------------------
-	let g:firenvim_config = {
-	\	'globalSettings': {
-	\		'alt': 'all',
-	\	},
-	\	'localSettings': {
-	\		'.*': {
-	\		'cmdline': 'firenvim',
-	\		'priority': 0,
-	\		'selector': 'textarea',
-	\		'takeover': 'never',
-	\		},
-	\	}
-	\ }
-
-	augroup myconfig_firenvim_init
-		autocmd!
-		autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-	augroup END
-
-	function! OnUIEnter(event) abort
-		if !s:IsFirenvimActive(a:event)
-			return
-		endif
-		set laststatus=0
-		if &lines < 10
-			set lines=10
-		endif
-		augroup myconfig_firenvim
-			autocmd!
-			autocmd BufEnter github.com_*.txt set filetype=markdown
-			autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
-		augroup END
-	endfunction
-
-	function! s:IsFirenvimActive(event) abort
-		if !exists('*nvim_get_chan_info')
-			return 0
-		endif
-		let l:ui = nvim_get_chan_info(a:event.chan)
-		return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
-		\ l:ui.client.name =~? 'Firenvim'
-	endfunction
-	" >>>-----------------------------------
-endif
-call plug#end()
-
-
-" 插件加载后
-silent! lua require('treesitter')
-" coc-explorer
-silent! call coc#config("explorer.file.root.template",
-	\ " [git & 1][hidden & 1][root]")
-silent! call coc#config("explorer.file.child.template",
-	\ "[git | 2][selection | clip | 1] ".
-	\ "[indent][icon | 1] [filename omitCenter 1] ".
-	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
-silent! call coc#config("explorer.buffer.root.template",
-	\ " [title] [hidden & 1]")
-silent! call coc#config("explorer.buffer.child.template",
-	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
-
-
-" 自动命令
-let g:rootpath_patterns = [
-\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
 \ ]
+" >>>-----------------------------------
+endif
+if s:plugin_proj
+" <<< coc (opt, var, au, exec)
+" 修改coc数据目录, 默认值是XDG config目录
+let g:coc_data_home = stdpath('data').'/coc'
+" 强制选项
+set hidden nobackup nowritebackup
+" 推荐选项
+" set cmdheight=2
+set updatetime=300
+function! s:show_documentation() abort
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	elseif (coc#rpc#ready())
+		call CocActionAsync('doHover')
+	endif
+endfunction
 
-augroup myconfig
+let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
+let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
+	\ "coc-db"]
+let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
+let s:coc_lsp = [
+	\ "coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
+	\ "coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
+	\ "coc-tsserver", "coc-eslint",
+	\ "coc-css", "coc-stylelint",
+	\ "coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
+	\ "coc-xml", "coc-svg", "coc-docker", "coc-texlab",
+\ ]
+let g:coc_global_extensions = [
+	\ "coc-pairs",
+\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
+
+" coc-explorer
+let g:coc_explorer_global_presets = {
+	\ 'buffer': {
+		\ 'sources': [{'name': 'buffer', 'expand': v:true}],
+		\ 'position': 'floating',
+		\ 'floating-position': 'center-top',
+	\ },
+\ }
+
+augroup myconfig_coc
 	autocmd!
-	" 自动设置工作目录
-	autocmd VimEnter,BufReadPost,BufEnter *
-		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
-	autocmd BufWritePost * call utils#rootpath_clear() |
-		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
-augroup END
-
-augroup myconfig_term	" 终端模式
-	autocmd!
-	" 不需要侧边栏
-	autocmd TermOpen * setlocal signcolumn=no
-augroup END
-
-augroup myconfig_coc	" 插件coc配置
-	autocmd!
-	" coc的配置文件使用jsonc格式
-	autocmd BufRead,BufNewFile coc-settings.json syntax match Comment +\/\/.\+$+
-
 	" coc-explorer界面
 	autocmd filetype coc-explorer setlocal fcs=eob:\ 
 	autocmd User CocExplorerOpenPost setlocal statusline=%#NonText#
@@ -558,26 +483,139 @@ augroup myconfig_coc	" 插件coc配置
 
 	" readonly文件不显示diagnostic
 	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
+
+	" 使用coc-html自动闭合tag, 禁用coc-pairs
+	autocmd FileType html let b:coc_pairs_disabled = ['<']
 augroup END
 
-
+call coc#config("explorer.file.root.template",
+	\ " [git & 1][hidden & 1][root]")
+call coc#config("explorer.file.child.template",
+	\ "[git | 2][selection | clip | 1] ".
+	\ "[indent][icon | 1] [filename omitCenter 1] ".
+	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
+call coc#config("explorer.buffer.root.template",
+	\ " [title] [hidden & 1]")
+call coc#config("explorer.buffer.child.template",
+	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
+" >>>-----------------------------------
+" <<< vim-clap (var)
+" 只使用cwd
+let g:clap_disable_run_rooter = v:true
 " 样式
-let g:everforest_background = 'hard'
-let g:everforest_sign_column_background = 'none'
-let g:everforest_disable_italic_comment = 1
+let g:clap_prompt_format = ' %provider_id% %forerunner_status% '
+let g:clap_layout = {'relative': 'editor'}
+let g:clap_preview_direction = 'UD'
+" 无normal模式(Esc立即退出)
+let g:clap_insert_mode_only = v:true
+" >>>-----------------------------------
+endif
+if s:plugin_dev
+" <<< asynctasks (var)
+let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
+" >>>-----------------------------------
+" <<< vim-go (var)
+" 只安装特定工具，优先使用coc-go提供的功能
+" 关闭gopls
+let g:go_gopls_enabled = 0
+" 禁用omnifunc补全
+let g:go_code_completion_enabled = 0
+" 关闭vim-go的按键映射
+let g:go_doc_keywordprg_enabled = 0 " 查看文档
+let g:go_def_mapping_enabled = 0 " 跳转定义
+" 禁止在保存时自动执行GoFmt
+let g:go_fmt_autosave = 0
+" >>>-----------------------------------
+" <<< vimspector (var)
+let g:vimspector_enable_mappings = 'HUMAN'
+" >>>-----------------------------------
+endif
+if s:plugin_cmd
+" <<< asyncrun (var)
+" quickfix窗口的默认高度
+let g:asyncrun_open = 6
+" >>>-----------------------------------
+" <<< vim-dadbod-ui (var, au)
+let g:db_ui_save_location = s:datadir.'/db_ui'
+let g:db_ui_use_nerd_fonts = 1
+augroup myconfig_dbui
+	autocmd!
+	autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
+augroup END
+" >>>-----------------------------------
+endif
+if s:plugin_x
+" <<< firenvim (var, func, au)
+let g:firenvim_config = {
+	\ 'globalSettings': {
+		\ 'alt': 'all',
+	\ },
+	\ 'localSettings': {
+		\ '.*': {
+			\ 'cmdline': 'firenvim',
+			\ 'priority': 0,
+			\ 'selector': 'textarea',
+			\ 'takeover': 'never',
+			\ },
+	\ }
+\ }
 
-function! s:colorscheme_everforest_custom() abort
-	let l:palette = everforest#get_palette(g:everforest_background)
+augroup myconfig_firenvim_init
+	autocmd!
+	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+augroup END
 
-	let g:better_whitespace_guicolor = l:palette.none[0]
-	call everforest#highlight('ExtraWhitespace',
-		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
+function! OnUIEnter(event) abort
+	if !s:IsFirenvimActive(a:event)
+		return
+	endif
+	set laststatus=0
+	if &lines < 10
+		set lines=10
+	endif
+	augroup myconfig_firenvim
+		autocmd!
+		autocmd BufEnter github.com_*.txt set filetype=markdown
+		autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
+	augroup END
 endfunction
 
-augroup colorscheme
+function! s:IsFirenvimActive(event) abort
+	if !exists('*nvim_get_chan_info')
+		return 0
+	endif
+	let l:ui = nvim_get_chan_info(a:event.chan)
+	return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
+		\ l:ui.client.name =~? 'Firenvim'
+endfunction
+" >>>-----------------------------------
+endif
+if s:plugin_misc
+" <<< vim-diff-enhanced (opt)
+if &diff
+	let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+endif
+" >>>-----------------------------------
+end
+end
+
+
+" vim-plug窗口位置
+let g:plug_window = 'new'
+
+augroup myconfig
 	autocmd!
-	autocmd ColorScheme everforest let g:lightline.colorscheme = 'everforest'
-	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
+	" 自动设置工作目录
+	let g:rootpath_patterns = [
+		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
+	\ ]
+	autocmd VimEnter,BufReadPost,BufEnter *
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
+	autocmd BufWritePost * call utils#rootpath_clear() |
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
+
+	" 终端不需要侧边栏
+	autocmd TermOpen * setlocal signcolumn=no
 augroup END
 
 silent! colorscheme everforest
