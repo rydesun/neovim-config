@@ -79,7 +79,9 @@ xmap               <leader>f   <Plug>(coc-format-selected)
 nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
-nnoremap           <leader>k   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
+nmap               <leader>k   <Plug>(coc-translator-p)
+vmap               <leader>k   <Plug>(coc-translator-pv)
+nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
@@ -108,6 +110,10 @@ nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 " 注意：ftplugin中的文件占用了 <leader>w 开头的映射
 nnoremap <silent>  <leader>wf  :call CocAction('format')<CR>
 
+nnoremap <silent>  <A-j>       :m .+1<CR>
+nnoremap <silent>  <A-k>       :m .-2<CR>
+vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
+vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
 cnoremap           <C-a>       <Home>
