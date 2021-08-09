@@ -254,7 +254,11 @@ if s:enable_plugin
 if s:plugin_ui
 " <<< everforest (var, au)
 let g:everforest_better_performance = 1
-let g:everforest_background = 'hard'
+if &background == 'dark'
+	let g:everforest_background = 'hard'
+else
+	let g:everforest_background = 'soft'
+endif
 let g:everforest_sign_column_background = 'none'
 let g:everforest_disable_italic_comment = 1
 
