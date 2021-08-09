@@ -148,6 +148,9 @@ let g:plug_window = 'new'		" 控制台位置
 call plug#begin(s:plugdir)
 Plug 'dstein64/vim-startuptime'		" 检查启动时间
 Plug 'sainnhe/everforest'		" 配色主题
+	" <<< everforest -----------------------
+	let g:everforest_better_performance = 1
+	" >>>-----------------------------------
 Plug 'itchyny/lightline.vim'		" 状态栏
 	" <<< lightline------------------------
 	let g:lightline = {
