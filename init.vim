@@ -97,6 +97,7 @@ nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
 nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
 nmap               <leader>hc  <Plug>(coc-git-commit)
 
+nnoremap <silent>  <leader>gq  :call CocAction('format')<CR>
 nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
 nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
 nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
@@ -117,7 +118,7 @@ nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
 nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
 " 注意：ftplugin中的文件占用了 <leader>w 开头的映射
-nnoremap <silent>  <leader>wf  :call CocAction('format')<CR>
+nnoremap           <leader>wf  <Plug>(coc-fix-current)
 
 nnoremap <silent>  <A-j>       :m .+1<CR>
 nnoremap <silent>  <A-k>       :m .-2<CR>
@@ -435,13 +436,12 @@ let g:axring_rings_go = [
 endif
 if s:plugin_proj
 " <<< coc (opt, var, au, exec)
+" format函数
+set formatexpr=CocAction('formatSelected')
+
 " 修改coc数据目录, 默认值是XDG config目录
-let g:coc_data_home = stdpath('data').'/coc'
-" 强制选项
-set hidden nobackup nowritebackup
-" 推荐选项
-" set cmdheight=2
-set updatetime=300
+let g:coc_data_home = s:datadir.'/coc'
+
 function! s:show_documentation() abort
 	if (index(['vim','help'], &filetype) >= 0)
 		execute 'h '.expand('<cword>')
@@ -477,6 +477,9 @@ let g:coc_explorer_global_presets = {
 
 augroup myconfig_coc
 	autocmd!
+	" 补全跳转后显示函数签名
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
 	" coc-explorer界面
 	autocmd filetype coc-explorer setlocal fcs=eob:\ 
 	autocmd User CocExplorerOpenPost setlocal statusline=%#NonText#
