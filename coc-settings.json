@@ -1,8 +1,9 @@
 {
-  "diagnostic.errorSign": "●",
-  "diagnostic.warningSign": "▶",
-  "diagnostic.infoSign": "▣",
-  "diagnostic.hintSign": "□",
+  "diagnostic.signPriority": 1,
+  "diagnostic.errorSign": "•┋",
+  "diagnostic.warningSign": "•┋",
+  "diagnostic.infoSign": "▪┋",
+  "diagnostic.hintSign": "▪┋",
   "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
   "suggest.snippetIndicator" : " [+]",
@@ -29,7 +30,12 @@
   // coc-translator
   "translator.engines": ["bing"],
   // coc-git
-  "git.signPriority": 100,
+  "git.signPriority": 5,
+  "git.addedSign.text": "+┃",
+  "git.changedSign.text": "~┃",
+  "git.removedSign.text": "_┃",
+  "git.topRemovedSign.text": "‾┃",
+  "git.changeRemovedSign.text": "≃┃",
   "git.branchCharacter": "",
   "git.stagedDecorator": "+",
   "git.untrackedDecorator": "%",

@@ -25,7 +25,11 @@ set hidden		" 可以切换未保存修改的buffer
 set splitbelow		" 水平分割的新窗口在下面打开
 set splitright		" 垂直分割的新窗口在右边打开
 set mouse=a		" 所有模式下支持鼠标
-set signcolumn=yes	" 始终开启侧边栏
+set relativenumber	" 开启相对行号
+set numberwidth=1	" 行号最低宽度
+" set signcolumn=number	" 在行号上显示侧边栏
+" 等待coc-git修复#187
+autocmd User CocNvimInit sleep 50m | set signcolumn=number
 set scrolloff=5		" 滚动时光标到上下边缘的预留行数
 set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
 set diffopt+=vertical	" diff模式默认以垂直方式分割
@@ -33,6 +37,7 @@ set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 set inccommand=nosplit	" 替换过程可视化
+set formatoptions+=B	" 合并中文行不加空格
 if $TERM != 'linux'
 	set termguicolors
 endif
@@ -284,6 +289,9 @@ function! s:colorscheme_everforest_custom() abort
 	let g:better_whitespace_guicolor = l:palette.none[0]
 	call everforest#highlight('ExtraWhitespace',
 		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
+
+	call everforest#highlight('IndentBlanklineContextChar',
+		\ l:palette.grey2, l:palette.none)
 endfunction
 
 augroup colorscheme_everforest
@@ -384,6 +392,10 @@ if s:plugin_view
 let g:indentLine_char = '┊'
 " 不显示空白符
 let g:indent_blankline_space_char = ' '
+" 优先使用treesitter计算缩进
+let g:indent_blankline_use_treesitter = v:true
+" 高亮上下文缩进线
+let g:indent_blankline_show_current_context = v:true
 " 排除类型
 let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
 	\ 'popup', 'clap_input', 'clap_action']
