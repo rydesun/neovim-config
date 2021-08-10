@@ -159,6 +159,17 @@ cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 cabbrev  <expr>   g       (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 
 lua require('keymap').add_indent_cmds()
+
+" 重新加载配置
+command! -nargs=1 -complete=custom,s:get_vim_files
+	\ Load  exec 'source '.s:confdir.'/<args>'
+function! s:get_vim_files(...) abort
+	let l:idx = len(s:confdir) + 1
+	return join(map(
+		\ globpath(s:confdir, '**/*.vim', 0, 1),
+		\ 'v:val[l:idx:]'),
+		\ "\n")
+endfunction
 " >>>-----------------------------------
 
 
