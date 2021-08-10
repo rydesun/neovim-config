@@ -47,7 +47,6 @@ let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
 
 " <<< 键位
 noremap  ;  :
-noremap  :  ;
 noremap  H  ^
 noremap  L  $
 noremap  '  `
@@ -55,6 +54,7 @@ noremap  `  '
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
 map                f           <Plug>Sneak_s
 map                F           <Plug>Sneak_S
+map                :           <Plug>Sneak_;
 nnoremap <silent>  K           :call <SID>show_documentation()<CR>
 nnoremap           s           <NOP>
 nnoremap <silent>  sc          :Clap bcommits<CR>
