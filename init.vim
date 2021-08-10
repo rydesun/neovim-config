@@ -91,6 +91,9 @@ nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nmap               <leader>k   <Plug>(coc-translator-p)
 vmap               <leader>k   <Plug>(coc-translator-pv)
 nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
+for s:i in [1,2,3,4,5,6,7,8,9]
+	exec 'nnoremap <leader>'.s:i.' <c-w>'.s:i.'w'
+endfor
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
