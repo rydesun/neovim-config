@@ -102,8 +102,9 @@ endfor
 
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
+nnoremap           <leader>ho  :CocCommand git.copyUrl<CR>
 nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
-nmap               <leader>hc  <Plug>(coc-git-commit)
+nmap               <leader>hb  <Plug>(coc-git-commit)
 
 nnoremap <silent>  <leader>gq  :call CocAction('format')<CR>
 nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
@@ -329,7 +330,6 @@ let g:lightline = {
 	\ 'component_function': {
 		\ 'mode': 'Lightline_mode',
 		\ 'gitStatus': 'Lightline_gitStatus',
-		\ 'gitBlame': 'Lightline_gitBlame',
 		\ 'modified': 'Lightline_modified',
 		\ 'readonly': 'Lightline_readonly',
 		\ 'diagnostic': 'Lightline_diagnostic',
