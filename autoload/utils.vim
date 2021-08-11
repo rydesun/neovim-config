@@ -44,7 +44,7 @@ function! utils#rootpath(patterns) abort
                 return getcwd()
         endif
 
-        if exists('b:rootpath') && !empty('b:rootpath')
+        if exists('b:rootpath') && 'b:rootpath'
                 return b:rootpath
         endif
 
