@@ -190,6 +190,8 @@ if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 Plug 'ryanoasis/vim-devicons'		" 图标字体
+Plug 'gelguy/wilder.nvim',
+	\ {'do': ':UpdateRemotePlugins'}	" 改进wildmenu
 endif
 
 if s:plugin_view
@@ -385,6 +387,28 @@ function! s:lightline_colorschemes(...) abort
 		\ "fnamemodify(v:val, ':t:r')"),
 		\ "\n")
 endfunction
+" >>>-----------------------------------
+" <<< wilder.nvim (exe, opt, map)
+call wilder#enable_cmdline_enter()
+set wildcharm=<Tab>
+
+call wilder#set_option('modes', ['/', '?', ':'])
+call wilder#set_option('pipeline', [
+	\ wilder#branch(
+		\ wilder#cmdline_pipeline({'language': 'python'}),
+		\ wilder#python_search_pipeline({
+			\ 'pattern': wilder#python_fuzzy_pattern(),
+		\ }),
+	\ ),
+\ ])
+call wilder#set_option('renderer', wilder#wildmenu_renderer(
+	\ wilder#wildmenu_lightline_theme({
+		\ 'highlights': {},
+		\ 'highlighter': wilder#basic_highlighter(),
+\ })))
+
+cnoremap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
+cnoremap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
 " >>>-----------------------------------
 endif
 if s:plugin_view
