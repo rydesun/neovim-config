@@ -190,6 +190,7 @@ if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 Plug 'ryanoasis/vim-devicons'		" 图标字体
+Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
 Plug 'gelguy/wilder.nvim',
 	\ {'do': ':UpdateRemotePlugins'}	" 改进wildmenu
 endif
@@ -387,6 +388,28 @@ function! s:lightline_colorschemes(...) abort
 		\ "fnamemodify(v:val, ':t:r')"),
 		\ "\n")
 endfunction
+" >>>-----------------------------------
+" <<< nvim-hlslens (map, au, exec)
+noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+	\<Cmd>lua require('hlslens').start()<CR>
+noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+	\<Cmd>lua require('hlslens').start()<CR>
+noremap  *   *<Cmd>lua require('hlslens').start()<CR>
+noremap  #   #<Cmd>lua require('hlslens').start()<CR>
+noremap  g*  g*<Cmd>lua require('hlslens').start()<CR>
+noremap  g#  g#<Cmd>lua require('hlslens').start()<CR>
+
+augroup myconfig_vmlens
+    autocmd!
+    autocmd User visual_multi_start lua require('vmlens').start()
+    autocmd User visual_multi_exit lua require('vmlens').exit()
+augroup END
+
+lua << EOF
+require('hlslens').setup({
+	nearest_only = true,
+})
+EOF
 " >>>-----------------------------------
 " <<< wilder.nvim (exe, opt, map)
 call wilder#enable_cmdline_enter()
