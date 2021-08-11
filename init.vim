@@ -696,9 +696,13 @@ augroup myconfig
 		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
 	\ ]
 	autocmd VimEnter,BufReadPost,BufEnter *
-		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
+		\ if &buftype == '' |
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns) |
+		\ endif
 	autocmd BufWritePost * call utils#rootpath_clear() |
-		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns)
+		\ if &buftype == '' |
+		\ exec 'lcd '.utils#rootpath(g:rootpath_patterns) |
+		\ endif
 
 	" 终端不需要侧边栏
 	autocmd TermOpen * setlocal signcolumn=no

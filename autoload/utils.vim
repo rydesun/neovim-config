@@ -39,11 +39,6 @@ endfunction
 
 " 工作目录
 function! utils#rootpath(patterns) abort
-	" 终端shell自动设置工作目录
-        if &buftype == 'terminal'
-                return getcwd()
-        endif
-
         if exists('b:rootpath') && 'b:rootpath'
                 return b:rootpath
         endif
