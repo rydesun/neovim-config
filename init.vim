@@ -171,7 +171,9 @@ lua require('keymap').add_indent_cmds()
 
 " 重新加载配置
 command! -nargs=1 -complete=custom,s:get_vim_files
-	\ Load  exec 'source '.s:confdir.'/<args>'
+	\ LoadConfig  exec 'source '.s:confdir.'/<args>'
+command! -nargs=1 -complete=custom,s:get_vim_files
+	\ EditConfig  exec 'tabnew '.s:confdir.'/<args>'
 function! s:get_vim_files(...) abort
 	let l:idx = len(s:confdir) + 1
 	return join(map(
