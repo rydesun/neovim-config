@@ -252,7 +252,7 @@ Plug 'jeetsukumaran/vim-indentwise'	" 缩进跳转
 Plug 'justinmk/vim-sneak'		" 光标定位
 Plug 'kshenoy/vim-signature'		" 快速标记
 Plug 'mg979/vim-visual-multi'		" 多重光标
-Plug 'tpope/vim-surround'		" 成对符号
+Plug 'machakann/vim-sandwich'		" 成对符号
 Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
 Plug 'scrooloose/nerdcommenter'		" 快速注释
 Plug 'tenfyzhong/axring.vim'		" 切换单词
@@ -505,6 +505,14 @@ let g:sneak#use_ic_scs = 1
 " >>> ---------------------------------
 " <<< vim-visual-multi (var)
 let g:VM_Extend_hl = 'CursorRange'
+" >>> ---------------------------------
+" <<< vim-sandwich (var)
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1, 'input': [')'] },
+	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1, 'input': [']'] },
+	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1, 'input': ['}'] },
+\ ]
 " >>> ---------------------------------
 " <<< nerdcommenter (var)
 " 取消所有预设键位映射
