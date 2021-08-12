@@ -145,7 +145,7 @@ nnoremap <silent>  <leader>lo  :CocList outline<CR>
 nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
-nnoremap <silent>  <Leader>tt  :FloatermNew --autoclose=1<CR>
+nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
 nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
 nnoremap           <leader>tl  :set list! list?<CR>
 nnoremap           <leader>tw  :set wrap! wrap?<CR>
@@ -744,7 +744,7 @@ augroup myconfig
 		\ endif
 
 	" 终端不需要侧边栏
-	autocmd TermOpen * setlocal signcolumn=no
+	autocmd TermOpen * setlocal norelativenumber
 augroup END
 
 silent! colorscheme everforest
