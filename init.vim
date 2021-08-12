@@ -137,6 +137,7 @@ nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
 nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
 nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
 nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
+nnoremap <silent>  <leader>gc  :Gina commit<CR>
 
 nmap               <leader>rn  <Plug>(coc-rename)
 nmap               <leader>rf  <Plug>(coc-refactor)
@@ -146,11 +147,6 @@ nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
 nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
 nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
-nnoremap <silent>  <leader>tc  :call utils#toggle_workmode()<CR>
-nnoremap           <leader>tl  :set list! list?<CR>
-nnoremap           <leader>tw  :set wrap! wrap?<CR>
-nnoremap <silent>  <leader>ts  :call utils#toggle_signcolumn()<CR>
-nnoremap <silent>  <leader>ti  :IndentLinesToggle<CR>
 
 " 注意：ftplugin中的文件占用了 <leader>w 开头的映射
 nnoremap           <leader>wf  <Plug>(coc-fix-current)
@@ -175,8 +171,6 @@ tnoremap <M-space>  <c-\><c-n>
 
 
 " <<< 命令
-command  -nargs=*  G  call utils#git_wrapper(<f-args>)
-
 command  GetHighlight
 	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
@@ -191,7 +185,6 @@ command! -nargs=1 -complete=custom,s:lightline_colorschemes
 cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
 cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 	\ 'w !sudo tee % >/dev/null' : 'ww'
-cabbrev  <expr>   g       (getcmdtype() == ':' && getcmdline() =~ '^g$')? 'G' : 'g'
 
 lua require('keymap').add_indent_cmds()
 
