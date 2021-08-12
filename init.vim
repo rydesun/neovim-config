@@ -200,6 +200,8 @@ function! s:get_vim_files(...) abort
 		\ 'v:val[l:idx:]'),
 		\ "\n")
 endfunction
+command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
+	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
 " >>>-----------------------------------
 
 
