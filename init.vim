@@ -13,6 +13,17 @@ let s:plugin_dev = !getenv('NVIM_NO_DEV')
 let s:plugin_cmd = !getenv('NVIM_NO_CMD')
 let s:plugin_x = !getenv('NVIM_NO_X')
 let s:plugin_misc = !getenv('NVIM_NO_MISC')
+
+let s:nvim_as_pager = getenv('NVIM_AS_PAGER')
+
+if s:nvim_as_pager
+	let s:plugin_ft = 0
+	let s:plugin_proj = 0
+	let s:plugin_dev = 0
+	let s:plugin_cmd = 0
+	let s:plugin_x = 0
+	let s:plugin_misc = 0
+endif
 " >>>-----------------------------------
 
 
@@ -42,10 +53,25 @@ if $TERM != 'linux'
 	set termguicolors
 endif
 let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
+
+if s:nvim_as_pager
+	set noswapfile
+	set laststatus=0
+	set norelativenumber
+	set signcolumn=no
+	augroup nvim_as_pager
+		autocmd!
+		autocmd TermOpen * normal G
+	augroup END
+endif
 " >>>-----------------------------------
 
 
 " <<< 键位
+if s:nvim_as_pager
+	nnoremap q :exit<CR>
+endif
+
 noremap  ;  :
 noremap  H  ^
 noremap  L  $
@@ -299,6 +325,11 @@ function! s:colorscheme_everforest_custom() abort
 
 	call everforest#highlight('IndentBlanklineContextChar',
 		\ l:palette.grey2, l:palette.none)
+
+	if s:nvim_as_pager
+		call everforest#highlight('MsgArea',
+			\ l:palette.none, l:palette.bg2)
+	endif
 endfunction
 
 augroup colorscheme_everforest
