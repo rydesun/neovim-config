@@ -15,6 +15,7 @@ let s:plugin_x = !getenv('NVIM_NO_X')
 let s:plugin_misc = !getenv('NVIM_NO_MISC')
 
 let s:nvim_as_pager = getenv('NVIM_AS_PAGER')
+let s:handle_ansi = getenv('HANDLE_ANSI')
 
 if s:nvim_as_pager
 	let s:plugin_ft = 0
@@ -59,10 +60,6 @@ if s:nvim_as_pager
 	set laststatus=0
 	set norelativenumber
 	set signcolumn=no
-	augroup nvim_as_pager
-		autocmd!
-		autocmd TermOpen * normal G
-	augroup END
 endif
 " >>>-----------------------------------
 
@@ -741,6 +738,13 @@ augroup myconfig
 	" 终端不需要侧边栏
 	autocmd TermOpen * setlocal norelativenumber
 augroup END
+
+if s:handle_ansi
+augroup handle_ansi
+	autocmd!
+	autocmd VimEnter * call utils#term_paging()
+augroup END
+endif
 
 silent! colorscheme everforest
 
