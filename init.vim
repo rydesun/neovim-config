@@ -15,7 +15,6 @@ let s:plugin_x = !getenv('NVIM_NO_X')
 let s:plugin_misc = !getenv('NVIM_NO_MISC')
 
 let s:nvim_as_pager = getenv('NVIM_AS_PAGER')
-let s:nvim_in_server = getenv('NVIM_IN_SERVER')
 
 if s:nvim_as_pager
 	let s:plugin_ft = 0
@@ -24,11 +23,6 @@ if s:nvim_as_pager
 	let s:plugin_cmd = 0
 	let s:plugin_x = 0
 	let s:plugin_misc = 0
-endif
-
-if s:nvim_in_server
-	let s:plugin_dev = 0
-	let s:plugin_x = 0
 endif
 " >>>-----------------------------------
 
