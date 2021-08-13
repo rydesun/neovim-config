@@ -65,26 +65,39 @@ endif
 
 
 " <<< 键位
-if s:nvim_as_pager
-	nnoremap q :exit<CR>
-endif
-
-noremap  ;  :
+" 单键
 noremap  H  ^
 noremap  L  $
-noremap  '  `
-noremap  `  '
+noremap  Q  @q
+noremap  ;  :
+map      :  <Plug>Sneak_;
+map      f  <Plug>Sneak_s
+map      F  <Plug>Sneak_S
+nnoremap <silent>  K  :call <SID>show_documentation()<CR>
+
+
+" <Esc>组：关闭
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-map                f           <Plug>Sneak_s
-map                F           <Plug>Sneak_S
-map                :           <Plug>Sneak_;
-nnoremap <silent>  K           :call <SID>show_documentation()<CR>
+nnoremap <silent>  <Esc>q      :cclose<CR>
+nnoremap <silent>  <Esc>l      :lclose<CR>
+nnoremap <silent>  <Esc>f      :bd<CR>
+nnoremap <silent>  <Esc>t      :tabclose<CR>
+nnoremap <silent>  <Esc>w      <C-w>c
+
+
+" s组：搜索列表(vim-clap)
+" vim-sandwich处理成对符号
 nnoremap           s           <NOP>
+nnoremap           S           :Clap<CR>
 nnoremap <silent>  sc          :Clap bcommits<CR>
 nnoremap <silent>  sf          :Clap files<CR>
 nnoremap <silent>  sg          :Clap grep2<CR>
 nnoremap <silent>  sl          :Clap blines<CR>
 nnoremap <silent>  s;          :Clap command_history<CR>
+
+
+" []组：前后跳转
+" 插件提供更多映射
 nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
 nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
@@ -93,67 +106,75 @@ nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
 nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
-nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
-nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
+
+
+" g组：语法跳转
+" splitjoin.vim执行拆分合并
 nmap     <silent>  gd          <Plug>(coc-definition)
 nmap     <silent>  gy          <Plug>(coc-type-definition)
 nmap     <silent>  gi          <Plug>(coc-implementation)
 nmap     <silent>  gr          <Plug>(coc-references)
 
+
+" 其他
+nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
+nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
+vnoremap           //          y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+
+" 文本对象
 xmap     if        <Plug>(coc-funcobj-i)
 omap     if        <Plug>(coc-funcobj-i)
 xmap     af        <Plug>(coc-funcobj-a)
 omap     af        <Plug>(coc-funcobj-a)
 
-vnoremap //        y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+" Leader
 let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 map                <leader>c   <Plug>NERDCommenterToggle
-xmap               <leader>f   <Plug>(coc-format-selected)
-nmap               <leader>f   <Plug>(coc-format-selected)
 nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nmap               <leader>k   <Plug>(coc-translator-p)
 vmap               <leader>k   <Plug>(coc-translator-pv)
 nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
-for s:i in [1,2,3,4,5,6,7,8,9]
-	exec 'nnoremap <leader>'.s:i.' <c-w>'.s:i.'w'
-endfor
 
+
+" h组g组：Git Hunk
 nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
 nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
 nnoremap           <leader>ho  :CocCommand git.copyUrl<CR>
 nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
 nmap               <leader>hb  <Plug>(coc-git-commit)
-
-nnoremap <silent>  <leader>gq  :call CocAction('format')<CR>
 nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
 nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
 nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
 nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
 nnoremap <silent>  <leader>gc  :Gina commit<CR>
 
+
+" r组：语法相关的修改
 nmap               <leader>rn  <Plug>(coc-rename)
-nmap               <leader>rf  <Plug>(coc-refactor)
+nmap               <leader>rt  <Plug>(coc-refactor)
+nmap               <leader>rf  <Plug>(coc-fix-current)
+nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
 
-nnoremap <silent>  <leader>lo  :CocList outline<CR>
-nnoremap <silent>  <leader>lr  :CocList --number-select tasks<CR>
-nnoremap <silent>  <leader>lp  :CocListResume<CR>
 
+" t组：操作终端
 nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
 
-" 注意：ftplugin中的文件占用了 <leader>w 开头的映射
-nnoremap           <leader>wf  <Plug>(coc-fix-current)
 
+" 其他
 nnoremap <silent>  <A-j>       :m .+1<CR>
 nnoremap <silent>  <A-k>       :m .-2<CR>
 vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
 vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 
+
+" 命令行
 cnoremap           <C-a>       <Home>
 cnoremap           <C-b>       <Left>
 cnoremap           <C-f>       <Right>
@@ -163,7 +184,15 @@ cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 cnoremap <expr>    %%          expand('%:p:h').'/'
 
+
+" 终端
 tnoremap <M-space>  <c-\><c-n>
+
+
+" 特殊情况
+if s:nvim_as_pager
+	nnoremap q :exit<CR>
+endif
 " >>>-----------------------------------
 
 
