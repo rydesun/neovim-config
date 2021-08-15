@@ -501,6 +501,8 @@ if s:plugin_view
 let g:indentLine_char = '┊'
 " 不显示空白符
 let g:indent_blankline_space_char = ' '
+" 折叠行不显示缩进线
+let g:indent_blankline_show_foldtext = v:false
 " 优先使用treesitter计算缩进
 let g:indent_blankline_use_treesitter = v:true
 " 高亮上下文缩进线
