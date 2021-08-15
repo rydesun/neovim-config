@@ -345,7 +345,7 @@ function! s:colorscheme_everforest_custom() abort
 	let l:palette = everforest#get_palette(g:everforest_background)
 
 	call everforest#highlight('Folded',
-		\ l:palette.grey2, l:palette.bg1)
+		\ l:palette.none, l:palette.none)
 
 	let g:better_whitespace_guicolor = l:palette.none[0]
 	call everforest#highlight('ExtraWhitespace',
@@ -797,6 +797,11 @@ function! Foldtext() abort
 		return '＋❰'.printf('%3d', l:cnt).'❱ '.l:text
 	else
 		let l:end = trim(getline(v:foldend))
+		" TODO: 应该根据闭合状态判断
+		if l:end =~ '^\s*[_a-zA-Z0-9]'
+			let l:cnt += 1
+			return l:start.' ❰'.l:cnt.'❱'
+		endif
 		if l:cnt == 0
 			return l:start.' '.l:end
 		else
