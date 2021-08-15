@@ -53,6 +53,10 @@ set formatoptions+=B	" 合并中文行不加空格
 if $TERM != 'linux'
 	set termguicolors
 endif
+" 修改折叠文本
+if &foldtext == 'foldtext()'
+	set foldtext=Foldtext()
+endif
 let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
 
 if s:nvim_as_pager
@@ -339,6 +343,9 @@ let g:everforest_disable_italic_comment = 1
 
 function! s:colorscheme_everforest_custom() abort
 	let l:palette = everforest#get_palette(g:everforest_background)
+
+	call everforest#highlight('Folded',
+		\ l:palette.grey2, l:palette.bg1)
 
 	let g:better_whitespace_guicolor = l:palette.none[0]
 	call everforest#highlight('ExtraWhitespace',
@@ -777,6 +784,26 @@ augroup handle_ansi
 	autocmd VimEnter * call utils#term_paging()
 augroup END
 endif
+
+function! Foldtext() abort
+	let l:start = getline(v:foldstart)
+	let l:cnt = v:foldend - v:foldstart - 1
+	if &foldmethod == 'marker'
+		let l:comment = substitute(&commentstring, '%s', '', '')
+		let l:marker = &foldmarker[:stridx(&foldmarker, ',')-1]
+		let l:text = substitute(l:start, l:marker, '', '')
+		let l:text = substitute(l:text, l:comment, '', '')
+		let l:text = trim(l:text)
+		return '＋❰'.printf('%3d', l:cnt).'❱ '.l:text
+	else
+		let l:end = trim(getline(v:foldend))
+		if l:cnt == 0
+			return l:start.' '.l:end
+		else
+			return l:start.' ❰'.l:cnt.'❱ '.l:end
+		end
+	endif
+endfunction
 
 silent! colorscheme everforest
 
