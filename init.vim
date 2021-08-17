@@ -50,6 +50,7 @@ set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 set inccommand=nosplit	" 替换过程可视化
 set formatoptions+=B	" 合并中文行不加空格
+set confirm		" 退出报错改为对话
 if $TERM != 'linux'
 	set termguicolors
 endif
@@ -77,6 +78,8 @@ noremap  ;  :
 map      :  <Plug>Sneak_;
 map      f  <Plug>Sneak_s
 map      F  <Plug>Sneak_S
+xnoremap <  <gv
+xnoremap >  >gv
 nnoremap <silent>  K  :call <SID>show_documentation()<CR>
 
 
@@ -168,6 +171,8 @@ nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
 
 " t组：操作终端
 nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
+nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 
 
 " 其他
