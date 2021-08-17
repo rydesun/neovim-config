@@ -221,7 +221,7 @@ cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
 cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 	\ 'w !sudo tee % >/dev/null' : 'ww'
 
-lua require('keymap').add_indent_cmds()
+lua require('keymap').setup()
 
 " 重新加载配置
 command! -nargs=1 -complete=custom,s:get_vim_files
@@ -243,6 +243,11 @@ command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
 " <<< 插件
 if s:enable_plugin
 call plug#begin(s:plugdir)
+
+Plug 'Olical/aniseed',
+	\ {'tag': '*'}			" 编译fennel
+" 自动编译
+let g:aniseed#env = v:true
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题

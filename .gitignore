@@ -3,3 +3,7 @@
 
 /.netrwhist
 /.init.vim.bak
+
+# TODO: /lua
+/lua/counter.lua
+/lua/keymap.lua
