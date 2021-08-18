@@ -9,7 +9,7 @@
     " 'setl sw=%1 ts=%1 noet' : 'i%1t'")
 })
 
-(tset M :setup (fn [self] (
+(set M.setup (fn [self] (
   each [_ i (pairs [2 4 8])]
     (each [_ cmd (pairs cmds)]
       (->> cmd
