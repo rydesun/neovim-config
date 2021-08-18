@@ -1,23 +1,3 @@
-" 工作目录
-function! utils#rootpath(patterns) abort
-        if exists('b:rootpath') && 'b:rootpath'
-                return b:rootpath
-        endif
-
-	let l:dir = expand('%:p:h')
-	let l:res = rooter#match_all(l:dir, a:patterns)
-	if !empty(l:res)
-		let b:rootpath = l:res
-		return b:rootpath
-	endif
-
-	let b:rootpath = l:dir
-	return b:rootpath
-endfunction
-function! utils#rootpath_clear() abort
-	let b:rootpath = ''
-endfunction
-
 " 浏览dash文档
 function! utils#doc_dash(language, keyword) abort
 	if empty(a:language)
