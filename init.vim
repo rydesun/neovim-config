@@ -175,6 +175,14 @@ nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 
 
+" 运行任务
+nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
+nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
+nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
+nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
+nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
+
+
 " 其他
 nnoremap <silent>  <A-j>       :m .+1<CR>
 nnoremap <silent>  <A-k>       :m .-2<CR>
@@ -698,6 +706,16 @@ let g:vimspector_enable_mappings = 'HUMAN'
 endif
 if s:plugin_cmd
 " <<< asyncrun (var)
+function! s:floaterm_repl(opts)
+	exec "FloatermNew --wintype=split --position=top ".a:opts.cmd
+	stopinsert | wincmd p
+endfunction
+function! s:floaterm_bottom(opts)
+	exec "FloatermNew --wintype=split --position=bottom ".a:opts.cmd
+endfunction
+let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+let g:asyncrun_runner.floaterm_repl = function('s:floaterm_repl')
+let g:asyncrun_runner.floaterm_bottom = function('s:floaterm_bottom')
 " quickfix窗口的默认高度
 let g:asyncrun_open = 6
 " >>>-----------------------------------
