@@ -14,8 +14,8 @@ let s:plugin_cmd = !getenv('NVIM_NO_CMD')
 let s:plugin_x = !getenv('NVIM_NO_X')
 let s:plugin_misc = !getenv('NVIM_NO_MISC')
 
-let s:nvim_as_pager = getenv('NVIM_AS_PAGER')
-let s:handle_ansi = getenv('HANDLE_ANSI')
+let s:nvim_as_pager = getenv('NVIM_AS_PAGER') || getenv('NVIM_AS_COLORFUL_PAGER')
+let s:handle_ansi = getenv('HANDLE_ANSI') || getenv('NVIM_AS_COLORFUL_PAGER')
 
 if s:nvim_as_pager
 	let s:plugin_ft = 0
