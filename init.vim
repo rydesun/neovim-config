@@ -528,7 +528,7 @@ let g:indent_blankline_buftype_exclude = ['terminal']
 " >>>-----------------------------------
 " <<< vim-better-whitespace (var)
 let g:better_whitespace_filetypes_blacklist =
-	\ ['git', 'diff', 'help', 'qf', 'dbout', 'coc-explorer', 'xxd']
+	\ ['coc-explorer', 'dbout', 'xxd']
 let g:show_spaces_that_precede_tabs = 1
 " >>>-----------------------------------
 " <<< hexmode (var)
