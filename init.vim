@@ -231,11 +231,23 @@ cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
 
 lua require('keymap').setup()
 
+
+" 编辑snippets
+command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
+	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
+
 " 重新加载配置
 command! -nargs=1 -complete=custom,s:get_vim_files
 	\ LoadConfig  exec 'source '.s:confdir.'/<args>'
+
+" 编辑配置
 command! -nargs=1 -complete=custom,s:get_vim_files
 	\ EditConfig  exec 'tabnew '.s:confdir.'/<args>'
+
+" 手动加载插件
+command! -nargs=1 -complete=custom,s:get_plugins
+	\ LoadPlug  call plug#load('<args>')
+
 function! s:get_vim_files(...) abort
 	let l:idx = len(s:confdir) + 1
 	return join(map(
@@ -243,8 +255,10 @@ function! s:get_vim_files(...) abort
 		\ 'v:val[l:idx:]'),
 		\ "\n")
 endfunction
-command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
-	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
+
+function! s:get_plugins(...) abort
+	return join(keys(g:plugs), "\n")
+endfunction
 " >>>-----------------------------------
 
 
