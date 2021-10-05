@@ -386,6 +386,12 @@ function! s:colorscheme_everforest_custom() abort
 	call everforest#highlight('IndentBlanklineContextChar',
 		\ l:palette.grey2, l:palette.none)
 
+	" rust
+	call everforest#highlight('CocRustTypeHint',
+		\ l:palette.grey0, l:palette.none)
+	call everforest#highlight('CocRustChainingHint',
+		\ l:palette.grey2, l:palette.none)
+
 	if s:nvim_as_pager
 		call everforest#highlight('MsgArea',
 			\ l:palette.none, l:palette.bg2)
