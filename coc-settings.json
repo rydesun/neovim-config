@@ -57,6 +57,7 @@
   "python.linting.flake8CategorySeverity.W": "Hint",
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
+  "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
   // coc-markdownlint
   "markdownlint.config": {
     "single-trailing-newline": false,
