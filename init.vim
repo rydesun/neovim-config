@@ -450,7 +450,9 @@ function! Lightline_modified() abort
 	return &modified ? '' : ''
 endfunction
 function! Lightline_gitStatus() abort
-	return get(g:, 'coc_git_status', '').(
+	let s:status = get(g:, 'coc_git_status', '')
+	let s:head = len(s:status) >= 40 ? s:status[:4].s:status[40:]: s:status
+	return s:head.(
 		\ !empty(get(b:, 'coc_git_status', '')) ? ' ': '')
 endfunction
 function! Lightline_diagnostic() abort
