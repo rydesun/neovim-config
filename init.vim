@@ -274,6 +274,7 @@ let g:aniseed#env = v:true
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
+Plug 'wfxr/minimap.vim'			" minimap
 Plug 'ryanoasis/vim-devicons'		" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
 Plug 'gelguy/wilder.nvim',
@@ -283,7 +284,6 @@ endif
 if s:plugin_view
 Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 Plug 'ntpeters/vim-better-whitespace'	" 空白符
-Plug 'wfxr/minimap.vim'			" minimap
 Plug 'rrethy/vim-hexokinase',
 	\ {'do': 'make hexokinase'}	" 显示颜色
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
@@ -378,7 +378,7 @@ function! s:colorscheme_everforest_custom() abort
 	let l:palette = everforest#get_palette(g:everforest_background)
 
 	call everforest#highlight('Folded',
-		\ l:palette.none, l:palette.none)
+		\ l:palette.aqua, l:palette.bg1)
 
 	let g:better_whitespace_guicolor = l:palette.none[0]
 	call everforest#highlight('ExtraWhitespace',
@@ -491,6 +491,17 @@ function! s:lightline_colorschemes(...) abort
 		\ "\n")
 endfunction
 " >>>-----------------------------------
+" <<< minimap (var)
+" 自启(非pager时)
+if !s:nvim_as_pager
+	let g:minimap_auto_start = 1
+endif
+let g:minimap_auto_start_win_enter = 1
+" 样式
+let g:minimap_width = 4
+let g:minimap_highlight_range = 1
+let g:minimap_git_colors = 1
+" >>>-----------------------------------
 " <<< nvim-hlslens (map, au, exec)
 noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
 	\<Cmd>lua require('hlslens').start()<CR>
@@ -553,15 +564,6 @@ let g:indent_blankline_buftype_exclude = ['terminal']
 let g:better_whitespace_filetypes_blacklist =
 	\ ['coc-explorer', 'dbout', 'xxd']
 let g:show_spaces_that_precede_tabs = 1
-" >>>-----------------------------------
-" <<< minimap (var)
-" 自启
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-" 样式
-let g:minimap_width = 4
-let g:minimap_highlight_range = 1
-let g:minimap_git_colors = 1
 " >>>-----------------------------------
 " <<< hexmode (var)
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
