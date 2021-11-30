@@ -283,6 +283,7 @@ endif
 if s:plugin_view
 Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 Plug 'ntpeters/vim-better-whitespace'	" 空白符
+Plug 'wfxr/minimap.vim'			" minimap
 Plug 'rrethy/vim-hexokinase',
 	\ {'do': 'make hexokinase'}	" 显示颜色
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
@@ -420,13 +421,13 @@ let g:lightline = {
 	\ },
 	\ 'inactive': {
 		\ 'left': [['modified', 'readonly', 'absolutepath']],
-		\ 'right': [['postionPe'],
+		\ 'right': [['percent'],
 			\ ['fileformat', 'fileencoding']],
 	\ },
 	\ 'component': {
 		\ 'absolutepath': '%<%F',
-		\ 'postion': '%2l:%-2v %2p%%',
-		\ 'postionPe': '%2p%%',
+		\ 'postion': '%2l-%2v',
+		\ 'percent': '%2p%%',
 		\ 'fileformat': '%{&ff!=#"unix"?&ff:""}',
 		\ 'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 		\ },
@@ -552,6 +553,15 @@ let g:indent_blankline_buftype_exclude = ['terminal']
 let g:better_whitespace_filetypes_blacklist =
 	\ ['coc-explorer', 'dbout', 'xxd']
 let g:show_spaces_that_precede_tabs = 1
+" >>>-----------------------------------
+" <<< minimap (var)
+" 自启
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+" 样式
+let g:minimap_width = 4
+let g:minimap_highlight_range = 1
+let g:minimap_git_colors = 1
 " >>>-----------------------------------
 " <<< hexmode (var)
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
