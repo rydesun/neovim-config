@@ -264,10 +264,6 @@ if s:enable_plugin
 call plug#begin(s:plugdir)
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'Olical/aniseed',
-	\ {'tag': '*'}			" 编译fennel
-" 自动编译
-let g:aniseed#env = v:true
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
