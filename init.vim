@@ -92,15 +92,12 @@ nnoremap <silent>  <Esc>t      :tabclose<CR>
 nnoremap <silent>  <Esc>w      <C-w>c
 
 
-" s组：搜索列表(vim-clap)
+" s组：搜索列表(telescope.nvim)
 " vim-sandwich处理成对符号
 nnoremap           s           <NOP>
-nnoremap           S           :Clap<CR>
-nnoremap <silent>  sc          :Clap bcommits<CR>
-nnoremap <silent>  sf          :Clap files<CR>
-nnoremap <silent>  sg          :Clap grep2<CR>
-nnoremap <silent>  sl          :Clap blines<CR>
-nnoremap <silent>  s;          :Clap command_history<CR>
+nnoremap           S           :Telescope<CR>
+nnoremap <silent>  ss          :Telescope live_grep<CR>
+nnoremap <silent>  sf          :Telescope find_files<CR>
 
 
 " []组：前后跳转
@@ -266,6 +263,7 @@ endfunction
 if s:enable_plugin
 call plug#begin(s:plugdir)
 
+Plug 'nvim-lua/plenary.nvim'
 Plug 'Olical/aniseed',
 	\ {'tag': '*'}			" 编译fennel
 " 自动编译
@@ -321,9 +319,7 @@ endif
 if s:plugin_proj
 Plug 'neoclide/coc.nvim',
 	\ {'branch': 'release'}		" coc
-Plug 'liuchengxu/vim-clap',
-	\ {'do': ':Clap install-binary!'} |
-	\ Plug 'vn-ki/coc-clap'		" Finder
+Plug 'nvim-telescope/telescope.nvim'	" finder
 Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
@@ -557,7 +553,7 @@ let g:indent_blankline_use_treesitter = v:true
 let g:indent_blankline_show_current_context = v:true
 " 排除类型
 let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
-	\ 'popup', 'clap_input', 'clap_action']
+	\ 'popup']
 let g:indent_blankline_buftype_exclude = ['terminal']
 " >>>-----------------------------------
 " <<< vim-better-whitespace (var)
@@ -704,16 +700,6 @@ call coc#config("explorer.buffer.root.template",
 	\ " [title] [hidden & 1]")
 call coc#config("explorer.buffer.child.template",
 	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
-" >>>-----------------------------------
-" <<< vim-clap (var)
-" 只使用cwd
-let g:clap_disable_run_rooter = v:true
-" 样式
-let g:clap_prompt_format = ' %provider_id% %forerunner_status% '
-let g:clap_layout = {'relative': 'editor'}
-let g:clap_preview_direction = 'UD'
-" 无normal模式(Esc立即退出)
-let g:clap_insert_mode_only = v:true
 " >>>-----------------------------------
 endif
 if s:plugin_dev
