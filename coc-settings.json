@@ -58,6 +58,7 @@
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
   "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
+  "rust-analyzer.completion.postfix.enable": false,
   // coc-markdownlint
   "markdownlint.config": {
     "single-trailing-newline": false,
