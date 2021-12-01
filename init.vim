@@ -267,7 +267,7 @@ if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 Plug 'wfxr/minimap.vim'			" minimap
-Plug 'ryanoasis/vim-devicons'		" 图标字体
+Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
 Plug 'gelguy/wilder.nvim',
 	\ {'do': ':UpdateRemotePlugins'}	" 改进wildmenu
@@ -464,8 +464,13 @@ function! Lightline_diagnostic() abort
 	endif
 	return join(msgs, ' ')
 endfunction
+lua GetIcon = function()
+	\ local filename = vim.fn.expand('%:t')
+	\ local extension = vim.fn.expand('%:e')
+	\ return require'nvim-web-devicons'.get_icon(filename, extension) end
 function! Lightline_filetype()
-	return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol().' '.&filetype : ''
+	let icon = luaeval('GetIcon')()
+	return strlen(&filetype) ? icon.' '.&filetype : ''
 endfunction
 
 function! s:set_lightline_colorscheme(name) abort
