@@ -33,7 +33,6 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中
 set ignorecase smartcase	" 大小写模糊搜索
 set wildignorecase	" 命令行补全文件名时无视大小写
 set title		" 设置虚拟终端的标题
-set hidden		" 可以切换未保存修改的buffer
 set splitbelow		" 水平分割的新窗口在下面打开
 set splitright		" 垂直分割的新窗口在右边打开
 set mouse=a		" 所有模式下支持鼠标
@@ -48,9 +47,8 @@ set diffopt+=vertical	" diff模式默认以垂直方式分割
 set wildmode=list:longest,full	" 命令行补全时以列表显示
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
-set inccommand=nosplit	" 替换过程可视化
 set formatoptions+=B	" 合并中文行不加空格
-set confirm		" 退出报错改为对话
+set confirm		" 报错方式改为询问
 if $TERM != 'linux'
 	set termguicolors
 endif
