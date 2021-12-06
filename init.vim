@@ -402,11 +402,11 @@ let g:lightline = {
 	\ 'separator': {'left': '', 'right': ''},
 	\ 'subseparator': {'left': '', 'right': ''},
 	\ 'active': {
-		\ 'left': [['mode', 'paste'],
-			\ ['gitStatus'],
-			\ ['modified', 'readonly', 'absolutepath']],
+		\ 'left': [['filetype'],
+			\ ['modified', 'buffer_git_status', 'readonly', 'absolutepath'],
+			\ ],
 		\ 'right': [['postion'],
-			\ ['diagnostic', 'filetype'],
+			\ ['diagnostic', 'git_status'],
 			\ ['fileformat', 'fileencoding']],
 	\ },
 	\ 'inactive': {
@@ -416,14 +416,14 @@ let g:lightline = {
 	\ },
 	\ 'component': {
 		\ 'absolutepath': '%<%F',
-		\ 'postion': '%2l-%2v',
+		\ 'postion': '%2l/%L',
 		\ 'percent': '%2p%%',
 		\ 'fileformat': '%{&ff!=#"unix"?&ff:""}',
 		\ 'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
 		\ },
 	\ 'component_function': {
-		\ 'mode': 'Lightline_mode',
-		\ 'gitStatus': 'Lightline_gitStatus',
+		\ 'git_status': 'Lightline_git_status',
+		\ 'buffer_git_status': 'Lightline_buffer_git_status',
 		\ 'modified': 'Lightline_modified',
 		\ 'readonly': 'Lightline_readonly',
 		\ 'diagnostic': 'Lightline_diagnostic',
@@ -431,20 +431,18 @@ let g:lightline = {
 	\ }
 \ }
 
-function! Lightline_mode() abort
-	return lightline#mode()[0]
-endfunction
 function! Lightline_readonly() abort
 	return &readonly ? '' : ''
 endfunction
 function! Lightline_modified() abort
 	return &modified ? '' : ''
 endfunction
-function! Lightline_gitStatus() abort
+function! Lightline_git_status() abort
 	let s:status = get(g:, 'coc_git_status', '')
-	let s:head = len(s:status) >= 40 ? s:status[:4].s:status[40:]: s:status
-	return s:head.(
-		\ !empty(get(b:, 'coc_git_status', '')) ? ' ': '')
+	return len(s:status) >= 40 ? s:status[:4].s:status[40:]: s:status
+endfunction
+function! Lightline_buffer_git_status() abort
+	return !empty(get(b:, 'coc_git_status', '')) ? '': ''
 endfunction
 function! Lightline_diagnostic() abort
 	let info = get(b:, 'coc_diagnostic_info', {})
@@ -496,6 +494,9 @@ let g:minimap_auto_start_win_enter = 1
 let g:minimap_width = 4
 let g:minimap_highlight_range = 1
 let g:minimap_git_colors = 1
+" >>>-----------------------------------
+" <<< nvim-web-devicons (exec)
+lua require'nvim-web-devicons'.setup { default = true }
 " >>>-----------------------------------
 " <<< nvim-hlslens (map, au, exec)
 noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
