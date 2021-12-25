@@ -38,9 +38,7 @@ set splitright		" 垂直分割的新窗口在右边打开
 set mouse=a		" 所有模式下支持鼠标
 set relativenumber	" 开启相对行号
 set numberwidth=1	" 行号最低宽度
-" set signcolumn=number	" 在行号上显示侧边栏
-" 等待coc-git修复#187
-autocmd User CocNvimInit sleep 50m | set signcolumn=number
+set signcolumn=number	" 在行号上显示侧边栏
 set scrolloff=5		" 滚动时光标到上下边缘的预留行数
 set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
 set diffopt+=vertical	" diff模式默认以垂直方式分割
