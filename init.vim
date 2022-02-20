@@ -799,11 +799,11 @@ augroup myconfig
 	\ ]
 	autocmd VimEnter,BufReadPost,BufEnter *
 		\ if &buftype == '' |
-		\ exec 'lcd '.luaeval("require('rooter').get(_A)", g:rootpath_patterns) |
+		\ exec 'lcd "'.luaeval("require('rooter').get(_A)", g:rootpath_patterns).'"' |
 		\ endif
 	autocmd BufWritePost * exec "lua require('rooter').clear()" |
 		\ if &buftype == '' |
-		\ exec 'lcd '.luaeval("require('rooter').get(_A)", g:rootpath_patterns) |
+		\ exec 'lcd "'.luaeval("require('rooter').get(_A)", g:rootpath_patterns).'"' |
 		\ endif
 
 	" 终端不需要侧边栏
