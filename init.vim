@@ -264,7 +264,6 @@ Plug 'nvim-lua/plenary.nvim'
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
-Plug 'wfxr/minimap.vim'			" minimap
 Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
 Plug 'gelguy/wilder.nvim',
@@ -481,17 +480,6 @@ function! s:lightline_colorschemes(...) abort
 		\ "fnamemodify(v:val, ':t:r')"),
 		\ "\n")
 endfunction
-" >>>-----------------------------------
-" <<< minimap (var)
-" 自启(非pager时)
-if !s:nvim_as_pager
-	let g:minimap_auto_start = 1
-endif
-let g:minimap_auto_start_win_enter = 1
-" 样式
-let g:minimap_width = 4
-let g:minimap_highlight_range = 1
-let g:minimap_git_colors = 1
 " >>>-----------------------------------
 " <<< nvim-web-devicons (exec)
 lua require'nvim-web-devicons'.setup { default = true }
