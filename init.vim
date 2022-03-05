@@ -3,27 +3,27 @@ let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
 let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
 let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
 
-let s:enable_plugin = !getenv('NVIM_NO_PLUG')
-let s:plugin_ui = !getenv('NVIM_NO_UI')
-let s:plugin_view = !getenv('NVIM_NO_VIEW')
-let s:plugin_ft = !getenv('NVIM_NO_FT')
-let s:plugin_op = !getenv('NVIM_NO_OP')
-let s:plugin_proj = !getenv('NVIM_NO_PROJ')
-let s:plugin_dev = !getenv('NVIM_NO_DEV')
-let s:plugin_cmd = !getenv('NVIM_NO_CMD')
-let s:plugin_x = !getenv('NVIM_NO_X')
-let s:plugin_misc = !getenv('NVIM_NO_MISC')
+" 启用所有类型的插件
+let s:plugins = v:true
+let s:plugin_ui = v:true
+let s:plugin_view = v:true
+let s:plugin_ft = v:true
+let s:plugin_op = v:true
+let s:plugin_proj = v:true
+let s:plugin_dev = v:true
+let s:plugin_cmd = v:true
+let s:plugin_x = v:true
+let s:plugin_misc = v:true
 
-let s:nvim_as_pager = getenv('NVIM_AS_PAGER') || getenv('NVIM_AS_COLORFUL_PAGER')
-let s:handle_ansi = getenv('HANDLE_ANSI') || getenv('NVIM_AS_COLORFUL_PAGER')
-
-if s:nvim_as_pager
-	let s:plugin_ft = 0
-	let s:plugin_proj = 0
-	let s:plugin_dev = 0
-	let s:plugin_cmd = 0
-	let s:plugin_x = 0
-	let s:plugin_misc = 0
+let s:ansi = get(g:, 'ansi', v:false)
+let s:paging = get(g:, 'paging', v:false)
+if s:paging
+	let s:plugin_ft = v:false
+	let s:plugin_proj = v:false
+	let s:plugin_dev = v:false
+	let s:plugin_cmd = v:false
+	let s:plugin_x = v:false
+	let s:plugin_misc = v:false
 endif
 " >>>-----------------------------------
 
@@ -56,7 +56,7 @@ if &foldtext == 'foldtext()'
 endif
 let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
 
-if s:nvim_as_pager
+if s:paging
 	set noswapfile
 	set laststatus=0
 	set norelativenumber
@@ -200,7 +200,7 @@ tnoremap <M-space>  <c-\><c-n>
 
 
 " 特殊情况
-if s:nvim_as_pager
+if s:paging
 	nnoremap q :exit<CR>
 endif
 " >>>-----------------------------------
@@ -256,7 +256,7 @@ endfunction
 
 
 " <<< 插件
-if s:enable_plugin
+if s:plugins
 call plug#begin(s:plugdir)
 
 Plug 'nvim-lua/plenary.nvim'
@@ -349,7 +349,7 @@ call plug#end()
 endif
 " >>>-----------------------------------
 
-if s:enable_plugin
+if s:plugins
 if s:plugin_ui
 " <<< everforest (var, au)
 let g:everforest_better_performance = 1
@@ -810,8 +810,8 @@ augroup myconfig
 	autocmd TermOpen * setlocal norelativenumber
 augroup END
 
-if s:handle_ansi
-augroup handle_ansi
+if s:ansi
+augroup ansi
 	autocmd!
 	autocmd VimEnter * call utils#term_paging()
 augroup END
