@@ -1,9 +1,9 @@
 {
   "diagnostic.signPriority": 1,
-  "diagnostic.errorSign": "│•",
-  "diagnostic.warningSign": "│•",
-  "diagnostic.infoSign": "│▪",
-  "diagnostic.hintSign": "│▪",
+  "diagnostic.errorSign": "┄┄",
+  "diagnostic.warningSign": "┄┄",
+  "diagnostic.infoSign": "┈┈",
+  "diagnostic.hintSign": "┈┈",
   "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,	// 检测光标处func
   "suggest.snippetIndicator" : " [+]",
@@ -55,6 +55,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.flake8CategorySeverity.E": "Information",
   "python.linting.flake8CategorySeverity.W": "Hint",
+  "pyright.organizeimports.provider": "isort",
   // coc-rust-analyzer
   "rust-analyzer.server.path": "rust-analyzer",
   "rust-analyzer.rustfmt.extraArgs": ["+nightly"],

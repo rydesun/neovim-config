@@ -321,7 +321,7 @@ Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
 Plug 'lervag/vimtex'			" LaTex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 Plug 'fatih/vim-go',
-	\ {'do': ':GoUpdateBinaries guru motion'}
+	\ {'do': ':GoUpdateBinaries motion'}
 Plug 'puremourning/vimspector',
 	\ {'on': []}			" 调试工具
 endif
