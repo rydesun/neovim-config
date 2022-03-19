@@ -799,14 +799,8 @@ augroup myconfig
 	let g:rootpath_patterns = [
 		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
 	\ ]
-	autocmd VimEnter,BufReadPost,BufEnter *
-		\ if &buftype == '' |
-		\ exec 'lcd "'.luaeval("require('rooter').get(_A)", g:rootpath_patterns).'"' |
-		\ endif
-	autocmd BufWritePost * exec "lua require('rooter').clear()" |
-		\ if &buftype == '' |
-		\ exec 'lcd "'.luaeval("require('rooter').get(_A)", g:rootpath_patterns).'"' |
-		\ endif
+	autocmd VimEnter,BufReadPost,BufEnter * call s:cd_root()
+	autocmd BufWritePost * call s:cd_root()
 
 	" 终端不需要侧边栏
 	autocmd TermOpen * setlocal norelativenumber
@@ -818,6 +812,16 @@ augroup ansi
 	autocmd VimEnter * call utils#term_paging()
 augroup END
 endif
+
+function! s:cd_root() abort
+	if &buftype != ''
+		return
+	endif
+	let p = luaeval("require('rooter').get(_A)", g:rootpath_patterns)
+	if isdirectory(p)
+		exec 'lcd '.p
+	endif
+endfunction
 
 function! Foldtext() abort
 	let l:start = getline(v:foldstart)
