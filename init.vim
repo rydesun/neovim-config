@@ -532,7 +532,9 @@ endif
 if s:plugin_view
 " <<< indent-blankline (var)
 " 缩进线字符
-let g:indentLine_char = '┊'
+if $TERM != 'linux'
+	let g:indentLine_char = '┊'
+endif
 " 优先使用treesitter计算缩进
 let g:indent_blankline_use_treesitter = v:true
 " 高亮上下文缩进线
