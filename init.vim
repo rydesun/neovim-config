@@ -353,6 +353,8 @@ if s:plugins
 if s:plugin_ui
 " <<< everforest (var, au)
 let g:everforest_better_performance = 1
+" 使用终端自身的配色
+let g:everforest_disable_terminal_colors = 1
 if &background == 'dark'
 	let g:everforest_background = 'hard'
 else
