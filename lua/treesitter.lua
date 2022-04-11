@@ -1,7 +1,7 @@
 local ts = require("nvim-treesitter.configs")
 
 return ts.setup {
-    ensure_installed = "maintained",
+    ensure_installed = "all",
     highlight = {
         enable = true,
     },
