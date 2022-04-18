@@ -33,6 +33,7 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中
 set ignorecase smartcase	" 大小写模糊搜索
 set wildignorecase	" 命令行补全文件名时无视大小写
 set title		" 设置虚拟终端的标题
+set laststatus=3	" 只显示一个窗口的状态栏
 set splitbelow		" 水平分割的新窗口在下面打开
 set splitright		" 垂直分割的新窗口在右边打开
 set mouse=a		" 所有模式下支持鼠标
@@ -408,11 +409,6 @@ let g:lightline = {
 			\ ['diagnostic', 'git_status'],
 			\ ['fileformat', 'fileencoding']],
 	\ },
-	\ 'inactive': {
-		\ 'left': [['modified', 'readonly', 'absolutepath']],
-		\ 'right': [['percent'],
-			\ ['fileformat', 'fileencoding']],
-	\ },
 	\ 'component': {
 		\ 'absolutepath': '%<%F',
 		\ 'postion': '%2l/%L',
@@ -664,7 +660,6 @@ augroup myconfig_coc
 
 	" coc-explorer界面
 	autocmd filetype coc-explorer setlocal fcs=eob:\ 
-	autocmd User CocExplorerOpenPost setlocal statusline=%#NonText#
 
 	" 用coc-explorer替换netrw
 	autocmd StdinReadPre * let s:std_in=1
