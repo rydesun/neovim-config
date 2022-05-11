@@ -25,6 +25,10 @@ if s:paging
 	let s:plugin_x = v:false
 	let s:plugin_misc = v:false
 endif
+
+if $TERM =~# '.*-kitty'
+	let $_ENV_FULL_UI = 1
+endif
 " >>>-----------------------------------
 
 
