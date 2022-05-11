@@ -558,9 +558,6 @@ endif
 if s:plugin_ft
 " <<< nvim-treesitter (exec, opt)
 lua require('treesitter')
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set foldlevel=99
 " >>>-----------------------------------
 endif
 if s:plugin_op
