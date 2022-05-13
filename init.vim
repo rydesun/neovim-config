@@ -141,6 +141,7 @@ nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 map                <leader>c   <Plug>NERDCommenterToggle
 nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
+nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nmap               <leader>k   <Plug>(coc-translator-p)
 vmap               <leader>k   <Plug>(coc-translator-pv)
@@ -283,6 +284,7 @@ Plug 'rrethy/vim-hexokinase',
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
 Plug 'psliwka/vim-smoothie'		" 平滑滚动
 Plug 'fidian/hexmode'			" 查看16进制
+Plug 'stevearc/aerial.nvim'
 endif
 
 if s:plugin_ft
@@ -553,6 +555,9 @@ let g:show_spaces_that_precede_tabs = 1
 " >>>-----------------------------------
 " <<< hexmode (var)
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+" >>>-----------------------------------
+" <<< aerial.nvim (exec)
+lua require('aerial').setup({})
 " >>>-----------------------------------
 endif
 if s:plugin_ft
