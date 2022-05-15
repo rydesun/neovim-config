@@ -3,32 +3,23 @@ let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
 let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
 let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
 
-" 启用所有类型的插件
-let s:plugins = v:true
-let s:plugin_ui = v:true
-let s:plugin_view = v:true
-let s:plugin_ft = v:true
-let s:plugin_op = v:true
-let s:plugin_proj = v:true
-let s:plugin_dev = v:true
-let s:plugin_cmd = v:true
-let s:plugin_x = v:true
-let s:plugin_misc = v:true
-
-let s:ansi = get(g:, 'ansi', v:false)
+" 是否处于Linux console
+let s:env_console = $TERM == 'linux'
+" 是否作为pager处理文本
 let s:paging = get(g:, 'paging', v:false)
-if s:paging
-	let s:plugin_ft = v:false
-	let s:plugin_proj = v:false
-	let s:plugin_dev = v:false
-	let s:plugin_cmd = v:false
-	let s:plugin_x = v:false
-	let s:plugin_misc = v:false
-endif
+" 是否包含ANSI转义序列
+let s:ansi = get(g:, 'ansi', v:false)
 
-if $TERM =~# '.*-kitty'
-	let $_ENV_FULL_UI = 1
-endif
+" 是否启用该类型的插件
+let s:plugin_ui = v:true	" 自身界面
+let s:plugin_view = v:true	" 查看文本
+let s:plugin_op = v:true	" 操作文本
+let s:plugin_ft = !s:paging	" 文件类型
+let s:plugin_proj = !s:paging	" 项目管理
+let s:plugin_dev = !s:paging	" 本地开发
+let s:plugin_cmd = !s:paging	" 外部命令
+let s:plugin_gui = !s:paging	" 桌面环境
+let s:plugin_misc = !s:paging	" 其他
 " >>>-----------------------------------
 
 
@@ -52,9 +43,8 @@ set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式
 set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
 set formatoptions+=B	" 合并中文行不加空格
 set confirm		" 报错方式改为询问
-if $TERM != 'linux'
-	set termguicolors
-endif
+if !s:env_console | set termguicolors | endif
+
 " 修改折叠文本
 if &foldtext == 'foldtext()'
 	set foldtext=Foldtext()
@@ -262,7 +252,6 @@ endfunction
 
 
 " <<< 插件
-if s:plugins
 call plug#begin(s:plugdir)
 
 Plug 'nvim-lua/plenary.nvim'
@@ -342,7 +331,7 @@ Plug 'tpope/vim-dadbod'	|
 	\ Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库
 endif
 
-if s:plugin_x
+if s:plugin_gui
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
 Plug 'glacambre/firenvim',
 	\ {'do': { _ -> firenvim#install(0) }}	" 浏览器嵌入
@@ -354,10 +343,8 @@ Plug 'dstein64/vim-startuptime'		" 检查启动时间
 endif
 
 call plug#end()
-endif
 " >>>-----------------------------------
 
-if s:plugins
 if s:plugin_ui
 " <<< everforest (var, au)
 let g:everforest_better_performance = 1
@@ -537,9 +524,7 @@ endif
 if s:plugin_view
 " <<< indent-blankline (var)
 " 缩进线字符
-if $TERM != 'linux'
-	let g:indentLine_char = '┊'
-endif
+if !s:env_console | let g:indentLine_char = '┊' | endif
 " 优先使用treesitter计算缩进
 let g:indent_blankline_use_treesitter = v:true
 " 高亮上下文缩进线
@@ -738,7 +723,7 @@ augroup myconfig_dbui
 augroup END
 " >>>-----------------------------------
 endif
-if s:plugin_x
+if s:plugin_gui
 " <<< firenvim (var, func, au)
 let g:firenvim_config = {
 	\ 'globalSettings': {
@@ -790,7 +775,6 @@ if &diff
 	let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
 " >>>-----------------------------------
-end
 end
 
 
