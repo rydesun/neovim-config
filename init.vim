@@ -90,8 +90,6 @@ Plug 'lervag/vimtex'			" LaTex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 Plug 'fatih/vim-go',
 	\ {'do': ':GoUpdateBinaries motion'}
-Plug 'puremourning/vimspector',
-	\ {'on': []}			" 调试工具
 endif
 
 if s:plugin_cmd
@@ -454,9 +452,6 @@ let g:go_doc_keywordprg_enabled = 0 " 查看文档
 let g:go_def_mapping_enabled = 0 " 跳转定义
 " 禁止在保存时自动执行GoFmt
 let g:go_fmt_autosave = 0
-endif " >>>-----------------------------------
-if has_key(g:plugs, 'vimspector') " <<<
-let g:vimspector_enable_mappings = 'HUMAN'
 endif " >>>-----------------------------------
 if has_key(g:plugs, 'asyncrun.vim') " <<<
 function! s:floaterm_repl(opts)
