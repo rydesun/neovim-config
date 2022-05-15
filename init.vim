@@ -22,235 +22,6 @@ let s:plugin_gui = !s:paging	" 桌面环境
 let s:plugin_misc = !s:paging	" 其他
 " >>>-----------------------------------
 
-
-" <<< 选项
-set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中文用户)
-set ignorecase smartcase	" 大小写模糊搜索
-set wildignorecase	" 命令行补全文件名时无视大小写
-set title		" 设置虚拟终端的标题
-set laststatus=3	" 只显示一个窗口的状态栏
-set splitbelow		" 水平分割的新窗口在下面打开
-set splitright		" 垂直分割的新窗口在右边打开
-set mouse=a		" 所有模式下支持鼠标
-set relativenumber	" 开启相对行号
-set numberwidth=1	" 行号最低宽度
-set signcolumn=number	" 在行号上显示侧边栏
-set scrolloff=5		" 滚动时光标到上下边缘的预留行数
-set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
-set diffopt+=vertical	" diff模式默认以垂直方式分割
-set wildmode=list:longest,full	" 命令行补全时以列表显示
-set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
-set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
-set formatoptions+=B	" 合并中文行不加空格
-set confirm		" 报错方式改为询问
-if !s:env_console | set termguicolors | endif
-
-" 修改折叠文本
-if &foldtext == 'foldtext()'
-	set foldtext=Foldtext()
-endif
-let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
-
-if s:paging
-	set noswapfile
-	set laststatus=0
-	set norelativenumber
-	set signcolumn=no
-endif
-" >>>-----------------------------------
-
-
-" <<< 键位
-" 单键
-noremap  H  ^
-noremap  L  $
-noremap  Q  @q
-noremap  ;  :
-map      :  <Plug>Sneak_;
-map      f  <Plug>Sneak_s
-map      F  <Plug>Sneak_S
-xnoremap <  <gv
-xnoremap >  >gv
-nnoremap <silent>  K  :call <SID>show_documentation()<CR>
-
-
-" <Esc>组：关闭
-nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-nnoremap <silent>  <Esc>q      :cclose<CR>
-nnoremap <silent>  <Esc>l      :lclose<CR>
-nnoremap <silent>  <Esc>f      :bd<CR>
-nnoremap <silent>  <Esc>t      :tabclose<CR>
-nnoremap <silent>  <Esc>w      <C-w>c
-
-
-" s组：搜索列表(telescope.nvim)
-" vim-sandwich处理成对符号
-nnoremap           s           <NOP>
-nnoremap           S           :Telescope<CR>
-nnoremap <silent>  ss          :Telescope live_grep<CR>
-nnoremap <silent>  sf          :Telescope find_files<CR>
-
-
-" []组：前后跳转
-" 插件提供更多映射
-nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
-nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
-nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
-nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
-nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
-nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
-nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
-nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
-
-
-" g组：语法跳转
-" splitjoin.vim执行拆分合并
-nmap     <silent>  gd          <Plug>(coc-definition)
-nmap     <silent>  gy          <Plug>(coc-type-definition)
-nmap     <silent>  gi          <Plug>(coc-implementation)
-nmap     <silent>  gr          <Plug>(coc-references)
-
-
-" 其他
-nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
-nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
-vnoremap           //          y/\V<C-R>=escape(@",'/\')<CR><CR>
-
-
-" 文本对象
-xmap     if        <Plug>(coc-funcobj-i)
-omap     if        <Plug>(coc-funcobj-i)
-xmap     af        <Plug>(coc-funcobj-a)
-omap     af        <Plug>(coc-funcobj-a)
-
-
-" Leader
-let g:mapleader=' ' | noremap <Space> <Nop>
-vnoremap <silent>  <leader>y   "+y
-nnoremap <silent>  <leader>p   "+p
-nnoremap <silent>  <leader>P   "+P
-map                <leader>c   <Plug>NERDCommenterToggle
-nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
-nnoremap <silent>  <leader>o   :AerialToggle left<CR>
-nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
-nmap               <leader>k   <Plug>(coc-translator-p)
-vmap               <leader>k   <Plug>(coc-translator-pv)
-nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
-
-
-" h组g组：Git Hunk
-nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
-nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
-nnoremap           <leader>ho  :CocCommand git.copyUrl<CR>
-nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
-nmap               <leader>hb  <Plug>(coc-git-commit)
-nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
-nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
-nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
-nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
-nnoremap <silent>  <leader>gc  :Gina commit<CR>
-
-
-" r组：语法相关的修改
-nmap               <leader>rn  <Plug>(coc-rename)
-nmap               <leader>rt  <Plug>(coc-refactor)
-nmap               <leader>rf  <Plug>(coc-fix-current)
-nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
-
-
-" t组：操作终端
-nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
-nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
-vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
-
-
-" 运行任务
-nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
-nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
-nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
-nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
-nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
-
-
-" 其他
-nnoremap <silent>  <A-j>       :m .+1<CR>
-nnoremap <silent>  <A-k>       :m .-2<CR>
-vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
-vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
-imap               <C-j>       <Plug>(coc-snippets-expand-jump)
-
-
-" 命令行
-cnoremap           <C-a>       <Home>
-cnoremap           <C-b>       <Left>
-cnoremap           <C-f>       <Right>
-cnoremap           <M-b>       <C-Left>
-cnoremap           <M-f>       <C-Right>
-cnoremap           <C-p>       <Up>
-cnoremap           <C-n>       <Down>
-cnoremap <expr>    %%          expand('%:p:h').'/'
-
-
-" 终端
-tnoremap <M-space>  <c-\><c-n>
-
-
-" 特殊情况
-if s:paging
-	nnoremap q :exit<CR>
-endif
-" >>>-----------------------------------
-
-
-" <<< 命令
-command  GetHighlight
-	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-
-command  CountZhCharacters  lua require('counter'):cmd_count_zh()
-
-command! -nargs=0  Typography  call typography#format()
-command! -nargs=0  TypographyHugo  call typography#format_hugo()
-
-command! -nargs=1 -complete=custom,s:lightline_colorschemes
-	\ LightlineColorscheme  call s:set_lightline_colorscheme(<q-args>)
-
-cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
-cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
-	\ 'w !sudo tee % >/dev/null' : 'ww'
-
-lua require('keymap').setup()
-
-
-" 编辑snippets
-command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
-	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
-
-" 重新加载配置
-command! -nargs=1 -complete=custom,s:get_vim_files
-	\ LoadConfig  exec 'source '.s:confdir.'/<args>'
-
-" 编辑配置
-command! -nargs=1 -complete=custom,s:get_vim_files
-	\ EditConfig  exec 'tabnew '.s:confdir.'/<args>'
-
-" 手动加载插件
-command! -nargs=1 -complete=custom,s:get_plugins
-	\ LoadPlug  call plug#load('<args>')
-
-function! s:get_vim_files(...) abort
-	let l:idx = len(s:confdir) + 1
-	return join(map(
-		\ globpath(s:confdir, '**/*.vim', 0, 1),
-		\ 'v:val[l:idx:]'),
-		\ "\n")
-endfunction
-
-function! s:get_plugins(...) abort
-	return join(keys(g:plugs), "\n")
-endfunction
-" >>>-----------------------------------
-
-
 " <<< 插件
 call plug#begin(s:plugdir)
 
@@ -759,9 +530,257 @@ if &diff
 endif
 endif " >>>-----------------------------------
 
+" <<< 按键
+" 单键
+noremap  H  ^
+noremap  L  $
+noremap  Q  @q
+noremap  ;  :
+map      :  <Plug>Sneak_;
+map      f  <Plug>Sneak_s
+map      F  <Plug>Sneak_S
+xnoremap <  <gv
+xnoremap >  >gv
+nnoremap <silent>  K  :call <SID>show_documentation()<CR>
 
-" vim-plug窗口位置
-let g:plug_window = 'new'
+
+" <Esc>组：关闭
+nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
+nnoremap <silent>  <Esc>q      :cclose<CR>
+nnoremap <silent>  <Esc>l      :lclose<CR>
+nnoremap <silent>  <Esc>f      :bd<CR>
+nnoremap <silent>  <Esc>t      :tabclose<CR>
+nnoremap <silent>  <Esc>w      <C-w>c
+
+
+" s组：搜索列表(telescope.nvim)
+" vim-sandwich处理成对符号
+nnoremap           s           <NOP>
+nnoremap           S           :Telescope<CR>
+nnoremap <silent>  ss          :Telescope live_grep<CR>
+nnoremap <silent>  sf          :Telescope find_files<CR>
+
+
+" []组：前后跳转
+" 插件提供更多映射
+nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
+nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
+nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
+nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
+nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
+nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
+nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
+nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
+
+
+" g组：语法跳转
+" splitjoin.vim执行拆分合并
+nmap     <silent>  gd          <Plug>(coc-definition)
+nmap     <silent>  gy          <Plug>(coc-type-definition)
+nmap     <silent>  gi          <Plug>(coc-implementation)
+nmap     <silent>  gr          <Plug>(coc-references)
+
+
+" 其他
+nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
+nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
+vnoremap           //          y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+
+" 文本对象
+xmap     if        <Plug>(coc-funcobj-i)
+omap     if        <Plug>(coc-funcobj-i)
+xmap     af        <Plug>(coc-funcobj-a)
+omap     af        <Plug>(coc-funcobj-a)
+
+
+" Leader
+let g:mapleader=' ' | noremap <Space> <Nop>
+vnoremap <silent>  <leader>y   "+y
+nnoremap <silent>  <leader>p   "+p
+nnoremap <silent>  <leader>P   "+P
+map                <leader>c   <Plug>NERDCommenterToggle
+nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
+nnoremap <silent>  <leader>o   :AerialToggle left<CR>
+nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
+nmap               <leader>k   <Plug>(coc-translator-p)
+vmap               <leader>k   <Plug>(coc-translator-pv)
+nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
+
+
+" h组g组：Git Hunk
+nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
+nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
+nnoremap           <leader>ho  :CocCommand git.copyUrl<CR>
+nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
+nmap               <leader>hb  <Plug>(coc-git-commit)
+nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
+nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
+nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
+nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
+nnoremap <silent>  <leader>gc  :Gina commit<CR>
+
+
+" r组：语法相关的修改
+nmap               <leader>rn  <Plug>(coc-rename)
+nmap               <leader>rt  <Plug>(coc-refactor)
+nmap               <leader>rf  <Plug>(coc-fix-current)
+nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
+
+
+" t组：操作终端
+nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
+nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+
+
+" 运行任务
+nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
+nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
+nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
+nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
+nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
+
+
+" 其他
+nnoremap <silent>  <A-j>       :m .+1<CR>
+nnoremap <silent>  <A-k>       :m .-2<CR>
+vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
+vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
+imap               <C-j>       <Plug>(coc-snippets-expand-jump)
+
+
+" 命令行
+cnoremap           <C-a>       <Home>
+cnoremap           <C-b>       <Left>
+cnoremap           <C-f>       <Right>
+cnoremap           <M-b>       <C-Left>
+cnoremap           <M-f>       <C-Right>
+cnoremap           <C-p>       <Up>
+cnoremap           <C-n>       <Down>
+cnoremap <expr>    %%          expand('%:p:h').'/'
+
+
+" 终端
+tnoremap <M-space>  <c-\><c-n>
+
+
+" 特殊情况
+if s:paging
+	nnoremap q :exit<CR>
+endif
+" >>>-----------------------------------
+
+" <<< 命令
+command  GetHighlight
+	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+command  CountZhCharacters  lua require('counter'):cmd_count_zh()
+
+command! -nargs=0  Typography  call typography#format()
+command! -nargs=0  TypographyHugo  call typography#format_hugo()
+
+command! -nargs=1 -complete=custom,s:lightline_colorschemes
+	\ LightlineColorscheme  call s:set_lightline_colorscheme(<q-args>)
+
+cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
+cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
+	\ 'w !sudo tee % >/dev/null' : 'ww'
+
+lua require('keymap').setup()
+
+
+" 编辑snippets
+command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
+	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
+
+" 重新加载配置
+command! -nargs=1 -complete=custom,s:get_vim_files
+	\ LoadConfig  exec 'source '.s:confdir.'/<args>'
+
+" 编辑配置
+command! -nargs=1 -complete=custom,s:get_vim_files
+	\ EditConfig  exec 'tabnew '.s:confdir.'/<args>'
+
+" 手动加载插件
+command! -nargs=1 -complete=custom,s:get_plugins
+	\ LoadPlug  call plug#load('<args>')
+
+function! s:get_vim_files(...) abort
+	let l:idx = len(s:confdir) + 1
+	return join(map(
+		\ globpath(s:confdir, '**/*.vim', 0, 1),
+		\ 'v:val[l:idx:]'),
+		\ "\n")
+endfunction
+
+function! s:get_plugins(...) abort
+	return join(keys(g:plugs), "\n")
+endfunction
+" >>>-----------------------------------
+
+" <<< 选项
+" 主题
+silent! colorscheme everforest
+if !s:env_console | set termguicolors | endif
+
+set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中文用户)
+set ignorecase smartcase	" 大小写模糊搜索
+set wildignorecase	" 命令行补全文件名时无视大小写
+set title		" 设置虚拟终端的标题
+set laststatus=3	" 只显示一个窗口的状态栏
+set splitbelow		" 水平分割的新窗口在下面打开
+set splitright		" 垂直分割的新窗口在右边打开
+set mouse=a		" 所有模式下支持鼠标
+set relativenumber	" 开启相对行号
+set numberwidth=1	" 行号最低宽度
+set signcolumn=number	" 在行号上显示侧边栏
+set scrolloff=5		" 滚动时光标到上下边缘的预留行数
+set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
+set diffopt+=vertical	" diff模式默认以垂直方式分割
+set wildmode=list:longest,full	" 命令行补全时以列表显示
+set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
+set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
+set formatoptions+=B	" 合并中文行不加空格
+set confirm		" 报错方式改为询问
+
+" 修改折叠文本
+if &foldtext == 'foldtext()'
+	function! Foldtext() abort
+		let l:start = getline(v:foldstart)
+		let l:cnt = v:foldend - v:foldstart - 1
+		if &foldmethod == 'marker'
+			let l:comment = substitute(&commentstring, '%s', '', '')
+			let l:marker = &foldmarker[:stridx(&foldmarker, ',')-1]
+			let l:text = substitute(l:start, l:marker, '', '')
+			let l:text = substitute(l:text, l:comment, '', '')
+			let l:text = trim(l:text)
+			return '＋❰'.printf('%3d', l:cnt).'❱ '.l:text
+		else
+			let l:end = trim(getline(v:foldend))
+			" TODO: 应该根据闭合状态判断
+			if l:end =~ '^\s*[_a-zA-Z0-9]'
+				let l:cnt += 1
+				return l:start.' ❰'.l:cnt.'❱'
+			endif
+			if l:cnt == 0
+				return l:start.' '.l:end
+			else
+				return l:start.' ❰'.l:cnt.'❱ '.l:end
+			end
+		endif
+	endfunction
+	set foldtext=Foldtext()
+endif
+let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
+
+if s:paging
+	set noswapfile
+	set laststatus=0
+	set norelativenumber
+	set signcolumn=no
+endif
+" >>>-----------------------------------
 
 augroup myconfig
 	autocmd!
@@ -769,56 +788,23 @@ augroup myconfig
 	let g:rootpath_patterns = [
 		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
 	\ ]
-	autocmd VimEnter,BufReadPost,BufEnter * call s:cd_root()
-	autocmd BufWritePost * call s:cd_root()
+	autocmd VimEnter,BufReadPost,BufEnter,BufWritePost * call s:cd_root()
+	function! s:cd_root() abort
+		if &buftype != '' | return | endif
+		let p = luaeval("require('rooter').get(_A)", g:rootpath_patterns)
+		if isdirectory(p)
+			try | exec 'lcd '.p | catch /E472/ | endtry
+		endif
+	endfunction
 
 	" 终端不需要侧边栏
 	autocmd TermOpen * setlocal norelativenumber
 augroup END
 
-if s:ansi
-augroup ansi
+augroup ansi | if s:ansi
 	autocmd!
 	autocmd VimEnter * call utils#term_paging()
-augroup END
-endif
-
-function! s:cd_root() abort
-	if &buftype != ''
-		return
-	endif
-	let p = luaeval("require('rooter').get(_A)", g:rootpath_patterns)
-	if isdirectory(p)
-		try | exec 'lcd '.p | catch /E472/ | endtry
-	endif
-endfunction
-
-function! Foldtext() abort
-	let l:start = getline(v:foldstart)
-	let l:cnt = v:foldend - v:foldstart - 1
-	if &foldmethod == 'marker'
-		let l:comment = substitute(&commentstring, '%s', '', '')
-		let l:marker = &foldmarker[:stridx(&foldmarker, ',')-1]
-		let l:text = substitute(l:start, l:marker, '', '')
-		let l:text = substitute(l:text, l:comment, '', '')
-		let l:text = trim(l:text)
-		return '＋❰'.printf('%3d', l:cnt).'❱ '.l:text
-	else
-		let l:end = trim(getline(v:foldend))
-		" TODO: 应该根据闭合状态判断
-		if l:end =~ '^\s*[_a-zA-Z0-9]'
-			let l:cnt += 1
-			return l:start.' ❰'.l:cnt.'❱'
-		endif
-		if l:cnt == 0
-			return l:start.' '.l:end
-		else
-			return l:start.' ❰'.l:cnt.'❱ '.l:end
-		end
-	endif
-endfunction
-
-silent! colorscheme everforest
+endif | augroup END
 
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
