@@ -282,7 +282,8 @@ Plug 'ntpeters/vim-better-whitespace'	" 空白符
 Plug 'rrethy/vim-hexokinase',
 	\ {'do': 'make hexokinase'}	" 显示颜色
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
-Plug 'psliwka/vim-smoothie'		" 平滑滚动
+Plug 'psliwka/vim-smoothie',
+	\ { 'commit': '10fd0aa' }	" 平滑滚动
 Plug 'fidian/hexmode'			" 查看16进制
 Plug 'stevearc/aerial.nvim'
 endif
@@ -822,7 +823,7 @@ function! s:cd_root() abort
 	endif
 	let p = luaeval("require('rooter').get(_A)", g:rootpath_patterns)
 	if isdirectory(p)
-		exec 'lcd '.p
+		try | exec 'lcd '.p | catch /E472/ | endtry
 	endif
 endfunction
 
