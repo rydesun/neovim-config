@@ -609,7 +609,6 @@ nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nmap               <leader>k   <Plug>(coc-translator-p)
 vmap               <leader>k   <Plug>(coc-translator-pv)
-nnoremap           <leader>K   :call utils#doc_dash(&ft, expand('<cword>'))<CR>
 
 
 " h组g组：Git Hunk
