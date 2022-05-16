@@ -3,21 +3,21 @@ let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
 let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
 let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
 
-" 是否处于Linux console
-let s:env_console = $TERM == 'linux'
+" 是否在小型环境中(非开发)
+let s:env_mini = $VIM_MINI
 " 是否作为pager处理文本
 let s:paging = get(g:, 'paging', v:false)
+" 是否处于Linux console
+let s:env_console = $TERM == 'linux'
 
 " 是否启用该类型的插件
 let s:plugin_ui = v:true	" 自身界面
 let s:plugin_view = v:true	" 查看文本
 let s:plugin_op = v:true	" 操作文本
-let s:plugin_ft = !s:paging	" 文件类型
-let s:plugin_proj = !s:paging	" 项目管理
-let s:plugin_dev = !s:paging	" 本地开发
 let s:plugin_cmd = !s:paging	" 外部命令
-let s:plugin_gui = !s:paging	" 桌面环境
-let s:plugin_misc = !s:paging	" 其他
+let s:plugin_proj = !s:paging	" 项目管理
+let s:plugin_ft = !s:env_mini && !s:paging	" 文件类型
+let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 " >>>-----------------------------------
 
 " <<< 插件
@@ -29,38 +29,26 @@ packadd typography	" 修复中英文间空格
 " 通过vim-plug安装的插件
 call plug#begin(s:plugdir)
 Plug 'nvim-lua/plenary.nvim'		" 补充lua API
+Plug 'dstein64/vim-startuptime'		" 检查启动时间
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
-Plug 'gelguy/wilder.nvim',
-	\ {'do': ':UpdateRemotePlugins'}	" 改进wildmenu
+Plug 'gelguy/wilder.nvim', {'do': ':UpdateRemotePlugins'}
+					" 改进wildmenu
 endif
 
 if s:plugin_view
 Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
 Plug 'ntpeters/vim-better-whitespace'	" 空白符
-Plug 'rrethy/vim-hexokinase',
-	\ {'do': 'make hexokinase'}	" 显示颜色
+Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
+					" 显示颜色
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
-Plug 'psliwka/vim-smoothie',
-	\ { 'commit': '10fd0aa' }	" 平滑滚动
+Plug 'psliwka/vim-smoothie', { 'commit': '10fd0aa' }
+					" 平滑滚动
 Plug 'fidian/hexmode'			" 查看16进制
-Plug 'stevearc/aerial.nvim'
-endif
-
-if s:plugin_ft
-Plug 'nvim-treesitter/nvim-treesitter',
-	\ {'do': ':TSUpdate'} |
-	\ Plug 'nvim-treesitter/playground' |
-	\ Plug 'romgrk/nvim-treesitter-context' |
-	\ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-" vim-polyglot 自带缩进检测插件autoindent
-" 禁止使用自带的插件sensible
-let g:polyglot_disabled = ['sensible']
-Plug 'sheerun/vim-polyglot'
 endif
 
 if s:plugin_op
@@ -75,7 +63,17 @@ Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
 Plug 'scrooloose/nerdcommenter'		" 快速注释
 Plug 'tenfyzhong/axring.vim'		" 切换单词
 Plug 'tpope/vim-repeat'			" 重复执行
-Plug 'mattn/emmet-vim'			" 展开缩写
+endif
+
+if s:plugin_cmd
+Plug 'skywind3000/asyncrun.vim'		" 异步执行
+Plug 'voldikss/vim-floaterm'		" 终端窗口
+Plug 'lambdalisue/gina.vim'		" 集成Git
+Plug 'tpope/vim-dadbod'			" 数据库
+Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库UI
+Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
+Plug 'glacambre/firenvim', {'do': { _ -> firenvim#install(0) }}
+					" 浏览器嵌入
 endif
 
 if s:plugin_proj
@@ -85,33 +83,27 @@ Plug 'nvim-telescope/telescope.nvim'	" finder
 Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
+if s:plugin_ft
+Plug 'nvim-treesitter/nvim-treesitter',
+	\ {'do': ':TSUpdate'} |
+	\ Plug 'nvim-treesitter/playground' |
+	\ Plug 'romgrk/nvim-treesitter-context' |
+	\ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" vim-polyglot 自带缩进检测插件autoindent
+" 禁止使用自带的插件sensible
+let g:polyglot_disabled = ['sensible']
+Plug 'sheerun/vim-polyglot'
+endif
+
 if s:plugin_dev
-Plug 'iamcco/markdown-preview.nvim',
-	\ {'do': 'cd app & yarn install'}	" markdown预览
+Plug 'stevearc/aerial.nvim'		" 大纲
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
+					" markdown预览
 Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
 Plug 'lervag/vimtex'			" LaTex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
-Plug 'fatih/vim-go',
-	\ {'do': ':GoUpdateBinaries motion'}
-endif
-
-if s:plugin_cmd
-Plug 'skywind3000/asyncrun.vim'		" 异步执行
-Plug 'voldikss/vim-floaterm'		" 终端窗口
-Plug 'lambdalisue/gina.vim'		" 集成Git
-Plug 'tpope/vim-dadbod'	|
-	\ Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库
-endif
-
-if s:plugin_gui
-Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
-Plug 'glacambre/firenvim',
-	\ {'do': { _ -> firenvim#install(0) }}	" 浏览器嵌入
-endif
-
-if s:plugin_misc
-Plug 'chrisbra/vim-diff-enhanced'	" 增强diff算法
-Plug 'dstein64/vim-startuptime'		" 检查启动时间
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries motion'}
+Plug 'mattn/emmet-vim'			" 展开缩写
 endif
 
 call plug#end()
@@ -122,6 +114,129 @@ function! s:is_loaded(plug) abort
 	return has_key(g:plugs, a:plug) && isdirectory(g:plugs[a:plug].dir)
 endfunction
 
+" 插件设置(按名称排序)
+if s:is_loaded('aerial.nvim') " <<<
+lua require('aerial').setup({})
+endif " >>>-----------------------------------
+if s:is_loaded('asyncrun.vim') " <<<
+function! s:floaterm_repl(opts)
+	exec "FloatermNew --wintype=split --position=top ".a:opts.cmd
+	stopinsert | wincmd p
+endfunction
+function! s:floaterm_bottom(opts)
+	exec "FloatermNew --wintype=split --position=bottom ".a:opts.cmd
+endfunction
+let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+let g:asyncrun_runner.floaterm_repl = function('s:floaterm_repl')
+let g:asyncrun_runner.floaterm_bottom = function('s:floaterm_bottom')
+" quickfix窗口的默认高度
+let g:asyncrun_open = 6
+endif " >>>-----------------------------------
+if s:is_loaded('asynctasks.vim') " <<<
+let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
+endif " >>>-----------------------------------
+if s:is_loaded('axring.vim') " <<<
+let g:axring_rings = [
+	\ ['&&', '||'],
+	\ ['&', '|', '^'],
+	\ ['&=', '|=', '^='],
+	\ ['>>', '<<'],
+	\ ['>>=', '<<='],
+	\ ['==', '!='],
+	\ ['===', '!=='],
+	\ ['>', '<', '>=', '<='],
+	\ ['++', '--'],
+	\ ['true', 'false'],
+	\ ['verbose', 'debug', 'info', 'warn', 'error', 'fatal'],
+\ ]
+let g:axring_rings_go = [
+	\ [':=', '='],
+	\ ['byte', 'rune'],
+	\ ['complex64', 'complex128'],
+	\ ['int', 'int8', 'int16', 'int32', 'int64'],
+	\ ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
+	\ ['float32', 'float64'],
+	\ ['interface', 'struct'],
+	\ ['debug', 'info', 'warn', 'error', 'panic', 'fatal'],
+\ ]
+endif " >>>-----------------------------------
+if s:is_loaded('coc.nvim') " <<<
+" format函数
+set formatexpr=CocAction('formatSelected')
+
+" 修改coc数据目录, 默认值是XDG config目录
+let g:coc_data_home = s:datadir.'/coc'
+
+function! s:show_documentation() abort
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	elseif (coc#rpc#ready())
+		call CocActionAsync('doHover')
+	endif
+endfunction
+
+let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
+let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
+	\ "coc-db"]
+let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
+let s:coc_lsp = [
+	\ "coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
+	\ "coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
+	\ "coc-tsserver", "coc-eslint",
+	\ "coc-css", "coc-stylelint",
+	\ "coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
+	\ "coc-xml", "coc-svg", "coc-docker", "coc-texlab",
+\ ]
+let g:coc_global_extensions = [
+	\ "coc-pairs",
+\ ] + s:coc_sources + s:coc_integration
+if s:plugin_dev
+	let g:coc_global_extensions += s:coc_snippets
+	let g:coc_global_extensions += s:coc_lsp
+endif
+
+" coc-explorer
+let g:coc_explorer_global_presets = {
+	\ 'buffer': {
+		\ 'sources': [{'name': 'buffer', 'expand': v:true}],
+		\ 'position': 'floating',
+		\ 'floating-position': 'center-top',
+	\ },
+\ }
+
+augroup myconfig_coc
+	autocmd!
+	" 补全跳转后显示函数签名
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+	" coc-explorer界面
+	autocmd filetype coc-explorer setlocal fcs=eob:\ 
+
+	" 用coc-explorer替换netrw
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+		\ | exe 'cd '.argv()[0]
+		\ | exe 'CocCommand explorer --position floating' argv()[0]
+		\ | wincmd p | bd | endif
+
+	" readonly文件不显示diagnostic
+	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
+
+	" 使用coc-html自动闭合tag, 禁用coc-pairs
+	autocmd FileType html let b:coc_pairs_disabled = ['<']
+augroup END
+
+call coc#config("explorer.file.root.template",
+	\ " [git & 1][hidden & 1][root]")
+call coc#config("explorer.file.child.template",
+	\ "[git | 2][selection | clip | 1] ".
+	\ "[indent][icon | 1] [filename omitCenter 1] ".
+	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
+call coc#config("explorer.buffer.root.template",
+	\ " [title] [hidden & 1]")
+call coc#config("explorer.buffer.child.template",
+	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
+endif " >>>-----------------------------------
 if s:is_loaded('everforest') " <<<
 let g:everforest_better_performance = 1
 " 使用终端自身的配色
@@ -164,6 +279,65 @@ augroup colorscheme_everforest
 	autocmd ColorScheme everforest let g:lightline.colorscheme = 'everforest'
 	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
 augroup END
+endif " >>>-----------------------------------
+if s:is_loaded('firenvim') " <<<
+let g:firenvim_config = {
+	\ 'globalSettings': {
+		\ 'alt': 'all',
+	\ },
+	\ 'localSettings': {
+		\ '.*': {
+			\ 'cmdline': 'firenvim',
+			\ 'priority': 0,
+			\ 'selector': 'textarea',
+			\ 'takeover': 'never',
+			\ },
+	\ }
+\ }
+
+augroup myconfig_firenvim_init
+	autocmd!
+	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+augroup END
+
+function! OnUIEnter(event) abort
+	if !s:IsFirenvimActive(a:event)
+		return
+	endif
+	set laststatus=0
+	if &lines < 10
+		set lines=10
+	endif
+	augroup myconfig_firenvim
+		autocmd!
+		autocmd BufEnter github.com_*.txt set filetype=markdown
+		autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
+	augroup END
+endfunction
+
+function! s:IsFirenvimActive(event) abort
+	if !exists('*nvim_get_chan_info')
+		return 0
+	endif
+	let l:ui = nvim_get_chan_info(a:event.chan)
+	return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
+		\ l:ui.client.name =~? 'Firenvim'
+endfunction
+endif " >>>-----------------------------------
+if s:is_loaded('hexmode') " <<<
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+endif " >>>-----------------------------------
+if s:is_loaded('indent-blankline.nvim') " <<<
+" 缩进线字符
+if !s:env_console | let g:indentLine_char = '┊' | endif
+" 优先使用treesitter计算缩进
+let g:indent_blankline_use_treesitter = v:true
+" 高亮上下文缩进线
+let g:indent_blankline_show_current_context = v:true
+" 排除类型
+let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
+	\ 'popup']
+let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
 if s:is_loaded('lightline.vim') " <<<
 let g:lightline = {
@@ -249,8 +423,14 @@ function! s:lightline_colorschemes(...) abort
 		\ "\n")
 endfunction
 endif " >>>-----------------------------------
-if s:is_loaded('nvim-web-devicons') " <<<
-lua require'nvim-web-devicons'.setup { default = true }
+if s:is_loaded('nerdcommenter') " <<<
+" 取消所有预设键位映射
+let g:NERDCreateDefaultMappings = 0
+" 注释符号后面添加空格
+let g:NERDSpaceDelims = 1
+let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
+" 注释符号左对齐
+let g:NERDDefaultAlign='left'
 endif " >>>-----------------------------------
 if s:is_loaded('nvim-hlslens') " <<<
 noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
@@ -274,6 +454,54 @@ require('hlslens').setup({
 })
 EOF
 endif " >>>-----------------------------------
+if s:is_loaded('nvim-treesitter') " <<<
+lua require('treesitter')
+endif " >>>-----------------------------------
+if s:is_loaded('nvim-web-devicons') " <<<
+lua require'nvim-web-devicons'.setup { default = true }
+endif " >>>-----------------------------------
+if s:is_loaded('vim-better-whitespace') " <<<
+let g:better_whitespace_filetypes_blacklist =
+	\ ['coc-explorer', 'dbout', 'xxd']
+let g:show_spaces_that_precede_tabs = 1
+endif " >>>-----------------------------------
+if s:is_loaded('vim-dadbod-ui') " <<<
+let g:db_ui_save_location = s:datadir.'/db_ui'
+let g:db_ui_use_nerd_fonts = 1
+augroup myconfig_dbui
+	autocmd!
+	autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
+augroup END
+endif " >>>-----------------------------------
+if s:is_loaded('vim-go') " <<<
+" 只安装特定工具，优先使用coc-go提供的功能
+" 关闭gopls
+let g:go_gopls_enabled = 0
+" 禁用omnifunc补全
+let g:go_code_completion_enabled = 0
+" 关闭vim-go的按键映射
+let g:go_doc_keywordprg_enabled = 0 " 查看文档
+let g:go_def_mapping_enabled = 0 " 跳转定义
+" 禁止在保存时自动执行GoFmt
+let g:go_fmt_autosave = 0
+endif " >>>-----------------------------------
+if s:is_loaded('vim-sandwich') " <<<
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1, 'input': [')'] },
+	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1, 'input': [']'] },
+	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1, 'input': ['}'] },
+\ ]
+endif " >>>----------------------------------
+if s:is_loaded('vim-sneak') " <<<
+" 类似于EasyMotion的标签模式
+let g:sneak#label = 1
+" 智能大小写
+let g:sneak#use_ic_scs = 1
+endif " >>>-----------------------------------
+if s:is_loaded('vim-visual-multi') " <<<
+let g:VM_Extend_hl = 'CursorRange'
+endif " >>>-----------------------------------
 if s:is_loaded('wilder.nvim') " <<<
 call wilder#enable_cmdline_enter()
 set wildcharm=<Tab>
@@ -295,242 +523,6 @@ call wilder#set_option('renderer', wilder#wildmenu_renderer(
 
 cnoremap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
 cnoremap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
-endif " >>>-----------------------------------
-if s:is_loaded('indent-blankline.nvim') " <<<
-" 缩进线字符
-if !s:env_console | let g:indentLine_char = '┊' | endif
-" 优先使用treesitter计算缩进
-let g:indent_blankline_use_treesitter = v:true
-" 高亮上下文缩进线
-let g:indent_blankline_show_current_context = v:true
-" 排除类型
-let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
-	\ 'popup']
-let g:indent_blankline_buftype_exclude = ['terminal']
-endif " >>>-----------------------------------
-if s:is_loaded('vim-better-whitespace') " <<<
-let g:better_whitespace_filetypes_blacklist =
-	\ ['coc-explorer', 'dbout', 'xxd']
-let g:show_spaces_that_precede_tabs = 1
-endif " >>>-----------------------------------
-if s:is_loaded('hexmode') " <<<
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-endif " >>>-----------------------------------
-if s:is_loaded('aerial.nvim') " <<<
-lua require('aerial').setup({})
-endif " >>>-----------------------------------
-if s:is_loaded('nvim-treesitter') " <<<
-lua require('treesitter')
-endif " >>>-----------------------------------
-if s:is_loaded('vim-sneak') " <<<
-" 类似于EasyMotion的标签模式
-let g:sneak#label = 1
-" 智能大小写
-let g:sneak#use_ic_scs = 1
-endif " >>>-----------------------------------
-if s:is_loaded('vim-visual-multi') " <<<
-let g:VM_Extend_hl = 'CursorRange'
-endif " >>>-----------------------------------
-if s:is_loaded('vim-sandwich') " <<<
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-let g:sandwich#recipes += [
-	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1, 'input': [')'] },
-	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1, 'input': [']'] },
-	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1, 'input': ['}'] },
-\ ]
-endif " >>>----------------------------------
-if s:is_loaded('nerdcommenter') " <<<
-" 取消所有预设键位映射
-let g:NERDCreateDefaultMappings = 0
-" 注释符号后面添加空格
-let g:NERDSpaceDelims = 1
-let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
-" 注释符号左对齐
-let g:NERDDefaultAlign='left'
-endif " >>>-----------------------------------
-if s:is_loaded('axring.vim') " <<<
-let g:axring_rings = [
-	\ ['&&', '||'],
-	\ ['&', '|', '^'],
-	\ ['&=', '|=', '^='],
-	\ ['>>', '<<'],
-	\ ['>>=', '<<='],
-	\ ['==', '!='],
-	\ ['===', '!=='],
-	\ ['>', '<', '>=', '<='],
-	\ ['++', '--'],
-	\ ['true', 'false'],
-	\ ['verbose', 'debug', 'info', 'warn', 'error', 'fatal'],
-\ ]
-let g:axring_rings_go = [
-	\ [':=', '='],
-	\ ['byte', 'rune'],
-	\ ['complex64', 'complex128'],
-	\ ['int', 'int8', 'int16', 'int32', 'int64'],
-	\ ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
-	\ ['float32', 'float64'],
-	\ ['interface', 'struct'],
-	\ ['debug', 'info', 'warn', 'error', 'panic', 'fatal'],
-\ ]
-endif " >>>-----------------------------------
-if s:is_loaded('coc.nvim') " <<<
-" format函数
-set formatexpr=CocAction('formatSelected')
-
-" 修改coc数据目录, 默认值是XDG config目录
-let g:coc_data_home = s:datadir.'/coc'
-
-function! s:show_documentation() abort
-	if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	elseif (coc#rpc#ready())
-		call CocActionAsync('doHover')
-	endif
-endfunction
-
-let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
-	\ "coc-db"]
-let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
-let s:coc_lsp = [
-	\ "coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
-	\ "coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
-	\ "coc-tsserver", "coc-eslint",
-	\ "coc-css", "coc-stylelint",
-	\ "coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
-	\ "coc-xml", "coc-svg", "coc-docker", "coc-texlab",
-\ ]
-let g:coc_global_extensions = [
-	\ "coc-pairs",
-\ ] + s:coc_sources + s:coc_integration + s:coc_snippets + s:coc_lsp
-
-" coc-explorer
-let g:coc_explorer_global_presets = {
-	\ 'buffer': {
-		\ 'sources': [{'name': 'buffer', 'expand': v:true}],
-		\ 'position': 'floating',
-		\ 'floating-position': 'center-top',
-	\ },
-\ }
-
-augroup myconfig_coc
-	autocmd!
-	" 补全跳转后显示函数签名
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-	" coc-explorer界面
-	autocmd filetype coc-explorer setlocal fcs=eob:\ 
-
-	" 用coc-explorer替换netrw
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-		\ | exe 'cd '.argv()[0]
-		\ | exe 'CocCommand explorer --position floating' argv()[0]
-		\ | wincmd p | bd | endif
-
-	" readonly文件不显示diagnostic
-	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
-
-	" 使用coc-html自动闭合tag, 禁用coc-pairs
-	autocmd FileType html let b:coc_pairs_disabled = ['<']
-augroup END
-
-call coc#config("explorer.file.root.template",
-	\ " [git & 1][hidden & 1][root]")
-call coc#config("explorer.file.child.template",
-	\ "[git | 2][selection | clip | 1] ".
-	\ "[indent][icon | 1] [filename omitCenter 1] ".
-	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
-call coc#config("explorer.buffer.root.template",
-	\ " [title] [hidden & 1]")
-call coc#config("explorer.buffer.child.template",
-	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
-endif " >>>-----------------------------------
-if s:is_loaded('asynctasks.vim') " <<<
-let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
-endif " >>>-----------------------------------
-if s:is_loaded('vim-go') " <<<
-" 只安装特定工具，优先使用coc-go提供的功能
-" 关闭gopls
-let g:go_gopls_enabled = 0
-" 禁用omnifunc补全
-let g:go_code_completion_enabled = 0
-" 关闭vim-go的按键映射
-let g:go_doc_keywordprg_enabled = 0 " 查看文档
-let g:go_def_mapping_enabled = 0 " 跳转定义
-" 禁止在保存时自动执行GoFmt
-let g:go_fmt_autosave = 0
-endif " >>>-----------------------------------
-if s:is_loaded('asyncrun.vim') " <<<
-function! s:floaterm_repl(opts)
-	exec "FloatermNew --wintype=split --position=top ".a:opts.cmd
-	stopinsert | wincmd p
-endfunction
-function! s:floaterm_bottom(opts)
-	exec "FloatermNew --wintype=split --position=bottom ".a:opts.cmd
-endfunction
-let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
-let g:asyncrun_runner.floaterm_repl = function('s:floaterm_repl')
-let g:asyncrun_runner.floaterm_bottom = function('s:floaterm_bottom')
-" quickfix窗口的默认高度
-let g:asyncrun_open = 6
-endif " >>>-----------------------------------
-if s:is_loaded('vim-dadbod-ui') " <<<
-let g:db_ui_save_location = s:datadir.'/db_ui'
-let g:db_ui_use_nerd_fonts = 1
-augroup myconfig_dbui
-	autocmd!
-	autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
-augroup END
-endif " >>>-----------------------------------
-if s:is_loaded('firenvim') " <<<
-let g:firenvim_config = {
-	\ 'globalSettings': {
-		\ 'alt': 'all',
-	\ },
-	\ 'localSettings': {
-		\ '.*': {
-			\ 'cmdline': 'firenvim',
-			\ 'priority': 0,
-			\ 'selector': 'textarea',
-			\ 'takeover': 'never',
-			\ },
-	\ }
-\ }
-
-augroup myconfig_firenvim_init
-	autocmd!
-	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-augroup END
-
-function! OnUIEnter(event) abort
-	if !s:IsFirenvimActive(a:event)
-		return
-	endif
-	set laststatus=0
-	if &lines < 10
-		set lines=10
-	endif
-	augroup myconfig_firenvim
-		autocmd!
-		autocmd BufEnter github.com_*.txt set filetype=markdown
-		autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
-	augroup END
-endfunction
-
-function! s:IsFirenvimActive(event) abort
-	if !exists('*nvim_get_chan_info')
-		return 0
-	endif
-	let l:ui = nvim_get_chan_info(a:event.chan)
-	return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
-		\ l:ui.client.name =~? 'Firenvim'
-endfunction
-endif " >>>-----------------------------------
-if s:is_loaded('vim-diff-enhanced') " <<<
-if &diff
-	let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
-endif
 endif " >>>-----------------------------------
 
 " <<< 按键
