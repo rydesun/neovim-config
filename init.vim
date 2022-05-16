@@ -7,8 +7,6 @@ let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
 let s:env_console = $TERM == 'linux'
 " 是否作为pager处理文本
 let s:paging = get(g:, 'paging', v:false)
-" 是否包含ANSI转义序列
-let s:ansi = get(g:, 'ansi', v:false)
 
 " 是否启用该类型的插件
 let s:plugin_ui = v:true	" 自身界面
@@ -23,9 +21,15 @@ let s:plugin_misc = !s:paging	" 其他
 " >>>-----------------------------------
 
 " <<< 插件
-call plug#begin(s:plugdir)
+" 我自己的插件
+packadd rooter		" 自动设置工作目录
+packadd ansi		" 处理ANSI转义序列
+packadd counter		" 统计中文字符数量
+packadd typography	" 修复中英文间空格
 
-Plug 'nvim-lua/plenary.nvim'
+" 通过vim-plug安装的插件
+call plug#begin(s:plugdir)
+Plug 'nvim-lua/plenary.nvim'		" 补充lua API
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
@@ -114,6 +118,7 @@ endif
 call plug#end()
 " >>>-----------------------------------
 
+" 检查vim-plug加载插件的情况
 function! s:is_loaded(plug) abort
 	return has_key(g:plugs, a:plug) && isdirectory(g:plugs[a:plug].dir)
 endfunction
@@ -674,11 +679,6 @@ endif
 command  GetHighlight
 	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
-command  CountZhCharacters  lua require('counter'):cmd_count_zh()
-
-command! -nargs=0  Typography  call typography#format()
-command! -nargs=0  TypographyHugo  call typography#format_hugo()
-
 command! -nargs=1 -complete=custom,s:lightline_colorschemes
 	\ LightlineColorscheme  call s:set_lightline_colorscheme(<q-args>)
 
@@ -779,27 +779,6 @@ if &foldtext == 'foldtext()'
 	set foldtext=Foldtext()
 endif
 " >>>-----------------------------------
-
-" 自动设置工作目录
-augroup myconfig
-	autocmd!
-	let g:rootpath_patterns = [
-		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
-	\ ]
-	autocmd VimEnter,BufReadPost,BufEnter,BufWritePost * call s:cd_root()
-	function! s:cd_root() abort
-		if &buftype != '' | return | endif
-		let p = luaeval("require('rooter').get(_A)", g:rootpath_patterns)
-		if isdirectory(p)
-			try | exec 'lcd '.p | catch /E472/ | endtry
-		endif
-	endfunction
-augroup END
-
-augroup ansi | if s:ansi
-	autocmd!
-	autocmd VimEnter * call utils#term_paging()
-endif | augroup END
 
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0

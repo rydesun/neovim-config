@@ -18,24 +18,6 @@ function! utils#term_git(cmd, cur) abort
 	nnoremap <buffer><silent> q :bd!<CR>
 endfunction
 
-" 将buffer写入临时文件
-function! utils#write_buffer_tmpfile() abort
-        let l:tempfile = tempname()
-        exec 'write '.l:tempfile
-        return l:tempfile
-endfunction
-
-" 在终端中输出文件
-function! utils#term_cat(tempfile) abort
-        exec 'term cat '.a:tempfile.'; cat'
-endfunction
-
-" 终端pager
-function! utils#term_paging() abort
-	let l:tempfile = utils#write_buffer_tmpfile()
-	call utils#term_cat(l:tempfile)
-endfunction
-
 function! utils#popup_open(message, max) abort
         call s:popup_close()
 

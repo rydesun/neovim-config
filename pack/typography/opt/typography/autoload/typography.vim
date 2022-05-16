@@ -1,4 +1,3 @@
-" TODO: incomplete Unified_Ideograph
 let s:hans_regexp = '[\u3400-\u4DBF\u4E00-\u9FFC]'
 let s:alnum_regexp = '[a-zA-Z0-9]'
 
