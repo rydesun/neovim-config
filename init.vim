@@ -723,27 +723,34 @@ endfunction
 silent! colorscheme everforest
 if !s:env_console | set termguicolors | endif
 
-set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1	" 常见文件编码(中文用户)
-set ignorecase smartcase	" 大小写模糊搜索
-set wildignorecase	" 命令行补全文件名时无视大小写
+set shortmess+=I	" 去除启动页面的介绍
 set title		" 设置虚拟终端的标题
 set laststatus=3	" 只显示一个窗口的状态栏
-set splitbelow		" 水平分割的新窗口在下面打开
-set splitright		" 垂直分割的新窗口在右边打开
-set mouse=a		" 所有模式下支持鼠标
-set relativenumber	" 开启相对行号
-set numberwidth=1	" 行号最低宽度
-set signcolumn=number	" 在行号上显示侧边栏
-set scrolloff=5		" 滚动时光标到上下边缘的预留行数
-set shortmess+=cI	" c关闭补全提示, I关闭空白页信息
-set diffopt+=vertical	" diff模式默认以垂直方式分割
-set wildmode=list:longest,full	" 命令行补全时以列表显示
-set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄	" list模式时的可见字符
-set wildignore+=*~,*.swp,*.bak,*.o,*.py[co],__pycache__		" 文件过滤规则
-set formatoptions+=B	" 合并中文行不加空格
-set confirm		" 报错方式改为询问
+set scrolloff=5		" 滚动页面时光标距离上下边缘的预留行数
 
-" 修改折叠文本
+set relativenumber	" 开启侧边栏的相对行号
+set signcolumn=number	" 其他的侧边栏符号覆盖在行号上面
+set numberwidth=3	" 行号的最低宽度
+" 终端不需要侧边栏
+augroup myconfig_term_signcolumn | autocmd!
+	autocmd TermOpen * setlocal norelativenumber
+augroup END
+" 分页时不需要swapfile 行号 状态栏
+if s:paging | set noswapfile norelativenumber laststatus=0 | endif
+
+" 常见文件编码(中文用户)
+set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1
+" list模式的可见字符
+set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
+
+set ignorecase		" pattern搜索无视大小写
+set smartcase		" pattern搜索含大写字符时则必须匹配大小写
+set formatoptions+=B	" 合并中文行时不加空格
+set mouse=a		" 所有模式支持鼠标
+" 补全路径时的过滤规则
+set wildignore+=*~,*.swp,*.o,*.py[co],__pycache__
+
+" 折叠行显示的文本
 if &foldtext == 'foldtext()'
 	function! Foldtext() abort
 		let l:start = getline(v:foldstart)
@@ -771,19 +778,11 @@ if &foldtext == 'foldtext()'
 	endfunction
 	set foldtext=Foldtext()
 endif
-let g:vim_indent_cont = shiftwidth()	" vimscript缩进宽度
-
-if s:paging
-	set noswapfile
-	set laststatus=0
-	set norelativenumber
-	set signcolumn=no
-endif
 " >>>-----------------------------------
 
+" 自动设置工作目录
 augroup myconfig
 	autocmd!
-	" 自动设置工作目录
 	let g:rootpath_patterns = [
 		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',
 	\ ]
@@ -795,9 +794,6 @@ augroup myconfig
 			try | exec 'lcd '.p | catch /E472/ | endtry
 		endif
 	endfunction
-
-	" 终端不需要侧边栏
-	autocmd TermOpen * setlocal norelativenumber
 augroup END
 
 augroup ansi | if s:ansi
