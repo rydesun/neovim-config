@@ -27,8 +27,6 @@
   },
   "explorer.icon.enableNerdfont": true,
   "explorer.git.icon.status.ignored": " ",
-  // coc-translator
-  "translator.engines": ["bing"],
   // coc-git
   "git.signPriority": 5,
   "git.addedSign.text": "+│",

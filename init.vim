@@ -49,6 +49,7 @@ Plug 'AndrewRadev/linediff.vim'		" 选区diff
 Plug 'psliwka/vim-smoothie', { 'commit': '10fd0aa' }
 					" 平滑滚动
 Plug 'fidian/hexmode'			" 查看16进制
+Plug 'voldikss/vim-translator'		" 翻译
 endif
 
 if s:plugin_op
@@ -175,7 +176,7 @@ function! s:show_documentation() abort
 	endif
 endfunction
 
-let g:coc_global_extensions = ["coc-git", "coc-explorer", "coc-translator"]
+let g:coc_global_extensions = ["coc-git", "coc-explorer"]
 
 " coc-explorer
 let g:coc_explorer_global_presets = {
@@ -318,7 +319,7 @@ let g:indent_blankline_use_treesitter = v:true
 let g:indent_blankline_show_current_context = v:true
 " 排除类型
 let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
-	\ 'popup']
+	\ 'popup', 'translator']
 let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
 if s:is_loaded('lightline.vim') " <<<
@@ -580,8 +581,8 @@ map                <leader>c   <Plug>NERDCommenterToggle
 nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
 nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
-nmap               <leader>k   <Plug>(coc-translator-p)
-vmap               <leader>k   <Plug>(coc-translator-pv)
+nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
+vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
 
 
 " h组g组：Git Hunk
