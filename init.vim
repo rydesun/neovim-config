@@ -295,7 +295,7 @@ function! s:IsFirenvimActive(event) abort
 endfunction
 endif " >>>-----------------------------------
 if s:is_loaded('gitsigns.nvim') " <<<
-lua require('gitsigns-config')
+lua require('config/gitsigns')
 endif " >>>-----------------------------------
 if s:is_loaded('hexmode') " <<<
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
@@ -418,8 +418,8 @@ noremap  g#  g#<Cmd>lua require('hlslens').start()<CR>
 
 augroup myconfig_vmlens
     autocmd!
-    autocmd User visual_multi_start lua require('vmlens').start()
-    autocmd User visual_multi_exit lua require('vmlens').exit()
+    autocmd User visual_multi_start lua require('config/vmlens').start()
+    autocmd User visual_multi_exit lua require('config/vmlens').exit()
 augroup END
 
 lua << EOF
@@ -429,7 +429,7 @@ require('hlslens').setup({
 EOF
 endif " >>>-----------------------------------
 if s:is_loaded('nvim-treesitter') " <<<
-lua require('treesitter')
+lua require('config/nvim-treesitter')
 endif " >>>-----------------------------------
 if s:is_loaded('nvim-web-devicons') " <<<
 lua require'nvim-web-devicons'.setup { default = true }
@@ -477,7 +477,7 @@ if s:is_loaded('vim-visual-multi') " <<<
 let g:VM_Extend_hl = 'CursorRange'
 endif " >>>-----------------------------------
 if s:is_loaded('wilder.nvim') " <<<
-lua require('wilder-config')
+lua require('config/wilder')
 endif " >>>-----------------------------------
 
 " <<< 按键
