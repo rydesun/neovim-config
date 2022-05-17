@@ -1,6 +1,6 @@
 " 自动设置工作目录
 
-augroup myconfig
+augroup rooter
 	autocmd!
 	let g:rootpath_patterns = [
 		\ '.git', '.hg', '.svn', 'Makefile', 'package.json',

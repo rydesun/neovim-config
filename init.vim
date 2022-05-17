@@ -23,6 +23,7 @@ let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 packadd rooter		" 自动设置工作目录
 packadd counter		" 统计中文字符数量
 packadd typography	" 修复中英文间空格
+packadd ansi		" 处理ANSI转义序列
 
 " 通过vim-plug安装的插件
 call plug#begin()
@@ -735,9 +736,5 @@ if &foldtext == 'foldtext()'
 	set foldtext=Foldtext()
 endif
 " >>>-----------------------------------
-
-if get(g:, 'ansi', v:false)
-	autocmd VimEnter * call ansi#term_cat()
-endif
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
