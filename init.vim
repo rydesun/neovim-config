@@ -36,7 +36,11 @@ Plug 'sainnhe/everforest'		" 配色主题
 Plug 'itchyny/lightline.vim'		" 状态栏
 Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
-Plug 'gelguy/wilder.nvim', {'do': ':UpdateRemotePlugins'}
+function! UpdateRemotePlugins(...)
+	let &rtp=&rtp
+	UpdateRemotePlugins
+endfunction
+Plug 'gelguy/wilder.nvim', {'do': function('UpdateRemotePlugins')}
 					" 改进wildmenu
 endif
 
@@ -487,26 +491,7 @@ if s:is_loaded('vim-visual-multi') " <<<
 let g:VM_Extend_hl = 'CursorRange'
 endif " >>>-----------------------------------
 if s:is_loaded('wilder.nvim') " <<<
-call wilder#enable_cmdline_enter()
-set wildcharm=<Tab>
-
-call wilder#set_option('modes', ['/', '?', ':'])
-call wilder#set_option('pipeline', [
-	\ wilder#branch(
-		\ wilder#cmdline_pipeline({'language': 'python'}),
-		\ wilder#python_search_pipeline({
-			\ 'pattern': wilder#python_fuzzy_pattern(),
-		\ }),
-	\ ),
-\ ])
-call wilder#set_option('renderer', wilder#wildmenu_renderer(
-	\ wilder#wildmenu_lightline_theme({
-		\ 'highlights': {},
-		\ 'highlighter': wilder#basic_highlighter(),
-\ })))
-
-cnoremap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-cnoremap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+lua require('wilder-config')
 endif " >>>-----------------------------------
 
 " <<< 按键
