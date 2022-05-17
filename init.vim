@@ -69,6 +69,7 @@ endif
 if s:plugin_cmd
 Plug 'skywind3000/asyncrun.vim'		" 异步执行
 Plug 'voldikss/vim-floaterm'		" 终端窗口
+Plug 'lewis6991/gitsigns.nvim'		" 集成Git
 Plug 'lambdalisue/gina.vim'		" 集成Git
 Plug 'tpope/vim-dadbod'			" 数据库
 Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库UI
@@ -176,7 +177,7 @@ function! s:show_documentation() abort
 	endif
 endfunction
 
-let g:coc_global_extensions = ["coc-git", "coc-explorer"]
+let g:coc_global_extensions = ["coc-explorer"]
 
 " coc-explorer
 let g:coc_explorer_global_presets = {
@@ -307,6 +308,9 @@ function! s:IsFirenvimActive(event) abort
 		\ l:ui.client.name =~? 'Firenvim'
 endfunction
 endif " >>>-----------------------------------
+if s:is_loaded('gitsigns.nvim') " <<<
+lua require('gitsigns-config')
+endif " >>>-----------------------------------
 if s:is_loaded('hexmode') " <<<
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 endif " >>>-----------------------------------
@@ -360,11 +364,12 @@ function! Lightline_modified() abort
 	return &modified ? '' : ''
 endfunction
 function! Lightline_git_status() abort
-	let s:status = get(g:, 'coc_git_status', '')
-	return len(s:status) >= 40 ? s:status[:4].s:status[40:]: s:status
+	" TODO: 整个项目的情况
+	let s:head = get(b:, 'gitsigns_head', '')
+	return len(s:head) == 40 ? s:head[:8]: s:head
 endfunction
 function! Lightline_buffer_git_status() abort
-	return !empty(get(b:, 'coc_git_status', '')) ? '': ''
+	return !empty(get(b:, 'gitsigns_status', '')) ? '': ''
 endfunction
 function! Lightline_diagnostic() abort
 	let info = get(b:, 'coc_diagnostic_info', {})
@@ -545,8 +550,6 @@ nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
 nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
 nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
 nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
-nmap     <silent>  [c          <Plug>(coc-git-prevchunk)
-nmap     <silent>  ]c          <Plug>(coc-git-nextchunk)
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 
@@ -560,8 +563,8 @@ nmap     <silent>  gr          <Plug>(coc-references)
 
 
 " 其他
-nmap     <silent>  <C-k>       <Plug>(coc-git-prevchunk)
-nmap     <silent>  <C-j>       <Plug>(coc-git-nextchunk)
+nnoremap <silent>  <C-k>       :Gitsigns prev_hunk<CR>
+nnoremap <silent>  <C-j>       :Gitsigns next_hunk<CR>
 vnoremap           //          y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 
@@ -586,11 +589,10 @@ vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
 
 
 " h组g组：Git Hunk
-nnoremap           <leader>hs  :CocCommand git.chunkStage<CR>
-nnoremap           <leader>hu  :CocCommand git.chunkUndo<CR>
-nnoremap           <leader>ho  :CocCommand git.copyUrl<CR>
-nmap               <leader>hi  <Plug>(coc-git-chunkinfo)
-nmap               <leader>hb  <Plug>(coc-git-commit)
+nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
+nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
+nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
+nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
 nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
 nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
 nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>

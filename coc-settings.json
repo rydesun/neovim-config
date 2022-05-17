@@ -27,16 +27,6 @@
   },
   "explorer.icon.enableNerdfont": true,
   "explorer.git.icon.status.ignored": " ",
-  // coc-git
-  "git.signPriority": 5,
-  "git.addedSign.text": "+│",
-  "git.changedSign.text": "~│",
-  "git.removedSign.text": "_│",
-  "git.topRemovedSign.text": "‾│",
-  "git.changeRemovedSign.text": "≃│",
-  "git.branchCharacter": "",
-  "git.stagedDecorator": "+",
-  "git.untrackedDecorator": "%",
   // coc-yank
   "yank.highlight.duration": 100,
   // coc-snippets
