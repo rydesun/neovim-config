@@ -9,8 +9,7 @@ wilder.set_option('pipeline', {
             language = 'vim',
             -- 任意位置开始匹配
             fuzzy = 2,
-        }),
-        wilder.search_pipeline()
+        })
     )
 })
 
