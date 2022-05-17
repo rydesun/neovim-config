@@ -95,10 +95,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-" vim-polyglot 自带缩进检测插件autoindent
-" 禁止使用自带的插件sensible
-let g:polyglot_disabled = ['sensible']
-Plug 'sheerun/vim-polyglot'
 Plug 'stevearc/aerial.nvim'		" 大纲
 Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
 					" markdown预览
