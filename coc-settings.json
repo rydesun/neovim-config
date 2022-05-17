@@ -23,6 +23,10 @@
   },
   "explorer.icon.enableNerdfont": true,
   "explorer.git.icon.status.ignored": " ",
+  "explorer.file.root.template": " [git & 1][hidden & 1][root]",
+  "explorer.file.child.template": "[git | 2][selection | clip | 1] [indent][icon | 1] [filename omitCenter 1] [modified][readonly][linkIcon growRight 1 omitCenter 5][size]",
+  "explorer.buffer.root.template": " [title] [hidden & 1]",
+  "explorer.buffer.child.template": "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]",
   // coc-snippets
   "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips",
   // coc-html

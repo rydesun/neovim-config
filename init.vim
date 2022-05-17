@@ -1,7 +1,6 @@
 " <<< 环境
-let s:confdir = stdpath('config')	" ${XDG_CONFIG_HOME}/nvim
-let s:datadir = stdpath('data')		" ${XDG_DATA_HOME}/nvim
-let s:plugdir = s:datadir.'/plugged'	" ${XDG_DATA_HOME}/nvim/plugged
+let s:confdir = stdpath('config')
+let s:datadir = stdpath('data')
 
 " 是否在小型环境中(非开发)
 let s:env_mini = $VIM_MINI
@@ -16,7 +15,6 @@ let s:plugin_view = v:true	" 查看文本
 let s:plugin_op = v:true	" 操作文本
 let s:plugin_cmd = !s:paging	" 外部命令
 let s:plugin_proj = !s:paging	" 项目管理
-let s:plugin_ft = !s:env_mini && !s:paging	" 文件类型
 let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 " >>>-----------------------------------
 
@@ -27,7 +25,7 @@ packadd counter		" 统计中文字符数量
 packadd typography	" 修复中英文间空格
 
 " 通过vim-plug安装的插件
-call plug#begin(s:plugdir)
+call plug#begin()
 Plug 'nvim-lua/plenary.nvim'		" 补充lua API
 Plug 'dstein64/vim-startuptime'		" 检查启动时间
 
@@ -50,7 +48,7 @@ Plug 'ntpeters/vim-better-whitespace'	" 空白符
 Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
 					" 显示颜色
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
-Plug 'psliwka/vim-smoothie', { 'commit': '10fd0aa' }
+Plug 'psliwka/vim-smoothie', {'commit': '10fd0aa'}
 					" 平滑滚动
 Plug 'fidian/hexmode'			" 查看16进制
 Plug 'voldikss/vim-translator'		" 翻译
@@ -78,18 +76,20 @@ Plug 'lambdalisue/gina.vim'		" 集成Git
 Plug 'tpope/vim-dadbod'			" 数据库
 Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库UI
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
-Plug 'glacambre/firenvim', {'do': { _ -> firenvim#install(0) }}
+Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
 					" 浏览器嵌入
 endif
 
 if s:plugin_proj
-Plug 'neoclide/coc.nvim',
-	\ {'branch': 'release'}		" coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
+					" 文件浏览器
 Plug 'nvim-telescope/telescope.nvim'	" finder
 Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
-if s:plugin_ft
+if s:plugin_dev
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
@@ -98,9 +98,6 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " 禁止使用自带的插件sensible
 let g:polyglot_disabled = ['sensible']
 Plug 'sheerun/vim-polyglot'
-endif
-
-if s:plugin_dev
 Plug 'stevearc/aerial.nvim'		" 大纲
 Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
 					" markdown预览
@@ -180,9 +177,16 @@ function! s:show_documentation() abort
 	endif
 endfunction
 
-let g:coc_global_extensions = ["coc-explorer"]
+augroup myconfig_coc
+	autocmd!
+	" 补全跳转后显示函数签名
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" coc-explorer
+	" readonly文件不显示diagnostic
+	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
+augroup END
+endif " >>>-----------------------------------
+if s:is_loaded('coc-explorer') " <<<
 let g:coc_explorer_global_presets = {
 	\ 'buffer': {
 		\ 'sources': [{'name': 'buffer', 'expand': v:true}],
@@ -191,12 +195,8 @@ let g:coc_explorer_global_presets = {
 	\ },
 \ }
 
-augroup myconfig_coc
-	autocmd!
-	" 补全跳转后显示函数签名
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-	" coc-explorer界面
+augroup myconfig_coc-explorer
+	" 不显示tilde
 	autocmd filetype coc-explorer setlocal fcs=eob:\ 
 
 	" 用coc-explorer替换netrw
@@ -205,21 +205,7 @@ augroup myconfig_coc
 		\ | exe 'cd '.argv()[0]
 		\ | exe 'CocCommand explorer --position floating' argv()[0]
 		\ | wincmd p | bd | endif
-
-	" readonly文件不显示diagnostic
-	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
 augroup END
-
-call coc#config("explorer.file.root.template",
-	\ " [git & 1][hidden & 1][root]")
-call coc#config("explorer.file.child.template",
-	\ "[git | 2][selection | clip | 1] ".
-	\ "[indent][icon | 1] [filename omitCenter 1] ".
-	\ "[modified][readonly][linkIcon growRight 1 omitCenter 5][size]")
-call coc#config("explorer.buffer.root.template",
-	\ " [title] [hidden & 1]")
-call coc#config("explorer.buffer.child.template",
-	\ "[git | 2][selection | 1] [name] [modified][readonly growRight 1][bufname]")
 endif " >>>-----------------------------------
 if s:is_loaded('everforest') " <<<
 let g:everforest_better_performance = 1
