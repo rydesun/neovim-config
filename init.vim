@@ -175,25 +175,7 @@ function! s:show_documentation() abort
 	endif
 endfunction
 
-let s:coc_sources = ["coc-lists", "coc-yank", "coc-tasks"]
-let s:coc_integration = ["coc-git", "coc-explorer", "coc-translator",
-	\ "coc-db"]
-let s:coc_snippets = ["coc-snippets",	"coc-emmet"]
-let s:coc_lsp = [
-	\ "coc-go", "coc-pyright", "coc-rust-analyzer", "coc-clangd",
-	\ "coc-sh", "coc-vimlsp", "coc-lua", "coc-diagnostic",
-	\ "coc-tsserver", "coc-eslint",
-	\ "coc-css", "coc-stylelint",
-	\ "coc-html", "coc-json", "coc-yaml", "coc-toml", "coc-markdownlint",
-	\ "coc-xml", "coc-svg", "coc-docker", "coc-texlab",
-\ ]
-let g:coc_global_extensions = [
-	\ "coc-pairs",
-\ ] + s:coc_sources + s:coc_integration
-if s:plugin_dev
-	let g:coc_global_extensions += s:coc_snippets
-	let g:coc_global_extensions += s:coc_lsp
-endif
+let g:coc_global_extensions = ["coc-git", "coc-explorer", "coc-translator"]
 
 " coc-explorer
 let g:coc_explorer_global_presets = {
