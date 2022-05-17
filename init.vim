@@ -205,9 +205,6 @@ augroup myconfig_coc
 
 	" readonly文件不显示diagnostic
 	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
-
-	" 使用coc-html自动闭合tag, 禁用coc-pairs
-	autocmd FileType html let b:coc_pairs_disabled = ['<']
 augroup END
 
 call coc#config("explorer.file.root.template",

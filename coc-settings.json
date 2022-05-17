@@ -12,10 +12,6 @@
     "snippet": "", "color": ""
   },
   "coc.preferences.formatOnSaveFiletypes": ["go", "rust"],
-  // coc-list
-  "session.directory": "~/.data/nvim/sessions",
-  "list.source.files.args": ["--hidden", "--files"],	// rg参数
-  "list.source.grep.args": ["-workspace"],
   // coc-explorer
   "explorer.width": 30,
   "explorer.sources": [{"name": "file","expand": true}],
@@ -27,8 +23,6 @@
   },
   "explorer.icon.enableNerdfont": true,
   "explorer.git.icon.status.ignored": " ",
-  // coc-yank
-  "yank.highlight.duration": 100,
   // coc-snippets
   "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips",
   // coc-html
