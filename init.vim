@@ -86,11 +86,10 @@ Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
 if s:plugin_ft
-Plug 'nvim-treesitter/nvim-treesitter',
-	\ {'do': ':TSUpdate'} |
-	\ Plug 'nvim-treesitter/playground' |
-	\ Plug 'romgrk/nvim-treesitter-context' |
-	\ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'romgrk/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " vim-polyglot 自带缩进检测插件autoindent
 " 禁止使用自带的插件sensible
 let g:polyglot_disabled = ['sensible']
@@ -104,7 +103,7 @@ Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
 Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
 Plug 'lervag/vimtex'			" LaTex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries motion'}
+Plug 'fatih/vim-go'			" golang
 Plug 'mattn/emmet-vim'			" 展开缩写
 endif
 
