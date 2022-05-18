@@ -83,9 +83,7 @@ endif
 
 if s:plugin_proj
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
-					" 文件浏览器
+Plug 'kyazdani42/nvim-tree.lua'		" 文件浏览器
 Plug 'nvim-telescope/telescope.nvim'	" finder
 Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
@@ -181,27 +179,6 @@ augroup myconfig_coc
 
 	" readonly文件不显示diagnostic
 	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
-augroup END
-endif " >>>-----------------------------------
-if s:is_loaded('coc-explorer') " <<<
-let g:coc_explorer_global_presets = {
-	\ 'buffer': {
-		\ 'sources': [{'name': 'buffer', 'expand': v:true}],
-		\ 'position': 'floating',
-		\ 'floating-position': 'center-top',
-	\ },
-\ }
-
-augroup myconfig_coc-explorer
-	" 不显示tilde
-	autocmd filetype coc-explorer setlocal fcs=eob:\ 
-
-	" 用coc-explorer替换netrw
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-		\ | exe 'cd '.argv()[0]
-		\ | exe 'CocCommand explorer --position floating' argv()[0]
-		\ | wincmd p | bd | endif
 augroup END
 endif " >>>-----------------------------------
 if s:is_loaded('everforest') " <<<
@@ -305,8 +282,8 @@ let g:indent_blankline_use_treesitter = v:true
 " 高亮上下文缩进线
 let g:indent_blankline_show_current_context = v:true
 " 排除类型
-let g:indent_blankline_filetype_exclude = ['help', 'lspinfo', 'coc-explorer',
-	\ 'popup', 'translator']
+let g:indent_blankline_filetype_exclude = ['help', 'lspinfo',
+	\ 'popup', 'translator', 'NvimTree']
 let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
 if s:is_loaded('lightline.vim') " <<<
@@ -425,6 +402,17 @@ require('hlslens').setup({
 })
 EOF
 endif " >>>-----------------------------------
+if s:is_loaded('nvim-tree.lua') " <<<
+augroup myconfig_explorer
+	autocmd!
+	" 如果是最后一个窗口则直接退出
+	autocmd BufEnter * ++nested
+		\ if winnr('$') == 1 && bufname() == 'NvimTree_'.tabpagenr()
+		\ | quit | endif
+augroup END
+
+lua require('config/nvim-tree')
+endif " >>>-----------------------------------
 if s:is_loaded('nvim-treesitter') " <<<
 lua require('config/nvim-treesitter')
 endif " >>>-----------------------------------
@@ -433,7 +421,7 @@ lua require'nvim-web-devicons'.setup { default = true }
 endif " >>>-----------------------------------
 if s:is_loaded('vim-better-whitespace') " <<<
 let g:better_whitespace_filetypes_blacklist =
-	\ ['coc-explorer', 'dbout', 'xxd']
+	\ ['dbout', 'xxd']
 let g:show_spaces_that_precede_tabs = 1
 endif " >>>-----------------------------------
 if s:is_loaded('vim-dadbod-ui') " <<<
@@ -545,9 +533,8 @@ vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 map                <leader>c   <Plug>NERDCommenterToggle
-nnoremap <silent>  <leader>e   :exec 'CocCommand explorer' getcwd()<CR>
+nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>o   :AerialToggle left<CR>
-nnoremap <silent>  <leader>b   :CocCommand explorer --preset buffer<CR>
 nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
 vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
 
