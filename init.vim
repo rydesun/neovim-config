@@ -354,8 +354,13 @@ lua GetIcon = function()
 	\ local extension = vim.fn.expand('%:e')
 	\ return require'nvim-web-devicons'.get_icon(filename, extension) end
 function! Lightline_filetype()
+	if !strlen(&filetype) | return '' | endif
 	let icon = luaeval('GetIcon')()
-	return strlen(&filetype) ? icon.' '.&filetype : ''
+	if empty(icon)
+		return &filetype
+	else
+		return icon.' '.&filetype
+	endif
 endfunction
 
 function! s:set_lightline_colorscheme(name) abort
