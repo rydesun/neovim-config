@@ -594,61 +594,24 @@ if s:paging
 endif
 " >>>-----------------------------------
 
-" <<< 命令
-command  GetHighlight
-	\ echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-
-command! -nargs=1 -complete=custom,s:lightline_colorschemes
-	\ LightlineColorscheme  call s:set_lightline_colorscheme(<q-args>)
-
-cabbrev  <silent> Search  AsyncRun -silent firefox -search <cword>
-cabbrev  <expr>   ww      (getcmdtype() == ':' && getcmdline() =~ '^ww$')?
-	\ 'w !sudo tee % >/dev/null' : 'ww'
-
+" <<< 命令行
 lua << EOF
-local cmds = {
-    i_et = "cnoreabb <expr> i%1"
-        .. " (getcmdtype() == ':' && getcmdline() =~ '^i%1$')?"
-        .. " 'setl sw=%1 ts=%1 et' : 'i%1'",
-    i_noet = "cnoreabb <expr> i%1t"
-        .. " (getcmdtype() == ':' && getcmdline() =~ '^i%1t$')?"
-        .. " 'setl sw=%1 ts=%1 noet' : 'i%1t'",
-}
-for _, i in pairs{2, 4, 8} do
-    for _, cmd in pairs(cmds) do
-        local s = string.gsub(i, "(%d)", cmd)
-        vim.api.nvim_command(s)
-    end
+local cabbrev = require'cabbrev'
+
+-- 以root权限写入
+cabbrev.expr('ww', 'w !sudo tee % >/dev/null')
+
+-- 设置缩进
+for _, c in pairs{2, 4, 8} do
+	c = tostring(c)
+	input = 'i'..c
+	replace = string.format('setl sw=%s ts=%s et', c, c)
+	cabbrev.expr(input, replace)
+	input = 'i'..c..'t'
+	replace = string.format('setl sw=%s ts=%s noet', c, c)
+	cabbrev.expr(input, replace)
 end
 EOF
-
-" 编辑snippets
-command EditSnippet  exec 'tabnew '.fnamemodify(stdpath('config'),
-	\ ':p:h:h').'/coc/ultisnips/'.&filetype.'.snippets'
-
-" 重新加载配置
-command! -nargs=1 -complete=custom,s:get_vim_files
-	\ LoadConfig  exec 'source '.s:confdir.'/<args>'
-
-" 编辑配置
-command! -nargs=1 -complete=custom,s:get_vim_files
-	\ EditConfig  exec 'tabnew '.s:confdir.'/<args>'
-
-" 手动加载插件
-command! -nargs=1 -complete=custom,s:get_plugins
-	\ LoadPlug  call plug#load('<args>')
-
-function! s:get_vim_files(...) abort
-	let l:idx = len(s:confdir) + 1
-	return join(map(
-		\ globpath(s:confdir, '**/*.vim', 0, 1),
-		\ 'v:val[l:idx:]'),
-		\ "\n")
-endfunction
-
-function! s:get_plugins(...) abort
-	return join(keys(g:plugs), "\n")
-endfunction
 " >>>-----------------------------------
 
 " <<< 选项
