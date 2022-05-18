@@ -26,7 +26,7 @@ packadd typography	" 修复中英文间空格
 packadd ansi		" 处理ANSI转义序列
 
 " 通过vim-plug安装的插件
-call plug#begin()
+try | call plug#begin()
 Plug 'nvim-lua/plenary.nvim'		" 补充lua API
 Plug 'dstein64/vim-startuptime'		" 检查启动时间
 
@@ -104,6 +104,11 @@ Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
 call plug#end()
+catch /E117.*plug#begin/ | autocmd VimEnter * redraw
+			\| echohl ErrorMsg
+			\| echo "缺少vim-plug"
+			\| echohl NONE
+endtry
 " >>>-----------------------------------
 
 " 插件设置(按名称排序)
