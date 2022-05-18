@@ -82,13 +82,12 @@ Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
 endif
 
 if s:plugin_proj
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kyazdani42/nvim-tree.lua'		" 文件浏览器
 Plug 'nvim-telescope/telescope.nvim'	" finder
-Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
 if s:plugin_dev
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
@@ -101,6 +100,7 @@ Plug 'lervag/vimtex'			" LaTex
 Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
 Plug 'fatih/vim-go'			" golang
 Plug 'mattn/emmet-vim'			" 展开缩写
+Plug 'editorconfig/editorconfig-vim'	" EditorConfig
 endif
 
 call plug#end()
