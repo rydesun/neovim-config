@@ -58,9 +58,7 @@ endif
 if s:plugin_op
 Plug 'wellle/targets.vim'		" 文本对象
 Plug 'tpope/vim-unimpaired'		" 快速跳转
-Plug 'jeetsukumaran/vim-indentwise'	" 缩进跳转
 Plug 'justinmk/vim-sneak'		" 光标定位
-Plug 'kshenoy/vim-signature'		" 快速标记
 Plug 'mg979/vim-visual-multi'		" 多重光标
 Plug 'machakann/vim-sandwich'		" 成对符号
 Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
@@ -74,8 +72,6 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行
 Plug 'voldikss/vim-floaterm'		" 终端窗口
 Plug 'lewis6991/gitsigns.nvim'		" 集成Git
 Plug 'lambdalisue/gina.vim'		" 集成Git
-Plug 'tpope/vim-dadbod'			" 数据库
-Plug 'kristijanhusak/vim-dadbod-ui'	" 数据库UI
 Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
 Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
 					" 浏览器嵌入
@@ -428,14 +424,6 @@ if utils#is_loaded('vim-better-whitespace') " <<<
 let g:better_whitespace_filetypes_blacklist =
 	\ ['dbout', 'xxd']
 let g:show_spaces_that_precede_tabs = 1
-endif " >>>-----------------------------------
-if utils#is_loaded('vim-dadbod-ui') " <<<
-let g:db_ui_save_location = s:datadir.'/db_ui'
-let g:db_ui_use_nerd_fonts = 1
-augroup myconfig_dbui
-	autocmd!
-	autocmd Filetype dbui setlocal shiftwidth=2 tabstop=2 expandtab
-augroup END
 endif " >>>-----------------------------------
 if utils#is_loaded('vim-go') " <<<
 " 只安装特定工具，优先使用coc-go提供的功能
