@@ -89,7 +89,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'stevearc/aerial.nvim'		" 大纲
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
+Plug 'iamcco/markdown-preview.nvim', {'do': {-> mkdp#util#install()}}
 					" markdown预览
 Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
 Plug 'lervag/vimtex'			" LaTex
