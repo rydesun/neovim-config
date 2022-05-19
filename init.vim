@@ -62,6 +62,7 @@ Plug 'tpope/vim-unimpaired'		" 增强[
 Plug 'justinmk/vim-sneak'		" 移动光标
 Plug 'mg979/vim-visual-multi'		" 多重光标
 Plug 'machakann/vim-sandwich'		" 成对符号
+Plug 'urxvtcd/vim-indent-object'	" 缩进对象
 Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
 Plug 'numToStr/Comment.nvim'		" 快速注释
 Plug 'tenfyzhong/axring.vim'		" 切换单词
@@ -426,6 +427,31 @@ xmap     if        <Plug>(coc-funcobj-i)
 omap     if        <Plug>(coc-funcobj-i)
 xmap     af        <Plug>(coc-funcobj-a)
 omap     af        <Plug>(coc-funcobj-a)
+" 缩进
+xmap     ii        <Plug>(indent-object_linewise-none)
+omap     ii        <Plug>(indent-object_blockwise-none)
+xmap     ai        <Plug>(indent-object_linewise-start)
+omap     ai        <Plug>(indent-object_linewise-start)
+xmap     iI        <Plug>(indent-object_linewise-end)
+omap     iI        <Plug>(indent-object_linewise-end)
+xmap     aI        <Plug>(indent-object_linewise-both)
+omap     aI        <Plug>(indent-object_linewise-both)
+omap     ij        <Plug>(indent-object_linewise-none-keep-start) 
+xmap     ij        <Plug>(indent-object_linewise-none-keep-start) 
+omap     ik        <Plug>(indent-object_linewise-none-keep-end) 
+xmap     ik        <Plug>(indent-object_linewise-none-keep-end)
+omap     iJ        <Plug>(indent-object_linewise-end-keep-start)
+xmap     iJ        <Plug>(indent-object_linewise-end-keep-start)
+omap     iK        <Plug>(indent-object_linewise-start-keep-end)
+xmap     iK        <Plug>(indent-object_linewise-start-keep-end)
+omap     ibj       <Plug>(indent-object_blockwise-none-keep-start)
+xmap     ibj       <Plug>(indent-object_blockwise-none-keep-start)
+omap     ibJ       <Plug>(indent-object_blockwise-end-keep-start)
+xmap     ibJ       <Plug>(indent-object_blockwise-end-keep-start)
+omap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
+xmap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
+omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
+xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 
 
 " Leader
