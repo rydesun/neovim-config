@@ -32,7 +32,7 @@ Plug 'dstein64/vim-startuptime'		" 检查启动时间
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
-Plug 'itchyny/lightline.vim'		" 状态栏
+Plug 'nvim-lualine/lualine.nvim'	" 状态栏
 Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
 function! UpdateRemotePlugins(...)
@@ -216,7 +216,6 @@ endfunction
 
 augroup colorscheme_everforest
 	autocmd!
-	autocmd ColorScheme everforest let g:lightline.colorscheme = 'everforest'
 	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
 augroup END
 endif " >>>-----------------------------------
@@ -282,95 +281,8 @@ let g:indent_blankline_filetype_exclude = ['help', 'lspinfo',
 	\ 'popup', 'translator', 'NvimTree']
 let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
-if utils#is_loaded('lightline.vim') " <<<
-let g:lightline = {
-	\ 'tabline_separator': {'left': '', 'right': ''},
-	\ 'tabline_subseparator': {'left': '', 'right': ''},
-	\ 'separator': {'left': '', 'right': ''},
-	\ 'subseparator': {'left': '', 'right': ''},
-	\ 'active': {
-		\ 'left': [['filetype'],
-			\ ['modified', 'buffer_git_status', 'readonly', 'absolutepath'],
-			\ ],
-		\ 'right': [['postion'],
-			\ ['diagnostic', 'git_status'],
-			\ ['fileformat', 'fileencoding']],
-	\ },
-	\ 'component': {
-		\ 'absolutepath': '%<%F',
-		\ 'postion': '%2l/%L',
-		\ 'percent': '%2p%%',
-		\ 'fileformat': '%{&ff!=#"unix"?&ff:""}',
-		\ 'fileencoding': '%{&fenc!=#"utf-8"?&fenc:""}',
-		\ },
-	\ 'component_function': {
-		\ 'git_status': 'Lightline_git_status',
-		\ 'buffer_git_status': 'Lightline_buffer_git_status',
-		\ 'modified': 'Lightline_modified',
-		\ 'readonly': 'Lightline_readonly',
-		\ 'diagnostic': 'Lightline_diagnostic',
-		\ 'filetype': 'Lightline_filetype',
-	\ }
-\ }
-
-function! Lightline_readonly() abort
-	return &readonly ? '' : ''
-endfunction
-function! Lightline_modified() abort
-	return &modified ? '' : ''
-endfunction
-function! Lightline_git_status() abort
-	" TODO: 整个项目的情况
-	let s:head = get(b:, 'gitsigns_head', '')
-	return len(s:head) == 40 ? s:head[:8]: s:head
-endfunction
-function! Lightline_buffer_git_status() abort
-	return !empty(get(b:, 'gitsigns_status', '')) ? '': ''
-endfunction
-function! Lightline_diagnostic() abort
-	let info = get(b:, 'coc_diagnostic_info', {})
-	if empty(info) | return '' | endif
-	let msgs = []
-	if get(info, 'error', 0)
-		call add(msgs, 'E' . info['error'])
-	endif
-	if get(info, 'warning', 0)
-		call add(msgs, 'W' . info['warning'])
-	endif
-	if get(info, 'information', 0)
-		call add(msgs, 'I' . info['information'])
-	endif
-	if get(info, 'hint', 0)
-		call add(msgs, 'H' . info['hint'])
-	endif
-	return join(msgs, ' ')
-endfunction
-lua GetIcon = function()
-	\ local filename = vim.fn.expand('%:t')
-	\ local extension = vim.fn.expand('%:e')
-	\ return require'nvim-web-devicons'.get_icon(filename, extension) end
-function! Lightline_filetype()
-	if !strlen(&filetype) | return '' | endif
-	let icon = luaeval('GetIcon')()
-	if empty(icon)
-		return &filetype
-	else
-		return icon.' '.&filetype
-	endif
-endfunction
-
-function! s:set_lightline_colorscheme(name) abort
-	let g:lightline.colorscheme = a:name
-	call lightline#init()
-	call lightline#colorscheme()
-	call lightline#update()
-endfunction
-function! s:lightline_colorschemes(...) abort
-	return join(map(
-		\ globpath(&rtp, "autoload/lightline/colorscheme/*.vim", 1, 1),
-		\ "fnamemodify(v:val, ':t:r')"),
-		\ "\n")
-endfunction
+if utils#is_loaded('lualine.nvim') " <<<
+lua require('config/lualine')
 endif " >>>-----------------------------------
 if utils#is_loaded('nerdcommenter') " <<<
 " 取消所有预设键位映射

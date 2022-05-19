@@ -13,9 +13,8 @@ wilder.set_option('pipeline', {
     )
 })
 
-wilder.set_option('renderer', wilder.wildmenu_renderer(
-    wilder.wildmenu_lightline_theme({
-        highlighter = wilder.basic_highlighter(),
-        separator = ' · ',
-    })
-))
+wilder.set_option('renderer', wilder.wildmenu_renderer({
+    highlighter = wilder.basic_highlighter(),
+    separator = ' · ',
+    left = {' ', wilder.wildmenu_spinner(), ' '},
+}))
