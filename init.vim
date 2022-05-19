@@ -272,14 +272,15 @@ endif " >>>-----------------------------------
 if utils#is_loaded('indent-blankline.nvim') " <<<
 " 缩进线字符
 if !s:env_console | let g:indentLine_char = '┊' | endif
+" 不显示第一层
+let g:indent_blankline_show_first_indent_level = v:false
+" 不在末尾行上显示
+let g:indent_blankline_show_trailing_blankline_indent = v:false
 " 优先使用treesitter计算缩进
 let g:indent_blankline_use_treesitter = v:true
-" 高亮上下文缩进线
+let g:indent_blankline_use_treesitter_scope = v:true
+" 高亮上下文
 let g:indent_blankline_show_current_context = v:true
-" 排除类型
-let g:indent_blankline_filetype_exclude = ['help', 'lspinfo',
-	\ 'popup', 'translator', 'NvimTree']
-let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
 if utils#is_loaded('lualine.nvim') " <<<
 lua require('config/lualine')
