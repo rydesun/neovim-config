@@ -28,6 +28,7 @@ packadd ansi		" 处理ANSI转义序列
 try | call plug#begin()
 Plug 'nvim-lua/plenary.nvim'		" 补充lua API
 Plug 'dstein64/vim-startuptime'		" 检查启动时间
+Plug 'lewis6991/impatient.nvim'		" 缓存lua
 
 if s:plugin_ui
 Plug 'sainnhe/everforest'		" 配色主题
@@ -106,7 +107,10 @@ catch /E117.*plug#begin/ | autocmd VimEnter * redraw
 endtry
 " >>>-----------------------------------
 
-" 插件设置(按名称排序)
+" 插件设置(按名称排序，优先impatient)
+if utils#is_loaded('impatient.nvim') " <<<
+lua require('impatient')
+endif " >>>-----------------------------------
 if utils#is_loaded('aerial.nvim') " <<<
 lua require('aerial').setup({})
 endif " >>>-----------------------------------
