@@ -49,6 +49,7 @@ Plug 'psliwka/vim-smoothie', {'commit': '10fd0aa'}
 					" 平滑滚动
 Plug 'lukas-reineke/indent-blankline.nvim'
 					" 缩进线
+Plug 'nmac427/guess-indent.nvim'	" 检测缩进
 Plug 'ntpeters/vim-better-whitespace'	" 空白符
 Plug 'AndrewRadev/linediff.vim'		" 选区diff
 Plug 'fidian/hexmode'			" 查看hex
@@ -265,6 +266,9 @@ endfunction
 endif " >>>-----------------------------------
 if utils#is_loaded('gitsigns.nvim') " <<<
 lua require('config/gitsigns')
+endif " >>>-----------------------------------
+if utils#is_loaded('guess-indent.nvim') " <<<
+lua require('guess-indent').setup({})
 endif " >>>-----------------------------------
 if utils#is_loaded('hexmode') " <<<
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
