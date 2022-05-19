@@ -636,6 +636,8 @@ if s:paging | set noswapfile norelativenumber laststatus=0 | endif
 
 " 常见文件编码(中文用户)
 set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1
+" 默认使用unix换行符(并且识别mac)
+set fileformats=unix,dos,mac
 " list模式的可见字符
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
 
