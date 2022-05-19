@@ -13,8 +13,7 @@ let s:env_console = $TERM == 'linux'
 let s:plugin_ui = v:true	" 自身界面
 let s:plugin_view = v:true	" 查看文本
 let s:plugin_op = v:true	" 操作文本
-let s:plugin_cmd = !s:paging	" 外部命令
-let s:plugin_proj = !s:paging	" 项目管理
+let s:plugin_cmd = !s:paging	" 命令集成
 let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 " >>>-----------------------------------
 
@@ -35,6 +34,8 @@ Plug 'sainnhe/everforest'		" 配色主题
 Plug 'nvim-lualine/lualine.nvim'	" 状态栏
 Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
 Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
+Plug 'kyazdani42/nvim-tree.lua'		" 文件浏览器
+Plug 'nvim-telescope/telescope.nvim'	" 查找
 function! UpdateRemotePlugins(...)
 	let &rtp=&rtp
 	UpdateRemotePlugins
@@ -44,21 +45,20 @@ Plug 'gelguy/wilder.nvim', {'do': function('UpdateRemotePlugins')}
 endif
 
 if s:plugin_view
-Plug 'lukas-reineke/indent-blankline.nvim'	" 缩进线
-Plug 'ntpeters/vim-better-whitespace'	" 空白符
-Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
-					" 显示颜色
-Plug 'AndrewRadev/linediff.vim'		" 选区diff
 Plug 'psliwka/vim-smoothie', {'commit': '10fd0aa'}
 					" 平滑滚动
-Plug 'fidian/hexmode'			" 查看16进制
+Plug 'lukas-reineke/indent-blankline.nvim'
+					" 缩进线
+Plug 'ntpeters/vim-better-whitespace'	" 空白符
+Plug 'AndrewRadev/linediff.vim'		" 选区diff
+Plug 'fidian/hexmode'			" 查看hex
 Plug 'voldikss/vim-translator'		" 翻译
 endif
 
 if s:plugin_op
 Plug 'andymass/vim-matchup'		" 增强%
-Plug 'tpope/vim-unimpaired'		" 快速跳转
-Plug 'justinmk/vim-sneak'		" 光标定位
+Plug 'tpope/vim-unimpaired'		" 增强[
+Plug 'justinmk/vim-sneak'		" 移动光标
 Plug 'mg979/vim-visual-multi'		" 多重光标
 Plug 'machakann/vim-sandwich'		" 成对符号
 Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
@@ -72,14 +72,9 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行
 Plug 'voldikss/vim-floaterm'		" 终端窗口
 Plug 'lewis6991/gitsigns.nvim'		" 集成Git
 Plug 'lambdalisue/gina.vim'		" 集成Git
-Plug 'lilydjwg/fcitx.vim'		" fcitx自动切换
+Plug 'lilydjwg/fcitx.vim'		" 切换输入法
 Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
-					" 浏览器嵌入
-endif
-
-if s:plugin_proj
-Plug 'kyazdani42/nvim-tree.lua'		" 文件浏览器
-Plug 'nvim-telescope/telescope.nvim'	" finder
+					" 嵌入浏览器
 endif
 
 if s:plugin_dev
@@ -88,15 +83,17 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'stevearc/aerial.nvim'		" 大纲
-Plug 'iamcco/markdown-preview.nvim', {'do': {-> mkdp#util#install()}}
-					" markdown预览
-Plug 'mzlogin/vim-markdown-toc'		" markdown生成TOC
-Plug 'lervag/vimtex'			" LaTex
-Plug 'skywind3000/asynctasks.vim'	" 构建任务系统
-Plug 'fatih/vim-go'			" golang
+Plug 'skywind3000/asynctasks.vim'	" 任务系统
+Plug 'stevearc/aerial.nvim'		" 代码大纲
+Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
+					" 显示颜色
 Plug 'mattn/emmet-vim'			" 展开缩写
-Plug 'editorconfig/editorconfig-vim'	" EditorConfig
+Plug 'editorconfig/editorconfig-vim'	" editorconfig
+Plug 'iamcco/markdown-preview.nvim', {'do': {-> mkdp#util#install()}}
+					" 预览markdown
+Plug 'mzlogin/vim-markdown-toc'		" 为markdown生成toc
+Plug 'lervag/vimtex'			" latex
+Plug 'fatih/vim-go'			" golang
 endif
 
 call plug#end()
