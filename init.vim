@@ -56,7 +56,7 @@ Plug 'voldikss/vim-translator'		" 翻译
 endif
 
 if s:plugin_op
-Plug 'wellle/targets.vim'		" 文本对象
+Plug 'andymass/vim-matchup'		" 增强%
 Plug 'tpope/vim-unimpaired'		" 快速跳转
 Plug 'justinmk/vim-sneak'		" 光标定位
 Plug 'mg979/vim-visual-multi'		" 多重光标
