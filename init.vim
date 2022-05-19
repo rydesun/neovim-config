@@ -62,7 +62,7 @@ Plug 'justinmk/vim-sneak'		" 光标定位
 Plug 'mg979/vim-visual-multi'		" 多重光标
 Plug 'machakann/vim-sandwich'		" 成对符号
 Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
-Plug 'scrooloose/nerdcommenter'		" 快速注释
+Plug 'numToStr/Comment.nvim'		" 快速注释
 Plug 'tenfyzhong/axring.vim'		" 切换单词
 Plug 'tpope/vim-repeat'			" 重复执行
 endif
@@ -177,6 +177,9 @@ augroup myconfig_coc
 	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
 augroup END
 endif " >>>-----------------------------------
+if utils#is_loaded('Comment.nvim') " <<<
+lua require('Comment').setup()
+endif " >>>-----------------------------------
 if utils#is_loaded('everforest') " <<<
 let g:everforest_better_performance = 1
 " 使用终端自身的配色
@@ -283,15 +286,6 @@ let g:indent_blankline_buftype_exclude = ['terminal']
 endif " >>>-----------------------------------
 if utils#is_loaded('lualine.nvim') " <<<
 lua require('config/lualine')
-endif " >>>-----------------------------------
-if utils#is_loaded('nerdcommenter') " <<<
-" 取消所有预设键位映射
-let g:NERDCreateDefaultMappings = 0
-" 注释符号后面添加空格
-let g:NERDSpaceDelims = 1
-let g:NERDCustomDelimiters = {'python': {'left': '#', 'right': ''}}
-" 注释符号左对齐
-let g:NERDDefaultAlign='left'
 endif " >>>-----------------------------------
 if utils#is_loaded('nvim-hlslens') " <<<
 noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
@@ -437,7 +431,6 @@ let g:mapleader=' ' | noremap <Space> <Nop>
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-map                <leader>c   <Plug>NERDCommenterToggle
 nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
