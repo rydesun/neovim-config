@@ -7,10 +7,10 @@ return ts.setup {
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "gn",
-            node_decremental = "gm",
-            node_incremental = "gn",
-            scope_incremental = "gc",
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
         }
     },
     move = {
