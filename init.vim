@@ -209,23 +209,27 @@ let g:everforest_disable_italic_comment = 1
 function! s:colorscheme_everforest_custom() abort
 	let l:palette = everforest#get_palette(g:everforest_background)
 
+	" 折叠行
 	call everforest#highlight('Folded',
 		\ l:palette.aqua, l:palette.bg1)
 
+	" vim-better-whitespace
 	let g:better_whitespace_guicolor = l:palette.none[0]
 	call everforest#highlight('ExtraWhitespace',
 		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
 
+	" indent-blankline
 	call everforest#highlight('IndentBlanklineContextChar',
 		\ l:palette.grey2, l:palette.none)
 
-	" rust
+	" coc-rust
 	call everforest#highlight('CocRustTypeHint',
 		\ l:palette.grey0, l:palette.none)
 	call everforest#highlight('CocRustChainingHint',
 		\ l:palette.grey2, l:palette.none)
 
-	if s:nvim_as_pager
+	" 分页时
+	if s:paging
 		call everforest#highlight('MsgArea',
 			\ l:palette.none, l:palette.bg2)
 	endif
