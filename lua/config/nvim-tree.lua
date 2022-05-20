@@ -18,6 +18,8 @@ require'nvim-tree'.setup {
   hijack_netrw = true,
   -- 光标在文件名首位
   hijack_cursor = true,
+  -- 自动更新
+  reload_on_bufenter = true,
 
   view = {
     -- 相对行号
@@ -48,4 +50,11 @@ require'nvim-tree'.setup {
   filters = {
     dotfiles = true,
   },
+
+  -- 打开文件后自动关闭
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    }
+  }
 }
