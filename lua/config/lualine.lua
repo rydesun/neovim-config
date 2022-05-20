@@ -38,6 +38,7 @@ function filename:update_status()
   local default_highlight = self:get_default_hl()
   local path = filename.super.update_status(self)
   local parent = vim.fn.getcwd() .. '/'
+  parent = parent:gsub('^'..vim.env.HOME, '~/')
   if path:find(parent, 1, true) == 1 then
     local path_left = highlight.component_format_highlight(
       self.status_colors.cwd) .. parent .. default_highlight
@@ -64,7 +65,7 @@ require'lualine'.setup {
     lualine_c = {
       {'fileformat', symbols = {unix = ''}, padding = {left = 1, right = 0}},
       {filename,
-        path = 2, symbols = {modified = '  ', readonly = ' ', unnamed = ''}},
+        path = 3, symbols = {modified = '  ', readonly = ' ', unnamed = ''}},
     },
     lualine_x = {encoding},
     lualine_y = {'diagnostics'},
