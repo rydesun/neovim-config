@@ -2,10 +2,14 @@
 let s:confdir = stdpath('config')
 let s:datadir = stdpath('data')
 
-" 是否在小型环境中(非开发)
-let s:env_mini = $VIM_MINI
 " 是否作为pager处理文本
 let s:paging = get(g:, 'paging', v:false)
+" 是否需要处理ANSI转义序列
+" 警告：在内置终端中输出而不是打开buffer
+let s:ansi = get(g:, 'ansi', v:false)
+
+" 是否在小型环境中(非开发)
+let s:env_mini = $VIM_MINI
 " 是否处于Linux console
 let s:env_console = $TERM == 'linux'
 
@@ -18,7 +22,6 @@ let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 " >>>-----------------------------------
 
 " <<< 插件
-
 " filetype.lua取代filetype.vim
 let g:do_filetype_lua = 1
 let g:did_load_filetypes = 0
@@ -27,7 +30,10 @@ let g:did_load_filetypes = 0
 packadd rooter		" 自动设置工作目录
 packadd counter		" 统计中文字符数量
 packadd typography	" 修复中英文间空格
-packadd ansi		" 处理ANSI转义序列
+" 警告：无故不要开启
+if s:ansi
+	packadd ansi	" 在终端中处理ANSI
+endif
 
 " 通过vim-plug安装的插件
 try | call plug#begin()
