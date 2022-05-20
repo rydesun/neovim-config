@@ -39,7 +39,10 @@ function filename:update_status()
   local path = filename.super.update_status(self)
   local parent = vim.fn.getcwd() .. '/'
   parent = parent:gsub('^'..vim.env.HOME, '~/')
-  if path:find(parent, 1, true) == 1 then
+  if path == '' then
+    return highlight.component_format_highlight(
+      self.status_colors.cwd) .. parent .. default_highlight
+  elseif path:find(parent, 1, true) == 1 then
     local path_left = highlight.component_format_highlight(
       self.status_colors.cwd) .. parent .. default_highlight
     local path_right = path:sub(#parent+1)
