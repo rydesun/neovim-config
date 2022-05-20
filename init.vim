@@ -18,6 +18,11 @@ let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
 " >>>-----------------------------------
 
 " <<< 插件
+
+" filetype.lua取代filetype.vim
+let g:do_filetype_lua = 1
+let g:did_load_filetypes = 0
+
 " 我自己的插件
 packadd rooter		" 自动设置工作目录
 packadd counter		" 统计中文字符数量
