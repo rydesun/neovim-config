@@ -413,8 +413,9 @@ nnoremap <silent>  <Esc>w      <C-w>c
 " vim-sandwich处理成对符号
 nnoremap           s           <NOP>
 nnoremap           S           :Telescope<CR>
-nnoremap <silent>  ss          :Telescope live_grep<CR>
-nnoremap <silent>  sf          :Telescope find_files<CR>
+nnoremap <silent>  ss          :Telescope live_grep theme=dropdown<CR>
+nnoremap <silent>  sf          :Telescope find_files theme=dropdown<CR>
+nnoremap <silent>  sg          :Telescope git_status theme=dropdown<CR>
 
 
 " []组：前后跳转
