@@ -5,12 +5,13 @@ local plug_cmd = function() return vim.g.plug_cmd end
 local plug_dev = function() return vim.g.plug_dev == 1 end
 
 return require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
   -- 补充lua API
-  use {'nvim-lua/plenary.nvim'}
+  use 'nvim-lua/plenary.nvim'
   -- 检查启动时间
-  use {'dstein64/vim-startuptime'}
+  use 'dstein64/vim-startuptime'
   -- 缓存lua
-  use {'lewis6991/impatient.nvim'}
+  use 'lewis6991/impatient.nvim'
 
   -- 配色主题
   use {'sainnhe/everforest', cond = plug_ui,
