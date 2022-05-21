@@ -11,10 +11,12 @@ vim.g.firenvim_config = {
 -- 不要状态栏
 vim.o.laststatus = 0
 
-if vim.o.lines < 10 then
-  vim.o.lines = 10
-end
-
-if vim.fn.bufname():find('.*ipynb.*DIV.*txt') then
-  vim.bo.filetype = python
-end
+-- 扩大过小的界面
+vim.api.nvim_create_autocmd({"UIEnter"}, {
+  pattern = {"*"},
+  callback = function()
+    if vim.o.lines < 10 then
+      vim.o.lines = 10
+    end
+  end
+})
