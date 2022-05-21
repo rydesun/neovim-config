@@ -86,7 +86,8 @@ Plug 'skywind3000/asyncrun.vim'		" 异步执行
 Plug 'voldikss/vim-floaterm'		" 终端窗口
 Plug 'lewis6991/gitsigns.nvim'		" 集成Git
 Plug 'lambdalisue/gina.vim'		" 集成Git
-Plug 'lilydjwg/fcitx.vim'		" 切换输入法
+Plug 'lilydjwg/fcitx.vim' | let g:fcitx5_remote = 'fcitx5-remote'
+					" 切换输入法(不用python)
 Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
 					" 嵌入浏览器
 endif
