@@ -2,7 +2,7 @@ local plug_ui = function() return vim.g.plug_ui end
 local plug_view = function() return vim.g.plug_view end
 local plug_op = function() return vim.g.plug_op end
 local plug_cmd = function() return vim.g.plug_cmd end
-local plug_dev = function() return vim.g.plug_dev end
+local plug_dev = function() return vim.g.plug_dev == 1 end
 
 return require('packer').startup(function(use)
   -- 补充lua API
@@ -93,8 +93,6 @@ return require('packer').startup(function(use)
     cond = function() return vim.g.plug_cmd and vim.g.env_firenvim end,
     config = function() require'config/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end}
-
-  if vim.g.vim_mini then return end
 
   use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
     config = function() require'config/coc' end}
