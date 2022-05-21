@@ -1,24 +1,24 @@
 " <<< 环境
-let s:confdir = stdpath('config')
-let s:datadir = stdpath('data')
+let g:confdir = stdpath('config')
+let g:datadir = stdpath('data')
 
 " 是否作为pager处理文本
-let s:paging = get(g:, 'paging', v:false)
+let g:paging = get(g:, 'paging', v:false)
 " 是否需要处理ANSI转义序列
 " 警告：在内置终端中输出而不是打开buffer
-let s:ansi = get(g:, 'ansi', v:false)
+let g:ansi = get(g:, 'ansi', v:false)
 
 " 是否在小型环境中(非开发)
-let s:env_mini = $VIM_MINI
+let g:env_mini = $VIM_MINI
 " 是否处于Linux console
-let s:env_console = $TERM == 'linux'
+let g:env_console = $TERM == 'linux'
 
 " 是否启用该类型的插件
 let s:plugin_ui = v:true	" 自身界面
 let s:plugin_view = v:true	" 查看文本
 let s:plugin_op = v:true	" 操作文本
-let s:plugin_cmd = !s:paging	" 命令集成
-let s:plugin_dev = !s:env_mini && !s:paging	" 本地开发
+let s:plugin_cmd = !g:paging	" 命令集成
+let s:plugin_dev = !g:env_mini && !g:paging	" 本地开发
 " >>>-----------------------------------
 
 " <<< 插件
@@ -31,7 +31,7 @@ packadd rooter		" 自动设置工作目录
 packadd counter		" 统计中文字符数量
 packadd typography	" 修复中英文间空格
 " 警告：无故不要开启
-if s:ansi
+if g:ansi
 	packadd ansi	" 在终端中处理ANSI
 endif
 
@@ -126,163 +126,24 @@ if utils#is_loaded('aerial.nvim') " <<<
 lua require('aerial').setup({})
 endif " >>>-----------------------------------
 if utils#is_loaded('asyncrun.vim') " <<<
-function! s:floaterm_repl(opts)
-	exec "FloatermNew --wintype=split --position=top ".a:opts.cmd
-	stopinsert | wincmd p
-endfunction
-function! s:floaterm_bottom(opts)
-	exec "FloatermNew --wintype=split --position=bottom ".a:opts.cmd
-endfunction
-let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
-let g:asyncrun_runner.floaterm_repl = function('s:floaterm_repl')
-let g:asyncrun_runner.floaterm_bottom = function('s:floaterm_bottom')
-" quickfix窗口的默认高度
-let g:asyncrun_open = 6
-endif " >>>-----------------------------------
-if utils#is_loaded('asynctasks.vim') " <<<
-let g:asynctasks_extra_config = [s:confdir.'/tasks.ini']
+lua require('config/asyncrun')
 endif " >>>-----------------------------------
 if utils#is_loaded('axring.vim') " <<<
-let g:axring_rings = [
-	\ ['&&', '||'],
-	\ ['&', '|', '^'],
-	\ ['&=', '|=', '^='],
-	\ ['>>', '<<'],
-	\ ['>>=', '<<='],
-	\ ['==', '!='],
-	\ ['===', '!=='],
-	\ ['>', '<', '>=', '<='],
-	\ ['++', '--'],
-	\ ['true', 'false'],
-	\ ['verbose', 'debug', 'info', 'warn', 'error', 'fatal'],
-\ ]
-let g:axring_rings_go = [
-	\ [':=', '='],
-	\ ['byte', 'rune'],
-	\ ['complex64', 'complex128'],
-	\ ['int', 'int8', 'int16', 'int32', 'int64'],
-	\ ['uint', 'uint8', 'uint16', 'uint32', 'uint64'],
-	\ ['float32', 'float64'],
-	\ ['interface', 'struct'],
-	\ ['debug', 'info', 'warn', 'error', 'panic', 'fatal'],
-\ ]
+lua require('config/axring')
 endif " >>>-----------------------------------
 if utils#is_loaded('coc.nvim') " <<<
-" format函数
-set formatexpr=CocAction('formatSelected')
-
-" 修改coc数据目录, 默认值是XDG config目录
-let g:coc_data_home = s:datadir.'/coc'
-
-function! s:show_documentation() abort
-	if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	elseif (coc#rpc#ready())
-		call CocActionAsync('doHover')
-	endif
-endfunction
-
-augroup myconfig_coc
-	autocmd!
-	" 补全跳转后显示函数签名
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-	" readonly文件不显示diagnostic
-	autocmd BufRead * if &readonly == 1 | let b:coc_diagnostic_disable = 1 | endif
-augroup END
+lua require('config/coc')
 endif " >>>-----------------------------------
 if utils#is_loaded('Comment.nvim') " <<<
 lua require('Comment').setup()
 endif " >>>-----------------------------------
 if utils#is_loaded('everforest') " <<<
-let g:everforest_better_performance = 1
-" 使用终端自身的配色
-let g:everforest_disable_terminal_colors = 1
-if &background == 'dark'
-	let g:everforest_background = 'hard'
-else
-	let g:everforest_background = 'soft'
-endif
-let g:everforest_sign_column_background = 'none'
-let g:everforest_disable_italic_comment = 1
-
-function! s:colorscheme_everforest_custom() abort
-	let l:palette = everforest#get_palette(g:everforest_background)
-
-	" 折叠行
-	call everforest#highlight('Folded',
-		\ l:palette.aqua, l:palette.bg1)
-
-	" vim-better-whitespace
-	let g:better_whitespace_guicolor = l:palette.none[0]
-	call everforest#highlight('ExtraWhitespace',
-		\ l:palette.none, l:palette.none, 'undercurl', l:palette.red)
-
-	" indent-blankline
-	call everforest#highlight('IndentBlanklineContextChar',
-		\ l:palette.grey2, l:palette.none)
-
-	" coc-rust
-	call everforest#highlight('CocRustTypeHint',
-		\ l:palette.grey0, l:palette.none)
-	call everforest#highlight('CocRustChainingHint',
-		\ l:palette.grey2, l:palette.none)
-
-	" 分页时
-	if s:paging
-		call everforest#highlight('MsgArea',
-			\ l:palette.none, l:palette.bg2)
-	endif
-endfunction
-
-augroup colorscheme_everforest
-	autocmd!
-	autocmd ColorScheme everforest call s:colorscheme_everforest_custom()
-augroup END
+lua require('config/everforest')
 endif " >>>-----------------------------------
 if utils#is_loaded('firenvim') " <<<
-let g:firenvim_config = {
-	\ 'globalSettings': {
-		\ 'alt': 'all',
-	\ },
-	\ 'localSettings': {
-		\ '.*': {
-			\ 'cmdline': 'firenvim',
-			\ 'priority': 0,
-			\ 'selector': 'textarea',
-			\ 'takeover': 'never',
-			\ },
-	\ }
-\ }
-
-augroup myconfig_firenvim_init
-	autocmd!
-	autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-augroup END
-
-function! OnUIEnter(event) abort
-	if !s:IsFirenvimActive(a:event)
-		return
-	endif
-	set laststatus=0
-	if &lines < 10
-		set lines=10
-	endif
-	augroup myconfig_firenvim
-		autocmd!
-		autocmd BufEnter github.com_*.txt set filetype=markdown
-		autocmd BufEnter *ipynb_*DIV-*.txt set filetype=python
-	augroup END
-endfunction
-
-function! s:IsFirenvimActive(event) abort
-	if !exists('*nvim_get_chan_info')
-		return 0
-	endif
-	let l:ui = nvim_get_chan_info(a:event.chan)
-	return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
-		\ l:ui.client.name =~? 'Firenvim'
-endfunction
+if exists('g:started_by_firenvim')
+	lua require('config/firenvim')
+endif
 endif " >>>-----------------------------------
 if utils#is_loaded('gitsigns.nvim') " <<<
 lua require('config/gitsigns')
@@ -290,56 +151,16 @@ endif " >>>-----------------------------------
 if utils#is_loaded('guess-indent.nvim') " <<<
 lua require('guess-indent').setup({})
 endif " >>>-----------------------------------
-if utils#is_loaded('hexmode') " <<<
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-endif " >>>-----------------------------------
 if utils#is_loaded('indent-blankline.nvim') " <<<
-" 缩进线字符
-if !s:env_console | let g:indentLine_char = '┊' | endif
-" 不显示第一层
-let g:indent_blankline_show_first_indent_level = v:false
-" 不在末尾行上显示
-let g:indent_blankline_show_trailing_blankline_indent = v:false
-" 优先使用treesitter计算缩进
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_use_treesitter_scope = v:true
-" 高亮上下文
-let g:indent_blankline_show_current_context = v:true
+lua require('config/indent-blankline')
 endif " >>>-----------------------------------
 if utils#is_loaded('lualine.nvim') " <<<
 lua require('config/lualine')
 endif " >>>-----------------------------------
 if utils#is_loaded('nvim-hlslens') " <<<
-noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
-	\<Cmd>lua require('hlslens').start()<CR>
-noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
-	\<Cmd>lua require('hlslens').start()<CR>
-noremap  *   *<Cmd>lua require('hlslens').start()<CR>
-noremap  #   #<Cmd>lua require('hlslens').start()<CR>
-noremap  g*  g*<Cmd>lua require('hlslens').start()<CR>
-noremap  g#  g#<Cmd>lua require('hlslens').start()<CR>
-
-augroup myconfig_vmlens
-    autocmd!
-    autocmd User visual_multi_start lua require('config/vmlens').start()
-    autocmd User visual_multi_exit lua require('config/vmlens').exit()
-augroup END
-
-lua << EOF
-require('hlslens').setup({
-	nearest_only = true,
-})
-EOF
+lua require('config/nvim-hlslens')
 endif " >>>-----------------------------------
 if utils#is_loaded('nvim-tree.lua') " <<<
-augroup myconfig_explorer
-	autocmd!
-	" 如果是最后一个窗口则直接退出
-	autocmd BufEnter * ++nested
-		\ if winnr('$') == 1 && bufname() == 'NvimTree_'.tabpagenr()
-		\ | quit | endif
-augroup END
-
 lua require('config/nvim-tree')
 endif " >>>-----------------------------------
 if utils#is_loaded('nvim-treesitter') " <<<
@@ -349,38 +170,13 @@ if utils#is_loaded('nvim-web-devicons') " <<<
 lua require'nvim-web-devicons'.setup { default = true }
 endif " >>>-----------------------------------
 if utils#is_loaded('vim-better-whitespace') " <<<
-let g:better_whitespace_filetypes_blacklist =
-	\ ['dbout', 'xxd']
-let g:show_spaces_that_precede_tabs = 1
+lua require('config/vim-better-whitespace')
 endif " >>>-----------------------------------
 if utils#is_loaded('vim-go') " <<<
-" 只安装特定工具，优先使用coc-go提供的功能
-" 关闭gopls
-let g:go_gopls_enabled = 0
-" 禁用omnifunc补全
-let g:go_code_completion_enabled = 0
-" 关闭vim-go的按键映射
-let g:go_doc_keywordprg_enabled = 0 " 查看文档
-let g:go_def_mapping_enabled = 0 " 跳转定义
-" 禁止在保存时自动执行GoFmt
-let g:go_fmt_autosave = 0
+lua require('config/vim-go')
 endif " >>>-----------------------------------
-if utils#is_loaded('vim-sandwich') " <<<
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-let g:sandwich#recipes += [
-	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1, 'input': [')'] },
-	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1, 'input': [']'] },
-	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1, 'input': ['}'] },
-\ ]
-endif " >>>----------------------------------
 if utils#is_loaded('vim-sneak') " <<<
-" 类似于EasyMotion的标签模式
-let g:sneak#label = 1
-" 智能大小写
-let g:sneak#use_ic_scs = 1
-endif " >>>-----------------------------------
-if utils#is_loaded('vim-visual-multi') " <<<
-let g:VM_Extend_hl = 'CursorRange'
+lua require('config/vim-sneak')
 endif " >>>-----------------------------------
 if utils#is_loaded('wilder.nvim') " <<<
 lua require('config/wilder')
@@ -397,6 +193,14 @@ map      f  <Plug>Sneak_s
 map      F  <Plug>Sneak_S
 xnoremap <  <gv
 xnoremap >  >gv
+
+function! s:show_documentation() abort
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	elseif (coc#rpc#ready())
+		call CocActionAsync('doHover')
+	endif
+endfunction
 nnoremap <silent>  K  :call <SID>show_documentation()<CR>
 
 
@@ -542,7 +346,7 @@ tnoremap <M-space>  <c-\><c-n>
 
 
 " 特殊情况
-if s:paging
+if g:paging
 	nnoremap q :exit<CR>
 endif
 " >>>-----------------------------------
@@ -568,9 +372,7 @@ EOF
 " >>>-----------------------------------
 
 " <<< 选项
-" 主题
-silent! colorscheme everforest
-if !s:env_console | set termguicolors | endif
+if !g:env_console | set termguicolors | endif
 
 set shortmess+=I	" 去除启动页面的介绍
 set title		" 设置虚拟终端的标题
@@ -585,7 +387,7 @@ augroup myconfig_term_signcolumn | autocmd!
 	autocmd TermOpen * setlocal norelativenumber
 augroup END
 " 分页时不需要swapfile 行号 状态栏
-if s:paging | set noswapfile norelativenumber laststatus=0 | endif
+if g:paging | set noswapfile norelativenumber laststatus=0 | endif
 
 " 常见文件编码(中文用户)
 set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1

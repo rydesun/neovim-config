@@ -58,3 +58,16 @@ require'nvim-tree'.setup {
     }
   }
 }
+
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  pattern = {"*"},
+  nested = true,
+  -- 如果是最后一个窗口则直接退出
+  callback = function()
+    if vim.fn.winnr('$') == 1 and
+      vim.fn.bufname() == 'NvimTree_'..vim.fn.tabpagenr()
+    then
+      vim.api.nvim_command('quit')
+    end
+  end
+})
