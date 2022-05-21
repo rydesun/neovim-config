@@ -1,4 +1,4 @@
 # neovim-config
 
-My NeoVim configuration files, using [vim-plug](https://github.com/junegunn/vim-plug)
+My NeoVim configuration files, using [packer.nvim](https://github.com/wbthomason/packer.nvim)
 to manage plugins.

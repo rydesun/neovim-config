@@ -1,5 +1,1 @@
-/hostrc.vim
-/tasks.ini
-
-/.netrwhist
-/.init.vim.bak
+packer_compiled.lua

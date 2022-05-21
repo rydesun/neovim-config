@@ -12,17 +12,56 @@ let g:ansi = get(g:, 'ansi', v:false)
 let g:env_mini = $VIM_MINI
 " 是否处于Linux console
 let g:env_console = $TERM == 'linux'
+" 是否在firenvim中
+let g:env_firenvim = get(g:, 'started_by_firenvim', v:false)
 
 " 是否启用该类型的插件
-let s:plugin_ui = v:true	" 自身界面
-let s:plugin_view = v:true	" 查看文本
-let s:plugin_op = v:true	" 操作文本
-let s:plugin_cmd = !g:paging	" 命令集成
-let s:plugin_dev = !g:env_mini && !g:paging	" 本地开发
+let g:plug_ui = v:true          " 自身界面
+let g:plug_view = v:true	" 查看文本
+let g:plug_op = v:true          " 操作文本
+let g:plug_cmd = !g:paging	" 命令集成
+let g:plug_dev = !g:env_mini && !g:paging	" 本地开发
+" >>>-----------------------------------
+
+" <<< 选项
+if !g:env_console | set termguicolors | endif
+
+set shortmess+=I	" 去除启动页面的介绍
+set title		" 设置虚拟终端的标题
+set laststatus=3	" 只显示一个窗口的状态栏
+set scrolloff=5		" 滚动页面时光标距离上下边缘的预留行数
+
+set relativenumber	" 开启侧边栏的相对行号
+set signcolumn=number	" 其他的侧边栏符号覆盖在行号上面
+set numberwidth=3	" 行号的最低宽度
+" 终端不需要侧边栏
+augroup myconfig_term_signcolumn | autocmd!
+	autocmd TermOpen * setlocal norelativenumber
+augroup END
+" 分页时不需要swapfile 行号 状态栏
+if g:paging | set noswapfile norelativenumber laststatus=0 | endif
+
+" 常见文件编码(中文用户)
+set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1
+" 默认使用unix换行符(并且识别mac)
+set fileformats=unix,dos,mac
+" list模式的可见字符
+set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
+
+set ignorecase		" pattern搜索无视大小写
+set smartcase		" pattern搜索含大写字符时则必须匹配大小写
+set formatoptions+=B	" 合并中文行时不加空格
+set mouse=a		" 所有模式支持鼠标
+" 补全路径时的过滤规则
+set wildignore+=*~,*.swp,*.o,*.py[co],__pycache__
 " >>>-----------------------------------
 
 " <<< 插件
-" filetype.lua取代filetype.vim
+" 通过packer.nvim安装的插件
+silent! lua require('impatient')
+silent! lua require('plugins')
+
+" 用filetype.lua取代filetype.vim
 let g:do_filetype_lua = 1
 let g:did_load_filetypes = 0
 
@@ -35,154 +74,7 @@ packadd foldtext	" 折叠行显示的文本
 if g:ansi
 	packadd ansi	" 在终端中处理ANSI
 endif
-
-" 通过vim-plug安装的插件
-try | call plug#begin()
-Plug 'nvim-lua/plenary.nvim'		" 补充lua API
-Plug 'dstein64/vim-startuptime'		" 检查启动时间
-Plug 'lewis6991/impatient.nvim'		" 缓存lua
-
-if s:plugin_ui
-Plug 'sainnhe/everforest'		" 配色主题
-Plug 'nvim-lualine/lualine.nvim'	" 状态栏
-Plug 'kyazdani42/nvim-web-devicons'	" 图标字体
-Plug 'kevinhwang91/nvim-hlslens'	" 搜索提示
-Plug 'kyazdani42/nvim-tree.lua'		" 文件浏览器
-Plug 'nvim-telescope/telescope.nvim'	" 查找
-function! UpdateRemotePlugins(...)
-	let &rtp=&rtp
-	UpdateRemotePlugins
-endfunction
-Plug 'gelguy/wilder.nvim', {'do': function('UpdateRemotePlugins')}
-					" 改进wildmenu
-endif
-
-if s:plugin_view
-Plug 'psliwka/vim-smoothie', {'commit': '10fd0aa'}
-					" 平滑滚动
-Plug 'lukas-reineke/indent-blankline.nvim'
-					" 缩进线
-Plug 'nmac427/guess-indent.nvim'	" 检测缩进
-Plug 'ntpeters/vim-better-whitespace'	" 空白符
-Plug 'AndrewRadev/linediff.vim'		" 选区diff
-Plug 'fidian/hexmode'			" 查看hex
-Plug 'voldikss/vim-translator'		" 翻译
-endif
-
-if s:plugin_op
-Plug 'andymass/vim-matchup'		" 增强%
-Plug 'tpope/vim-unimpaired'		" 增强[
-Plug 'justinmk/vim-sneak'		" 移动光标
-Plug 'mg979/vim-visual-multi'		" 多重光标
-Plug 'machakann/vim-sandwich'		" 成对符号
-Plug 'urxvtcd/vim-indent-object'	" 缩进对象
-Plug 'AndrewRadev/splitjoin.vim'	" 拆分合并
-Plug 'numToStr/Comment.nvim'		" 快速注释
-Plug 'tenfyzhong/axring.vim'		" 切换单词
-Plug 'tpope/vim-repeat'			" 重复执行
-endif
-
-if s:plugin_cmd
-Plug 'skywind3000/asyncrun.vim'		" 异步执行
-Plug 'voldikss/vim-floaterm'		" 终端窗口
-Plug 'lewis6991/gitsigns.nvim'		" 集成Git
-Plug 'lambdalisue/gina.vim'		" 集成Git
-Plug 'lilydjwg/fcitx.vim' | let g:fcitx5_remote = 'fcitx5-remote'
-					" 切换输入法(不用python)
-Plug 'glacambre/firenvim', {'do': {-> firenvim#install(0)}}
-					" 嵌入浏览器
-endif
-
-if s:plugin_dev
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'romgrk/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'skywind3000/asynctasks.vim'	" 任务系统
-Plug 'stevearc/aerial.nvim'		" 代码大纲
-Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
-					" 显示颜色
-Plug 'mattn/emmet-vim'			" 展开缩写
-Plug 'editorconfig/editorconfig-vim'	" editorconfig
-Plug 'iamcco/markdown-preview.nvim', {'do': {-> mkdp#util#install()}}
-					" 预览markdown
-Plug 'mzlogin/vim-markdown-toc'		" 为markdown生成toc
-Plug 'lervag/vimtex'			" latex
-Plug 'fatih/vim-go'			" golang
-endif
-
-call plug#end()
-catch /E117.*plug#begin/ | autocmd VimEnter * redraw
-			\| echohl ErrorMsg
-			\| echo "缺少vim-plug"
-			\| echohl NONE
-endtry
 " >>>-----------------------------------
-
-" 插件设置(按名称排序，优先impatient)
-if utils#is_loaded('impatient.nvim') " <<<
-lua require('impatient')
-endif " >>>-----------------------------------
-if utils#is_loaded('aerial.nvim') " <<<
-lua require('aerial').setup({})
-endif " >>>-----------------------------------
-if utils#is_loaded('asyncrun.vim') " <<<
-lua require('config/asyncrun')
-endif " >>>-----------------------------------
-if utils#is_loaded('axring.vim') " <<<
-lua require('config/axring')
-endif " >>>-----------------------------------
-if utils#is_loaded('coc.nvim') " <<<
-lua require('config/coc')
-endif " >>>-----------------------------------
-if utils#is_loaded('Comment.nvim') " <<<
-lua require('Comment').setup()
-endif " >>>-----------------------------------
-if utils#is_loaded('everforest') " <<<
-lua require('config/everforest')
-endif " >>>-----------------------------------
-if utils#is_loaded('firenvim') " <<<
-if exists('g:started_by_firenvim')
-	lua require('config/firenvim')
-endif
-endif " >>>-----------------------------------
-if utils#is_loaded('gitsigns.nvim') " <<<
-lua require('config/gitsigns')
-endif " >>>-----------------------------------
-if utils#is_loaded('guess-indent.nvim') " <<<
-lua require('guess-indent').setup({})
-endif " >>>-----------------------------------
-if utils#is_loaded('indent-blankline.nvim') " <<<
-lua require('config/indent-blankline')
-endif " >>>-----------------------------------
-if utils#is_loaded('lualine.nvim') " <<<
-lua require('config/lualine')
-endif " >>>-----------------------------------
-if utils#is_loaded('nvim-hlslens') " <<<
-lua require('config/nvim-hlslens')
-endif " >>>-----------------------------------
-if utils#is_loaded('nvim-tree.lua') " <<<
-lua require('config/nvim-tree')
-endif " >>>-----------------------------------
-if utils#is_loaded('nvim-treesitter') " <<<
-lua require('config/nvim-treesitter')
-endif " >>>-----------------------------------
-if utils#is_loaded('nvim-web-devicons') " <<<
-lua require'nvim-web-devicons'.setup { default = true }
-endif " >>>-----------------------------------
-if utils#is_loaded('vim-better-whitespace') " <<<
-lua require('config/vim-better-whitespace')
-endif " >>>-----------------------------------
-if utils#is_loaded('vim-go') " <<<
-lua require('config/vim-go')
-endif " >>>-----------------------------------
-if utils#is_loaded('vim-sneak') " <<<
-lua require('config/vim-sneak')
-endif " >>>-----------------------------------
-if utils#is_loaded('wilder.nvim') " <<<
-lua require('config/wilder')
-endif " >>>-----------------------------------
 
 " <<< 按键
 " 单键
@@ -371,39 +263,6 @@ for _, c in pairs{2, 4, 8} do
 	cabbrev.expr(input, replace)
 end
 EOF
-" >>>-----------------------------------
-
-" <<< 选项
-if !g:env_console | set termguicolors | endif
-
-set shortmess+=I	" 去除启动页面的介绍
-set title		" 设置虚拟终端的标题
-set laststatus=3	" 只显示一个窗口的状态栏
-set scrolloff=5		" 滚动页面时光标距离上下边缘的预留行数
-
-set relativenumber	" 开启侧边栏的相对行号
-set signcolumn=number	" 其他的侧边栏符号覆盖在行号上面
-set numberwidth=3	" 行号的最低宽度
-" 终端不需要侧边栏
-augroup myconfig_term_signcolumn | autocmd!
-	autocmd TermOpen * setlocal norelativenumber
-augroup END
-" 分页时不需要swapfile 行号 状态栏
-if g:paging | set noswapfile norelativenumber laststatus=0 | endif
-
-" 常见文件编码(中文用户)
-set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1
-" 默认使用unix换行符(并且识别mac)
-set fileformats=unix,dos,mac
-" list模式的可见字符
-set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
-
-set ignorecase		" pattern搜索无视大小写
-set smartcase		" pattern搜索含大写字符时则必须匹配大小写
-set formatoptions+=B	" 合并中文行时不加空格
-set mouse=a		" 所有模式支持鼠标
-" 补全路径时的过滤规则
-set wildignore+=*~,*.swp,*.o,*.py[co],__pycache__
 " >>>-----------------------------------
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
