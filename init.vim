@@ -88,15 +88,6 @@ map      F  <Plug>Sneak_S
 xnoremap <  <gv
 xnoremap >  >gv
 
-function! s:show_documentation() abort
-	if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	elseif (coc#rpc#ready())
-		call CocActionAsync('doHover')
-	endif
-endfunction
-nnoremap <silent>  K  :call <SID>show_documentation()<CR>
-
 
 " <Esc>组：关闭
 nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
