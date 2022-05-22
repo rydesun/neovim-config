@@ -23,7 +23,7 @@ let g:plug_cmd = !g:paging	" 命令集成
 let g:plug_dev = !g:env_mini && !g:paging	" 本地开发
 " >>>-----------------------------------
 
-" <<< 选项
+" <<< 选项 (自身界面)
 if !g:env_console | set termguicolors | endif
 
 set shortmess+=I	" 去除启动页面的介绍
@@ -38,20 +38,26 @@ set numberwidth=3	" 行号的最低宽度
 augroup myconfig_term_signcolumn | autocmd!
 	autocmd TermOpen * setlocal norelativenumber
 augroup END
-" 分页时不需要swapfile 行号 状态栏
-if g:paging | set noswapfile norelativenumber laststatus=0 | endif
+" 分页时不需要行号 状态栏
+if g:paging | set norelativenumber laststatus=0 | endif
+" >>>-----------------------------------
 
+" <<< 选项 (文本内容)
 " 常见文件编码(中文用户)
 set fileencodings=ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1
 " 默认使用unix换行符(并且识别mac)
 set fileformats=unix,dos,mac
 " list模式的可见字符
 set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
+" 所有模式支持鼠标
+set mouse=a
+" 合并中文行时不加空格
+set formatoptions+=B
+" >>>-----------------------------------
 
-set ignorecase		" pattern搜索无视大小写
-set smartcase		" pattern搜索含大写字符时则必须匹配大小写
-set formatoptions+=B	" 合并中文行时不加空格
-set mouse=a		" 所有模式支持鼠标
+" <<< 选项 (命令行)
+" pattern搜索无视大小写，含大写字符时则必须匹配大小写
+set ignorecase smartcase
 " 补全路径时的过滤规则
 set wildignore+=*~,*.swp,*.o,*.py[co],__pycache__
 " >>>-----------------------------------
