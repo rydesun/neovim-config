@@ -98,7 +98,7 @@ return require('packer').startup(function(use)
   if vim.g.env_mini then return end
 
   use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
-    config = function() require'config/coc' end}
+    setup = function() require'config/coc' end}
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'config/nvim-treesitter' end,
     run = ':TSUpdate'}
