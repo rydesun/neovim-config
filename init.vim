@@ -89,20 +89,20 @@ endif
 
 " <<< 命令行
 lua << EOF
-local cabbrev = require'cabbrev'
+local cabbrev = require'lib/cabbrev'
 
 -- 以root权限写入
-cabbrev.expr('ww', 'w !sudo tee % >/dev/null')
+cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
 
 -- 设置缩进
 for _, c in pairs{2, 4, 8} do
 	c = tostring(c)
 	input = 'i'..c
 	replace = string.format('setl sw=%s ts=%s et', c, c)
-	cabbrev.expr(input, replace)
+	cabbrev.alias(input, replace)
 	input = 'i'..c..'t'
 	replace = string.format('setl sw=%s ts=%s noet', c, c)
-	cabbrev.expr(input, replace)
+	cabbrev.alias(input, replace)
 end
 EOF
 " >>>-----------------------------------
