@@ -2,30 +2,33 @@
 let g:confdir = stdpath('config')
 let g:datadir = stdpath('data')
 
-" 是否作为pager处理文本
-let g:paging = utils#bool(get(g:, 'paging', v:false))
-" 是否需要处理ANSI转义序列
-" 警告：在内置终端中输出而不是打开buffer
-let g:ansi = utils#bool(get(g:, 'ansi', v:false))
+lua << EOF
+utils = require('lib/utils')
+-- 是否作为pager处理文本
+vim.g.paging = utils.bool(vim.g.paging)
+-- 是否需要处理ANSI转义序列
+-- 警告：在内置终端中输出而不是打开buffer
+vim.g.ansi = utils.bool(vim.g.ansi)
 
-" 是否在小型环境中(非开发)
-let g:env_mini = utils#bool($VIM_MINI)
-" 是否处于Linux console
-let g:env_console = utils#bool($TERM == 'linux')
-" 是否在firenvim中
-let g:env_firenvim = utils#bool(get(g:, 'started_by_firenvim', v:false))
+-- 是否在小型环境中(非开发)
+vim.g.env_mini = utils.bool(vim.env.VIM_MINI)
+-- 是否处于Linux console
+vim.g.env_console = vim.env.TERM == 'linux'
+-- 是否在firenvim中
+vim.g.env_firenvim = utils.bool(vim.g.started_by_firenvim)
 
-" 是否启用该类型的插件
-" 自身界面
-let g:plug_ui = v:true
-" 查看文本
-let g:plug_view = v:true
-" 操作文本
-let g:plug_op = v:true
-" 命令集成
-let g:plug_cmd = utils#bool(!g:paging)
-" 本地开发
-let g:plug_dev = utils#bool(!g:env_mini && !g:paging)
+-- 是否启用该类型的插件
+-- 自身界面
+vim.g.plug_ui = true
+-- 查看文本
+vim.g.plug_view = true
+-- 操作文本
+vim.g.plug_op = true
+-- 命令集成
+vim.g.plug_cmd = not vim.g.paging
+-- 本地开发
+vim.g.plug_dev = not vim.g.env_mini and not vim.g.paging
+EOF
 " >>>-----------------------------------
 
 " <<< 选项 (自身界面)
