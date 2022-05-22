@@ -95,6 +95,8 @@ return require('packer').startup(function(use)
     config = function() require'config/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end}
 
+  if vim.g.env_mini ~= '' and vim.g.env_mini ~= '0' then return end
+
   use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
     config = function() require'config/coc' end}
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
