@@ -2,7 +2,7 @@ local plug_ui = function() return vim.g.plug_ui end
 local plug_view = function() return vim.g.plug_view end
 local plug_op = function() return vim.g.plug_op end
 local plug_cmd = function() return vim.g.plug_cmd end
-local plug_dev = function() return vim.g.plug_dev == 1 end
+local plug_dev = function() return vim.g.plug_dev end
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -95,7 +95,7 @@ return require('packer').startup(function(use)
     config = function() require'config/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end}
 
-  if vim.g.env_mini ~= '' and vim.g.env_mini ~= '0' then return end
+  if vim.g.env_mini then return end
 
   use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
     config = function() require'config/coc' end}

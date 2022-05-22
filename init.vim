@@ -3,24 +3,29 @@ let g:confdir = stdpath('config')
 let g:datadir = stdpath('data')
 
 " 是否作为pager处理文本
-let g:paging = get(g:, 'paging', v:false)
+let g:paging = utils#bool(get(g:, 'paging', v:false))
 " 是否需要处理ANSI转义序列
 " 警告：在内置终端中输出而不是打开buffer
-let g:ansi = get(g:, 'ansi', v:false)
+let g:ansi = utils#bool(get(g:, 'ansi', v:false))
 
 " 是否在小型环境中(非开发)
-let g:env_mini = $VIM_MINI
+let g:env_mini = utils#bool($VIM_MINI)
 " 是否处于Linux console
-let g:env_console = $TERM == 'linux'
+let g:env_console = utils#bool($TERM == 'linux')
 " 是否在firenvim中
-let g:env_firenvim = get(g:, 'started_by_firenvim', v:false)
+let g:env_firenvim = utils#bool(get(g:, 'started_by_firenvim', v:false))
 
 " 是否启用该类型的插件
-let g:plug_ui = v:true          " 自身界面
-let g:plug_view = v:true	" 查看文本
-let g:plug_op = v:true          " 操作文本
-let g:plug_cmd = !g:paging	" 命令集成
-let g:plug_dev = !g:env_mini && !g:paging	" 本地开发
+" 自身界面
+let g:plug_ui = v:true
+" 查看文本
+let g:plug_view = v:true
+" 操作文本
+let g:plug_op = v:true
+" 命令集成
+let g:plug_cmd = utils#bool(!g:paging)
+" 本地开发
+let g:plug_dev = utils#bool(!g:env_mini && !g:paging)
 " >>>-----------------------------------
 
 " <<< 选项 (自身界面)
