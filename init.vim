@@ -215,10 +215,10 @@ nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
 nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
-nnoremap <silent>  <leader>gd  :call utils#term_git('d', v:true)<CR>
-nnoremap <silent>  <leader>ga  :call utils#term_git('d', v:false)<CR>
-nnoremap <silent>  <leader>gs  :call utils#term_git('s', v:false)<CR>
-nnoremap <silent>  <leader>gt  :call utils#term_git('ds', v:false)<CR>
+nnoremap <silent>  <leader>gd  :lua require'lib/term_git'.run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  :lua require'lib/term_git'.run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  :lua require'lib/term_git'.run('show', false)<CR>
+nnoremap <silent>  <leader>gt  :lua require'lib/term_git'.run('diff --staged', false)<CR>
 nnoremap <silent>  <leader>gc  :Gina commit<CR>
 
 " r组：语法相关的修改
