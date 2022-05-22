@@ -3,19 +3,19 @@ let g:confdir = stdpath('config')
 let g:datadir = stdpath('data')
 
 lua << EOF
-utils = require('lib/utils')
+lib = require('lib')
 -- 是否作为pager处理文本
-vim.g.paging = utils.bool(vim.g.paging)
+vim.g.paging = lib.bool(vim.g.paging)
 -- 是否需要处理ANSI转义序列
 -- 警告：在内置终端中输出而不是打开buffer
-vim.g.ansi = utils.bool(vim.g.ansi)
+vim.g.ansi = lib.bool(vim.g.ansi)
 
 -- 是否在小型环境中(非开发)
-vim.g.env_mini = utils.bool(vim.env.VIM_MINI)
+vim.g.env_mini = lib.bool(vim.env.VIM_MINI)
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 -- 是否在firenvim中
-vim.g.env_firenvim = utils.bool(vim.g.started_by_firenvim)
+vim.g.env_firenvim = lib.bool(vim.g.started_by_firenvim)
 
 -- 是否启用该类型的插件
 -- 自身界面
@@ -92,7 +92,7 @@ endif
 
 " <<< 命令行
 lua << EOF
-local cabbrev = require'lib/cabbrev'
+local cabbrev = require'utils/cabbrev'
 
 -- 以root权限写入
 cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
@@ -215,10 +215,10 @@ nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
 nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
-nnoremap <silent>  <leader>gd  :lua require'lib/term_git'.run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  :lua require'lib/term_git'.run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  :lua require'lib/term_git'.run('show', false)<CR>
-nnoremap <silent>  <leader>gt  :lua require'lib/term_git'.run('diff --staged', false)<CR>
+nnoremap <silent>  <leader>gd  :lua require'utils/term_git'.run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  :lua require'utils/term_git'.run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  :lua require'utils/term_git'.run('show', false)<CR>
+nnoremap <silent>  <leader>gt  :lua require'utils/term_git'.run('diff --staged', false)<CR>
 nnoremap <silent>  <leader>gc  :Gina commit<CR>
 
 " r组：语法相关的修改
