@@ -1,7 +1,4 @@
 " <<< 环境
-let g:confdir = stdpath('config')
-let g:datadir = stdpath('data')
-
 lua << EOF
 lib = require('lib')
 -- 是否作为pager处理文本

@@ -1,5 +1,5 @@
 -- 修改coc数据目录, 默认值是XDG config目录
-vim.g.coc_data_home = vim.g.datadir..'/coc'
+vim.g.coc_data_home = vim.fn.stdpath('data')..'/coc'
 
 -- 覆盖K键
 vim.api.nvim_set_keymap('n', 'K', '', {
