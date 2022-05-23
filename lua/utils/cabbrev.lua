@@ -3,7 +3,7 @@ local fn = vim.fn
 
 function M.alias(input, replace)
   local cmd = 'cnoreabbrev <expr> %s v:lua._cmd_expr("%s", "%s")'
-  vim.cmd(cmd:format(input, input, replace))
+  vim.api.nvim_command(cmd:format(input, input, replace))
 end
 
 function _G._cmd_expr(input, replace)
