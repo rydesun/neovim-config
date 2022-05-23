@@ -58,9 +58,6 @@ set listchars=tab:\|·,space:␣,trail:☲,extends:►,precedes:◄
 set mouse=a
 " 合并中文行时不加空格
 set formatoptions+=B
-" >>>-----------------------------------
-
-" <<< 选项 (命令行)
 " pattern搜索无视大小写，含大写字符时则必须匹配大小写
 set ignorecase smartcase
 " 补全路径时的过滤规则
@@ -85,7 +82,7 @@ vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
 EOF
 
-" 我自己的插件
+" 本地插件
 packadd rooter		" 自动设置工作目录
 packadd counter		" 统计中文字符数量
 packadd typography	" 修复中英文间空格
@@ -116,7 +113,7 @@ end
 EOF
 " >>>-----------------------------------
 
-" <<< 按键
+" <<< 按键 (非默认行为)
 noremap  H  ^
 noremap  L  $
 noremap  Q  @q
@@ -129,14 +126,6 @@ xnoremap >  >gv
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 if g:paging | nnoremap q :exit<CR> | endif
 
-" <Esc>组：关闭
-nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-nnoremap <silent>  <Esc>q      :cclose<CR>
-nnoremap <silent>  <Esc>l      :lclose<CR>
-nnoremap <silent>  <Esc>f      :bd<CR>
-nnoremap <silent>  <Esc>t      :tabclose<CR>
-nnoremap <silent>  <Esc>w      <C-w>c
-
 " s组：搜索列表(telescope.nvim)
 " vim-sandwich处理成对符号
 nnoremap           s           <NOP>
@@ -145,6 +134,23 @@ nnoremap <silent>  ss          :Telescope live_grep theme=dropdown<CR>
 nnoremap <silent>  sb          :Telescope buffers theme=dropdown previewer=false<CR>
 nnoremap <silent>  sf          :Telescope find_files theme=dropdown previewer=false<CR>
 nnoremap <silent>  sg          :Telescope git_status theme=dropdown previewer=false<CR>
+
+" g组：语法跳转
+" splitjoin.vim执行拆分合并
+nmap     <silent>  gd          <Plug>(coc-definition)
+nmap     <silent>  gy          <Plug>(coc-type-definition)
+nmap     <silent>  gi          <Plug>(coc-implementation)
+nmap     <silent>  gr          <Plug>(coc-references)
+" >>>-----------------------------------
+
+" <<< 按键 (新增行为)
+" <Esc>组：关闭
+nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
+nnoremap <silent>  <Esc>q      :cclose<CR>
+nnoremap <silent>  <Esc>l      :lclose<CR>
+nnoremap <silent>  <Esc>f      :bd<CR>
+nnoremap <silent>  <Esc>t      :tabclose<CR>
+nnoremap <silent>  <Esc>w      <C-w>c
 
 " []组：前后跳转
 " 插件提供更多映射
@@ -155,13 +161,6 @@ nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 
-" g组：语法跳转
-" splitjoin.vim执行拆分合并
-nmap     <silent>  gd          <Plug>(coc-definition)
-nmap     <silent>  gy          <Plug>(coc-type-definition)
-nmap     <silent>  gi          <Plug>(coc-implementation)
-nmap     <silent>  gr          <Plug>(coc-references)
-
 " Ctrl Alt
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)
 nnoremap <silent>  <C-k>       :Gitsigns prev_hunk<CR>
@@ -170,6 +169,47 @@ nnoremap <silent>  <A-j>       :m .+1<CR>
 nnoremap <silent>  <A-k>       :m .-2<CR>
 vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
 vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
+" >>>-----------------------------------
+
+" <<< 按键 (Leader)
+let g:mapleader=' ' | noremap <Space> <Nop>
+" 单键
+vnoremap <silent>  <leader>y   "+y
+nnoremap <silent>  <leader>p   "+p
+nnoremap <silent>  <leader>P   "+P
+nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
+nnoremap <silent>  <leader>o   :AerialToggle left<CR>
+nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
+vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
+
+" 数字组：运行
+nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
+nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
+nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
+nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
+nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
+
+" h组g组：Git Hunk
+nnoremap <silent>  <leader>gd  :lua require'utils/term_git'.run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  :lua require'utils/term_git'.run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  :lua require'utils/term_git'.run('show', false)<CR>
+nnoremap <silent>  <leader>gt  :lua require'utils/term_git'.run('diff --staged', false)<CR>
+nnoremap <silent>  <leader>gc  :Gina commit<CR>
+nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
+nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
+nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
+nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
+
+" r组：语法相关的修改
+nmap               <leader>rn  <Plug>(coc-rename)
+nmap               <leader>rt  <Plug>(coc-refactor)
+nmap               <leader>rf  <Plug>(coc-fix-current)
+nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
+
+" t组：操作终端
+nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
+nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
@@ -204,47 +244,6 @@ omap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 xmap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
-" >>>-----------------------------------
-
-" <<< 按键 (Leader)
-let g:mapleader=' ' | noremap <Space> <Nop>
-" 单键
-vnoremap <silent>  <leader>y   "+y
-nnoremap <silent>  <leader>p   "+p
-nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
-nnoremap <silent>  <leader>o   :AerialToggle left<CR>
-nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
-vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
-
-" h组g组：Git Hunk
-nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
-nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
-nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
-nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
-nnoremap <silent>  <leader>gd  :lua require'utils/term_git'.run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  :lua require'utils/term_git'.run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  :lua require'utils/term_git'.run('show', false)<CR>
-nnoremap <silent>  <leader>gt  :lua require'utils/term_git'.run('diff --staged', false)<CR>
-nnoremap <silent>  <leader>gc  :Gina commit<CR>
-
-" r组：语法相关的修改
-nmap               <leader>rn  <Plug>(coc-rename)
-nmap               <leader>rt  <Plug>(coc-refactor)
-nmap               <leader>rf  <Plug>(coc-fix-current)
-nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
-
-" t组：操作终端
-nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
-nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
-vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
-
-" 运行任务
-nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
-nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
-nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
-nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
-nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (命令行)
