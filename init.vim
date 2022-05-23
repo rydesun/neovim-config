@@ -142,8 +142,9 @@ nnoremap <silent>  <Esc>w      <C-w>c
 nnoremap           s           <NOP>
 nnoremap           S           :Telescope<CR>
 nnoremap <silent>  ss          :Telescope live_grep theme=dropdown<CR>
-nnoremap <silent>  sf          :Telescope find_files theme=dropdown<CR>
-nnoremap <silent>  sg          :Telescope git_status theme=dropdown<CR>
+nnoremap <silent>  sb          :Telescope buffers theme=dropdown previewer=false<CR>
+nnoremap <silent>  sf          :Telescope find_files theme=dropdown previewer=false<CR>
+nnoremap <silent>  sg          :Telescope git_status theme=dropdown previewer=false<CR>
 
 " []组：前后跳转
 " 插件提供更多映射
