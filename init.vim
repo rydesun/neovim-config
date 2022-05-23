@@ -181,6 +181,7 @@ nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
 vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
+nnoremap <silent>  <leader>K   :lua require'utils/devdocs':open_cursor()<CR>
 
 " 数字组：运行
 nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
