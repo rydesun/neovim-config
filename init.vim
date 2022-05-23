@@ -71,13 +71,22 @@ set wildignore+=*~,*.swp,*.o,*.py[co],__pycache__
 " >>>-----------------------------------
 
 " <<< 插件
-" 通过packer.nvim安装的插件
-silent! lua require('impatient')
-silent! lua require('plugins')
+lua << EOF
+pcall(function() require'impatient' end)
 
-" 用filetype.lua取代filetype.vim
-let g:do_filetype_lua = 1
-let g:did_load_filetypes = 0
+-- 通过packer.nvim安装的插件
+status, err = pcall(function() require'plugins' end)
+if not status and err:find([[module 'packer' not found]]) then
+  vim.api.nvim_create_autocmd({"VimEnter"}, {
+    pattern = {"*"},
+    callback = function() require'utils/msg'.err('缺少packer.nvim') end
+  })
+end
+
+-- 用filetype.lua取代filetype.vim
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+EOF
 
 " 我自己的插件
 packadd rooter		" 自动设置工作目录
