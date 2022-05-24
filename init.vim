@@ -160,6 +160,10 @@ nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
 nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
+nnoremap <silent>  [of         :set laststatus=2<CR>
+nnoremap <silent>  ]of         :set laststatus=3<CR>
+nnoremap <silent>  [om         :set colorcolumn=80<CR>
+nnoremap <silent>  ]om         :set colorcolumn=<CR>
 
 " Ctrl Alt
 imap               <C-j>       <Plug>(coc-snippets-expand-jump)

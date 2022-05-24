@@ -13,6 +13,20 @@ vim.g.nvim_tree_icons = {
   },
 }
 
+local lib = require("nvim-tree.lib")
+
+local git_add = function()
+  local node = lib.get_node_at_cursor()
+  vim.api.nvim_command("silent !git add " .. node.absolute_path)
+  lib.refresh_tree()
+end
+
+local git_unstage = function()
+  local node = lib.get_node_at_cursor()
+  vim.api.nvim_command("silent !git restore --staged " .. node.absolute_path)
+  lib.refresh_tree()
+end
+
 require'nvim-tree'.setup {
   -- 取代netrw
   hijack_netrw = true,
@@ -29,8 +43,11 @@ require'nvim-tree'.setup {
     mappings = {
       list = {
         { key = "l", action = "edit" },
+        { key = "h", action = "close_node" },
         { key = "<C-k>", action = "prev_git_item" },
         { key = "<C-j>", action = "next_git_item" },
+        { key = "<<", action = "git_add", action_cb = git_add },
+        { key = ">>", action = "git_unstage", action_cb = git_unstage },
       },
     },
   },
