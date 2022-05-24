@@ -4,8 +4,14 @@ lib = require('lib')
 -- 是否作为pager处理文本
 vim.g.paging = lib.bool(vim.g.paging)
 -- 是否需要处理ANSI转义序列
--- 警告：在内置终端中输出而不是打开buffer
+-- 警告：这将会在在内置终端中输出而不是在当前buffer
 vim.g.ansi = lib.bool(vim.g.ansi)
+if vim.g.ansi then
+  vim.api.nvim_create_autocmd({"VimEnter"}, {
+    pattern = {"*"},
+    callback = function() require'utils/term_cat'.run(true, true) end
+  })
+end
 
 -- 是否在小型环境中(非开发)
 vim.g.env_mini = lib.bool(vim.env.VIM_MINI)
@@ -84,17 +90,25 @@ EOF
 
 " 本地插件
 packadd rooter		" 自动设置工作目录
-packadd counter		" 统计中文字符数量
-packadd typography	" 修复中英文间空格
 packadd foldtext	" 折叠行显示的文本
-" 警告：无故不要开启
-if g:ansi
-	packadd ansi	" 在终端中处理ANSI
-endif
 " >>>-----------------------------------
 
 " <<< 命令行
 lua << EOF
+-- 统计中文字符数量
+vim.api.nvim_create_user_command(
+  'CountZhChars',
+  function(opts) require'utils/zh':count() end,
+  {}
+)
+
+-- 修复中英文间空格
+vim.api.nvim_create_user_command(
+  'TypoSpace',
+  function(opts) require'utils/zh':typo_space() end,
+  {}
+)
+
 local cabbrev = require'utils/cabbrev'
 
 -- 以root权限写入
@@ -102,13 +116,13 @@ cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
 
 -- 设置缩进
 for _, c in pairs{2, 4, 8} do
-	c = tostring(c)
-	input = 'i'..c
-	replace = string.format('setl sw=%s ts=%s et', c, c)
-	cabbrev.alias(input, replace)
-	input = 'i'..c..'t'
-	replace = string.format('setl sw=%s ts=%s noet', c, c)
-	cabbrev.alias(input, replace)
+  c = tostring(c)
+  input = 'i'..c
+  replace = string.format('setl sw=%s ts=%s et', c, c)
+  cabbrev.alias(input, replace)
+  input = 'i'..c..'t'
+  replace = string.format('setl sw=%s ts=%s noet', c, c)
+  cabbrev.alias(input, replace)
 end
 EOF
 " >>>-----------------------------------
