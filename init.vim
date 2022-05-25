@@ -91,8 +91,9 @@ vim.g.did_load_filetypes = 0
 EOF
 
 " 本地插件
-packadd rooter		" 自动设置工作目录
 packadd foldtext	" 折叠行显示的文本
+packadd rooter		" 自动设置工作目录
+lua require'rooter'.setup{'.git', '.hg', '.svn', 'Makefile', 'package.json'}
 " >>>-----------------------------------
 
 " <<< 命令行
