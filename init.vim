@@ -76,11 +76,13 @@ pcall(function() require'impatient' end)
 
 -- 通过packer.nvim安装的插件
 status, err = pcall(function() require'plugins' end)
-if not status and err:find([[module 'packer' not found]]) then
-  vim.api.nvim_create_autocmd({"VimEnter"}, {
-    pattern = {"*"},
-    callback = function() require'utils/msg'.err('缺少packer.nvim') end
-  })
+if not status then
+  if err:find([[module 'packer' not found]]) then
+    vim.api.nvim_create_autocmd({"VimEnter"}, {
+      pattern = {"*"},
+      callback = function() require'utils/msg'.err('缺少packer.nvim') end
+    })
+  else error(err) end
 end
 
 -- 用filetype.lua取代filetype.vim
