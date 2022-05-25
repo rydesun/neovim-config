@@ -5,9 +5,8 @@ local plug_cmd = function() return vim.g.plug_cmd end
 local plug_dev = function() return vim.g.plug_dev end
 
 return require('packer').startup(function(use)
+  -- 管理自己
   use 'wbthomason/packer.nvim'
-  -- 补充lua API
-  use 'nvim-lua/plenary.nvim'
   -- 检查启动时间
   use 'dstein64/vim-startuptime'
   -- 缓存lua
@@ -18,17 +17,21 @@ return require('packer').startup(function(use)
     config = function() require'config/everforest' end}
   -- 状态栏
   use {'nvim-lualine/lualine.nvim', cond = plug_ui,
+    requires = {{'kyazdani42/nvim-web-devicons', opt=true}},
     config = function() require'config/lualine' end}
-  -- 图标字体
-  use {'kyazdani42/nvim-web-devicons', cond = plug_ui}
   -- 搜索提示
   use {'kevinhwang91/nvim-hlslens', cond = plug_ui,
     config = function() require'config/nvim-hlslens' end}
   -- 文件浏览器
   use {'kyazdani42/nvim-tree.lua', cond = plug_ui,
+    requires = {{'kyazdani42/nvim-web-devicons', opt=true}},
     config = function() require'config/nvim-tree' end}
   -- 查找
-  use {'nvim-telescope/telescope.nvim', cond = plug_ui}
+  use {'nvim-telescope/telescope.nvim', cond = plug_ui,
+    requires = {
+      {'nvim-lua/plenary.nvim', opt=true},
+      {'kyazdani42/nvim-web-devicons', opt=true},
+  }}
   -- 改进wildmenu
   use {'gelguy/wilder.nvim', cond = plug_ui,
     run = ':UpdateRemotePlugins',
@@ -83,6 +86,7 @@ return require('packer').startup(function(use)
   use {'voldikss/vim-floaterm', cond = plug_cmd}
   -- 集成Git
   use {'lewis6991/gitsigns.nvim', cond = plug_cmd,
+    requires = {{'nvim-lua/plenary.nvim', opt=true}},
     config = function() require'config/gitsigns' end}
   -- 集成Git
   use {'lambdalisue/gina.vim', cond = plug_cmd}
