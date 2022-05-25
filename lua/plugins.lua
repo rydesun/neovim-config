@@ -110,9 +110,11 @@ return require('packer').startup(function(use)
   -- 代码大纲
   use {'stevearc/aerial.nvim', cond = plug_dev,
     config = function() require'aerial'.setup{} end}
-  -- 显示颜色
-  use {'rrethy/vim-hexokinase', cond = plug_dev,
-    run = 'make hexokinase'}
+  -- 显示颜色(需要go编译)
+  if vim.fn.executable('make') > 0 and vim.fn.executable('go') > 0 then
+    use {'rrethy/vim-hexokinase', cond = plug_dev,
+      run = 'make hexokinase'}
+  end
   -- 展开缩写
   use {'mattn/emmet-vim', cond = plug_dev}
   -- editorconfig
