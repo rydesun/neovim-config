@@ -97,8 +97,10 @@ return require('packer').startup(function(use)
 
   if vim.g.env_mini then return end
 
-  use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
-    setup = function() require'config/coc' end}
+  if vim.fn.executable('node') > 0 then
+    use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
+      setup = function() require'config/coc' end}
+  end
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'config/nvim-treesitter' end,
     run = ':TSUpdate'}
@@ -128,8 +130,12 @@ return require('packer').startup(function(use)
   -- 为markdown生成toc
   use {'mzlogin/vim-markdown-toc', cond = plug_dev}
   -- latex
-  use {'lervag/vimtex', cond = plug_dev}
+  if vim.fn.executable('latex') > 0 then
+    use {'lervag/vimtex', cond = plug_dev}
+  end
   -- golang
-  use {'fatih/vim-go', cond = plug_dev,
-    config = function() require'config/vim-go' end}
+  if vim.fn.executable('go') > 0 then
+    use {'fatih/vim-go', cond = plug_dev,
+      config = function() require'config/vim-go' end}
+  end
 end)
