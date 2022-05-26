@@ -99,7 +99,7 @@ return require('packer').startup(function(use)
 
   use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
     setup = function() require'config/coc' end}
-  use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
+  use {'nvim-treesitter/nvim-treesitter', cond = true,
     config = function() require'config/nvim-treesitter' end,
     run = ':TSUpdate'}
   use {'nvim-treesitter/playground', cond = plug_dev}
