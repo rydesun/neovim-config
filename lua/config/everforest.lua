@@ -8,7 +8,8 @@ vim.g.everforest_disable_italic_comment = 1
 
 vim.api.nvim_command("colorscheme everforest")
 
-local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background)
+local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
+  vim.fn['everforest#get_configuration']().colors_override)
 
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
