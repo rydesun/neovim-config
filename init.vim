@@ -92,6 +92,11 @@ EOF
 
 " 本地插件
 packadd foldtext	" 折叠行显示的文本
+if g:env_console
+	lua require'foldtext'.setup{'+', '<', '>'}
+else
+	lua require'foldtext'.setup{'＋', '❰', '❱'}
+endif
 packadd rooter		" 自动设置工作目录
 lua require'rooter'.setup{'.git', '.hg', '.svn', 'Makefile', 'package.json'}
 " >>>-----------------------------------
