@@ -13,45 +13,38 @@ return ts.setup {
             node_decremental = "grm",
         }
     },
-    move = {
-        enable = true,
-        set_jumps = true,
-        goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer"
-        },
-        goto_next_start = {
-            ["]]"] = "@class.outer",
-            ["]m"] = "@function.outer"
-        },
-        goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer"
-        },
-        goto_previous_start = {
-            ["[["] = "@class.outer",
-            ["[m"] = "@function.outer"
-        },
-    },
     textobjects = {
         select = {
             enable = true,
+            -- 如果不在文本对象中，自动往下查找
             lookahead = true,
             keymaps = {
                 ["if"] = "@function.inner",
-                ac = "@class.outer",
-                af = "@function.outer",
-                ic = "@class.inner"
+                ["af"] = "@function.outer",
+                ["ic"] = "@class.inner",
+                ["ac"] = "@class.outer",
             },
         },
-        swap = {
+        move = {
             enable = true,
-            swap_next = {
-                ["<leader>]p"] = "@parameter.inner"
+            -- 在跳转列表中记录位置
+            set_jumps = true,
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]]"] = "@class.outer",
             },
-            swap_previous = {
-                ["<leader>[p"] = "@parameter.inner"
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+                ["]["] = "@class.outer",
             },
-        }
-    }
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[]"] = "@class.outer"
+            },
+        },
+    },
 }

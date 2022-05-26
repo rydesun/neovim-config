@@ -235,12 +235,6 @@ vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
-" 函数
-xmap     if        <Plug>(coc-funcobj-i)
-omap     if        <Plug>(coc-funcobj-i)
-xmap     af        <Plug>(coc-funcobj-a)
-omap     af        <Plug>(coc-funcobj-a)
-
 " 缩进
 xmap     ii        <Plug>(indent-object_linewise-none)
 omap     ii        <Plug>(indent-object_blockwise-none)
