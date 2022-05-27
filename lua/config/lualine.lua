@@ -51,6 +51,8 @@ function filename:update_status()
   return path
 end
 
+local transform_color = require('lib').transform_color(0.3, 30)
+
 require'lualine'.setup {
   options = {
     theme = 'everforest',
@@ -73,7 +75,22 @@ require'lualine'.setup {
     lualine_x = {encoding},
     lualine_y = {'diagnostics'},
     lualine_z = {
-      {'filetype', icons_enabled = false},
+      {'filetype', icons_enabled = false,
+        color = function()
+          local ok, devicons = pcall(require, 'nvim-web-devicons')
+          if not ok then
+            return {}
+          end
+          local f_name, f_ext = vim.fn.expand('%:t'), vim.fn.expand('%:e')
+          local _, icon_highlight_group = devicons.get_icon(f_name, f_ext)
+          local hl_color = require'lualine.utils.utils'.
+            extract_highlight_colors(icon_highlight_group, 'fg')
+          if not hl_color then
+            return {}
+          end
+          return { bg = transform_color(hl_color) }
+        end,
+    },
     },
   },
   extensions = {'aerial', 'nvim-tree', 'quickfix'},
