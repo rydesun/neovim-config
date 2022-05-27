@@ -73,7 +73,16 @@ require'lualine'.setup {
         path = 3, symbols = {modified = '  ', readonly = ' ', unnamed = ''}},
     },
     lualine_x = {encoding},
-    lualine_y = {'diagnostics'},
+    lualine_y = {
+      {'diagnostics',
+        diagnostics_color = {
+          error = 'DiagnosticFloatingError',
+          warn  = 'DiagnosticFloatingWarn',
+          info  = 'DiagnosticFloatingInfo',
+          hint  = 'DiagnosticFloatingHint',
+        },
+      },
+    },
     lualine_z = {
       {'filetype', icons_enabled = false,
         color = function()
