@@ -11,7 +11,4 @@ require'indent_blankline'.setup {
   -- 优先使用treesitter计算缩进
   use_treesitter = true,
   use_treesitter_scope = true,
-
-  -- 高亮上下文
-  show_current_context = true,
 }
