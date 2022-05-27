@@ -6,7 +6,7 @@ function M.setup(signs)
     local folded_cnt = vim.v.foldend - vim.v.foldstart
 
     if vim.o.foldmethod == 'marker' then
-      local comment = vim.o.commentstring:format('')
+      local comment = vim.o.commentstring:format(''):gsub('%-', '%%-')
       local marker = vim.o.foldmarker:sub(1, vim.o.foldmarker:find(',')-1)
       local text = first_line:gsub(marker, ''):gsub(comment, '')
       return signs[1] .. signs[2] .. vim.fn.printf('%3d', folded_cnt-1)
