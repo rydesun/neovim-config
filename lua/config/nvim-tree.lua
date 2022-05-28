@@ -1,18 +1,3 @@
--- 压缩目录层次
-vim.g.nvim_tree_group_empty = 1
-
-vim.g.nvim_tree_icons = {
-  git = {
-    unstaged = " *",
-    staged = " +",
-    unmerged = " ",
-    renamed = " ➜",
-    untracked = " %",
-    deleted = " x",
-    ignored = " ◌",
-  },
-}
-
 local lib = require("nvim-tree.lib")
 
 local git_add = function()
@@ -53,13 +38,26 @@ require'nvim-tree'.setup {
   },
 
   renderer = {
+    -- 压缩目录层次
+    group_empty = true,
     -- 缩进线
     indent_markers = {
       enable = true,
     },
-    -- git状态显示在侧边栏上
     icons = {
+        -- git状态显示在侧边栏上
         git_placement = "signcolumn",
+        glyphs = {
+          git = {
+            unstaged = " *",
+            staged = " +",
+            unmerged = " ",
+            renamed = " ➜",
+            untracked = " %",
+            deleted = " x",
+            ignored = " ◌",
+          },
+        },
     },
   },
 
