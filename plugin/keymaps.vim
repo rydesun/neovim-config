@@ -60,17 +60,8 @@ vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
 vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 " >>>-----------------------------------
 
-" <<< 按键 (Leader)
+" <<< 按键 (Leader单键)
 let g:mapleader=' ' | noremap <Space> <Nop>
-" 单键
-vnoremap <silent>  <leader>y   "+y
-nnoremap <silent>  <leader>p   "+p
-nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
-nnoremap <silent>  <leader>o   :AerialToggle left<CR>
-nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
-vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
-nnoremap <silent>  <leader>K   :lua require'utils/devdocs':open_cursor()<CR>
 
 " 数字组：运行
 nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
@@ -79,6 +70,17 @@ nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
 nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
 nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
 
+vnoremap <silent>  <leader>y   "+y
+nnoremap <silent>  <leader>p   "+p
+nnoremap <silent>  <leader>P   "+P
+nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
+nnoremap <silent>  <leader>o   :AerialToggle left<CR>
+nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
+vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
+nnoremap <silent>  <leader>K   :lua require'utils/devdocs':open_cursor()<CR>
+" >>>-----------------------------------
+
+" <<< 按键 (Leader多键)
 " h组g组：Git Hunk
 nnoremap <silent>  <leader>gd  :lua require'utils/term_git'.run('diff', true)<CR>
 nnoremap <silent>  <leader>ga  :lua require'utils/term_git'.run('diff', false)<CR>
