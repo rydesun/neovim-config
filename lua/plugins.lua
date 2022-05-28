@@ -53,7 +53,8 @@ return require('packer').startup(function(use)
   use {'voldikss/vim-translator', cond = plug_view}
 
   -- 增强%
-  use {'andymass/vim-matchup', cond = plug_op}
+  use {'andymass/vim-matchup', cond = plug_op,
+    config = function() require'config/vim-matchup' end}
   -- 增强[
   use {'tpope/vim-unimpaired', cond = plug_op}
   -- 移动光标
