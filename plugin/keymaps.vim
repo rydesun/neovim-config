@@ -132,7 +132,14 @@ omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 " >>>-----------------------------------
 
-" <<< 按键 (命令行)
+" <<< 按键 (Emacs风格)
+inoremap           <C-a>       <Home>
+inoremap           <C-e>       <End>
+inoremap           <C-b>       <Left>
+inoremap           <C-f>       <Right>
+inoremap           <M-b>       <C-Left>
+inoremap           <M-f>       <C-Right>
+
 cnoremap           <C-a>       <Home>
 cnoremap           <C-b>       <Left>
 cnoremap           <C-f>       <Right>
@@ -140,11 +147,11 @@ cnoremap           <M-b>       <C-Left>
 cnoremap           <M-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
-cnoremap <expr>    %%          expand('%:p:h').'/'
 " >>>-----------------------------------
 
-" <<< 按键 (终端)
-tnoremap <M-space>  <c-\><c-n>
+" <<< 按键 (命令行、终端)
+cnoremap <expr>    %%          expand('%:p:h').'/'
+tnoremap           <M-space>   <c-\><c-n>
 " >>>-----------------------------------
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
