@@ -1,10 +1,10 @@
 -- <<< 环境
-local lib = require('lib')
+local bool = require('lib').bool
 -- 是否作为pager处理文本
-vim.g.paging = lib.bool(vim.g.paging)
+vim.g.paging = bool(vim.g.paging)
 -- 是否需要处理ANSI转义序列
 -- 警告：这将会在在内置终端中输出而不是在当前buffer
-vim.g.ansi = lib.bool(vim.g.ansi)
+vim.g.ansi = bool(vim.g.ansi)
 if vim.g.ansi then
   vim.api.nvim_create_autocmd({"VimEnter"}, {
     pattern = {"*"},
@@ -13,11 +13,11 @@ if vim.g.ansi then
 end
 
 -- 是否在小型环境中(非开发)
-vim.g.env_mini = lib.bool(vim.env.VIM_MINI)
+vim.g.env_mini = bool(vim.env.VIM_MINI)
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 -- 是否在firenvim中
-vim.g.env_firenvim = lib.bool(vim.g.started_by_firenvim)
+vim.g.env_firenvim = bool(vim.g.started_by_firenvim)
 
 -- 是否启用该类型的插件
 -- 自身界面
