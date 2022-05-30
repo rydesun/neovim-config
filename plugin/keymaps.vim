@@ -3,9 +3,8 @@ noremap  H  ^
 noremap  L  $
 noremap  Q  @q
 noremap  ;  :
-map      :  <Plug>Sneak_;
-map      f  <Plug>Sneak_s
-map      F  <Plug>Sneak_S
+map      f  <Plug>(leap-forward)
+map      F  <Plug>(leap-backward)
 xnoremap <  <gv
 xnoremap >  >gv
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>

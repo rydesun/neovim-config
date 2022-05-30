@@ -58,8 +58,8 @@ return require('packer').startup(function(use)
   -- 增强[
   use {'tpope/vim-unimpaired', cond = plug_op}
   -- 移动光标
-  use {'justinmk/vim-sneak', cond = plug_op,
-    setup = function() require'config/vim-sneak' end}
+  use {'ggandor/leap.nvim', cond = plug_op,
+    setup = function() end}
   -- 多重光标
   use {'mg979/vim-visual-multi', cond = plug_op}
   -- 成对符号
