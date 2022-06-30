@@ -74,6 +74,9 @@ return require('packer').startup(function(use)
   -- 切换单词
   use {'tenfyzhong/axring.vim', cond = plug_op,
     config = function() require'config/axring' end}
+  -- 编辑颜色
+  use {'ziontee113/color-picker.nvim', cond = plug_op,
+    config = function() require'color-picker' end}
   -- 重复执行
   use {'tpope/vim-repeat', cond = plug_op}
 

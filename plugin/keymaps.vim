@@ -77,6 +77,7 @@ nnoremap <silent>  <leader>o   :AerialToggle left<CR>
 nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
 vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
 nnoremap <silent>  <leader>K   :lua require'utils/devdocs':open_cursor()<CR>
+nnoremap <silent>  <leader>c   :PickColorInsert<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader多键)
