@@ -84,10 +84,10 @@ nnoremap <silent>  <leader>c   :PickColorInsert<CR>
 
 " <<< 按键 (Leader多键)
 " h组g组：Git Hunk
-nnoremap <silent>  <leader>gd  :lua require'utils/term_git'.run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  :lua require'utils/term_git'.run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  :lua require'utils/term_git'.run('show', false)<CR>
-nnoremap <silent>  <leader>gt  :lua require'utils/term_git'.run('diff --staged', false)<CR>
+nnoremap <silent>  <leader>gd  :lua require'utils/term-git'.run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  :lua require'utils/term-git'.run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  :lua require'utils/term-git'.run('show', false)<CR>
+nnoremap <silent>  <leader>gt  :lua require'utils/term-git'.run('diff --staged', false)<CR>
 nnoremap <silent>  <leader>gc  :Gina commit<CR>
 nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
 nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>

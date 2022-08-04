@@ -8,7 +8,7 @@ vim.g.ansi = bool(vim.g.ansi)
 if vim.g.ansi then
   vim.api.nvim_create_autocmd({"VimEnter"}, {
     pattern = {"*"},
-    callback = function() require'utils/term_cat'.run(true, true) end
+    callback = function() require'utils/term-cat'.run(true, true) end
   })
 end
 

@@ -15,36 +15,36 @@ return require('packer').startup(function(use)
 
   -- 配色主题
   use {'sainnhe/everforest', cond = plug_ui,
-    config = function() require'config/everforest' end}
+    config = function() require'plugin-configs/everforest' end}
   -- 状态栏
   use {'nvim-lualine/lualine.nvim', cond = plug_ui,
-    config = function() require'config/lualine' end}
+    config = function() require'plugin-configs/lualine' end}
   -- 图标字体
   use {'kyazdani42/nvim-web-devicons', cond = plug_ui}
   -- 搜索提示
   use {'kevinhwang91/nvim-hlslens', cond = plug_ui,
-    config = function() require'config/nvim-hlslens' end}
+    config = function() require'plugin-configs/nvim-hlslens' end}
   -- 文件浏览器
   use {'kyazdani42/nvim-tree.lua', cond = plug_ui,
-    config = function() require'config/nvim-tree' end}
+    config = function() require'plugin-configs/nvim-tree' end}
   -- 查找
   use {'nvim-telescope/telescope.nvim', cond = plug_ui}
   -- 改进wildmenu
   use {'gelguy/wilder.nvim', cond = plug_ui,
     run = ':UpdateRemotePlugins',
-    config = function() require'config/wilder' end}
+    config = function() require'plugin-configs/wilder' end}
 
   -- 平滑滚动
   use {'psliwka/vim-smoothie', cond = plug_view}
   -- 缩进线
   use {'lukas-reineke/indent-blankline.nvim', cond = plug_view,
-    config = function() require'config/indent-blankline' end}
+    config = function() require'plugin-configs/indent-blankline' end}
   -- 检测缩进
   use {'nmac427/guess-indent.nvim', cond = plug_view,
     config = function() require'guess-indent'.setup{} end}
   -- 空白符
   use {'ntpeters/vim-better-whitespace', cond = plug_view,
-    config = function() require'config/vim-better-whitespace' end}
+    config = function() require'plugin-configs/vim-better-whitespace' end}
   -- 选区diff
   use {'AndrewRadev/linediff.vim', cond = plug_view}
   -- 查看hex
@@ -54,7 +54,7 @@ return require('packer').startup(function(use)
 
   -- 增强%
   use {'andymass/vim-matchup', cond = plug_op,
-    config = function() require'config/vim-matchup' end}
+    config = function() require'plugin-configs/vim-matchup' end}
   -- 增强[
   use {'tpope/vim-unimpaired', cond = plug_op}
   -- 移动光标
@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
     config = function() require'Comment'.setup() end}
   -- 切换单词
   use {'tenfyzhong/axring.vim', cond = plug_op,
-    config = function() require'config/axring' end}
+    config = function() require'plugin-configs/axring' end}
   -- 编辑颜色
   use {'ziontee113/color-picker.nvim', cond = plug_op,
     config = function() require'color-picker' end}
@@ -81,18 +81,18 @@ return require('packer').startup(function(use)
   use {'tpope/vim-repeat', cond = plug_op}
   -- 补全
   use {'hrsh7th/nvim-cmp', cond = plug_op,
-    config = function() require'config/nvim-cmp' end}
+    config = function() require'plugin-configs/nvim-cmp' end}
   use {'hrsh7th/cmp-buffer', cond = plug_op}
   use {'hrsh7th/cmp-path', cond = plug_op}
 
   -- 异步执行
   use {'skywind3000/asyncrun.vim', cond = plug_cmd,
-    config = function() require'config/asyncrun' end}
+    config = function() require'plugin-configs/asyncrun' end}
   -- 终端窗口
   use {'voldikss/vim-floaterm', cond = plug_cmd}
   -- 集成Git
   use {'lewis6991/gitsigns.nvim', cond = plug_cmd,
-    config = function() require'config/gitsigns' end}
+    config = function() require'plugin-configs/gitsigns' end}
   -- 集成Git
   use {'lambdalisue/gina.vim', cond = plug_cmd}
   -- 切换输入法
@@ -101,7 +101,7 @@ return require('packer').startup(function(use)
   -- 嵌入浏览器
   use {'glacambre/firenvim',
     cond = function() return vim.g.plug_cmd and vim.g.env_firenvim end,
-    config = function() require'config/firenvim' end,
+    config = function() require'plugin-configs/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end}
 
   if vim.g.env_mini then return end
@@ -111,17 +111,17 @@ return require('packer').startup(function(use)
   use {'williamboman/mason.nvim', cond = plug_dev,
     config = function() require'mason'.setup() end}
   use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
-    config = function() require'config/mason-lspconfig' end,
+    config = function() require'plugin-configs/mason-lspconfig' end,
     after = {'nvim-lspconfig', 'mason.nvim'}}
   -- 代码补全
   use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
   use {'hrsh7th/cmp-nvim-lsp-signature-help', cond = plug_dev}
   use {'L3MON4D3/LuaSnip', cond = plug_dev,
-    config = function() require'config/luasnip' end}
+    config = function() require'plugin-configs/luasnip' end}
   use {'saadparwaiz1/cmp_luasnip', cond = plug_dev}
   -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
-    config = function() require'config/nvim-treesitter' end,
+    config = function() require'plugin-configs/nvim-treesitter' end,
     run = ':TSUpdate'}
   use {'nvim-treesitter/playground', cond = plug_dev,
     after = 'nvim-treesitter'}
@@ -153,6 +153,6 @@ return require('packer').startup(function(use)
   -- golang
   if vim.fn.executable('go') > 0 then
     use {'fatih/vim-go', cond = plug_dev,
-      config = function() require'config/vim-go' end}
+      config = function() require'plugin-configs/vim-go' end}
   end
 end)
