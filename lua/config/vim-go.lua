@@ -1,4 +1,4 @@
--- 只安装特定工具，优先使用coc-go提供的功能
+-- 只安装特定工具，优先使用LSP提供的功能
 
 -- 关闭gopls
 vim.g.go_gopls_enabled = 0

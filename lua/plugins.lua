@@ -79,6 +79,11 @@ return require('packer').startup(function(use)
     config = function() require'color-picker' end}
   -- 重复执行
   use {'tpope/vim-repeat', cond = plug_op}
+  -- 补全
+  use {'hrsh7th/nvim-cmp', cond = plug_op,
+    config = function() require'config/nvim-cmp' end}
+  use {'hrsh7th/cmp-buffer', cond = plug_op}
+  use {'hrsh7th/cmp-path', cond = plug_op}
 
   -- 异步执行
   use {'skywind3000/asyncrun.vim', cond = plug_cmd,
@@ -101,10 +106,20 @@ return require('packer').startup(function(use)
 
   if vim.g.env_mini then return end
 
-  if vim.fn.executable('node') > 0 then
-    use {'neoclide/coc.nvim', branch='release', cond = plug_dev,
-      setup = function() require'config/coc' end}
-  end
+  -- LSP
+  use {'neovim/nvim-lspconfig', cond = plug_dev}
+  use {'williamboman/mason.nvim', cond = plug_dev,
+    config = function() require'mason'.setup() end}
+  use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
+    config = function() require'config/mason-lspconfig' end,
+    after = {'nvim-lspconfig', 'mason.nvim'}}
+  -- 代码补全
+  use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
+  use {'hrsh7th/cmp-nvim-lsp-signature-help', cond = plug_dev}
+  use {'L3MON4D3/LuaSnip', cond = plug_dev,
+    config = function() require'config/luasnip' end}
+  use {'saadparwaiz1/cmp_luasnip', cond = plug_dev}
+  -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'config/nvim-treesitter' end,
     run = ':TSUpdate'}

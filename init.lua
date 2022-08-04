@@ -63,6 +63,11 @@ if vim.g.paging then
   -- nightly特性
   pcall(function() vim.api.nvim_set_option('cmdheight', 0) end)
 end
+-- LSP
+vim.diagnostic.config{
+  -- 不在侧边栏显示符号
+  signs = false,
+}
 -- >>>-----------------------------------
 
 -- <<< 选项 (文本内容)

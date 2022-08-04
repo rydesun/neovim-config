@@ -25,10 +25,6 @@ vim.fn['everforest#highlight']('IndentBlanklineContextChar', palette.grey2, pale
 vim.api.nvim_command('hi! link LeapLabelPrimary Search')
 vim.api.nvim_command('hi! link LeapLabelSecondary DiffText')
 
--- coc-rust
-vim.fn['everforest#highlight']('CocRustTypeHint', palette.grey0, palette.none)
-vim.fn['everforest#highlight']('CocRustChainingHint', palette.grey2, palette.none)
-
 -- 分页时
 if vim.g.paging then
   vim.fn['everforest#highlight']('MsgArea', palette.none, palette.bg2)

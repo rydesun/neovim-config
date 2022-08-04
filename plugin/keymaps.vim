@@ -9,6 +9,7 @@ xnoremap <  <gv
 xnoremap >  >gv
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 if g:paging | nnoremap q :exit<CR> | endif
+nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 
 " s组：搜索列表(telescope.nvim)
 " vim-sandwich处理成对符号
@@ -21,10 +22,10 @@ nnoremap <silent>  sg          :Telescope git_status theme=dropdown previewer=fa
 
 " g组：语法跳转
 " splitjoin.vim执行拆分合并
-nmap     <silent>  gd          <Plug>(coc-definition)
-nmap     <silent>  gy          <Plug>(coc-type-definition)
-nmap     <silent>  gi          <Plug>(coc-implementation)
-nmap     <silent>  gr          <Plug>(coc-references)
+nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions theme=dropdown<CR>
+nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions theme=dropdown<CR>
+nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations theme=dropdown<CR>
+nnoremap <silent>  gr          <Cmd>Telescope lsp_references theme=dropdown<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
@@ -38,10 +39,10 @@ nnoremap <silent>  <Esc>w      <C-w>c
 
 " []组：前后跳转
 " 插件提供更多映射
-nmap     <silent>  [g          <Plug>(coc-diagnostic-prev)
-nmap     <silent>  ]g          <Plug>(coc-diagnostic-next)
-nmap     <silent>  [G          <Plug>(coc-diagnostic-prev-error)
-nmap     <silent>  ]G          <Plug>(coc-diagnostic-next-error)
+nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{severity=vim.diagnostic.severity.ERROR}<CR>
+nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
 nnoremap <silent>  [of         :set laststatus=2<CR>
@@ -50,7 +51,8 @@ nnoremap <silent>  [om         :set colorcolumn=80<CR>
 nnoremap <silent>  ]om         :set colorcolumn=<CR>
 
 " Ctrl Alt
-imap               <C-j>       <Plug>(coc-snippets-expand-jump)
+imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
+imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-k>       :Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       :Gitsigns next_hunk<CR>
 nnoremap <silent>  <A-j>       :m .+1<CR>
@@ -93,10 +95,8 @@ nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
 
 " r组：语法相关的修改
-nmap               <leader>rn  <Plug>(coc-rename)
-nmap               <leader>rt  <Plug>(coc-refactor)
-nmap               <leader>rf  <Plug>(coc-fix-current)
-nnoremap <silent>  <leader>rm  :call CocAction('format')<CR>
+nnoremap <silent>  <leader>rn  <Cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent>  <leader>rf  <Cmd>lua vim.lsp.buf.formatting()<CR>
 
 " t组：操作终端
 nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
