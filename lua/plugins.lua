@@ -139,10 +139,8 @@ return require('packer').startup(function(use)
     use {'rrethy/vim-hexokinase', cond = plug_dev,
       run = 'make hexokinase'}
   end
-  -- 展开缩写
-  use {'mattn/emmet-vim', cond = plug_dev}
-  -- editorconfig
-  use {'editorconfig/editorconfig-vim', cond = plug_dev}
+  -- EditorConfig
+  use {'gpanders/editorconfig.nvim', cond = plug_dev}
   -- 预览markdown
   use {'iamcco/markdown-preview.nvim', cond = plug_dev,
     run = function() vim.fn['mkdp#util#install']() end}
