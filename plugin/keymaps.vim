@@ -102,6 +102,12 @@ nnoremap <silent>  <leader>rf  <Cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
 nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+
+" w组：特定语言
+nmap     <silent>  <leader>wa  <Plug>(go-alternate-edit)
+nmap     <silent>  <leader>wt  <Plug>(go-test-func)
+nmap     <silent>  <leader>wc  <Plug>(go-coverage-toggle)
+nmap     <silent>  <leader>wp  <Plug>MarkdownPreviewToggle
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
