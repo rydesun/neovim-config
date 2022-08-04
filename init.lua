@@ -60,8 +60,6 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
 if vim.g.paging then
   vim.o.relativenumber = false
   vim.o.laststatus = 0
-  -- nightly特性
-  pcall(function() vim.api.nvim_set_option('cmdheight', 0) end)
 end
 -- LSP
 vim.diagnostic.config{
