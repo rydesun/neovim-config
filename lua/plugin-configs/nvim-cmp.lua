@@ -5,7 +5,6 @@ local sources = {
   luasnip = "LuaSnip",
 }
 local kinds = {
-  Text = '文本',
   Method = '方法',
   Function = '函数',
   Constructor = '构造器',
@@ -37,12 +36,34 @@ cmp.setup{
     expand = function(args) require('luasnip').lsp_expand(args.body) end,
   },
   sources = cmp.config.sources(
-    { { name = 'nvim_lsp' }, { name = 'nvim_lsp_signature_help' },
-      { name = 'luasnip' }, { name = 'path' } },
-    { { name = 'buffer' } }
+    {
+      { name = 'nvim_lsp' }, { name = 'nvim_lsp_signature_help' },
+      { name = 'luasnip' }, { name = 'path' }
+    }, {
+      {
+        name = 'buffer',
+        option = {
+          get_bufnrs = function()
+            local bufs = {}
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              local byte_size = vim.api.nvim_buf_get_offset(
+                buf, vim.api.nvim_buf_line_count(buf))
+              if byte_size < 1024 * 1024 then
+                table.insert(bufs, buf)
+              end
+            end
+            return bufs
+          end
+        },
+      },
+    }
   ),
   formatting = {
     format = function(entry, vim_item)
+      if vim_item.kind == 'Text' then
+        vim_item.kind = ''
+        return vim_item
+      end
       vim_item.kind = '│ ' .. (
         kinds[vim_item.kind] or vim_item.kind or '')
       vim_item.menu = '│ ' .. (
