@@ -30,10 +30,6 @@ return require('packer').startup(function(use)
   -- 查找
   use {'nvim-telescope/telescope.nvim', cond = plug_ui,
     config = function() require'plugin-configs/telescope' end}
-  -- 改进wildmenu
-  use {'gelguy/wilder.nvim', cond = plug_ui,
-    run = ':UpdateRemotePlugins',
-    config = function() require'plugin-configs/wilder' end}
 
   -- 平滑滚动
   use {'psliwka/vim-smoothie', cond = plug_view}
@@ -85,6 +81,7 @@ return require('packer').startup(function(use)
     config = function() require'plugin-configs/nvim-cmp' end}
   use {'hrsh7th/cmp-buffer', cond = plug_op}
   use {'hrsh7th/cmp-path', cond = plug_op}
+  use {'hrsh7th/cmp-cmdline', cond = plug_op}
 
   -- 异步执行
   use {'skywind3000/asyncrun.vim', cond = plug_cmd,

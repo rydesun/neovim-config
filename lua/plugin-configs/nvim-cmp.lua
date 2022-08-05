@@ -1,4 +1,6 @@
 local cmp = require'cmp'
+if not cmp then return end
+
 local sources = {
   buffer = "Buffer",
   nvim_lsp = "LSP",
@@ -72,3 +74,49 @@ cmp.setup{
     end
   },
 }
+
+local types = require('cmp.types')
+local cmdline_mapping = {
+    ['<Tab>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Insert })
+        end
+      end,
+    },
+    ['<S-Tab>'] = {
+      c = function()
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
+        end
+      end,
+    },
+}
+
+cmp.setup.cmdline('/', {
+  mapping = cmdline_mapping,
+  view = {
+    entries = {name = 'wildmenu', separator = ' · ' }
+  },
+})
+
+cmp.setup.cmdline('?', {
+  mapping = cmdline_mapping,
+  view = {
+    entries = {name = 'wildmenu', separator = ' · ' }
+  },
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmdline_mapping,
+  view = {
+    entries = {name = 'wildmenu', separator = ' · ' }
+  },
+  sources = cmp.config.sources(
+    {
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    }
+  ),
+})
