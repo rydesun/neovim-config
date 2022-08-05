@@ -110,7 +110,7 @@ return require('packer').startup(function(use)
     config = function() require'mason'.setup() end}
   use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
     config = function() require'plugin-configs/mason-lspconfig' end,
-    after = {'nvim-lspconfig', 'mason.nvim'}}
+    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp'}}
   -- 代码补全
   use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
   use {'hrsh7th/cmp-nvim-lsp-signature-help', cond = plug_dev}
