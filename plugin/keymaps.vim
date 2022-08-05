@@ -8,33 +8,33 @@ map      F  <Plug>(leap-backward)
 xnoremap <  <gv
 xnoremap >  >gv
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-if g:paging | nnoremap q :exit<CR> | endif
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
+if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
 " s组：搜索列表(telescope.nvim)
 " vim-sandwich处理成对符号
 nnoremap           s           <NOP>
-nnoremap           S           :Telescope<CR>
-nnoremap <silent>  ss          :Telescope live_grep theme=dropdown<CR>
-nnoremap <silent>  sb          :Telescope buffers theme=dropdown previewer=false<CR>
-nnoremap <silent>  sf          :Telescope find_files theme=dropdown previewer=false<CR>
-nnoremap <silent>  sg          :Telescope git_status theme=dropdown previewer=false<CR>
+nnoremap           S           <Cmd>Telescope<CR>
+nnoremap <silent>  ss          <Cmd>Telescope live_grep<CR>
+nnoremap <silent>  sb          <Cmd>Telescope buffers<CR>
+nnoremap <silent>  sf          <Cmd>Telescope find_files<CR>
+nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
 
 " g组：语法跳转
 " splitjoin.vim执行拆分合并
-nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions theme=dropdown<CR>
-nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions theme=dropdown<CR>
-nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations theme=dropdown<CR>
-nnoremap <silent>  gr          <Cmd>Telescope lsp_references theme=dropdown<CR>
+nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions<CR>
+nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions<CR>
+nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations<CR>
+nnoremap <silent>  gr          <Cmd>Telescope lsp_references<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
 " <Esc>组：关闭
-nnoremap <silent>  <Esc><Esc>  :nohlsearch<CR>
-nnoremap <silent>  <Esc>q      :cclose<CR>
-nnoremap <silent>  <Esc>l      :lclose<CR>
-nnoremap <silent>  <Esc>f      :bd<CR>
-nnoremap <silent>  <Esc>t      :tabclose<CR>
+nnoremap <silent>  <Esc><Esc>  <Cmd>nohlsearch<CR>
+nnoremap <silent>  <Esc>q      <Cmd>cclose<CR>
+nnoremap <silent>  <Esc>l      <Cmd>lclose<CR>
+nnoremap <silent>  <Esc>f      <Cmd>bd<CR>
+nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
 nnoremap <silent>  <Esc>w      <C-w>c
 
 " []组：前后跳转
@@ -43,65 +43,65 @@ nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{severity=vim.diagnostic.severity.ERROR}<CR>
-nnoremap <silent>  ]w          :NextTrailingWhitespace<CR>
-nnoremap <silent>  [w          :PrevTrailingWhitespace<CR>
-nnoremap <silent>  [of         :set laststatus=2<CR>
-nnoremap <silent>  ]of         :set laststatus=3<CR>
-nnoremap <silent>  [om         :set colorcolumn=80<CR>
-nnoremap <silent>  ]om         :set colorcolumn=<CR>
+nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
+nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
+nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
+nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
+nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
+nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 
 " Ctrl Alt
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
-nnoremap <silent>  <C-k>       :Gitsigns prev_hunk<CR>
-nnoremap <silent>  <C-j>       :Gitsigns next_hunk<CR>
-nnoremap <silent>  <A-j>       :m .+1<CR>
-nnoremap <silent>  <A-k>       :m .-2<CR>
-vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
-vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
+nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
+nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
+nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
+nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
+vnoremap <silent>  <A-j>       <Cmd>m '>+1<CR>==gv
+vnoremap <silent>  <A-k>       <Cmd>m '<-2<CR>==gv
 " >>>-----------------------------------
 
 " <<< 按键 (Leader单键)
 let g:mapleader=' ' | noremap <Space> <Nop>
 
 " 数字组：运行
-nnoremap <silent>  <Leader>1   :AsyncTask repl<CR>
-nnoremap <silent>  <Leader>3   :AsyncTask file-run<CR>
-nnoremap <silent>  <Leader>5   :AsyncTask project-run<CR>
-nnoremap <silent>  <Leader>7   :AsyncTask project-build<CR>
-nnoremap <silent>  <Leader>9   :AsyncTask file-build<CR>
+nnoremap <silent>  <Leader>1   <Cmd>AsyncTask repl<CR>
+nnoremap <silent>  <Leader>3   <Cmd>AsyncTask file-run<CR>
+nnoremap <silent>  <Leader>5   <Cmd>AsyncTask project-run<CR>
+nnoremap <silent>  <Leader>7   <Cmd>AsyncTask project-build<CR>
+nnoremap <silent>  <Leader>9   <Cmd>AsyncTask file-build<CR>
 
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   :NvimTreeFindFileToggle<CR>
-nnoremap <silent>  <leader>o   :AerialToggle left<CR>
-nnoremap <silent>  <leader>k   :TranslateW --engines=haici<CR>
-vnoremap <silent>  <leader>k   :Translate --engines=google<CR>
-nnoremap <silent>  <leader>K   :lua require'utils/devdocs':open_cursor()<CR>
-nnoremap <silent>  <leader>c   :PickColorInsert<CR>
+nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
+nnoremap <silent>  <leader>o   <Cmd>AerialToggle left<CR>
+nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
+vnoremap <silent>  <leader>k   <Cmd>Translate --engines=google<CR>
+nnoremap <silent>  <leader>K   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
+nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader多键)
 " h组g组：Git Hunk
-nnoremap <silent>  <leader>gd  :lua require'utils/term-git'.run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  :lua require'utils/term-git'.run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  :lua require'utils/term-git'.run('show', false)<CR>
-nnoremap <silent>  <leader>gt  :lua require'utils/term-git'.run('diff --staged', false)<CR>
-nnoremap <silent>  <leader>gc  :Gina commit<CR>
-nnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
-nnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
-nnoremap <silent>  <leader>hU  :Gitsigns undo_stage_hunk<CR>
-nnoremap <silent>  <leader>hi  :Gitsigns preview_hunk<CR>
+nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  <Cmd>lua require'utils/term-git'.run('show', false)<CR>
+nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.run('diff --staged', false)<CR>
+nnoremap <silent>  <leader>gc  <Cmd>Gina commit<CR>
+nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
+nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
+nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
+nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 
 " r组：语法相关的修改
 nnoremap <silent>  <leader>rn  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>rf  <Cmd>lua vim.lsp.buf.formatting()<CR>
 
 " t组：操作终端
-nnoremap <silent>  <Leader>tt  :FloatermToggle<CR>
-nnoremap <silent>  <Leader>ts  :FloatermSend<CR>
-vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+nnoremap <silent>  <Leader>tt  <Cmd>FloatermToggle<CR>
+nnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
+vnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
 
 " w组：特定语言
 nmap     <silent>  <leader>wa  <Plug>(go-alternate-edit)

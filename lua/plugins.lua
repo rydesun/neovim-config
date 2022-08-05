@@ -28,7 +28,8 @@ return require('packer').startup(function(use)
   use {'kyazdani42/nvim-tree.lua', cond = plug_ui,
     config = function() require'plugin-configs/nvim-tree' end}
   -- 查找
-  use {'nvim-telescope/telescope.nvim', cond = plug_ui}
+  use {'nvim-telescope/telescope.nvim', cond = plug_ui,
+    config = function() require'plugin-configs/telescope' end}
   -- 改进wildmenu
   use {'gelguy/wilder.nvim', cond = plug_ui,
     run = ':UpdateRemotePlugins',
