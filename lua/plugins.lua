@@ -113,6 +113,8 @@ return require('packer').startup(function(use)
     after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp'}}
   use {'simrat39/rust-tools.nvim', cond = plug_dev,
     config = function() require'plugin-configs/rust-tools' end}
+  use {'saecki/crates.nvim', cond = plug_dev,
+    config = function() require'crates'.setup() end}
   -- 代码补全
   use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
   use {'hrsh7th/cmp-nvim-lsp-signature-help', cond = plug_dev}
