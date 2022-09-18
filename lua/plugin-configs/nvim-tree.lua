@@ -21,6 +21,10 @@ require'nvim-tree'.setup {
   reload_on_bufenter = true,
 
   view = {
+    -- 浮动窗口
+    float = {
+      enable = true,
+    },
     -- 相对行号
     relativenumber = true,
     -- 侧边栏符号覆盖在行号上面
