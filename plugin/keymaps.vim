@@ -70,6 +70,7 @@ nnoremap <silent>  <Leader>3   <Cmd>AsyncTask file-run<CR>
 nnoremap <silent>  <Leader>5   <Cmd>AsyncTask project-run<CR>
 nnoremap <silent>  <Leader>7   <Cmd>AsyncTask project-build<CR>
 nnoremap <silent>  <Leader>9   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <Leader>-   <Cmd>AsyncTask test<CR>
 
 vnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
