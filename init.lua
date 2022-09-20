@@ -93,10 +93,9 @@ pcall(function() require'impatient' end)
 local ok, err = pcall(function() require'plugins' end)
 if not ok then
   if err:find([[module 'packer' not found]]) then
-    vim.api.nvim_create_autocmd({"VimEnter"}, {
-      pattern = {"*"},
-      callback = function() require'utils/msg'.err('缺少packer.nvim') end
-    })
+    vim.schedule(function ()
+      vim.api.nvim_err_writeln('缺少packer.nvim')
+    end)
   else error(err) end
 end
 
