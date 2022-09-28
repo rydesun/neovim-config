@@ -39,10 +39,12 @@ nnoremap <silent>  <Esc>w      <C-w>c
 
 " []组：前后跳转
 " 插件提供更多映射
-nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
-nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{severity=vim.diagnostic.severity.ERROR}<CR>
-nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{severity=vim.diagnostic.severity.ERROR}<CR>
+nnoremap <silent>  [g          <Cmd>Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent>  ]g          <Cmd>Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent>  [G          <Cmd>lua require'lspsaga.diagnostic'.goto_prev{
+				\ severity=vim.diagnostic.severity.ERROR}<CR>
+nnoremap <silent>  ]G          <Cmd>lua require'lspsaga.diagnostic'.goto_next{
+				\ severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
 nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
@@ -81,6 +83,11 @@ nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 vnoremap <silent>  <leader>k   <Cmd>Translate --engines=google<CR>
 nnoremap <silent>  <leader>K   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
+
+" LSP
+nnoremap <silent>  <leader>a  <Cmd>Lspsaga code_action<CR>
+nnoremap <silent>  <leader>r  <Cmd>Lspsaga rename<CR>
+nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.formatting()<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader多键)
@@ -95,20 +102,22 @@ nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 
-" r组：语法相关的修改
-nnoremap <silent>  <leader>rn  <Cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent>  <leader>rf  <Cmd>lua vim.lsp.buf.formatting()<CR>
-
 " t组：操作终端
 nnoremap <silent>  <Leader>tt  <Cmd>FloatermToggle<CR>
 nnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
 vnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
 
 " w组：特定语言
-nmap     <silent>  <leader>wa  <Plug>(go-alternate-edit)
-nmap     <silent>  <leader>wt  <Plug>(go-test-func)
-nmap     <silent>  <leader>wc  <Plug>(go-coverage-toggle)
-nmap     <silent>  <leader>wp  <Plug>MarkdownPreviewToggle
+" rust
+autocmd filetype rust nnoremap <buffer><silent> <leader>wt
+	\ <Cmd>lua require'rust-tools'.open_cargo_toml.open_cargo_toml()<CR>
+autocmd filetype rust nnoremap <buffer><silent> <leader>wp
+	\ <Cmd>lua require'rust-tools'.parent_module.parent_module()<CR>
+autocmd filetype rust nnoremap <buffer><silent> <leader>wm
+	\ <Cmd>lua require'rust-tools'.expand_macro.expand_macro()<CR>
+" markdown
+autocmd filetype markdown nmap <buffer><silent> <leader>wp
+	\ <Plug>MarkdownPreviewToggle
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
