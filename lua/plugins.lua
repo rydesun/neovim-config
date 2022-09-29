@@ -120,10 +120,12 @@ return require('packer').startup(function(use)
     config = function() require'plugin-configs/lspsaga' end}
   -- 代码补全
   use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
-  use {'hrsh7th/cmp-nvim-lsp-signature-help', cond = plug_dev}
   use {'L3MON4D3/LuaSnip', cond = plug_dev,
     config = function() require'plugin-configs/luasnip' end}
   use {'saadparwaiz1/cmp_luasnip', cond = plug_dev}
+  -- 函数签名
+  use {'ray-x/lsp_signature.nvim', cond = plug_dev,
+    config = function() require'plugin-configs/lsp_signature' end}
   -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'plugin-configs/nvim-treesitter' end,

@@ -81,7 +81,8 @@ nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle left<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 vnoremap <silent>  <leader>k   <Cmd>Translate --engines=google<CR>
-nnoremap <silent>  <leader>K   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
+nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
 
 " LSP
