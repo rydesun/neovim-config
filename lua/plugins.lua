@@ -110,7 +110,7 @@ return require('packer').startup(function(use)
     config = function() require'mason'.setup() end}
   use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
     config = function() require'plugin-configs/mason-lspconfig' end,
-    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp'}}
+    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp', 'lua-dev.nvim'}}
   use {'simrat39/rust-tools.nvim', cond = plug_dev,
     config = function() require'rust-tools'.setup({}) end}
   use {'saecki/crates.nvim', cond = plug_dev,
@@ -126,6 +126,8 @@ return require('packer').startup(function(use)
   -- 函数签名
   use {'ray-x/lsp_signature.nvim', cond = plug_dev,
     config = function() require'plugin-configs/lsp_signature' end}
+  -- nvim api
+  use {'folke/lua-dev.nvim', cond = plug_dev}
   -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'plugin-configs/nvim-treesitter' end,

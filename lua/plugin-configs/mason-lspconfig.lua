@@ -1,3 +1,5 @@
+require'lua-dev'.setup {}
+
 local lspconfig = require('lspconfig')
 
 require('mason-lspconfig').setup()
@@ -15,15 +17,6 @@ require('mason-lspconfig').setup_handlers({
     lspconfig.sumneko_lua.setup {
       settings = {
         Lua = {
-          runtime = {
-            version = 'LuaJIT',
-          },
-          diagnostics = {
-            globals = {'vim'},
-          },
-          workspace = {
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
           telemetry = {
             enable = true,
           },
