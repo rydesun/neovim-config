@@ -1,121 +1,72 @@
-local cmp = require'cmp'
-if not cmp then return end
+local cmp = require 'cmp'
+local types = require 'cmp.types'
 
-local sources = {
-  buffer = "Buffer",
-  nvim_lsp = "LSP",
-  luasnip = "LuaSnip",
-}
-local kinds = {
-  Method = '方法',
-  Function = '函数',
-  Constructor = '构造器',
-  Field = '字段',
-  Variable = '变量',
-  Class = '类',
-  Interface = '接口',
-  Module = '模块',
-  Property = '属性',
-  Value = '值',
-  Enum = '枚举',
-  Keyword = '关键字',
-  Snippet = ' ',
-  Color = ' ',
-  File = ' ',
-  Reference = ' ',
-  Folder = ' ',
-  EnumMember = '枚举成员',
-  Constant = '常量',
-  Struct = '结构体',
-  Event = '事件',
-  Operator = '运算符',
-  TypeParameter = '类型形参',
+local view_kinds = {
+  Method = '方法', Function = '函数', Constructor = '构造器', Field = '字段',
+  Variable = '变量', Class = '类', Interface = '接口', Module = '模块',
+  Property = '属性', Value = '值', Enum = '枚举', Keyword = '关键字',
+  Snippet = ' ', Color = ' ', File = ' ', Reference = ' ', Folder = ' ',
+  EnumMember = '枚举成员', Constant = '常量', Struct = '结构体', Event = '事件',
+  Operator = '运算符', TypeParameter = '类型参数',
 }
 
-cmp.setup{
-  mapping = cmp.mapping.preset.insert{},
+cmp.setup {
+  mapping = cmp.mapping.preset.insert {
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+  },
   snippet = {
     expand = function(args) require('luasnip').lsp_expand(args.body) end,
   },
-  sources = cmp.config.sources(
-    {
-      { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'path' }
-    }, {
-      {
-        name = 'buffer',
-        option = {
-          get_bufnrs = function()
-            local bufs = {}
-            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-              local byte_size = vim.api.nvim_buf_get_offset(
-                buf, vim.api.nvim_buf_line_count(buf))
-              if byte_size < 1024 * 1024 then
-                table.insert(bufs, buf)
-              end
-            end
-            return bufs
-          end
-        },
-      },
-    }
-  ),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'path' }
+  }, {
+    { name = 'buffer' },
+  }),
+  window = {
+    completion = cmp.config.window.bordered {
+      col_offset = -1,
+    },
+    documentation = cmp.config.window.bordered(),
+  },
   formatting = {
-    format = function(entry, vim_item)
+    format = function(_, vim_item)
       if vim_item.kind == 'Text' then
         vim_item.kind = ''
-        return vim_item
+      else
+        vim_item.kind = '│ ' .. (view_kinds[vim_item.kind] or vim_item.kind)
       end
-      vim_item.kind = '│ ' .. (
-        kinds[vim_item.kind] or vim_item.kind or '')
-      vim_item.menu = '│ ' .. (
-        sources[entry.source.name] or entry.source.name or '')
       return vim_item
     end
   },
 }
 
-local types = require('cmp.types')
-local cmdline_mapping = {
+local cmdline_opts = {
+  view = {
+    entries = { name = 'wildmenu', separator = ' · ' }
+  },
+  mapping = {
     ['<Tab>'] = {
       c = function()
-        if cmp.visible() then
-          cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Insert })
-        end
+        if not cmp.visible() then return end
+        cmp.select_next_item { behavior = types.cmp.SelectBehavior.Insert }
       end,
     },
     ['<S-Tab>'] = {
       c = function()
-        if cmp.visible() then
-          cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
-        end
+        if not cmp.visible() then return end
+        cmp.select_prev_item { behavior = types.cmp.SelectBehavior.Insert }
       end,
     },
+  },
 }
 
-cmp.setup.cmdline('/', {
-  mapping = cmdline_mapping,
-  view = {
-    entries = {name = 'wildmenu', separator = ' · ' }
-  },
-})
-
-cmp.setup.cmdline('?', {
-  mapping = cmdline_mapping,
-  view = {
-    entries = {name = 'wildmenu', separator = ' · ' }
-  },
-})
-
-cmp.setup.cmdline(':', {
-  mapping = cmdline_mapping,
-  view = {
-    entries = {name = 'wildmenu', separator = ' · ' }
-  },
-  sources = cmp.config.sources(
-    {
-      { name = 'path' }
-    }, {
+cmp.setup.cmdline('/', cmdline_opts)
+cmp.setup.cmdline('?', cmdline_opts)
+cmp.setup.cmdline(':',
+  vim.tbl_extend('error', cmdline_opts, {
+    sources = {
       { name = 'cmdline' }
     }
-  ),
-})
+  })
+)
