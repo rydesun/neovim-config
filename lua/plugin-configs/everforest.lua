@@ -11,6 +11,10 @@ vim.api.nvim_command("colorscheme everforest")
 local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
   vim.fn['everforest#get_configuration']().colors_override)
 
+-- 浮动窗口
+vim.fn['everforest#highlight']('NormalFloat', palette.fg, palette.bg0)
+vim.fn['everforest#highlight']('FloatBorder', palette.grey1, palette.bg0)
+
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
 
