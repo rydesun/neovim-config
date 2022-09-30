@@ -13,12 +13,12 @@ local git_unstage = function()
 end
 
 require'nvim-tree'.setup {
-  -- 取代netrw
-  hijack_netrw = true,
   -- 光标在文件名首位
   hijack_cursor = true,
   -- 自动更新
   reload_on_bufenter = true,
+  -- 使用buffer的工作目录
+  respect_buf_cwd = true,
 
   view = {
     -- 浮动窗口
