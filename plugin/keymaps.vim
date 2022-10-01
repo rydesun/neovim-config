@@ -89,6 +89,7 @@ nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
 nnoremap <silent>  <leader>a  <Cmd>Lspsaga code_action<CR>
 nnoremap <silent>  <leader>r  <Cmd>Lspsaga rename<CR>
 nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
+xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader多键)

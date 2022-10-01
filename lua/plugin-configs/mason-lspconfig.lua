@@ -1,6 +1,7 @@
 require'lua-dev'.setup {}
 
 local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
 
 require('mason-lspconfig').setup()
 require('mason-lspconfig').setup_handlers({
@@ -25,17 +26,13 @@ require('mason-lspconfig').setup_handlers({
     }
   end,
 
-  pylsp = function()
-    lspconfig.pylsp.setup {
-      settings = {
-        pylsp = {
-          plugins = {
-            flake8 = {
-              enabled = true
-            }
-          }
-        }
-      }
+  pyright = function()
+    local default_config = require(
+      'lspconfig.server_configurations.pyright').default_config
+    lspconfig.pyright.setup {
+      root_dir = function(fname)
+        return default_config.root_dir(fname) or util.find_git_ancestor(fname)
+      end,
     }
   end,
 })
