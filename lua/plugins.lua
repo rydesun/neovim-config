@@ -82,9 +82,9 @@ return require('packer').startup(function(use)
   -- 补全
   use {'hrsh7th/nvim-cmp', cond = plug_op,
     config = function() require'plugin-configs/nvim-cmp' end}
-  use {'hrsh7th/cmp-buffer', cond = plug_op}
-  use {'hrsh7th/cmp-path', cond = plug_op}
-  use {'hrsh7th/cmp-cmdline', cond = plug_op}
+  use {'hrsh7th/cmp-buffer'}
+  use {'hrsh7th/cmp-path'}
+  use {'hrsh7th/cmp-cmdline'}
 
   -- 异步执行
   use {'skywind3000/asyncrun.vim', cond = plug_cmd,

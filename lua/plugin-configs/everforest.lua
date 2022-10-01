@@ -14,6 +14,9 @@ local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
 
+-- nvim-cmp
+vim.fn['everforest#highlight']('PmenuSel', palette.none, palette.bg_visual)
+
 -- vim-better-whitespace
 vim.g.better_whitespace_guicolor = palette.none[0]
 vim.fn['everforest#highlight']('ExtraWhitespace', palette.none, palette.none, 'undercurl', palette.red)
