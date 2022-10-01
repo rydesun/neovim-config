@@ -3,6 +3,27 @@ require'lua-dev'.setup {}
 local lspconfig = require('lspconfig')
 local util = require('lspconfig.util')
 
+require'rust-tools'.setup {
+  server = {
+    settings = {
+      ['rust-analyzer'] = {
+        completion = {
+          postfix = {
+            enable = false
+          },
+          privateEditable = {
+            enable = true
+          }
+        },
+        imports = {
+          -- 自动导入时优先以crate开头
+          prefix = 'crate',
+        }
+      }
+    }
+  }
+}
+
 require('mason-lspconfig').setup()
 require('mason-lspconfig').setup_handlers({
   function (server_name)

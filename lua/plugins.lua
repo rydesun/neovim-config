@@ -111,13 +111,13 @@ return require('packer').startup(function(use)
   use {'neovim/nvim-lspconfig', cond = plug_dev}
   use {'williamboman/mason.nvim', cond = plug_dev,
     config = function() require'mason'.setup() end}
+  use {'simrat39/rust-tools.nvim', cond = plug_dev}
   use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
     config = function() require'plugin-configs/mason-lspconfig' end,
-    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp', 'lua-dev.nvim'}}
+    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp',
+      'rust-tools.nvim', 'lua-dev.nvim'}}
   use {'jose-elias-alvarez/null-ls.nvim', cond = plug_dev,
     config = function() require'plugin-configs.null-ls' end}
-  use {'simrat39/rust-tools.nvim', cond = plug_dev,
-    config = function() require'rust-tools'.setup({}) end}
   use {'saecki/crates.nvim', cond = plug_dev,
     config = function() require'crates'.setup() end}
   -- LSP界面
