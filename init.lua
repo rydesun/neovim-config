@@ -99,10 +99,6 @@ if not ok then
   else error(err) end
 end
 
--- 用filetype.lua取代filetype.vim
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-
 -- 本地插件
 -- 折叠行显示的文本
 vim.api.nvim_command('packadd foldtext')
