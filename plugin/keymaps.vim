@@ -59,8 +59,8 @@ nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
 nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
 nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
-vnoremap <silent>  <A-j>       <Cmd>m '>+1<CR>==gv
-vnoremap <silent>  <A-k>       <Cmd>m '<-2<CR>==gv
+vnoremap <silent>  <A-j>       :m '>+1<CR>==gv
+vnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 " >>>-----------------------------------
 
 " <<< 按键 (Leader单键)
@@ -80,7 +80,7 @@ nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle left<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
-vnoremap <silent>  <leader>k   <Cmd>Translate --engines=google<CR>
+vnoremap <silent>  <leader>k   :TranslateW --engines=google<CR>
 nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
@@ -107,7 +107,7 @@ nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 " t组：操作终端
 nnoremap <silent>  <Leader>tt  <Cmd>FloatermToggle<CR>
 nnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
-vnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
+vnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 
 " w组：特定语言
 " rust
