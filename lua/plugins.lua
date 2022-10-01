@@ -21,6 +21,9 @@ return require('packer').startup(function(use)
     config = function() require'plugin-configs/lualine' end}
   -- 图标字体
   use {'kyazdani42/nvim-web-devicons', cond = plug_ui}
+  -- 浮动通知
+  use {'rcarriga/nvim-notify', cond = plug_ui,
+    config = function() require'plugin-configs/nvim-notify' end}
   -- 搜索提示
   use {'kevinhwang91/nvim-hlslens', cond = plug_ui,
     config = function() require'plugin-configs/nvim-hlslens' end}
