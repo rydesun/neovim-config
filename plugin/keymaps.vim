@@ -8,7 +8,7 @@ map      F  <Plug>(leap-backward)
 xnoremap <  <gv
 xnoremap >  >gv
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent>  K  <Cmd>Lspsaga hover_doc<CR>
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
 " s组：搜索列表(telescope.nvim)
@@ -88,7 +88,7 @@ nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
 " LSP
 nnoremap <silent>  <leader>a  <Cmd>Lspsaga code_action<CR>
 nnoremap <silent>  <leader>r  <Cmd>Lspsaga rename<CR>
-nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader多键)
