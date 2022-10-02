@@ -8,13 +8,12 @@ vim.g.firenvim_config = {
   }}
 }
 
--- 不要状态栏
-vim.o.laststatus = 0
-
--- 扩大过小的界面
 vim.api.nvim_create_autocmd({"UIEnter"}, {
   pattern = {"*"},
   callback = function()
+    -- 不要状态栏
+    vim.o.laststatus = 0
+    -- 扩大过小的界面
     if vim.o.lines < 10 then
       vim.o.lines = 10
     end
