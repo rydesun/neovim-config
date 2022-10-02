@@ -109,15 +109,19 @@ return require('packer').startup(function(use)
 
   -- LSP
   use {'neovim/nvim-lspconfig', cond = plug_dev}
+  -- 单独配置LSP
+  use {'folke/lua-dev.nvim', cond = plug_dev}
+  use {'simrat39/rust-tools.nvim', cond = plug_dev}
+  -- 自动配置LSP
   use {'williamboman/mason.nvim', cond = plug_dev,
     config = function() require'mason'.setup() end}
-  use {'simrat39/rust-tools.nvim', cond = plug_dev}
+  use {'jose-elias-alvarez/null-ls.nvim', cond = plug_dev}
+  use {'jayp0521/mason-null-ls.nvim', cond = plug_dev}
   use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
     config = function() require'plugin-configs/mason-lspconfig' end,
     after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp',
-      'rust-tools.nvim', 'lua-dev.nvim'}}
-  use {'jose-elias-alvarez/null-ls.nvim', cond = plug_dev,
-    config = function() require'plugin-configs.null-ls' end}
+      'rust-tools.nvim', 'lua-dev.nvim',
+      'null-ls.nvim', 'mason-null-ls.nvim'}}
   use {'saecki/crates.nvim', cond = plug_dev,
     config = function() require'crates'.setup() end}
   -- LSP界面
@@ -131,8 +135,6 @@ return require('packer').startup(function(use)
   -- 函数签名
   use {'ray-x/lsp_signature.nvim', cond = plug_dev,
     config = function() require'plugin-configs/lsp_signature' end}
-  -- nvim api
-  use {'folke/lua-dev.nvim', cond = plug_dev}
   -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'plugin-configs/nvim-treesitter' end,
