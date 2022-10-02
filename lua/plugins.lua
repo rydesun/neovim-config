@@ -12,6 +12,11 @@ return require('packer').startup(function(use)
   use 'dstein64/vim-startuptime'
   -- 缓存lua
   use 'lewis6991/impatient.nvim'
+  -- 小工具
+  use {'echasnovski/mini.nvim', config = function()
+    require 'mini.ai'.setup {}
+    require 'mini.bufremove'.setup {}
+  end}
 
   -- 配色主题
   use {'sainnhe/everforest', cond = plug_ui,

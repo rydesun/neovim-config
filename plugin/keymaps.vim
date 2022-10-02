@@ -33,7 +33,7 @@ nnoremap <silent>  gr          <Cmd>Telescope lsp_references<CR>
 nnoremap <silent>  <Esc><Esc>  <Cmd>nohlsearch<CR>
 nnoremap <silent>  <Esc>q      <Cmd>cclose<CR>
 nnoremap <silent>  <Esc>l      <Cmd>lclose<CR>
-nnoremap <silent>  <Esc>f      <Cmd>bd<CR>
+nnoremap <silent>  <Esc>f      <Cmd>lua MiniBufremove.delete()<CR>
 nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
 nnoremap <silent>  <Esc>w      <C-w>c
 
