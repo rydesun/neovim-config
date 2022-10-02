@@ -44,7 +44,7 @@ return require('packer').startup(function(use)
     config = function() require'guess-indent'.setup{} end}
   -- 空白符
   use {'ntpeters/vim-better-whitespace', cond = plug_view,
-    config = function() require'plugin-configs/vim-better-whitespace' end}
+    setup = function() require'plugin-configs/vim-better-whitespace' end}
   -- 选区diff
   use {'AndrewRadev/linediff.vim', cond = plug_view}
   -- 查看hex

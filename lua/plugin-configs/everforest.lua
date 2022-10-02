@@ -18,7 +18,6 @@ vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
 vim.fn['everforest#highlight']('PmenuSel', palette.none, palette.bg_visual)
 
 -- vim-better-whitespace
-vim.g.better_whitespace_guicolor = palette.none[0]
 vim.fn['everforest#highlight']('ExtraWhitespace', palette.none, palette.none, 'undercurl', palette.red)
 
 -- indent-blankline
