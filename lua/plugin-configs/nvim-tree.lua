@@ -24,6 +24,9 @@ require'nvim-tree'.setup {
     -- 浮动窗口
     float = {
       enable = true,
+      open_win_config = {
+        col = 2,
+      }
     },
     -- 相对行号
     relativenumber = true,

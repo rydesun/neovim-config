@@ -59,6 +59,7 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
 -- 分页时不需要行号 状态栏
 if vim.g.paging then
   vim.o.relativenumber = false
+  vim.o.cmdheight = 0
   -- laststatus会被lualine覆盖
   vim.api.nvim_create_autocmd('UIEnter', {
     pattern = {"*"},

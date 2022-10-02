@@ -14,14 +14,15 @@ local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
 
+-- 浮动窗口
+vim.api.nvim_command('hi! FloatBorder guibg=None')
+
 -- nvim-cmp
 vim.fn['everforest#highlight']('PmenuSel', palette.none, palette.bg_visual)
 
 -- vim-better-whitespace
-vim.fn['everforest#highlight']('ExtraWhitespace', palette.none, palette.none, 'undercurl', palette.red)
-
--- indent-blankline
-vim.fn['everforest#highlight']('IndentBlanklineContextChar', palette.grey2, palette.none)
+vim.fn['everforest#highlight']('ExtraWhitespace',
+  palette.red, palette.none, 'strikethrough')
 
 -- leap
 vim.api.nvim_command('hi! link LeapLabelPrimary Search')
