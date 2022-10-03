@@ -13,6 +13,10 @@ local git_unstage = function()
 end
 
 require'nvim-tree'.setup {
+  -- 让位dirbuf.nvim接管
+  hijack_directories = {
+    enable = false,
+  },
   -- 光标在文件名首位
   hijack_cursor = true,
   -- 自动更新

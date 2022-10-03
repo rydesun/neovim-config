@@ -35,6 +35,8 @@ return require('packer').startup(function(use)
   -- 文件浏览器
   use {'kyazdani42/nvim-tree.lua', cond = plug_ui,
     config = function() require'plugin-configs/nvim-tree' end}
+  -- 编辑目录
+  use {'elihunter173/dirbuf.nvim', cond = plug_ui}
   -- 查找
   use {'nvim-telescope/telescope.nvim', cond = plug_ui,
     config = function() require'plugin-configs/telescope' end}
