@@ -99,8 +99,8 @@ return require('packer').startup(function(use)
   -- 集成Git
   use {'lewis6991/gitsigns.nvim', cond = plug_cmd,
     config = function() require'plugin-configs/gitsigns' end}
-  -- 集成Git
-  use {'lambdalisue/gina.vim', cond = plug_cmd}
+  -- Git diff
+  use {'sindrets/diffview.nvim', cond = plug_cmd}
   -- 切换输入法
   use {'lilydjwg/fcitx.vim', cond = plug_cmd,
     setup = function() vim.g.fcitx5_remote = 'fcitx5-remote' end}

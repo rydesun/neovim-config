@@ -98,7 +98,9 @@ nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.run('diff', true
 nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.run('diff', false)<CR>
 nnoremap <silent>  <leader>gs  <Cmd>lua require'utils/term-git'.run('show', false)<CR>
 nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.run('diff --staged', false)<CR>
-nnoremap <silent>  <leader>gc  <Cmd>Gina commit<CR>
+nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
+nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory<CR>
+xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
 nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
