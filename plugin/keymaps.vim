@@ -111,15 +111,20 @@ xnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 
 " w组：特定语言
 " rust
-autocmd filetype rust nnoremap <buffer><silent> <leader>wt
-	\ <Cmd>lua require'rust-tools'.open_cargo_toml.open_cargo_toml()<CR>
-autocmd filetype rust nnoremap <buffer><silent> <leader>wp
-	\ <Cmd>lua require'rust-tools'.parent_module.parent_module()<CR>
-autocmd filetype rust nnoremap <buffer><silent> <leader>wm
-	\ <Cmd>lua require'rust-tools'.expand_macro.expand_macro()<CR>
+function! RustKeymap() abort
+	nnoremap <buffer><silent> <leader>wa
+		\ <Cmd>RustHoverActions<CR><Cmd>RustHoverActions<CR>
+	nnoremap <buffer><silent> <leader>wr <Cmd>RustRunnables<CR>
+	nnoremap <buffer><silent> <leader>we <Cmd>RustExpandMacro<CR>
+	nnoremap <buffer><silent> <leader>wu <Cmd>RustParentModule<CR>
+	nnoremap <buffer><silent> <leader>wc <Cmd>RustOpenCargo<CR>
+endfunction
+autocmd filetype rust call RustKeymap()
 " markdown
-autocmd filetype markdown nmap <buffer><silent> <leader>wp
-	\ <Plug>MarkdownPreviewToggle
+function! MarkdownKeymap() abort
+	nmap <buffer><silent> <leader>wp <Plug>MarkdownPreviewToggle
+endfunction
+autocmd filetype markdown call MarkdownKeymap()
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
