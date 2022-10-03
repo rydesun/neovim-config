@@ -24,8 +24,11 @@ require'rust-tools'.setup {
 }
 
 local null_ls = require 'null-ls'
+local mason_null_ls = require 'mason-null-ls'
+
 null_ls.setup()
-require 'mason-null-ls'.setup_handlers {
+mason_null_ls.setup()
+mason_null_ls.setup_handlers {
   function(source_name)
     for _, method in pairs {
       'code_actions', 'completion', 'diagnostics', 'formatting', 'hover'
@@ -42,7 +45,20 @@ require 'mason-null-ls'.setup_handlers {
         diagnostic.severity = vim.diagnostic.severity["HINT"]
       end,
     })
-  end
+  end,
+
+  markdownlint = function()
+    null_ls.register(null_ls.builtins.formatting.markdownlint)
+    null_ls.register(null_ls.builtins.diagnostics.markdownlint.with {
+      diagnostic_config = {
+        underline = false,
+        virtual_text = false,
+      },
+      diagnostics_postprocess = function(diagnostic)
+        diagnostic.severity = vim.diagnostic.severity["HINT"]
+      end,
+    })
+  end,
 }
 
 require('mason-lspconfig').setup()
