@@ -12,6 +12,7 @@ require 'nvim-treesitter.configs'.setup {
         ['ac'] = '@class.outer',
         ['il'] = '@loop.inner',
         ['al'] = '@loop.outer',
+        ['aC'] = "@comment.outer",
         ['id'] = "@conditional.inner",
         ['ad'] = "@conditional.outer",
       },

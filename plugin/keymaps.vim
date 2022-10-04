@@ -9,6 +9,14 @@ xnoremap <  <gv
 xnoremap >  >gv
 xnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <silent>  K  <Cmd>Lspsaga hover_doc<CR>
+
+nmap  <C-a>  <Plug>(dial-increment)
+nmap  <C-x>  <Plug>(dial-decrement)
+vmap  <C-a>  <Plug>(dial-increment)
+vmap  <C-x>  <Plug>(dial-decrement)
+vmap g<C-a> g<Plug>(dial-increment)
+vmap g<C-x> g<Plug>(dial-decrement)
+
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
 " s组：搜索列表(telescope.nvim)

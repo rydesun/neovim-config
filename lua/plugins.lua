@@ -113,8 +113,8 @@ return require('packer').startup(function(use)
     config = function() require 'Comment'.setup() end }
 
   -- 切换单词
-  use { 'tenfyzhong/axring.vim', cond = plug_op,
-    config = function() require 'plugin-configs/axring' end }
+  use { 'monaqa/dial.nvim', cond = plug_op,
+    config = function() require 'plugin-configs/dial' end }
 
   -- 编辑颜色
   use { 'ziontee113/color-picker.nvim', cond = plug_op,
