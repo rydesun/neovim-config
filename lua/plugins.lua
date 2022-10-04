@@ -112,36 +112,51 @@ return require('packer').startup(function(use)
     config = function() require'plugin-configs/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end}
 
+  -- 在最小环境中，不安装下面的插件
   if vim.g.env_mini then return end
 
-  -- LSP
+  -- 集成LSP和DAP等工具
+  use { 'williamboman/mason.nvim', cond = plug_dev,
+    config = function() require 'plugin-configs/mason' end,
+    after = {
+      -- 自动配置
+      'nvim-lspconfig', 'mason-lspconfig.nvim',
+      -- 额外配置
+      'rust-tools.nvim', 'lua-dev.nvim',
+      -- 集成非LSP工具
+      'null-ls.nvim', 'mason-null-ls.nvim',
+      -- 在此使用update_capabilities增强补全能力
+      'cmp-nvim-lsp',
+    } }
+
+  -- LSP的默认配置
   use {'neovim/nvim-lspconfig', cond = plug_dev}
-  -- 单独配置LSP
-  use {'folke/lua-dev.nvim', cond = plug_dev}
-  use {'simrat39/rust-tools.nvim', cond = plug_dev}
+
   -- 自动配置LSP
-  use {'williamboman/mason.nvim', cond = plug_dev,
-    config = function() require'mason'.setup() end}
+  use {'williamboman/mason-lspconfig.nvim', cond = plug_dev}
+
+  -- 单独配置LSP
+  use {'simrat39/rust-tools.nvim', cond = plug_dev}
+  use {'folke/lua-dev.nvim', cond = plug_dev}
+
+  -- 用null-ls集成非LSP工具
   use {'jose-elias-alvarez/null-ls.nvim', cond = plug_dev}
   use {'jayp0521/mason-null-ls.nvim', cond = plug_dev}
-  use {'williamboman/mason-lspconfig.nvim', cond = plug_dev,
-    config = function() require'plugin-configs/mason-lspconfig' end,
-    after = {'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp',
-      'rust-tools.nvim', 'lua-dev.nvim',
-      'null-ls.nvim', 'mason-null-ls.nvim'}}
-  use {'saecki/crates.nvim', cond = plug_dev,
-    config = function() require'crates'.setup() end}
-  -- LSP界面
-  use {'glepnir/lspsaga.nvim', cond = plug_dev,
-    config = function() require'plugin-configs/lspsaga' end}
-  -- 代码补全
+
+  -- 用LSP补全代码
   use {'hrsh7th/cmp-nvim-lsp', cond = plug_dev}
   use {'L3MON4D3/LuaSnip', cond = plug_dev,
     config = function() require'plugin-configs/luasnip' end}
   use {'saadparwaiz1/cmp_luasnip', cond = plug_dev}
-  -- 函数签名
+
+  -- 增强LSP界面
+  use {'glepnir/lspsaga.nvim', cond = plug_dev,
+    config = function() require'plugin-configs/lspsaga' end}
+
+  -- 补全时显示函数签名
   use {'ray-x/lsp_signature.nvim', cond = plug_dev,
     config = function() require'plugin-configs/lsp_signature' end}
+
   -- CST
   use {'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require'plugin-configs/nvim-treesitter' end,
@@ -169,6 +184,9 @@ return require('packer').startup(function(use)
     run = function() vim.fn['mkdp#util#install']() end}
   -- 为markdown生成toc
   use {'mzlogin/vim-markdown-toc', cond = plug_dev}
+  -- rust
+  use {'saecki/crates.nvim', cond = plug_dev,
+    config = function() require'crates'.setup() end}
   -- latex
   if vim.fn.executable('latex') > 0 then
     use {'lervag/vimtex', cond = plug_dev}

@@ -1,3 +1,5 @@
+require'mason'.setup {}
+
 require'lua-dev'.setup {}
 require'rust-tools'.setup {
   server = {
