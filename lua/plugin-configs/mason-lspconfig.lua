@@ -1,6 +1,3 @@
-local lspconfig = require('lspconfig')
-local util = require('lspconfig.util')
-
 require'lua-dev'.setup {}
 require'rust-tools'.setup {
   server = {
@@ -61,19 +58,22 @@ mason_null_ls.setup_handlers {
   end,
 }
 
+local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
+local capabilities = require('cmp_nvim_lsp').update_capabilities(
+  vim.lsp.protocol.make_client_capabilities())
+
 require('mason-lspconfig').setup()
 require('mason-lspconfig').setup_handlers({
   function (server_name)
-    lspconfig[server_name].setup{}
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(
-      vim.lsp.protocol.make_client_capabilities())
-    require('lspconfig')[server_name].setup{
+    lspconfig[server_name].setup {
       capabilities = capabilities
     }
   end,
 
   sumneko_lua = function()
     lspconfig.sumneko_lua.setup {
+      capabilities = capabilities,
       settings = {
         Lua = {
           telemetry = {
@@ -88,9 +88,19 @@ require('mason-lspconfig').setup_handlers({
     local default_config = require(
       'lspconfig.server_configurations.pyright').default_config
     lspconfig.pyright.setup {
+      capabilities = capabilities,
       root_dir = function(fname)
         return default_config.root_dir(fname) or util.find_git_ancestor(fname)
       end,
+    }
+  end,
+
+  jsonls = function()
+    lspconfig.jsonls.setup {
+      capabilities = capabilities,
+      on_attach = function(client, _)
+        client.server_capabilities.documentFormattingProvider = false
+      end
     }
   end,
 })
