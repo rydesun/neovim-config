@@ -19,6 +19,16 @@ require'rust-tools'.setup {
         }
       }
     }
+  },
+  tools = {
+    inlay_hints = {
+      highlight = 'InlayHint',
+      other_hints_prefix = '⇒ ',
+      show_parameter_hints = false,
+    },
+    hover_actions = {
+      auto_focus = true,
+    },
   }
 }
 

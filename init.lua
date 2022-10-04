@@ -72,6 +72,10 @@ end
 vim.diagnostic.config{
   -- 不在侧边栏显示符号
   signs = false,
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+    prefix = '🞬',
+  }
 }
 -- >>>-----------------------------------
 

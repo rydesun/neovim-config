@@ -114,8 +114,7 @@ xnoremap <silent>  <Leader>ts  :FloatermSend<CR>
 " w组：特定语言
 " rust
 function! RustKeymap() abort
-	nnoremap <buffer><silent> <leader>wa
-		\ <Cmd>RustHoverActions<CR><Cmd>RustHoverActions<CR>
+	nnoremap <buffer><silent> <leader>wa <Cmd>RustHoverActions<CR>
 	nnoremap <buffer><silent> <leader>wr <Cmd>RustRunnables<CR>
 	nnoremap <buffer><silent> <leader>we <Cmd>RustExpandMacro<CR>
 	nnoremap <buffer><silent> <leader>wu <Cmd>RustParentModule<CR>

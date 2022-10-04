@@ -11,6 +11,19 @@ vim.api.nvim_command("colorscheme everforest")
 local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
   vim.fn['everforest#get_configuration']().colors_override)
 
+-- virtual text
+for _, name in pairs {
+  'VirtualTextError',
+  'VirtualTextWarning',
+  'VirtualTextInfo',
+  'VirtualTextHint'
+} do
+  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red, 'italic')
+end
+
+-- InlayHint
+vim.fn['everforest#highlight']('InlayHint', palette.grey0, palette.bg2, 'italic')
+
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
 
