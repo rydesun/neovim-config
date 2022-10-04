@@ -25,7 +25,7 @@ require'rust-tools'.setup {
 local null_ls = require 'null-ls'
 local mason_null_ls = require 'mason-null-ls'
 
-null_ls.setup()
+vim.schedule(null_ls.setup)
 mason_null_ls.setup()
 mason_null_ls.setup_handlers {
   function(source_name)
