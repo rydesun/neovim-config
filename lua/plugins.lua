@@ -131,6 +131,8 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-cmdline' },
       { 'saadparwaiz1/cmp_luasnip' },
+      { 'L3MON4D3/LuaSnip', cond = plug_op,
+        config = function() require 'plugin-configs/luasnip' end }
     } }
 
   -- 自动匹配
@@ -200,8 +202,6 @@ return require('packer').startup(function(use)
 
   -- 用LSP补全代码
   use { 'hrsh7th/cmp-nvim-lsp', cond = plug_dev }
-  use { 'L3MON4D3/LuaSnip', cond = plug_dev,
-    config = function() require 'plugin-configs/luasnip' end }
 
   -- 增强LSP界面
   use { 'glepnir/lspsaga.nvim', cond = plug_dev,
