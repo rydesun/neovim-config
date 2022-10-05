@@ -68,6 +68,9 @@ nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
 nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
 xnoremap <silent>  <A-j>       :m '>+1<CR>==gv
 xnoremap <silent>  <A-k>       :m '<-2<CR>==gv
+
+" OMNI
+imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols theme=cursor<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader单键)

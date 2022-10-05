@@ -46,6 +46,9 @@ return require('packer').startup(function(use)
 
   -- 查找
   use { 'nvim-telescope/telescope.nvim', cond = cond,
+    requires = {
+      { 'nvim-telescope/telescope-symbols.nvim', cond = cond },
+    },
     config = function() require 'plugin-configs/telescope' end }
 
   -- 保持窗口布局
