@@ -16,8 +16,8 @@ return require('packer').startup(function(use)
   -- 补充lua API
   use 'nvim-lua/plenary.nvim'
 
-  -- 检查启动时间
-  use 'dstein64/vim-startuptime'
+  -- tpope's dot.
+  use 'tpope/vim-repeat'
   -- >>>-----------------------------------
 
   -- <<< 自身界面 plug_ui
@@ -91,8 +91,7 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-unimpaired', cond = plug_op }
 
   -- 移动光标
-  use { 'ggandor/leap.nvim', cond = plug_op,
-    setup = function() end }
+  use { 'ggandor/leap.nvim', cond = plug_op }
 
   -- 多重光标
   use { 'mg979/vim-visual-multi', cond = plug_op }
@@ -113,13 +112,6 @@ return require('packer').startup(function(use)
   -- 切换单词
   use { 'monaqa/dial.nvim', cond = plug_op,
     config = function() require 'plugin-configs/dial' end }
-
-  -- 编辑颜色
-  use { 'ziontee113/color-picker.nvim', cond = plug_op,
-    config = function() require 'color-picker' end }
-
-  -- 重复执行
-  use { 'tpope/vim-repeat', cond = plug_op }
 
   -- 补全
   use { 'hrsh7th/nvim-cmp', cond = plug_op,
@@ -145,6 +137,9 @@ return require('packer').startup(function(use)
   use { 'skywind3000/asyncrun.vim', cond = plug_cmd,
     config = function() require 'plugin-configs/asyncrun' end }
 
+  -- 任务系统
+  use { 'skywind3000/asynctasks.vim', cond = plug_cmd }
+
   -- 终端窗口
   use { 'voldikss/vim-floaterm', cond = plug_cmd }
 
@@ -164,6 +159,9 @@ return require('packer').startup(function(use)
     cond = function() return vim.g.plug_cmd and vim.g.env_firenvim end,
     config = function() require 'plugin-configs/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end }
+
+  -- 检查启动时间
+  use { 'dstein64/vim-startuptime', cond = plug_cmd }
   -- >>>-----------------------------------
 
   -- 非开发环境中，不安装下面的插件
@@ -211,47 +209,43 @@ return require('packer').startup(function(use)
   -- >>>-----------------------------------
 
   -- <<< 本地开发 plug_dev (tree-sitter)
-  -- CST
   use { 'nvim-treesitter/nvim-treesitter', cond = plug_dev,
     config = function() require 'plugin-configs/nvim-treesitter' end,
     run = ':TSUpdate' }
+
+  -- 查看CST
   use { 'nvim-treesitter/playground', cond = plug_dev }
+
+  -- 上下文
   use { 'nvim-treesitter/nvim-treesitter-context', cond = plug_dev }
+
+  -- 文本对象
   use { 'nvim-treesitter/nvim-treesitter-textobjects', cond = plug_dev }
+
+  -- 大纲视图
+  use { 'stevearc/aerial.nvim', cond = plug_dev,
+    config = function() require 'aerial'.setup {} end }
   -- >>>-----------------------------------
 
   -- <<< 本地开发 plug_dev (特定语言)
-  -- 预览markdown
+  -- 预览Markdown
   use { 'iamcco/markdown-preview.nvim', cond = plug_dev,
     run = function() vim.fn['mkdp#util#install']() end }
 
-  -- 为markdown生成toc
+  -- 为Markdown生成toc
   use { 'mzlogin/vim-markdown-toc', cond = plug_dev }
 
-  -- rust
+  -- Rust
   use { 'saecki/crates.nvim', cond = plug_dev,
     config = function() require 'plugin-configs.crates' end }
 
-  -- latex
+  -- LaTex
   if vim.fn.executable('latex') > 0 then
     use { 'lervag/vimtex', cond = plug_dev }
-  end
-
-  -- golang
-  if vim.fn.executable('go') > 0 then
-    use { 'fatih/vim-go', cond = plug_dev,
-      config = function() require 'plugin-configs/vim-go' end }
   end
   -- >>>-----------------------------------
 
   -- <<< 本地开发 plug_dev (其他)
-  -- 任务系统
-  use { 'skywind3000/asynctasks.vim', cond = plug_dev }
-
-  -- 代码大纲
-  use { 'stevearc/aerial.nvim', cond = plug_dev,
-    config = function() require 'aerial'.setup {} end }
-
   -- 显示颜色(需要go编译)
   if vim.fn.executable('make') > 0 and vim.fn.executable('go') > 0 then
     use { 'rrethy/vim-hexokinase', cond = plug_dev,
