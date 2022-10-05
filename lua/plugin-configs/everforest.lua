@@ -12,13 +12,11 @@ local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
   vim.fn['everforest#get_configuration']().colors_override)
 
 -- virtual text
-for _, name in pairs {
-  'VirtualTextError',
-  'VirtualTextWarning',
-  'VirtualTextInfo',
-  'VirtualTextHint'
-} do
+for _, name in pairs { 'VirtualTextError', 'VirtualTextWarning', } do
   vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red, 'italic')
+end
+for _, name in pairs { 'VirtualTextInfo', 'VirtualTextHint' } do
+  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_green, 'italic')
 end
 
 -- InlayHint

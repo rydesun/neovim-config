@@ -232,7 +232,7 @@ return require('packer').startup(function(use)
 
   -- rust
   use { 'saecki/crates.nvim', cond = plug_dev,
-    config = function() require 'crates'.setup() end }
+    config = function() require 'plugin-configs.crates' end }
 
   -- latex
   if vim.fn.executable('latex') > 0 then
