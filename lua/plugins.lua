@@ -57,7 +57,8 @@ return require('packer').startup(function(use)
 
   -- <<< 查看文本 plug_view
   -- 平滑滚动
-  use { 'psliwka/vim-smoothie', cond = plug_view }
+  use { 'karb94/neoscroll.nvim', cond = plug_view,
+    config = function() require 'plugin-configs/neoscroll' end }
 
   -- 缩进线
   use { 'lukas-reineke/indent-blankline.nvim', cond = plug_view,
