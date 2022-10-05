@@ -18,12 +18,6 @@ return require('packer').startup(function(use)
 
   -- 检查启动时间
   use 'dstein64/vim-startuptime'
-
-  -- 小工具
-  use { 'echasnovski/mini.nvim', config = function()
-    require 'mini.ai'.setup {}
-    require 'mini.bufremove'.setup {}
-  end }
   -- >>>-----------------------------------
 
   -- <<< 自身界面 plug_ui
@@ -56,6 +50,9 @@ return require('packer').startup(function(use)
   -- 查找
   use { 'nvim-telescope/telescope.nvim', cond = plug_ui,
     config = function() require 'plugin-configs/telescope' end }
+
+  -- 保持窗口布局
+  use { 'famiu/bufdelete.nvim', cond = plug_ui }
   -- >>>-----------------------------------
 
   -- <<< 查看文本 plug_view
