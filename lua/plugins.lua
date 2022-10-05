@@ -130,7 +130,14 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-cmdline' },
+      { 'saadparwaiz1/cmp_luasnip' },
     } }
+
+  -- 自动匹配
+  use { 'windwp/nvim-autopairs', cond = plug_op,
+    -- 与补全插件集成
+    after = { 'nvim-cmp' },
+    config = function() require 'plugin-configs/nvim-autopairs' end }
   -- >>>-----------------------------------
 
   -- <<< 命令集成 plug_cmd
@@ -195,7 +202,6 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-nvim-lsp', cond = plug_dev }
   use { 'L3MON4D3/LuaSnip', cond = plug_dev,
     config = function() require 'plugin-configs/luasnip' end }
-  use { 'saadparwaiz1/cmp_luasnip', cond = plug_dev }
 
   -- 增强LSP界面
   use { 'glepnir/lspsaga.nvim', cond = plug_dev,

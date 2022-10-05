@@ -7,7 +7,6 @@ map      f  <Plug>(leap-forward)
 map      F  <Plug>(leap-backward)
 xnoremap <  <gv
 xnoremap >  >gv
-xnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <silent>  K  <Cmd>Lspsaga hover_doc<CR>
 
 nmap  <C-a>  <Plug>(dial-increment)
