@@ -31,7 +31,7 @@ require 'dial.config'.augends:register_group {
     augend.constant.new { elements = { "&=", "|=", "^=" }, word = false },
     augend.constant.new { elements = { "==", "!=" }, word = false },
     augend.constant.new { elements = { "===", "!==" }, word = false },
-    augend.constant.new { elements = { ">", "<", ">=", "<=" }, word = false },
+    augend.constant.new { elements = { ">=", "<=", ">", "<" }, word = false },
     augend.constant.new { elements = { "++", "--" }, word = false },
 
     -- 关键字
