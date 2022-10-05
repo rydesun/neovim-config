@@ -86,8 +86,8 @@ vim.o.fileencodings = 'ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1'
 vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
 vim.o.listchars = 'tab:|·,space:␣,trail:☲,extends:►,precedes:◄'
--- 所有模式支持鼠标
-vim.o.mouse = 'a'
+-- 去掉鼠标右键的菜单
+vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格
 vim.opt.formatoptions:append('B')
 -- pattern搜索无视大小写，含大写字符时则必须匹配大小写
