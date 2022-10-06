@@ -90,6 +90,10 @@ return require('packer').startup(function(use)
 
   -- 翻译
   use { 'voldikss/vim-translator', cond = cond }
+
+  -- 显示颜色
+  use { 'NvChad/nvim-colorizer.lua', cond = cond,
+    config = function() require 'plugin-configs/nvim-colorizer' end}
   -- >>>-----------------------------------
 
   -- <<< 操作文本
@@ -263,12 +267,6 @@ return require('packer').startup(function(use)
   -- >>>-----------------------------------
 
   -- <<< 本地开发 (其他)
-  -- 显示颜色(需要go编译)
-  if vim.fn.executable('make') > 0 and vim.fn.executable('go') > 0 then
-    use { 'rrethy/vim-hexokinase', cond = cond,
-      run = 'make hexokinase' }
-  end
-
   -- EditorConfig
   use { 'gpanders/editorconfig.nvim', cond = cond }
   -- >>>-----------------------------------
