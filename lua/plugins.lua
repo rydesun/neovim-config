@@ -54,6 +54,8 @@ return require('packer').startup(function(use)
       { 'nvim-telescope/telescope-symbols.nvim', cond = cond },
       -- 管理yank
       { 'AckslD/nvim-neoclip.lua', cond = cond },
+      -- 索引文件
+      { "nvim-telescope/telescope-frecency.nvim", cond = cond },
     },
     config = function() require 'plugin-configs/telescope' end }
 

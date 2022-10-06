@@ -37,7 +37,7 @@ nnoremap <silent>  sj          <Cmd>Telescope jumplist<CR>
 nnoremap <silent>  sm          <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
 nnoremap <silent>  so          <Cmd>Telescope buffers<CR>
-nnoremap <silent>  sO          <Cmd>Telescope oldfiles<CR>
+nnoremap <silent>  sO          <Cmd>Telescope frecency theme=dropdown previewer=false<CR>
 " 文件列表(当前工作区)
 nnoremap <silent>  sf          <Cmd>Telescope find_files<CR>
 nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
