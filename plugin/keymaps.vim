@@ -132,10 +132,14 @@ nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 
-" t组：操作终端
+" t组：操作终端、测试
 nnoremap <silent>  <Leader>tt  <Cmd>FloatermToggle<CR>
 nnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
 xnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+nnoremap <silent>  <leader>tn  :TestNearest<CR>
+nnoremap <silent>  <leader>tf  :TestFile<CR>
+nnoremap <silent>  <leader>tl  :TestLast<CR>
+nnoremap <silent>  <leader>tv  :TestVisit<CR>
 
 " w组：特定语言
 " rust

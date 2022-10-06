@@ -262,7 +262,7 @@ return require('packer').startup(function(use)
 
   -- Rust
   use { 'saecki/crates.nvim', cond = cond,
-    config = function() require 'plugin-configs.crates' end }
+    config = function() require 'plugin-configs/crates' end }
 
   -- LaTex
   if vim.fn.executable('latex') > 0 then
@@ -271,10 +271,13 @@ return require('packer').startup(function(use)
   -- >>>-----------------------------------
 
   -- <<< 本地开发 (其他)
+  -- 测试
+  use { 'vim-test/vim-test', cond = cond,
+    setup = function() require 'plugin-configs/vim-test' end }
+
   -- 调试打印
   use { 'andrewferrier/debugprint.nvim', cond = cond,
-    config = function() require 'debugprint'.setup() end,
-  }
+    config = function() require 'debugprint'.setup() end }
 
   -- EditorConfig
   use { 'gpanders/editorconfig.nvim', cond = cond }
