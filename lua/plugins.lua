@@ -243,6 +243,10 @@ return require('packer').startup(function(use)
   use { 'mizlan/iswap.nvim', cond = cond,
     config = function() require 'iswap'.setup {} end }
 
+  -- 编辑注入代码块
+  use { 'AckslD/nvim-FeMaco.lua', cond = cond,
+    config = function() require 'femaco'.setup() end }
+
   -- 大纲视图
   use { 'stevearc/aerial.nvim', cond = cond,
     config = function() require 'aerial'.setup {} end }
