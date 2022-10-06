@@ -44,6 +44,7 @@ nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
 
 " OMNI组：特殊种类的补全
 imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
+imap     <silent>  <C-x><C-p>  <Cmd>Telescope neoclip theme=cursor<CR>
 imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols<CR>
 " >>>-----------------------------------
 

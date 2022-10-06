@@ -24,3 +24,19 @@ require 'telescope'.setup {
     symbols = { theme = 'cursor', layout_config = { width = 40 } },
   },
 }
+
+require 'telescope'.load_extension 'neoclip'
+require 'neoclip'.setup {
+  -- 持久保存
+  enable_persistent_history = true,
+  -- 在多个会话间同步
+  continuous_sync = true,
+  keys = {
+    telescope = {
+      i = {
+        -- 不要覆盖<c-p>
+        paste = '<c-y>',
+      },
+    }
+  }
+}
