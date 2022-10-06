@@ -77,6 +77,11 @@ imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
+" 交换节点
+nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>
+nnoremap <silent>  <A-h>       <Cmd>ISwapWithLeft<CR>
+nnoremap <silent>  <A-l>       <Cmd>ISwapWithRight<CR>
+" 交换行
 nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
 nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
 xnoremap <silent>  <A-j>       :m '>+1<CR>==gv

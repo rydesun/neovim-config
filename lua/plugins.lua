@@ -235,6 +235,10 @@ return require('packer').startup(function(use)
   -- 文本对象
   use { 'nvim-treesitter/nvim-treesitter-textobjects', cond = cond }
 
+  -- 交换对象
+  use { 'mizlan/iswap.nvim', cond = cond,
+    config = function() require 'iswap'.setup {} end }
+
   -- 大纲视图
   use { 'stevearc/aerial.nvim', cond = cond,
     config = function() require 'aerial'.setup {} end }
