@@ -18,21 +18,33 @@ vmap g<C-x> g<Plug>(dial-decrement)
 
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
-" s组：搜索列表(telescope.nvim)
-" vim-sandwich处理成对符号
-nnoremap           s           <NOP>
-nnoremap           S           <Cmd>Telescope<CR>
-nnoremap <silent>  ss          <Cmd>Telescope live_grep<CR>
-nnoremap <silent>  sb          <Cmd>Telescope buffers<CR>
-nnoremap <silent>  sf          <Cmd>Telescope find_files<CR>
-nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
-
-" g组：语法跳转
-" splitjoin.vim执行拆分合并
+" g组：按词跳转
 nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions<CR>
 nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions<CR>
 nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr          <Cmd>Telescope lsp_references<CR>
+nnoremap <silent>  gs          <Cmd>Telescope grep_string<CR>
+nnoremap <silent>  gS          <Cmd>Telescope live_grep<CR>
+
+" s组：位置/文件跳转
+" 另外有vim-sandwich占用sa、sd、sr
+nnoremap           s           <NOP>
+nnoremap <silent>  S           <Cmd>Telescope<CR>
+nnoremap <silent>  ss          <Cmd>Telescope resume<CR>
+" quickfix/loclist
+nnoremap <silent>  sq          <Cmd>Telescope diagnostics<CR>
+nnoremap <silent>  sj          <Cmd>Telescope jumplist<CR>
+nnoremap <silent>  sm          <Cmd>Telescope marks<CR>
+" 文件列表(历史打开)
+nnoremap <silent>  so          <Cmd>Telescope buffers<CR>
+nnoremap <silent>  sO          <Cmd>Telescope oldfiles<CR>
+" 文件列表(当前工作区)
+nnoremap <silent>  sf          <Cmd>Telescope find_files<CR>
+nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
+
+" OMNI组：特殊种类的补全
+imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
+imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
@@ -45,7 +57,7 @@ nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
 nnoremap <silent>  <Esc>w      <C-w>c
 
 " []组：前后跳转
-" 插件提供更多映射
+" 另外有插件提供更多映射
 nnoremap <silent>  [g          <Cmd>Lspsaga diagnostic_jump_prev<CR>
 nnoremap <silent>  ]g          <Cmd>Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent>  [G          <Cmd>lua require'lspsaga.diagnostic'.goto_prev{
@@ -68,9 +80,6 @@ nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
 nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
 xnoremap <silent>  <A-j>       :m '>+1<CR>==gv
 xnoremap <silent>  <A-k>       :m '<-2<CR>==gv
-
-" OMNI
-imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols theme=cursor<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader单键)

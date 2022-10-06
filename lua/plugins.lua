@@ -106,9 +106,6 @@ return require('packer').startup(function(use)
   -- 缩进对象
   use { 'urxvtcd/vim-indent-object', cond = cond }
 
-  -- 拆分合并
-  use { 'AndrewRadev/splitjoin.vim', cond = cond }
-
   -- 快速注释
   use { 'numToStr/Comment.nvim', cond = cond,
     config = function() require 'Comment'.setup() end }
