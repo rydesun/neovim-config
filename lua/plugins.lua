@@ -93,7 +93,7 @@ return require('packer').startup(function(use)
 
   -- 显示颜色
   use { 'NvChad/nvim-colorizer.lua', cond = cond,
-    config = function() require 'plugin-configs/nvim-colorizer' end}
+    config = function() require 'plugin-configs/nvim-colorizer' end }
   -- >>>-----------------------------------
 
   -- <<< 操作文本
@@ -271,6 +271,11 @@ return require('packer').startup(function(use)
   -- >>>-----------------------------------
 
   -- <<< 本地开发 (其他)
+  -- 调试打印
+  use { 'andrewferrier/debugprint.nvim', cond = cond,
+    config = function() require 'debugprint'.setup() end,
+  }
+
   -- EditorConfig
   use { 'gpanders/editorconfig.nvim', cond = cond }
   -- >>>-----------------------------------

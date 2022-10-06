@@ -19,6 +19,7 @@ vmap g<C-x> g<Plug>(dial-decrement)
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
 " g组：按词跳转
+" 另外有debugprint.nvim占用g?
 nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions<CR>
 nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions<CR>
 nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations<CR>
