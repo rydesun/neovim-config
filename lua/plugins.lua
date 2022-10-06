@@ -156,7 +156,8 @@ return require('packer').startup(function(use)
   use { 'skywind3000/asynctasks.vim', cond = cond }
 
   -- 终端窗口
-  use { 'voldikss/vim-floaterm', cond = cond }
+  use { 'akinsho/toggleterm.nvim', tag = '*', cond = cond,
+    config = function() require 'plugin-configs/toggleterm' end }
 
   -- 集成Git
   use { 'lewis6991/gitsigns.nvim', cond = cond,

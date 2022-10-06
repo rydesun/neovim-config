@@ -133,9 +133,10 @@ nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 
 " t组：操作终端、测试
-nnoremap <silent>  <Leader>tt  <Cmd>FloatermToggle<CR>
-nnoremap <silent>  <Leader>ts  <Cmd>FloatermSend<CR>
-xnoremap <silent>  <Leader>ts  :FloatermSend<CR>
+nnoremap <silent>  <Leader>tt  <Cmd>ToggleTerm direction=float<CR>
+nnoremap <silent>  <Leader>tb  <Cmd>ToggleTerm direction=horizontal<CR>
+nnoremap <silent>  <Leader>ts  <Cmd>ToggleTermSendCurrentLine<CR>
+xnoremap <silent>  <Leader>ts  :ToggleTermSendVisualSelection<CR>
 nnoremap <silent>  <leader>tn  :TestNearest<CR>
 nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
