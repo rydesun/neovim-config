@@ -14,7 +14,7 @@ local function git_diff()
   if status == nil or status == '' then
     return ''
   else
-    return '❄'
+    return ''
   end
 end
 

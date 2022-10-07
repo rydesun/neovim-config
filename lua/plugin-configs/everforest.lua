@@ -17,14 +17,14 @@ vim.fn['everforest#highlight']('TabLineSepSel', palette.statusline1, palette.bg1
 
 -- virtual text
 for _, name in pairs { 'VirtualTextError', 'VirtualTextWarning', } do
-  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red, 'italic')
+  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red)
 end
 for _, name in pairs { 'VirtualTextInfo', 'VirtualTextHint' } do
-  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_green, 'italic')
+  vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_green)
 end
 
 -- InlayHint
-vim.fn['everforest#highlight']('InlayHint', palette.grey0, palette.bg2, 'italic')
+vim.fn['everforest#highlight']('InlayHint', palette.grey0, palette.bg2)
 
 -- 折叠行
 vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
