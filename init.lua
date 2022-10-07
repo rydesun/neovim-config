@@ -111,6 +111,10 @@ if not ok then
 end
 
 -- 本地插件
+-- tabline
+vim.api.nvim_command('packadd tabline')
+require 'tabline'.setup()
+
 -- 折叠行显示的文本
 vim.api.nvim_command('packadd foldtext')
 if vim.g.env_console then

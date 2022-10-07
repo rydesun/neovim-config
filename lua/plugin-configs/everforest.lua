@@ -11,6 +11,10 @@ vim.api.nvim_command("colorscheme everforest")
 local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
   vim.fn['everforest#get_configuration']().colors_override)
 
+-- tabline
+vim.fn['everforest#highlight']('TabLineSep', palette.bg3, palette.bg1)
+vim.fn['everforest#highlight']('TabLineSepSel', palette.statusline1, palette.bg1)
+
 -- virtual text
 for _, name in pairs { 'VirtualTextError', 'VirtualTextWarning', } do
   vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red, 'italic')
