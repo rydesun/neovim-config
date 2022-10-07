@@ -149,11 +149,11 @@ return require('packer').startup(function(use)
   local cond = function() return vim.g.plug_cmd end
 
   -- 异步执行
-  use { 'skywind3000/asyncrun.vim', cond = cond,
-    config = function() require 'plugin-configs/asyncrun' end }
+  use { 'skywind3000/asyncrun.vim', cond = cond }
 
   -- 任务系统
-  use { 'skywind3000/asynctasks.vim', cond = cond }
+  use { 'skywind3000/asynctasks.vim', cond = cond,
+    config = function() require 'plugin-configs/asynctasks' end }
 
   -- 终端窗口
   use { 'akinsho/toggleterm.nvim', tag = '*', cond = cond,
