@@ -47,6 +47,10 @@ nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
 imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
 imap     <silent>  <C-x><C-p>  <Cmd>Telescope neoclip theme=cursor<CR>
 imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols<CR>
+imap     <silent>  <C-x><C-e>  <Cmd>lua require'telescope.builtin'.symbols {
+				\ sources = {'emoji', 'kaomoji', 'gitmoji'} }<CR>
+imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
+				\ sources = {'nerd'} }<CR>
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
