@@ -96,13 +96,13 @@ xnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 " <<< 按键 (Leader单键)
 let g:mapleader=' ' | noremap <Space> <Nop>
 
-" 数字组：运行
-nnoremap <silent>  <Leader>1   <Cmd>AsyncTask repl<CR>
-nnoremap <silent>  <Leader>3   <Cmd>AsyncTask file-run<CR>
-nnoremap <silent>  <Leader>5   <Cmd>AsyncTask project-run<CR>
-nnoremap <silent>  <Leader>7   <Cmd>AsyncTask project-build<CR>
-nnoremap <silent>  <Leader>9   <Cmd>AsyncTask file-build<CR>
-nnoremap <silent>  <Leader>-   <Cmd>AsyncTask test<CR>
+" 数字组：编译运行
+nnoremap <silent>  <Leader>1   <Cmd>AsyncTask run<CR>
+nnoremap <silent>  <Leader>2   <Cmd>AsyncTask build<CR>
+nnoremap <silent>  <Leader>3   <Cmd>AsyncTask build-release<CR>
+nnoremap <silent>  <Leader>7   <Cmd>AsyncTask file-run<CR>
+nnoremap <silent>  <Leader>8   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <Leader>0   <Cmd>AsyncTask repl<CR>
 
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
