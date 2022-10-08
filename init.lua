@@ -56,18 +56,21 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
   pattern = {"*"},
   callback = function() vim.opt_local.relativenumber = false end
 })
--- 分页时不需要行号 状态栏
+
 if vim.g.paging then
+  -- 分页时不需要行号和命令行
   vim.o.relativenumber = false
   vim.o.cmdheight = 0
-  -- laststatus会被lualine覆盖
+  -- 分页时不需要状态栏(排除man文件类型)
+  -- laststatus会被lualine覆盖，所以需要autocmd
   vim.api.nvim_create_autocmd('UIEnter', {
-    pattern = {"*"},
+    pattern = { '*' },
     callback = function()
-      vim.o.laststatus = 0
+      if vim.bo.filetype ~= 'man' then vim.o.laststatus = 0 end
     end
   })
 end
+
 -- LSP
 vim.diagnostic.config{
   -- 不在侧边栏显示符号
