@@ -284,6 +284,11 @@ return require('packer').startup(function(use)
   if vim.fn.executable('latex') > 0 then
     use { 'lervag/vimtex', cond = cond }
   end
+
+  -- kitty配置文件
+  if vim.fn.executable('kitty') > 0 then
+    use { 'fladson/vim-kitty', cond = cond }
+  end
   -- >>>-----------------------------------
 
   -- <<< 本地开发 (其他)
