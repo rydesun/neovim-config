@@ -1,6 +1,6 @@
-require'indent_blankline'.setup {
+require 'indent_blankline'.setup {
   -- 缩进线字符
-  char_list = {'│', '┊'},
+  char = '┊',
 
   -- 不显示第一层
   show_first_indent_level = false,
