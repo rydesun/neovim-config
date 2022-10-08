@@ -130,6 +130,9 @@ return require('packer').startup(function(use)
   use { 'numToStr/Comment.nvim', cond = cond,
     config = function() require 'Comment'.setup() end }
 
+  -- 表格对齐
+  use { 'junegunn/vim-easy-align', cond = cond }
+
   -- 切换单词
   use { 'monaqa/dial.nvim', cond = cond,
     config = function() require 'plugin-configs/dial' end }

@@ -36,6 +36,9 @@ nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
 nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 nnoremap <silent>  gS  <Cmd>Telescope live_grep<CR>
+" 对齐
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " s组：位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
