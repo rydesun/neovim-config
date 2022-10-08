@@ -122,6 +122,7 @@ xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
+nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle left<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>

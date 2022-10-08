@@ -154,6 +154,9 @@ return require('packer').startup(function(use)
     -- 与补全插件集成
     after = { 'nvim-cmp' },
     config = function() require 'plugin-configs/nvim-autopairs' end }
+
+  -- 撤销历史
+  use { 'mbbill/undotree', cond = cond }
   -- >>>-----------------------------------
 
   -- <<< 命令集成
