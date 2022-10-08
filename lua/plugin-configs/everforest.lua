@@ -27,7 +27,7 @@ end
 vim.fn['everforest#highlight']('InlayHint', palette.grey0, palette.bg2)
 
 -- 折叠行
-vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg1)
+vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg_blue)
 
 -- 浮动窗口
 vim.api.nvim_command('hi! FloatBorder guibg=None')

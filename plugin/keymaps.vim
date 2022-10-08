@@ -18,6 +18,14 @@ vmap g<C-x> g<Plug>(dial-decrement)
 
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
+" z组：折叠
+nnoremap <silent>  zj          <Cmd>lua require'ufo'.goNextClosedFold()<CR>
+nnoremap <silent>  zk          <Cmd>lua require'ufo'.goPreviousClosedFold()<CR>
+nnoremap <silent>  zv          <Cmd>lua require'ufo'.peekFoldedLinesUnderCursor()<CR>
+" 保持foldlevel的值
+nnoremap <silent>  zR          <Cmd>lua require 'ufo'.openAllFolds()<CR>
+nnoremap <silent>  zM          <Cmd>lua require 'ufo'.closeAllFolds()<CR>
+
 " g组：按词跳转
 " 另外有debugprint.nvim占用g?
 nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions<CR>

@@ -82,6 +82,11 @@ return require('packer').startup(function(use)
   use { 'ntpeters/vim-better-whitespace', cond = cond,
     setup = function() require 'plugin-configs/vim-better-whitespace' end }
 
+  -- 折叠
+  use { 'kevinhwang91/nvim-ufo', cond = cond,
+    requires = { 'kevinhwang91/promise-async', cond = cond },
+    config = function() require 'plugin-configs/nvim-ufo' end }
+
   -- 选区diff
   use { 'AndrewRadev/linediff.vim', cond = cond }
 
