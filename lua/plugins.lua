@@ -291,6 +291,10 @@ return require('packer').startup(function(use)
   use { 'vim-test/vim-test', cond = cond,
     setup = function() require 'plugin-configs/vim-test' end }
 
+  -- 覆盖率
+  use { 'andythigpen/nvim-coverage', cond = cond,
+    config = function() require 'plugin-configs/nvim-coverage' end }
+
   -- 调试打印
   use { 'andrewferrier/debugprint.nvim', cond = cond,
     config = function() require 'debugprint'.setup() end }

@@ -113,6 +113,7 @@ let g:mapleader=' ' | noremap <Space> <Nop>
 nnoremap <silent>  <leader>1   <Cmd>AsyncTask run<CR>
 nnoremap <silent>  <leader>2   <Cmd>AsyncTask build<CR>
 nnoremap <silent>  <leader>3   <Cmd>AsyncTask build-release<CR>
+nnoremap <silent>  <leader>4   <Cmd>AsyncTask coverage<CR>
 nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
 nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
 nnoremap <silent>  <leader>0   <Cmd>AsyncTask repl<CR>
