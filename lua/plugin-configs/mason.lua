@@ -112,7 +112,13 @@ require('mason-lspconfig').setup_handlers({
       capabilities = capabilities,
       on_attach = function(client, _)
         client.server_capabilities.documentFormattingProvider = false
-      end
+      end,
+      settings = {
+        json = {
+          schemas = require 'schemastore'.json.schemas(),
+          validate = { enable = true },
+        }
+      },
     }
   end,
 })

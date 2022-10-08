@@ -189,6 +189,10 @@ return require('packer').startup(function(use)
   -- 集成LSP和DAP等工具
   use { 'williamboman/mason.nvim', cond = cond,
     config = function() require 'plugin-configs/mason' end,
+    requires = {
+      -- JSON schema
+      { 'b0o/schemastore.nvim', cond = cond },
+    },
     after = {
       -- 自动配置
       'nvim-lspconfig', 'mason-lspconfig.nvim',
