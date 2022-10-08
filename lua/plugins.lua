@@ -50,6 +50,9 @@ return require('packer').startup(function(use)
   -- 查找
   use { 'nvim-telescope/telescope.nvim', cond = cond,
     requires = {
+      -- 搜索支持fzf语法
+      { 'nvim-telescope/telescope-fzf-native.nvim', cond = cond,
+        run = 'make' },
       -- 补全符号
       { 'nvim-telescope/telescope-symbols.nvim', cond = cond },
       -- 管理yank
