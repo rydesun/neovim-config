@@ -1,13 +1,17 @@
-" <<< 按键 (非默认行为)
+" <<< 按键 (覆盖默认行为)
 noremap  H  ^
 noremap  L  $
 noremap  Q  @q
 noremap  ;  :
 map      f  <Plug>(leap-forward)
 map      F  <Plug>(leap-backward)
+" 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
+" 用LSP查看文档
 nnoremap <silent>  K  <Cmd>Lspsaga hover_doc<CR>
+" 分页时按q直接退出
+if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
 nmap  <C-a>  <Plug>(dial-increment)
 nmap  <C-x>  <Plug>(dial-decrement)
@@ -16,40 +20,38 @@ vmap  <C-x>  <Plug>(dial-decrement)
 vmap g<C-a> g<Plug>(dial-increment)
 vmap g<C-x> g<Plug>(dial-decrement)
 
-if g:paging | nnoremap q <Cmd>exit<CR> | endif
-
 " z组：折叠
-nnoremap <silent>  zj          <Cmd>lua require'ufo'.goNextClosedFold()<CR>
-nnoremap <silent>  zk          <Cmd>lua require'ufo'.goPreviousClosedFold()<CR>
-nnoremap <silent>  zv          <Cmd>lua require'ufo'.peekFoldedLinesUnderCursor()<CR>
+nnoremap <silent>  zj  <Cmd>lua require'ufo'.goNextClosedFold()<CR>
+nnoremap <silent>  zk  <Cmd>lua require'ufo'.goPreviousClosedFold()<CR>
+nnoremap <silent>  zv  <Cmd>lua require'ufo'.peekFoldedLinesUnderCursor()<CR>
 " 保持foldlevel的值
-nnoremap <silent>  zR          <Cmd>lua require 'ufo'.openAllFolds()<CR>
-nnoremap <silent>  zM          <Cmd>lua require 'ufo'.closeAllFolds()<CR>
+nnoremap <silent>  zR  <Cmd>lua require 'ufo'.openAllFolds()<CR>
+nnoremap <silent>  zM  <Cmd>lua require 'ufo'.closeAllFolds()<CR>
 
 " g组：按词跳转
-" 另外有debugprint.nvim占用g?
-nnoremap <silent>  gd          <Cmd>Telescope lsp_definitions<CR>
-nnoremap <silent>  gy          <Cmd>Telescope lsp_type_definitions<CR>
-nnoremap <silent>  gi          <Cmd>Telescope lsp_implementations<CR>
-nnoremap <silent>  gr          <Cmd>Telescope lsp_references<CR>
-nnoremap <silent>  gs          <Cmd>Telescope grep_string<CR>
-nnoremap <silent>  gS          <Cmd>Telescope live_grep<CR>
+" 另外有插件debugprint.nvim占用g?
+nnoremap <silent>  gd  <Cmd>Telescope lsp_definitions<CR>
+nnoremap <silent>  gy  <Cmd>Telescope lsp_type_definitions<CR>
+nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
+nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
+nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
+nnoremap <silent>  gS  <Cmd>Telescope live_grep<CR>
 
 " s组：位置/文件跳转
-" 另外有vim-sandwich占用sa、sd、sr
-nnoremap           s           <NOP>
-nnoremap <silent>  S           <Cmd>Telescope<CR>
-nnoremap <silent>  ss          <Cmd>Telescope resume<CR>
+" 另外有插件vim-sandwich占用sa、sd、sr
+nnoremap           s   <NOP>
+nnoremap <silent>  S   <Cmd>Telescope<CR>
+nnoremap <silent>  ss  <Cmd>Telescope resume<CR>
 " quickfix/loclist
-nnoremap <silent>  sq          <Cmd>Telescope diagnostics<CR>
-nnoremap <silent>  sj          <Cmd>Telescope jumplist<CR>
-nnoremap <silent>  sm          <Cmd>Telescope marks<CR>
+nnoremap <silent>  sq  <Cmd>Telescope diagnostics<CR>
+nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
+nnoremap <silent>  sm  <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
-nnoremap <silent>  so          <Cmd>Telescope buffers<CR>
-nnoremap <silent>  sO          <Cmd>Telescope frecency theme=dropdown previewer=false<CR>
+nnoremap <silent>  so  <Cmd>Telescope buffers<CR>
+nnoremap <silent>  sO  <Cmd>Telescope frecency theme=dropdown previewer=false<CR>
 " 文件列表(当前工作区)
-nnoremap <silent>  sf          <Cmd>Telescope find_files<CR>
-nnoremap <silent>  sg          <Cmd>Telescope git_status<CR>
+nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
+nnoremap <silent>  sg  <Cmd>Telescope git_status<CR>
 
 " OMNI组：特殊种类的补全
 imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
@@ -105,12 +107,12 @@ xnoremap <silent>  <A-k>       :m '<-2<CR>==gv
 let g:mapleader=' ' | noremap <Space> <Nop>
 
 " 数字组：编译运行
-nnoremap <silent>  <Leader>1   <Cmd>AsyncTask run<CR>
-nnoremap <silent>  <Leader>2   <Cmd>AsyncTask build<CR>
-nnoremap <silent>  <Leader>3   <Cmd>AsyncTask build-release<CR>
-nnoremap <silent>  <Leader>7   <Cmd>AsyncTask file-run<CR>
-nnoremap <silent>  <Leader>8   <Cmd>AsyncTask file-build<CR>
-nnoremap <silent>  <Leader>0   <Cmd>AsyncTask repl<CR>
+nnoremap <silent>  <leader>1   <Cmd>AsyncTask run<CR>
+nnoremap <silent>  <leader>2   <Cmd>AsyncTask build<CR>
+nnoremap <silent>  <leader>3   <Cmd>AsyncTask build-release<CR>
+nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
+nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <leader>0   <Cmd>AsyncTask repl<CR>
 
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
@@ -121,7 +123,6 @@ nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
 nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
-nnoremap <silent>  <leader>c   <Cmd>PickColorInsert<CR>
 
 " LSP
 nnoremap <silent>  <leader>a  <Cmd>Lspsaga code_action<CR>
@@ -132,23 +133,27 @@ xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 
 " <<< 按键 (Leader多键)
 " h组g组：Git Hunk
-nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  <Cmd>lua require'utils/term-git'.run('show', false)<CR>
-nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.run('diff --staged', false)<CR>
-nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
-nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory<CR>
-xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
 nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
+nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
+nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory<CR>
+xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
+nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.
+				\ run('diff', true)<CR>
+nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.
+				\ run('diff', false)<CR>
+nnoremap <silent>  <leader>gs  <Cmd>lua require'utils/term-git'.
+				\ run('show', false)<CR>
+nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.
+				\ run('diff --staged', false)<CR>
 
 " t组：操作终端、测试
-nnoremap <silent>  <Leader>tt  <Cmd>ToggleTerm direction=float<CR>
-nnoremap <silent>  <Leader>tb  <Cmd>ToggleTerm direction=horizontal<CR>
-nnoremap <silent>  <Leader>ts  <Cmd>ToggleTermSendCurrentLine<CR>
-xnoremap <silent>  <Leader>ts  :ToggleTermSendVisualSelection<CR>
+nnoremap <silent>  <leader>tt  <Cmd>ToggleTerm direction=float<CR>
+nnoremap <silent>  <leader>tb  <Cmd>ToggleTerm direction=horizontal<CR>
+nnoremap <silent>  <leader>ts  <Cmd>ToggleTermSendCurrentLine<CR>
+xnoremap <silent>  <leader>ts  :ToggleTermSendVisualSelection<CR>
 nnoremap <silent>  <leader>tn  :TestNearest<CR>
 nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
@@ -204,14 +209,14 @@ inoremap           <C-a>       <Home>
 inoremap           <C-e>       <End>
 inoremap           <C-b>       <Left>
 inoremap           <C-f>       <Right>
-inoremap           <M-b>       <C-Left>
-inoremap           <M-f>       <C-Right>
+inoremap           <A-b>       <C-Left>
+inoremap           <A-f>       <C-Right>
 
 cnoremap           <C-a>       <Home>
 cnoremap           <C-b>       <Left>
 cnoremap           <C-f>       <Right>
-cnoremap           <M-b>       <C-Left>
-cnoremap           <M-f>       <C-Right>
+cnoremap           <A-b>       <C-Left>
+cnoremap           <A-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 " >>>-----------------------------------
