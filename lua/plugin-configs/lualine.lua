@@ -1,21 +1,13 @@
 local function git_branch()
   local head = vim.b.gitsigns_head
-  if head == nil or head == '' then
-    return ''
-  elseif head == 'master' or head == 'main' then
-    return ''
-  else
-    return ' '..head
-  end
+  return (head == nil or head == '') and ''
+      or (head == 'master' or head == 'main') and ''
+      or ' ' .. head
 end
 
-local function git_diff()
+local function git_file_status()
   local status = vim.b.gitsigns_status
-  if status == nil or status == '' then
-    return ''
-  else
-    return ''
-  end
+  return (status == nil or status == '') and '' or ''
 end
 
 local function encoding()
@@ -23,58 +15,67 @@ local function encoding()
   return fenc == 'utf-8' and '' or fenc
 end
 
-local filename = require('lualine.components.filename'):extend()
-local highlight = require'lualine.highlight'
+local filename = require 'lualine.components.filename':extend()
+local highlight = require 'lualine.highlight'
 
 function filename:init(options)
-  filename.super.init(self, options)
+  filename.super:init(options)
   self.status_colors = {
     cwd = highlight.create_component_highlight_group(
-      {fg = '#5f6d67'}, 'filename_cwd', self.options),
+      { fg = '#5f6d67' }, 'filename_cwd', self.options),
   }
 end
 
 function filename:update_status()
-  local default_highlight = self:get_default_hl()
-  local path = filename.super.update_status(self)
+  local path = filename.super:update_status() -- 可能被压缩
+  local full_path = vim.fn.expand('%:p')
   local parent = vim.fn.getcwd() .. '/'
-  parent = parent:gsub('^'..vim.env.HOME, '~/')
-  if path == '' then
-    return highlight.component_format_highlight(
-      self.status_colors.cwd) .. parent .. default_highlight
-  elseif path:find(parent, 1, true) == 1 then
-    local path_left = highlight.component_format_highlight(
-      self.status_colors.cwd) .. parent .. default_highlight
-    local path_right = path:sub(#parent+1)
-    path =  path_left .. path_right
+  local short_parent = parent:gsub('^' .. vim.env.HOME, '~/')
+  local parent_hi = highlight.component_format_highlight(self.status_colors.cwd)
+  local default_hi = self:get_default_hl()
+  if path == '' or full_path == nil then
+    return parent_hi .. short_parent .. default_hi
   end
-  return path
+  if full_path:find(parent, 1, true) ~= 1 then return path end
+
+  local count_slash = 0
+  for _ in short_parent:gmatch('/') do count_slash = count_slash + 1 end
+  local splitter_idx = 0
+  for i = 1, #path do
+    splitter_idx = splitter_idx + 1
+    local c = path:sub(i, i)
+    if c == '/' then count_slash = count_slash - 1 end
+    if count_slash == 0 then break end
+  end
+  local path_left = parent_hi .. path:sub(1, splitter_idx) .. default_hi
+  local path_right = path:sub(splitter_idx + 1)
+  return path_left .. path_right
 end
 
-local transform_color = require('lib').transform_color(0.3, 30)
+local transform_color = require 'lib'.transform_color(0.3, 30)
 
-require'lualine'.setup {
+require 'lualine'.setup {
   options = {
     theme = 'everforest',
-    section_separators = {left = '', right = ''},
+    section_separators = { left = '', right = '' },
     component_separators = '',
   },
   sections = {
     lualine_a = {
-      {'%L/%-2l', padding = {left = 1, right = 0}},
+      { '%L/%-2l', padding = { left = 1, right = 0 } },
     },
     lualine_b = {
-      {git_branch, padding = {left = 1, right = 0}},
-      git_diff,
+      { git_branch, padding = { left = 1, right = 0 } },
+      git_file_status,
     },
     lualine_c = {
-      {'fileformat', symbols = {unix = ''}, padding = {left = 1, right = 0}},
-      {filename,
-        path = 3, symbols = {modified = '  ', readonly = ' ', unnamed = ''}},
+      { 'fileformat', symbols = { unix = '' }, padding = { left = 1, right = 0 } },
+      { filename, path = 3,
+        symbols = { modified = '  ', readonly = '', unnamed = '' } },
     },
-    lualine_x = {encoding},
+    lualine_x = { encoding },
     lualine_y = {
-      {'diagnostics',
+      { 'diagnostics',
         diagnostics_color = {
           error = 'DiagnosticFloatingError',
           warn  = 'DiagnosticFloatingWarn',
@@ -84,23 +85,19 @@ require'lualine'.setup {
       },
     },
     lualine_z = {
-      {'filetype', icons_enabled = false,
+      { 'filetype', icons_enabled = false,
         color = function()
           local ok, devicons = pcall(require, 'nvim-web-devicons')
-          if not ok then
-            return {}
-          end
+          if not ok then return {} end
           local f_name, f_ext = vim.fn.expand('%:t'), vim.fn.expand('%:e')
           local _, icon_highlight_group = devicons.get_icon(f_name, f_ext)
-          local hl_color = require'lualine.utils.utils'.
-            extract_highlight_colors(icon_highlight_group, 'fg')
-          if not hl_color then
-            return {}
-          end
+          local hl_color = require 'lualine.utils.utils'.extract_highlight_colors(
+            icon_highlight_group, 'fg')
+          if not hl_color then return {} end
           return { bg = transform_color(hl_color) }
         end,
-    },
+      },
     },
   },
-  extensions = {'aerial', 'nvim-tree', 'quickfix'},
+  extensions = { 'aerial', 'man', 'nvim-tree', 'quickfix', 'toggleterm' },
 }
