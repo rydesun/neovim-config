@@ -88,6 +88,7 @@ return require('packer').startup(function(use)
   -- 折叠
   use { 'kevinhwang91/nvim-ufo', cond = cond,
     requires = { 'kevinhwang91/promise-async', cond = cond },
+    after = { 'promise-async' },
     config = function() require 'plugin-configs/nvim-ufo' end }
 
   -- 选区diff
