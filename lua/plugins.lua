@@ -268,7 +268,7 @@ return require('packer').startup(function(use)
 
   -- 大纲视图
   use { 'stevearc/aerial.nvim', cond = cond,
-    config = function() require 'aerial'.setup {} end }
+    config = function() require 'plugin-configs/aerial' end }
   -- >>>-----------------------------------
 
   -- <<< 本地开发 (特定语言)
