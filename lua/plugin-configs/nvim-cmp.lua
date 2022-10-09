@@ -1,14 +1,6 @@
 local cmp = require 'cmp'
 local types = require 'cmp.types'
-
-local view_kinds = {
-  Method = '方法', Function = '函数', Constructor = '构造器', Field = '字段',
-  Variable = '变量', Class = '类', Interface = '接口', Module = '模块',
-  Property = '属性', Value = '值', Enum = '枚举', Keyword = '关键字',
-  Snippet = ' ', Color = ' ', File = ' ', Reference = ' ', Folder = ' ',
-  EnumMember = '枚举成员', Constant = '常量', Struct = '结构体', Event = '事件',
-  Operator = '运算符', TypeParameter = '类型参数',
-}
+local view_kinds = require 'plugin-configs.lspkind'.texts()
 
 cmp.setup {
   mapping = cmp.mapping.preset.insert {
