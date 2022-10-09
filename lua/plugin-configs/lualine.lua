@@ -30,7 +30,9 @@ function filename:update_status()
   local path = filename.super:update_status() -- 可能被压缩
   local full_path = vim.fn.expand('%:p')
   local parent = vim.fn.getcwd() .. '/'
-  local short_parent = parent:gsub('^' .. vim.env.HOME, '~/')
+  local home = vim.env.HOME
+  home = home:sub(string.len(home)) == '/' and home or home .. '/'
+  local short_parent = parent:gsub('^' .. home, '~/')
   local parent_hi = highlight.component_format_highlight(self.status_colors.cwd)
   local default_hi = self:get_default_hl()
   if path == '' or full_path == nil then
