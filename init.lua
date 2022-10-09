@@ -118,14 +118,6 @@ end
 vim.api.nvim_command('packadd tabline')
 require 'tabline'.setup()
 
--- 折叠行显示的文本
-vim.api.nvim_command('packadd foldtext')
-if vim.g.env_console then
-  require'foldtext'.setup{'+', '<', '>'}
-else
-  require'foldtext'.setup{'＋', '❰', '❱'}
-end
-
 -- 自动设置工作目录
 vim.api.nvim_command('packadd rooter')
 require'rooter'.setup{'.git', '.hg', '.svn', 'Makefile', 'package.json'}

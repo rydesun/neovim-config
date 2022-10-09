@@ -50,7 +50,7 @@ nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
 nnoremap <silent>  s;  <Cmd>Telescope command_history<CR>
 " quickfix/loclist
 nnoremap <silent>  sq  <Cmd>Telescope diagnostics<CR>
-nnoremap <silent>  sj  <Cmd>Telescope jumplist trim_text=true<CR>
+nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
 nnoremap <silent>  sm  <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
 nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
@@ -98,7 +98,7 @@ nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 
-" Ctrl Alt
+" CtrlAlt组
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
@@ -190,6 +190,7 @@ autocmd filetype markdown call MarkdownKeymap()
 " >>>-----------------------------------
 
 " <<< 按键 (文本对象)
+" 另外有插件nvim-treesitter的配置
 " 缩进
 xmap     ii        <Plug>(indent-object_linewise-none)
 omap     ii        <Plug>(indent-object_blockwise-none)
