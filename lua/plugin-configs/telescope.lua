@@ -8,7 +8,10 @@ require 'telescope'.setup {
     lsp_implementations = view_ivy,
     lsp_references = view_ivy,
     grep_string = view_ivy,
+
     live_grep = view_ivy,
+    current_buffer_fuzzy_find = view_ivy,
+    command_history = view_ivy,
 
     diagnostics = view_ivy,
     jumplist = view_ivy,

@@ -35,26 +35,34 @@ nnoremap <silent>  gy  <Cmd>Telescope lsp_type_definitions<CR>
 nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
 nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
-nnoremap <silent>  gS  <Cmd>Telescope live_grep<CR>
-" 对齐
+" 表格对齐
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" s组：位置/文件跳转
+" s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
 nnoremap           s   <NOP>
 nnoremap <silent>  S   <Cmd>Telescope<CR>
-nnoremap <silent>  ss  <Cmd>Telescope resume<CR>
+nnoremap <silent>  sl  <Cmd>Telescope resume<CR>
+nnoremap <silent>  ss  <Cmd>Telescope live_grep<CR>
+nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
+			\ skip_empty_lines=true<CR>
+nnoremap <silent>  s;  <Cmd>Telescope command_history<CR>
 " quickfix/loclist
 nnoremap <silent>  sq  <Cmd>Telescope diagnostics<CR>
-nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
+nnoremap <silent>  sj  <Cmd>Telescope jumplist trim_text=true<CR>
 nnoremap <silent>  sm  <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
-nnoremap <silent>  so  <Cmd>Telescope buffers<CR>
+nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
 nnoremap <silent>  sO  <Cmd>Telescope frecency theme=dropdown previewer=false<CR>
 " 文件列表(当前工作区)
 nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
+nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
 nnoremap <silent>  sg  <Cmd>Telescope git_status<CR>
+" Vim
+nnoremap <silent>  svk <Cmd>Telescope keymaps show_plug=false<CR>
+nnoremap <silent>  svo <Cmd>Telescope vim_options<CR>
+nnoremap <silent>  svh <Cmd>Telescope highlights<CR>
 
 " OMNI组：特殊种类的补全
 imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
