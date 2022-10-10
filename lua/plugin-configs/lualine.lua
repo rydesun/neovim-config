@@ -1,13 +1,13 @@
 local function git_branch()
   local head = vim.b.gitsigns_head
   return (head == nil or head == '') and ''
-      or (head == 'master' or head == 'main') and ''
-      or ' ' .. head
+      or (head == 'master' or head == 'main') and ' '
+      or ' ' .. head
 end
 
 local function git_file_status()
   local status = vim.b.gitsigns_status
-  return (status == nil or status == '') and '' or ''
+  return (status == nil or status == '') and '' or ' '
 end
 
 local function encoding()
@@ -68,16 +68,17 @@ require 'lualine'.setup {
     },
     lualine_b = {
       { git_branch, padding = { left = 1, right = 0 } },
-      git_file_status,
+      { git_file_status, padding = 0 },
     },
     lualine_c = {
       { 'fileformat', symbols = { unix = '' }, padding = { left = 1, right = 0 } },
       { filename, path = 3,
-        symbols = { modified = '  ', readonly = '', unnamed = '' } },
+        symbols = { modified = ' ', readonly = '', unnamed = '' } },
     },
     lualine_x = { encoding },
     lualine_y = {
       { 'diagnostics',
+        symbols = { error = '● ', warn = '▲ ', info = '■ ', hint = '■ ' },
         diagnostics_color = {
           error = 'DiagnosticFloatingError',
           warn  = 'DiagnosticFloatingWarn',
@@ -87,7 +88,8 @@ require 'lualine'.setup {
       },
     },
     lualine_z = {
-      { 'filetype', icons_enabled = false,
+      { 'filetype', padding = { left = 0, right = 1 },
+        icons_enabled = true, colored = false,
         color = function()
           local ok, devicons = pcall(require, 'nvim-web-devicons')
           if not ok then return {} end
