@@ -23,6 +23,8 @@ require 'telescope'.setup {
     find_files = view_dropdown,
     git_status = view_dropdown,
 
+    help_tags = view_ivy,
+
     registers = { theme = 'cursor', layout_config = { height = 20 } },
     symbols = { theme = 'cursor', layout_config = { width = 40 } },
   },

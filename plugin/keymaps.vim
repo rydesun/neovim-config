@@ -60,6 +60,7 @@ nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
 nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
 nnoremap <silent>  sg  <Cmd>Telescope git_status<CR>
 " Vim
+nnoremap <silent>  svv <Cmd>Telescope help_tags<CR>
 nnoremap <silent>  svk <Cmd>Telescope keymaps show_plug=false<CR>
 nnoremap <silent>  svo <Cmd>Telescope vim_options<CR>
 nnoremap <silent>  svh <Cmd>Telescope highlights<CR>
