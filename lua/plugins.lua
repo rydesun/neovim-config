@@ -207,17 +207,25 @@ return require('packer').startup(function(use)
     requires = {
       -- JSON schema
       { 'b0o/schemastore.nvim', cond = cond },
+      -- 让Lua可以查询nvim的API
+      -- 手动配置LSP即可，不需要加载
+      { 'folke/lua-dev.nvim', cond = false },
     },
     after = {
       -- 自动配置
       'nvim-lspconfig', 'mason-lspconfig.nvim',
       -- 额外配置
-      'rust-tools.nvim', 'lua-dev.nvim',
-      -- 集成非LSP工具
-      'null-ls.nvim', 'mason-null-ls.nvim',
+      'rust-tools.nvim',
       -- 在此使用update_capabilities增强补全能力
       'cmp-nvim-lsp',
     } }
+
+  -- 集成非LSP工具。用null-ls的配置 + mason安装的工具
+  use { 'jose-elias-alvarez/null-ls.nvim', cond = cond }
+  use { 'jayp0521/mason-null-ls.nvim', cond = cond,
+    config = function() require 'plugin-configs/mason-null-ls' end,
+    after = { 'null-ls.nvim', 'mason.nvim' },
+  }
 
   -- LSP的默认配置
   use { 'neovim/nvim-lspconfig', cond = cond }
@@ -227,11 +235,6 @@ return require('packer').startup(function(use)
 
   -- 单独配置LSP
   use { 'simrat39/rust-tools.nvim', cond = cond }
-  use { 'folke/lua-dev.nvim', cond = cond }
-
-  -- 用null-ls集成非LSP工具
-  use { 'jose-elias-alvarez/null-ls.nvim', cond = cond }
-  use { 'jayp0521/mason-null-ls.nvim', cond = cond }
 
   -- 用LSP补全代码
   use { 'hrsh7th/cmp-nvim-lsp', cond = cond }
