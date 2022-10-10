@@ -39,9 +39,13 @@ vim.fn['everforest#highlight']('PmenuSel', palette.none, palette.bg_visual)
 vim.fn['everforest#highlight']('ExtraWhitespace',
   palette.red, palette.none, 'strikethrough')
 
--- leap
+-- leap.nvim
 vim.api.nvim_command('hi! link LeapLabelPrimary Search')
 vim.api.nvim_command('hi! link LeapLabelSecondary DiffText')
+
+-- sniprun
+vim.api.nvim_command('hi! link SniprunVirtualTextOk VirtualTextInfo')
+vim.api.nvim_command('hi! link SniprunVirtualTextErr VirtualTextInfo')
 
 -- 分页时
 if vim.g.paging then

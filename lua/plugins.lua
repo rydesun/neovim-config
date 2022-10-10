@@ -311,6 +311,11 @@ return require('packer').startup(function(use)
   use { 'andrewferrier/debugprint.nvim', cond = cond,
     config = function() require 'debugprint'.setup() end }
 
+  -- Code Runner
+  use { 'michaelb/sniprun', cond = cond,
+    config = function() require 'sniprun'.setup {} end,
+    run = 'bash ./install.sh' }
+
   -- EditorConfig
   use { 'gpanders/editorconfig.nvim', cond = cond }
   -- >>>-----------------------------------
