@@ -105,14 +105,37 @@ imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
 " 交换节点
-nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>
-nnoremap <silent>  <A-h>       <Cmd>ISwapWithLeft<CR>
-nnoremap <silent>  <A-l>       <Cmd>ISwapWithRight<CR>
-" 交换行
-nnoremap <silent>  <A-j>       <Cmd>m .+1<CR>
-nnoremap <silent>  <A-k>       <Cmd>m .-2<CR>
-xnoremap <silent>  <A-j>       :m '>+1<CR>==gv
-xnoremap <silent>  <A-k>       :m '<-2<CR>==gv
+nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
+" 移动光标
+nnoremap           <A-j>       <C-w>j
+nnoremap           <A-k>       <C-w>k
+nnoremap           <A-h>       <C-w>h
+nnoremap           <A-l>       <C-w>l
+tnoremap           <A-j>       <C-\><C-n><C-w>j
+tnoremap           <A-k>       <C-\><C-n><C-w>k
+tnoremap           <A-h>       <C-\><C-n><C-w>h
+tnoremap           <A-l>       <C-\><C-n><C-w>l
+tnoremap           <A-q>       <C-\><C-n>
+
+" 命令行
+cnoremap <expr>    %%          expand('%:p:h').'/'
+" >>>-----------------------------------
+
+" <<< 按键 (Emacs编辑)
+inoremap           <C-a>       <Home>
+inoremap           <C-e>       <End>
+inoremap           <C-b>       <Left>
+inoremap           <C-f>       <Right>
+inoremap           <A-b>       <C-Left>
+inoremap           <A-f>       <C-Right>
+
+cnoremap           <C-a>       <Home>
+cnoremap           <C-b>       <Left>
+cnoremap           <C-f>       <Right>
+cnoremap           <A-b>       <C-Left>
+cnoremap           <A-f>       <C-Right>
+cnoremap           <C-p>       <Up>
+cnoremap           <C-n>       <Down>
 " >>>-----------------------------------
 
 " <<< 按键 (Leader单键)
@@ -219,28 +242,6 @@ omap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 xmap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
-" >>>-----------------------------------
-
-" <<< 按键 (Emacs风格)
-inoremap           <C-a>       <Home>
-inoremap           <C-e>       <End>
-inoremap           <C-b>       <Left>
-inoremap           <C-f>       <Right>
-inoremap           <A-b>       <C-Left>
-inoremap           <A-f>       <C-Right>
-
-cnoremap           <C-a>       <Home>
-cnoremap           <C-b>       <Left>
-cnoremap           <C-f>       <Right>
-cnoremap           <A-b>       <C-Left>
-cnoremap           <A-f>       <C-Right>
-cnoremap           <C-p>       <Up>
-cnoremap           <C-n>       <Down>
-" >>>-----------------------------------
-
-" <<< 按键 (命令行、终端)
-cnoremap <expr>    %%          expand('%:p:h').'/'
-tnoremap           <M-space>   <c-\><c-n>
 " >>>-----------------------------------
 
 " vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
