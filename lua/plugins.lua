@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/lualine' end }
 
   -- 图标字体
-  use { 'kyazdani42/nvim-web-devicons', cond = cond }
+  use { 'nvim-tree/nvim-web-devicons', cond = cond }
 
   -- 浮动通知
   use { 'rcarriga/nvim-notify', cond = cond,
@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/nvim-hlslens' end }
 
   -- 文件浏览器
-  use { 'kyazdani42/nvim-tree.lua', cond = cond,
+  use { 'nvim-tree/nvim-tree.lua', cond = cond,
     config = function() require 'plugin-configs/nvim-tree' end }
 
   -- 编辑目录
