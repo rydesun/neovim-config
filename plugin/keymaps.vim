@@ -177,8 +177,9 @@ nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
-nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory<CR>
+nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>
 xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
+nnoremap <silent>  <leader>gH  <Cmd>DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.
 				\ run('diff', true)<CR>
 nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.
@@ -199,7 +200,7 @@ nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
 
 " w组：特定语言
-" rust
+" Rust
 function! RustKeymap() abort
 	nnoremap <buffer><silent> <leader>wa <Cmd>RustHoverActions<CR>
 	nnoremap <buffer><silent> <leader>wr <Cmd>RustRunnables<CR>
@@ -208,7 +209,8 @@ function! RustKeymap() abort
 	nnoremap <buffer><silent> <leader>wc <Cmd>RustOpenCargo<CR>
 endfunction
 autocmd filetype rust call RustKeymap()
-" markdown
+
+" Markdown
 function! MarkdownKeymap() abort
 	nmap <buffer><silent> <leader>wp <Plug>MarkdownPreviewToggle
 endfunction
