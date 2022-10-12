@@ -145,6 +145,9 @@ local cabbrev = require'utils/cabbrev'
 -- 以root权限写入
 cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
 
+-- 创建不存在的父目录
+cabbrev.alias('mp', '!mkdir -p %:h')
+
 -- 设置缩进
 for _, c in pairs{2, 4, 8} do
   c = tostring(c)
