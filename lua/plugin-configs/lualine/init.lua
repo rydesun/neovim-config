@@ -10,7 +10,7 @@ require 'lualine'.setup {
   },
   sections = {
     lualine_a = {
-      { '%L/%-2l', padding = { left = 1, right = 0 } },
+      { '%L-%-2l', padding = { left = 1, right = 0 } },
     },
     lualine_b = {
       { components.git_branch, padding = { left = 1, right = 0 } },
@@ -37,8 +37,8 @@ require 'lualine'.setup {
       { 'filetype', padding = { left = 0, right = 1 },
         icons_enabled = true, colored = false,
         color = function()
-          local color = require 'plugin-configs.lualine.lib'.
-            filetype_color(transform_color)
+          local color = require 'plugin-configs.lualine.lib'
+              .filetype_color(transform_color)
           return color and { bg = color } or {}
         end,
       },

@@ -89,6 +89,8 @@ vim.o.fileencodings = 'ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1'
 vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
 vim.o.listchars = 'tab:|·,space:␣,trail:☲,extends:►,precedes:◄'
+-- 隐藏空行的tilde
+vim.opt.fillchars:append('eob: ')
 -- 去掉鼠标右键的菜单
 vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格
