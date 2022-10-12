@@ -84,7 +84,7 @@ vim.diagnostic.config{
 
 -- <<< 选项 (文本内容)
 -- 常见文件编码(中文用户)
-vim.o.fileencodings = 'ucs-bom,utf-8,sjis,euc-jp,big5,gb18030,latin1'
+vim.o.fileencodings = 'ucs-bom,utf-8,gbk,sjis,euc-jp,big5,gb18030,latin1'
 -- 默认使用unix换行符(并且识别mac)
 vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
