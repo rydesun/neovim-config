@@ -54,7 +54,7 @@ nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
 nnoremap <silent>  sm  <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
 nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
-nnoremap <silent>  sO  <Cmd>Telescope frecency theme=dropdown previewer=false<CR>
+nnoremap <silent>  sO  <Cmd>Telescope oldfiles only_cwd=true<CR>
 " 文件列表(当前工作区)
 nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
 nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>

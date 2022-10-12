@@ -31,20 +31,13 @@ require 'telescope'.setup {
 }
 
 require 'telescope'.load_extension 'fzf'
-require 'telescope'.load_extension 'frecency'
 
 require 'telescope'.load_extension 'neoclip'
 require 'neoclip'.setup {
-  -- 持久保存
-  enable_persistent_history = true,
-  -- 在多个会话间同步
-  continuous_sync = true,
   keys = {
     telescope = {
-      i = {
-        -- 不要覆盖<c-p>
-        paste = '<c-y>',
-      },
+      -- 不要覆盖<c-p>
+      i = { paste = '<c-y>' },
     }
   }
 }
