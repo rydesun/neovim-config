@@ -35,12 +35,12 @@ function M.filename:update_status()
   local home = vim.env.HOME
   home = home:sub(string.len(home)) == '/' and home or home .. '/'
   local short_parent = parent:gsub('^' .. home, '~/')
-  local parent_hi = highlight.component_format_highlight(self.status_colors.cwd)
-  local default_hi = self:get_default_hl()
-  if path == '' or full_path == nil then
-    return parent_hi .. short_parent .. default_hi
-  end
-  if full_path:find(parent, 1, true) ~= 1 then return path end
+
+  local cwd_hl = highlight.component_format_highlight(self.status_colors.cwd)
+  local file_hl = self:get_default_hl()
+
+  if path == '' or full_path == nil then return cwd_hl .. short_parent end
+  if full_path:find(parent, 1, true) ~= 1 then return file_hl .. path end
 
   local count_slash = 0
   for _ in short_parent:gmatch('/') do count_slash = count_slash + 1 end
@@ -51,9 +51,9 @@ function M.filename:update_status()
     if c == '/' then count_slash = count_slash - 1 end
     if count_slash == 0 then break end
   end
-  local path_left = parent_hi .. path:sub(1, splitter_idx) .. default_hi
+  local path_left = path:sub(1, splitter_idx)
   local path_right = path:sub(splitter_idx + 1)
-  return path_left .. path_right
+  return cwd_hl .. path_left .. file_hl .. path_right
 end
 
 return M

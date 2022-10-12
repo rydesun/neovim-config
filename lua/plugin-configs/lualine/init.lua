@@ -37,14 +37,9 @@ require 'lualine'.setup {
       { 'filetype', padding = { left = 0, right = 1 },
         icons_enabled = true, colored = false,
         color = function()
-          local ok, devicons = pcall(require, 'nvim-web-devicons')
-          if not ok then return {} end
-          local f_name, f_ext = vim.fn.expand('%:t'), vim.fn.expand('%:e')
-          local _, icon_highlight_group = devicons.get_icon(f_name, f_ext)
-          local hl_color = require 'lualine.utils.utils'.extract_highlight_colors(
-            icon_highlight_group, 'fg')
-          if not hl_color then return {} end
-          return { bg = transform_color(hl_color) }
+          local color = require 'plugin-configs.lualine.lib'.
+            filetype_color(transform_color)
+          return color and { bg = color } or {}
         end,
       },
     },
