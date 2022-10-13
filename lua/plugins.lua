@@ -38,8 +38,10 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/nvim-hlslens' end }
 
   -- 文件浏览器
-  use { 'nvim-tree/nvim-tree.lua', cond = cond,
-    config = function() require 'plugin-configs/nvim-tree' end }
+  use { 'nvim-neo-tree/neo-tree.nvim', cond = cond,
+    branch = 'v2.x',
+    requires = { 'MunifTanjim/nui.nvim' },
+    config = function() require 'plugin-configs/neo-tree' end }
 
   -- 编辑目录
   use { 'elihunter173/dirbuf.nvim', cond = cond }

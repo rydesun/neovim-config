@@ -43,5 +43,5 @@ require 'lualine'.setup {
       },
     },
   },
-  extensions = { extensions.man, 'nvim-tree', 'quickfix', 'toggleterm' },
+  extensions = { extensions.man, 'quickfix', 'toggleterm' },
 }
