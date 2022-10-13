@@ -1,14 +1,14 @@
 -- <<< 环境
-local bool = require('lib').bool
+local bool = require 'lib'.bool
 -- 是否作为pager处理文本
 vim.g.paging = bool(vim.g.paging)
 -- 是否需要处理ANSI转义序列
 -- 警告：这将会在在内置终端中输出而不是在当前buffer
 vim.g.ansi = bool(vim.g.ansi)
 if vim.g.ansi then
-  vim.api.nvim_create_autocmd({"VimEnter"}, {
-    pattern = {"*"},
-    callback = function() require'utils/term-cat'.run(true, true) end
+  vim.api.nvim_create_autocmd('VimEnter', {
+    pattern = { '*' },
+    callback = function() require 'utils/term-cat'.run(true, true) end
   })
 end
 
@@ -37,7 +37,9 @@ if not vim.g.env_console then
   vim.o.termguicolors = true
 end
 -- 去除启动页面的介绍
-vim.opt.shortmess:append('I')
+vim.opt.shortmess:append 'I'
+-- 不在右下角提示搜索
+vim.opt.shortmess:append 'S'
 -- 设置虚拟终端的标题
 vim.o.title = true
 -- 只显示一个窗口的状态栏
@@ -52,8 +54,8 @@ vim.o.signcolumn = 'number'
 -- 行号的最低宽度
 vim.o.numberwidth = 3
 -- 终端不需要侧边栏
-vim.api.nvim_create_autocmd({"TermOpen"}, {
-  pattern = {"*"},
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = { '*' },
   callback = function() vim.opt_local.relativenumber = false end
 })
 
@@ -72,7 +74,7 @@ if vim.g.paging then
 end
 
 -- LSP
-vim.diagnostic.config{
+vim.diagnostic.config {
   -- 不在侧边栏显示符号
   signs = false,
   virtual_text = {
@@ -90,11 +92,11 @@ vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
 vim.o.listchars = 'tab:|·,space:␣,trail:☲,extends:►,precedes:◄'
 -- 隐藏空行的tilde
-vim.opt.fillchars:append('eob: ')
+vim.opt.fillchars:append 'eob: '
 -- 去掉鼠标右键的菜单
 vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格
-vim.opt.formatoptions:append('B')
+vim.opt.formatoptions:append 'B'
 -- pattern搜索无视大小写，含大写字符时则必须匹配大小写
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -103,13 +105,13 @@ vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
 -- >>>-----------------------------------
 
 -- <<< 插件
-pcall(function() require'impatient' end)
+pcall(function() require 'impatient' end)
 
 -- 通过packer.nvim安装的插件
-local ok, err = pcall(function() require'plugins' end)
-if not ok then
+local _, err = pcall(function() require 'plugins' end)
+if err ~= nil then
   if err:find([[module 'packer' not found]]) then
-    vim.schedule(function ()
+    vim.schedule(function()
       vim.api.nvim_err_writeln('缺少packer.nvim')
     end)
   else error(err) end
@@ -117,30 +119,30 @@ end
 
 -- 本地插件
 -- tabline
-vim.api.nvim_command('packadd tabline')
+vim.api.nvim_command 'packadd tabline'
 require 'tabline'.setup()
 
 -- 自动设置工作目录
-vim.api.nvim_command('packadd rooter')
-require'rooter'.setup{'.git', '.hg', '.svn', 'Makefile', 'package.json'}
+vim.api.nvim_command 'packadd rooter'
+require 'rooter'.setup { '.git', '.hg', '.svn', 'Makefile', 'package.json' }
 -- >>>-----------------------------------
 
 -- <<< 命令行
 -- 统计中文字符数量
 vim.api.nvim_create_user_command(
   'CountZhChars',
-  function(_) require'utils/zh':count() end,
+  function(_) require 'utils/zh':count() end,
   {}
 )
 
 -- 修复中英文间空格
 vim.api.nvim_create_user_command(
   'TypoSpace',
-  function(_) require'utils/zh':typo_space() end,
+  function(_) require 'utils/zh':typo_space() end,
   {}
 )
 
-local cabbrev = require'utils/cabbrev'
+local cabbrev = require 'utils/cabbrev'
 
 -- 以root权限写入
 cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
@@ -149,12 +151,12 @@ cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
 cabbrev.alias('mp', '!mkdir -p %:h')
 
 -- 设置缩进
-for _, c in pairs{2, 4, 8} do
+for _, c in pairs { 2, 4, 8 } do
   c = tostring(c)
-  local input = 'i'..c
+  local input = 'i' .. c
   local replace = string.format('setl sw=%s ts=%s et', c, c)
   cabbrev.alias(input, replace)
-  input = 'i'..c..'t'
+  input = 'i' .. c .. 't'
   replace = string.format('setl sw=%s ts=%s noet', c, c)
   cabbrev.alias(input, replace)
 end
