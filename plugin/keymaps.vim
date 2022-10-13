@@ -76,14 +76,6 @@ imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
-" <Esc>组：关闭
-nnoremap <silent>  <Esc><Esc>  <Cmd>nohlsearch<CR>
-nnoremap <silent>  <Esc>q      <Cmd>cclose<CR>
-nnoremap <silent>  <Esc>l      <Cmd>lclose<CR>
-nnoremap <silent>  <Esc>f      <Cmd>Bdelete<CR>
-nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
-nnoremap <silent>  <Esc>w      <C-w>c
-
 " []组：前后跳转
 " 另外有插件提供更多映射
 nnoremap <silent>  [g          <Cmd>Lspsaga diagnostic_jump_prev<CR>
@@ -106,16 +98,28 @@ nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
 " 交换节点
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
-" 移动光标
+" 移动光标、调整窗口
 nnoremap           <A-j>       <C-w>j
 nnoremap           <A-k>       <C-w>k
 nnoremap           <A-h>       <C-w>h
 nnoremap           <A-l>       <C-w>l
+nnoremap           <A-S-j>     <C-w>+
+nnoremap           <A-S-k>     <C-w>-
+nnoremap           <A-S-h>     <C-w><
+nnoremap           <A-S-l>     <C-w>>
 tnoremap           <A-j>       <C-\><C-n><C-w>j
 tnoremap           <A-k>       <C-\><C-n><C-w>k
 tnoremap           <A-h>       <C-\><C-n><C-w>h
 tnoremap           <A-l>       <C-\><C-n><C-w>l
 tnoremap           <A-q>       <C-\><C-n>
+
+" <Esc>组：关闭
+nnoremap <silent>  <Esc><Esc>  <Cmd>nohlsearch<CR>
+nnoremap <silent>  <Esc>q      <Cmd>cclose<CR>
+nnoremap <silent>  <Esc>l      <Cmd>lclose<CR>
+nnoremap <silent>  <Esc>f      <Cmd>Bdelete<CR>
+nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
+nnoremap <silent>  <Esc>w      <C-w>c
 
 " 命令行
 cnoremap <expr>    %%          expand('%:p:h').'/'
