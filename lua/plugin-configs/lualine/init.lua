@@ -4,7 +4,6 @@ local transform_color = require 'lib'.transform_color(0.3, 30)
 
 require 'lualine'.setup {
   options = {
-    theme = 'everforest',
     section_separators = { left = '', right = '' },
     component_separators = '',
   },
