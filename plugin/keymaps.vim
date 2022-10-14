@@ -99,18 +99,18 @@ nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
 " 交换节点
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
 " 移动光标、调整窗口
-nnoremap           <A-j>       <C-w>j
-nnoremap           <A-k>       <C-w>k
-nnoremap           <A-h>       <C-w>h
-nnoremap           <A-l>       <C-w>l
+nnoremap           <A-j>       <Cmd>wincmd j<CR>
+nnoremap           <A-k>       <Cmd>wincmd k<CR>
+nnoremap           <A-h>       <Cmd>wincmd h<CR>
+nnoremap           <A-l>       <Cmd>wincmd l<CR>
 nnoremap           <A-S-j>     <C-w>+
 nnoremap           <A-S-k>     <C-w>-
 nnoremap           <A-S-h>     <C-w><
 nnoremap           <A-S-l>     <C-w>>
-tnoremap           <A-j>       <C-\><C-n><C-w>j
-tnoremap           <A-k>       <C-\><C-n><C-w>k
-tnoremap           <A-h>       <C-\><C-n><C-w>h
-tnoremap           <A-l>       <C-\><C-n><C-w>l
+tnoremap           <A-j>       <Cmd>wincmd j<CR>
+tnoremap           <A-k>       <Cmd>wincmd k<CR>
+tnoremap           <A-h>       <Cmd>wincmd h<CR>
+tnoremap           <A-l>       <Cmd>wincmd l<CR>
 tnoremap           <A-q>       <C-\><C-n>
 
 " <Esc>组：关闭
