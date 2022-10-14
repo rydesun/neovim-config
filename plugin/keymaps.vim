@@ -177,9 +177,16 @@ xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 " <<< 按键 (Leader多键)
 " h组g组：Git Hunk
 nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
+xnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
+nnoremap <silent>  <leader>hS  <Cmd>Gitsigns stage_buffer<CR>
 nnoremap <silent>  <leader>hu  <Cmd>Gitsigns reset_hunk<CR>
+xnoremap <silent>  <leader>hu  :Gitsigns reset_hunk<CR>
 nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
+nnoremap <silent>  <leader>hR  <Cmd>Gitsigns reset_buffer<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
+nnoremap <silent>  <leader>hb  <Cmd>lua require'gitsigns'.blame_line{full=true}<CR>
+nnoremap <silent>  <leader>hd  <Cmd>Gitsigns toggle_deleted<CR>
+
 nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
 nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>
 xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
@@ -223,6 +230,10 @@ autocmd filetype markdown call MarkdownKeymap()
 
 " <<< 按键 (文本对象)
 " 另外有插件nvim-treesitter的配置
+
+xmap     ih        :Gitsigns select_hunk<CR>
+omap     ih        :Gitsigns select_hunk<CR>
+
 " 缩进
 xmap     ii        <Plug>(indent-object_linewise-none)
 omap     ii        <Plug>(indent-object_blockwise-none)
