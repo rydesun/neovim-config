@@ -211,8 +211,6 @@ return require('packer').startup(function(use)
     after = {
       -- 自动配置
       'nvim-lspconfig', 'mason-lspconfig.nvim',
-      -- 额外配置
-      'rust-tools.nvim',
       -- 在此使用default_capabilities
       'cmp-nvim-lsp',
     } }
@@ -231,7 +229,8 @@ return require('packer').startup(function(use)
   use { 'williamboman/mason-lspconfig.nvim', cond = cond }
 
   -- 单独配置LSP
-  use { 'simrat39/rust-tools.nvim', cond = cond }
+  use { 'simrat39/rust-tools.nvim', cond = cond,
+    config = function() require 'plugin-configs/rust-tools' end }
 
   -- 用LSP补全代码
   use { 'hrsh7th/cmp-nvim-lsp', cond = cond }
