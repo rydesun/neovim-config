@@ -213,7 +213,7 @@ return require('packer').startup(function(use)
       'nvim-lspconfig', 'mason-lspconfig.nvim',
       -- 额外配置
       'rust-tools.nvim',
-      -- 在此使用update_capabilities增强补全能力
+      -- 在此使用default_capabilities
       'cmp-nvim-lsp',
     } }
 
