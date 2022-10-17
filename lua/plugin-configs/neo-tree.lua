@@ -38,7 +38,21 @@ require 'neo-tree'.setup {
       mappings = {
         ['<c-k>'] = 'prev_git_modified',
         ['<c-j>'] = 'next_git_modified',
-      }
+        ['o'] = 'system_open',
+        ['O'] = 'system_run',
+      },
+    },
+    commands = {
+      system_open = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        vim.api.nvim_command(string.format("AsyncRun xdg-open '%s'", path))
+      end,
+      system_run = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        vim.api.nvim_input(": '" .. path .. "'<Home>AsyncRun ")
+      end,
     },
   },
 }
