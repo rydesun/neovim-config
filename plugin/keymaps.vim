@@ -36,8 +36,8 @@ nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
 nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 " 表格对齐
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(LiveEasyAlign)
+nmap ga <Plug>(LiveEasyAlign)
 
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
@@ -144,6 +144,7 @@ cnoremap           <C-n>       <Down>
 
 " <<< 按键 (Leader单键)
 let g:mapleader=' ' | noremap <Space> <Nop>
+let g:maplocalleader=' w'
 
 " 数字组：编译运行
 nnoremap <silent>  <leader>1   <Cmd>AsyncTask run<CR>
@@ -210,20 +211,20 @@ nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
 
-" w组：特定语言
+" LocalLeader组：特定文件类型
 " Rust
 function! RustKeymap() abort
-	nnoremap <buffer><silent> <leader>wa <Cmd>RustHoverActions<CR>
-	nnoremap <buffer><silent> <leader>wr <Cmd>RustRunnables<CR>
-	nnoremap <buffer><silent> <leader>we <Cmd>RustExpandMacro<CR>
-	nnoremap <buffer><silent> <leader>wu <Cmd>RustParentModule<CR>
-	nnoremap <buffer><silent> <leader>wc <Cmd>RustOpenCargo<CR>
+	nnoremap <buffer><silent> <LocalLeader>a <Cmd>RustHoverActions<CR>
+	nnoremap <buffer><silent> <LocalLeader>r <Cmd>RustRunnables<CR>
+	nnoremap <buffer><silent> <LocalLeader>e <Cmd>RustExpandMacro<CR>
+	nnoremap <buffer><silent> <LocalLeader>u <Cmd>RustParentModule<CR>
+	nnoremap <buffer><silent> <LocalLeader>c <Cmd>RustOpenCargo<CR>
 endfunction
 autocmd filetype rust call RustKeymap()
 
 " Markdown
 function! MarkdownKeymap() abort
-	nmap <buffer><silent> <leader>wp <Plug>MarkdownPreviewToggle
+	nmap <buffer><silent> <LocalLeader>p <Plug>MarkdownPreviewToggle
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
 " >>>-----------------------------------
