@@ -3,8 +3,7 @@ noremap  H  ^
 noremap  L  $
 noremap  Q  @q
 noremap  ;  :
-map      f  <Plug>(leap-forward)
-map      F  <Plug>(leap-backward)
+noremap  :  ;
 " 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
@@ -76,6 +75,20 @@ imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
 " >>>-----------------------------------
 
 " <<< 按键 (新增行为)
+" leap.nvim跳转
+lua << EOF
+vim.api.nvim_set_keymap('n', '-', '', {
+  callback = function()
+    require 'leap'.leap {
+      target_windows = vim.tbl_filter(
+        function(win) return vim.api.nvim_win_get_config(win).focusable end,
+        vim.api.nvim_tabpage_list_wins(0)
+      )
+    }
+  end,
+})
+EOF
+
 " []组：前后跳转
 " 另外有插件提供更多映射
 nnoremap <silent>  [g          <Cmd>Lspsaga diagnostic_jump_prev<CR>
