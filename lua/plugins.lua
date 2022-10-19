@@ -154,7 +154,8 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/nvim-autopairs' end }
 
   -- 撤销历史
-  use { 'mbbill/undotree', cond = cond }
+  use { 'mbbill/undotree', cond = cond,
+    config = function() require 'plugin-configs/undotree' end }
   -- >>>-----------------------------------
 
   -- <<< 命令集成
