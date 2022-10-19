@@ -89,7 +89,8 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/nvim-ufo' end }
 
   -- 选区diff
-  use { 'AndrewRadev/linediff.vim', cond = cond }
+  use { 'AndrewRadev/linediff.vim', cond = cond,
+    config = function() require 'plugin-configs/linediff' end }
 
   -- 查看hex
   use { 'fidian/hexmode', cond = cond }
