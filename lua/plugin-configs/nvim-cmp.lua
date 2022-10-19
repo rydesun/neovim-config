@@ -13,7 +13,7 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'path' }
   }, {
-    { name = 'buffer', option = {
+    { name = 'omni' }, { name = 'buffer', option = {
       get_bufnrs = function()
         local bufs = {}
         for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -30,9 +30,15 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    format = function(_, vim_item)
+    format = function(entry, vim_item)
       if vim_item.kind == 'Text' then
-        vim_item.kind = ''
+        local source_name = entry.source.name
+        if source_name == 'buffer' then
+          vim_item.kind = ''
+        else
+          vim_item.kind = string.format('(%s)', source_name)
+          vim_item.kind_hl_group = 'CmpItemKind'
+        end
       else
         vim_item.kind = '│ ' .. (view_kinds[vim_item.kind] or vim_item.kind)
       end

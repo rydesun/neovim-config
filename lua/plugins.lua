@@ -141,6 +141,7 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/nvim-cmp' end,
     requires = {
       { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-omni' },
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-cmdline' },
       { 'saadparwaiz1/cmp_luasnip' },
