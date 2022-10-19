@@ -22,7 +22,7 @@ require 'neo-tree'.setup {
   },
   window = {
     position = 'float',
-    popup = { size = { width = 40, height = 20 } },
+    popup = { size = { width = 50, height = 25 } },
     mappings = {
       ['a'] = { 'add', config = { show_path = 'relative' } },
     }
