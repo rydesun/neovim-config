@@ -162,4 +162,14 @@ for _, c in pairs { 2, 4, 8 } do
 end
 -- >>>-----------------------------------
 
+-- <<< 其他
+-- 高亮yank文本
+vim.api.nvim_create_autocmd('TextYankPost', {
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup = 'Visual', timeout = 80 }
+  end,
+})
+-- >>>-----------------------------------
+
 -- vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
