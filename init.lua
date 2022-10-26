@@ -12,8 +12,8 @@ if vim.g.ansi then
   })
 end
 
--- 是否在小型环境中(非开发)
-vim.g.env_mini = bool(vim.env.VIM_MINI)
+-- 是否在开发环境中
+vim.g.env_dev = bool(vim.env.VIM_DEV) or vim.fn.executable('firefox')
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 -- 是否在firenvim中
@@ -27,9 +27,15 @@ vim.g.plug_view = true
 -- 操作文本
 vim.g.plug_op = true
 -- 命令集成
-vim.g.plug_cmd = not vim.g.paging
+vim.g.plug_cmd = true
 -- 本地开发
-vim.g.plug_dev = not vim.g.env_mini and not vim.g.paging
+vim.g.plug_dev = vim.g.env_dev
+
+-- pager不需要启用这些插件
+if vim.g.paging then
+    vim.g.plug_cmd = false
+    vim.g.plug_dev = false
+end
 -- >>>-----------------------------------
 
 -- <<< 选项 (自身界面)

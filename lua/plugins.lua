@@ -196,7 +196,7 @@ return require('packer').startup(function(use)
   -- >>>-----------------------------------
 
   -- 非开发环境中，不安装下面的插件
-  if vim.g.env_mini then return end
+  if not vim.g.env_dev then return end
 
   local cond = function() return vim.g.plug_dev end
 
