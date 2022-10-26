@@ -158,6 +158,10 @@ return require('packer').startup(function(use)
   -- 撤销历史
   use { 'mbbill/undotree', cond = cond,
     config = function() require 'plugin-configs/undotree' end }
+
+  -- 编辑颜色
+  use { 'uga-rosa/ccc.nvim', cond = cond,
+    config = function() require 'ccc'.setup {} end }
   -- >>>-----------------------------------
 
   -- <<< 命令集成
