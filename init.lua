@@ -13,7 +13,7 @@ if vim.g.ansi then
 end
 
 -- 是否在开发环境中
-vim.g.env_dev = bool(vim.env.VIM_DEV) or vim.fn.executable('firefox')
+vim.g.env_dev = bool(vim.env.VIM_DEV) or vim.fn.executable('firefox') > 0
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 -- 是否在firenvim中
