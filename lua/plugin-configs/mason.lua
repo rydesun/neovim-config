@@ -7,7 +7,7 @@ capabilities.textDocument.foldingRange = {
 
 require 'mason'.setup {}
 require 'mason-lspconfig'.setup()
-require 'mason-lspconfig'.setup_handlers({
+require 'mason-lspconfig'.setup_handlers {
   function(server_name)
     lspconfig[server_name].setup { capabilities = capabilities }
   end,
@@ -53,4 +53,9 @@ require 'mason-lspconfig'.setup_handlers({
       },
     }
   end,
-})
+}
+
+-- 使用系统端安装的包
+if vim.fn.executable 'clangd' > 0 then
+  lspconfig.clangd.setup { capabilities = capabilities }
+end
