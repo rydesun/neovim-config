@@ -195,6 +195,15 @@ return require('packer').startup(function(use)
     config = function() require 'plugin-configs/firenvim' end,
     run = function() vim.fn['firenvim#install'](0) end }
 
+  -- kitty配置文件
+  if vim.fn.executable('kitty') > 0 then
+    use { 'fladson/vim-kitty', cond = cond }
+  end
+  -- tridactyl配置文件
+  if vim.fn.executable('firefox') > 0 then
+    use { 'tridactyl/vim-tridactyl', cond = cond }
+  end
+
   -- 检查启动时间
   use { 'dstein64/vim-startuptime', cond = cond }
   -- >>>-----------------------------------
@@ -293,11 +302,6 @@ return require('packer').startup(function(use)
   -- LaTex
   if vim.fn.executable('latex') > 0 then
     use { 'lervag/vimtex', cond = cond }
-  end
-
-  -- kitty配置文件
-  if vim.fn.executable('kitty') > 0 then
-    use { 'fladson/vim-kitty', cond = cond }
   end
   -- >>>-----------------------------------
 
