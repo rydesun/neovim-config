@@ -186,14 +186,10 @@ return require('packer').startup(function(use)
   use { 'sindrets/diffview.nvim', cond = cond }
 
   -- 切换输入法
-  use { 'lilydjwg/fcitx.vim', cond = cond,
-    setup = function() vim.g.fcitx5_remote = 'fcitx5-remote' end }
-
-  -- 嵌入浏览器
-  use { 'glacambre/firenvim',
-    cond = function() return vim.g.plug_cmd and vim.g.env_firenvim end,
-    config = function() require 'plugin-configs/firenvim' end,
-    run = function() vim.fn['firenvim#install'](0) end }
+  if vim.fn.executable('fcitx5-remote') > 0 then
+    use { 'lilydjwg/fcitx.vim', cond = cond,
+      setup = function() vim.g.fcitx5_remote = 'fcitx5-remote' end }
+  end
 
   -- kitty配置文件
   if vim.fn.executable('kitty') > 0 then

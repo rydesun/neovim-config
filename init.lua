@@ -12,12 +12,10 @@ if vim.g.ansi then
   })
 end
 
--- 是否在开发环境中
+-- 是否在开发环境中 (有firefox就够了)
 vim.g.env_dev = bool(vim.env.VIM_DEV) or vim.fn.executable('firefox') > 0
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
--- 是否在firenvim中
-vim.g.env_firenvim = bool(vim.g.started_by_firenvim)
 
 -- 是否启用该类型的插件
 -- 自身界面
