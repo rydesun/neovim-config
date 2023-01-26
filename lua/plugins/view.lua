@@ -21,7 +21,7 @@ return {
 
   -- 折叠
   { 'kevinhwang91/nvim-ufo',
-    cond = cond, event = event, config = autoconfig(),
+    cond = cond, config = autoconfig(),
     dependencies = { 'kevinhwang91/promise-async' } },
 
   -- 选区diff
