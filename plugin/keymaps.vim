@@ -38,6 +38,14 @@ nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 xmap ga <Plug>(LiveEasyAlign)
 nmap ga <Plug>(LiveEasyAlign)
 
+" q组：关闭
+" 不影响用其他的键位录制宏
+nnoremap <silent>  qw  <C-w>c
+nnoremap <silent>  qf  <Cmd>Bdelete<CR>
+nnoremap <silent>  qt  <Cmd>tabclose<CR>
+nnoremap <silent>  qc  <Cmd>cclose<CR>
+nnoremap <silent>  ql  <Cmd>lclose<CR>
+
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
 nnoremap           s   <NOP>
@@ -101,7 +109,7 @@ nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
 nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
 nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
-nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
+nnoremap <silent>  [om         <Cmd>set colorcolumn=79<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 
 " CtrlAlt组
