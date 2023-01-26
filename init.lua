@@ -1,4 +1,4 @@
--- <<< 环境
+-- {{{ 环境
 local bool = require 'lib'.bool
 -- 是否作为pager处理文本
 vim.g.paging = bool(vim.g.paging)
@@ -34,9 +34,9 @@ if vim.g.paging then
     vim.g.plug_cmd = false
     vim.g.plug_dev = false
 end
--- >>>-----------------------------------
+-- }}}
 
--- <<< 选项 (自身界面)
+-- {{{ 选项 (自身界面)
 if not vim.g.env_console then
   vim.o.termguicolors = true
 end
@@ -86,9 +86,9 @@ vim.diagnostic.config {
     prefix = '🞬',
   }
 }
--- >>>-----------------------------------
+-- }}}
 
--- <<< 选项 (文本内容)
+-- {{{ 选项 (文本内容)
 -- 常见文件编码(中文用户)
 vim.o.fileencodings = 'ucs-bom,utf-8,gbk,sjis,euc-jp,big5,gb18030,latin1'
 -- 默认使用unix换行符(并且识别mac)
@@ -106,9 +106,9 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 -- 补全路径时的过滤规则
 vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
--- >>>-----------------------------------
+-- }}}
 
--- <<< 插件
+-- {{{ 插件
 vim.g.mapleader = ' '
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
@@ -121,9 +121,9 @@ if err ~= nil then
     end)
   else error(err) end
 end
--- >>>-----------------------------------
+-- }}}
 
--- <<< 命令行
+-- {{{ 命令行
 -- 统计中文字符数量
 vim.api.nvim_create_user_command(
   'CountZhChars',
@@ -147,8 +147,8 @@ cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
 cabbrev.alias('mp', '!mkdir -p %:h')
 
 -- 设置缩进
-for _, c in pairs { 2, 4, 8 } do
-  c = tostring(c)
+for _, n in pairs { 2, 4, 8 } do
+  local c = tostring(n)
   local input = 'i' .. c
   local replace = string.format('setl sw=%s ts=%s et', c, c)
   cabbrev.alias(input, replace)
@@ -156,9 +156,9 @@ for _, c in pairs { 2, 4, 8 } do
   replace = string.format('setl sw=%s ts=%s noet', c, c)
   cabbrev.alias(input, replace)
 end
--- >>>-----------------------------------
+-- }}}
 
--- <<< 其他
+-- {{{ 其他
 -- 高亮yank文本
 vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
@@ -166,6 +166,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'Visual', timeout = 80 }
   end,
 })
--- >>>-----------------------------------
+-- }}}
 
--- vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
+-- vim: foldmethod=marker:foldlevel=0

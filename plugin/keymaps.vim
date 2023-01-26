@@ -1,4 +1,4 @@
-" <<< 按键 (覆盖默认行为)
+" {{{ 按键 (覆盖默认行为)
 noremap  H  ^
 noremap  L  $
 noremap  Q  @q
@@ -80,9 +80,9 @@ imap     <silent>  <C-x><C-e>  <Cmd>lua require'telescope.builtin'.symbols {
 				\ sources = {'emoji', 'kaomoji', 'gitmoji'} }<CR>
 imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
 				\ sources = {'nerd'} }<CR>
-" >>>-----------------------------------
+" }}}
 
-" <<< 按键 (新增行为)
+" {{{ 按键 (新增行为)
 " leap.nvim跳转
 lua << EOF
 vim.api.nvim_set_keymap('n', '-', '', {
@@ -144,9 +144,9 @@ nnoremap <silent>  <Esc>w      <C-w>c
 
 " 命令行
 cnoremap <expr>    %%          expand('%:p:h').'/'
-" >>>-----------------------------------
+" }}}
 
-" <<< 按键 (Emacs编辑)
+" {{{ 按键 (Emacs编辑)
 inoremap           <C-a>       <Home>
 inoremap           <C-e>       <End>
 inoremap           <C-b>       <Left>
@@ -161,9 +161,9 @@ cnoremap           <A-b>       <C-Left>
 cnoremap           <A-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
-" >>>-----------------------------------
+" }}}
 
-" <<< 按键 (Leader单键)
+" {{{ 按键 (Leader单键)
 let g:mapleader=' ' | noremap <Space> <Nop>
 let g:maplocalleader=' w'
 
@@ -194,9 +194,9 @@ nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
-" >>>-----------------------------------
+" }}}
 
-" <<< 按键 (Leader多键)
+" {{{ 按键 (Leader多键)
 " h组g组：Git Hunk
 nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
 xnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>
@@ -248,9 +248,9 @@ function! MarkdownKeymap() abort
 	nmap <buffer><silent> <LocalLeader>p <Plug>MarkdownPreviewToggle
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
-" >>>-----------------------------------
+" }}}
 
-" <<< 按键 (文本对象)
+" {{{ 按键 (文本对象)
 " 另外有插件nvim-treesitter的配置
 
 xmap     ih        :Gitsigns select_hunk<CR>
@@ -281,6 +281,6 @@ omap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 xmap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
 omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
-" >>>-----------------------------------
+" }}}
 
-" vim: foldmethod=marker:foldmarker=<<<,>>>:foldlevel=0
+" vim: foldmethod=marker:foldlevel=0
