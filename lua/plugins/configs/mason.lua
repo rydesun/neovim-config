@@ -19,7 +19,10 @@ require 'mason-lspconfig'.setup_handlers {
         Lua = {
           runtime = { version = 'LuaJIT' },
           diagnostics = { globals = { 'vim' } },
-          workspace = { library = vim.api.nvim_list_runtime_paths() },
+          workspace = {
+            library = vim.api.nvim_list_runtime_paths(),
+            checkThirdParty = false,
+          },
           -- 开启遥测
           telemetry = { enable = true },
         }
