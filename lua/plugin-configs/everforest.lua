@@ -13,7 +13,8 @@ local function everforest_custom()
 
   -- tabline
   vim.fn['everforest#highlight']('TabLineSep', palette.bg3, palette.bg1)
-  vim.fn['everforest#highlight']('TabLineSepSel', palette.statusline1, palette.bg1)
+  vim.fn['everforest#highlight']('TabLineSepSel',
+    palette.statusline1, palette.bg1)
 
   -- virtual text
   for _, name in pairs { 'VirtualTextError', 'VirtualTextWarning', } do
@@ -37,7 +38,7 @@ local function everforest_custom()
 
   -- vim-better-whitespace
   vim.fn['everforest#highlight']('ExtraWhitespace',
-    palette.red, palette.none, 'strikethrough')
+    palette.none, palette.bg_red)
 
   -- leap.nvim
   vim.api.nvim_command('hi! link LeapLabelPrimary Search')
