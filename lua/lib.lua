@@ -1,5 +1,14 @@
 local M = {}
 
+function M.autoconfig(name)
+  return function(lazy_plugin)
+    if name == nil then
+      name = vim.fn.fnamemodify(lazy_plugin.name, ':r')
+    end
+    require('plugin-configs.' .. name)
+  end
+end
+
 function M.bool(val)
   local t = type(val)
   if t == 'number' then return val > 0

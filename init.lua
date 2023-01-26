@@ -109,26 +109,18 @@ vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
 -- >>>-----------------------------------
 
 -- <<< 插件
-pcall(function() require 'impatient' end)
+vim.g.mapleader = ' '
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+vim.opt.rtp:prepend(lazypath)
 
--- 通过packer.nvim安装的插件
-local _, err = pcall(function() require 'plugins' end)
+local _, err = pcall(function() require 'lazy'.setup 'lazy-plugins' end)
 if err ~= nil then
-  if err:find([[module 'packer' not found]]) then
+  if err:find([[module 'lazy' not found]]) then
     vim.schedule(function()
-      vim.api.nvim_err_writeln('缺少packer.nvim')
+      vim.api.nvim_err_writeln('缺少lazy.nvim')
     end)
   else error(err) end
 end
-
--- 本地插件
--- tabline
-vim.api.nvim_command 'packadd tabline'
-require 'tabline'.setup()
-
--- 自动设置工作目录
-vim.api.nvim_command 'packadd rooter'
-require 'rooter'.setup { '.git', '.hg', '.svn', 'Makefile', 'package.json' }
 -- >>>-----------------------------------
 
 -- <<< 命令行

@@ -1,14 +1,11 @@
-local packer_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local packer_compiled = vim.fn.stdpath 'config' .. '/plugin/packer_compiled.lua'
-
-if vim.fn.isdirectory(packer_path) == 0 then
-  vim.fn.system { 'git', 'clone', '--depth', '1',
-    'https://github.com/wbthomason/packer.nvim', packer_path }
-  vim.api.nvim_command('packadd packer.nvim')
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system { 'git', 'clone', '--depth', '1', '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath }
 end
 
-require 'init'
+-- 清除旧的packer_compiled.lua
+local packer_compiled = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
 if vim.fn.filereadable(packer_compiled) then
   vim.fn.delete(packer_compiled)
 end
-require 'packer'.sync()
