@@ -28,10 +28,6 @@ return {
       'mason.nvim', 'jose-elias-alvarez/null-ls.nvim',
     } },
 
-  -- 增强LSP界面
-  { 'glepnir/lspsaga.nvim',
-    cond = cond, event = event, config = autoconfig() },
-
   -- 补全时显示函数签名
   { 'ray-x/lsp_signature.nvim',
     cond = cond, event = event, config = autoconfig() },

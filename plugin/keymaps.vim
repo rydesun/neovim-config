@@ -8,7 +8,7 @@ noremap  :  ;
 xnoremap <  <gv
 xnoremap >  >gv
 " 用LSP查看文档
-nnoremap <silent>  K  <Cmd>Lspsaga hover_doc<CR>
+nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 " 分页时按q直接退出
 if g:paging | nnoremap q <Cmd>exit<CR> | endif
 
@@ -99,11 +99,11 @@ EOF
 
 " []组：前后跳转
 " 另外有插件提供更多映射
-nnoremap <silent>  [g          <Cmd>Lspsaga diagnostic_jump_prev<CR>
-nnoremap <silent>  ]g          <Cmd>Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent>  [G          <Cmd>lua require'lspsaga.diagnostic'.goto_prev{
+nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{
 				\ severity=vim.diagnostic.severity.ERROR}<CR>
-nnoremap <silent>  ]G          <Cmd>lua require'lspsaga.diagnostic'.goto_next{
+nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{
 				\ severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
@@ -190,8 +190,8 @@ nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 
 " LSP
-nnoremap <silent>  <leader>a  <Cmd>Lspsaga code_action<CR>
-nnoremap <silent>  <leader>r  <Cmd>Lspsaga rename<CR>
+nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 " >>>-----------------------------------

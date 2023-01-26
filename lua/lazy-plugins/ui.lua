@@ -49,6 +49,10 @@ return {
       'AckslD/nvim-neoclip.lua',
     } },
 
+  -- 自定义界面
+  { 'stevearc/dressing.nvim',
+    cond = cond, event = event, config = autoconfig() },
+
   -- 保持窗口布局
   { 'famiu/bufdelete.nvim',
     cond = cond, event = event },
