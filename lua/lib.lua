@@ -5,7 +5,7 @@ function M.autoconfig(name)
     if name == nil then
       name = vim.fn.fnamemodify(lazy_plugin.name, ':r')
     end
-    require('plugin-configs.' .. name)
+    require('plugins.configs.' .. name)
   end
 end
 

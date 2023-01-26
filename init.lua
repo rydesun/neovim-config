@@ -113,7 +113,7 @@ vim.g.mapleader = ' '
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
 
-local _, err = pcall(function() require 'lazy'.setup 'lazy-plugins' end)
+local _, err = pcall(function() require 'lazy'.setup 'plugins' end)
 if err ~= nil then
   if err:find([[module 'lazy' not found]]) then
     vim.schedule(function()

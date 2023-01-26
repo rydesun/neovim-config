@@ -1,5 +1,5 @@
-local components = require 'plugin-configs.lualine.components'
-local extensions = require 'plugin-configs.lualine.extensions'
+local components = require 'plugins.configs.lualine.components'
+local extensions = require 'plugins.configs.lualine.extensions'
 local transform_color = require 'lib'.transform_color(0.3, 30)
 
 require 'lualine'.setup {
@@ -36,7 +36,7 @@ require 'lualine'.setup {
       { 'filetype', padding = { left = 0, right = 1 },
         icons_enabled = true, colored = false,
         color = function()
-          local color = require 'plugin-configs.lualine.lib'
+          local color = require 'plugins.configs.lualine.lib'
               .filetype_color(transform_color)
           return color and { bg = color } or {}
         end,
