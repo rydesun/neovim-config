@@ -6,7 +6,7 @@ function M.run(to_utf8, replace)
 
   -- 写入缓存文件
   local tempfile = vim.fn.tempname()
-  vim.api.nvim_command('write ' .. tempfile)
+  vim.api.nvim_command('silent write ' .. tempfile)
   if replace then vim.api.nvim_command('bdelete') end
 
   -- 在内置终端中打开
