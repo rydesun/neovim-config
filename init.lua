@@ -12,8 +12,8 @@ if vim.g.ansi then
   })
 end
 
--- 是否在开发环境中 (有firefox就够了)
-vim.g.env_dev = bool(vim.env.VIM_DEV) or vim.fn.executable('firefox') > 0
+-- 是否在开发环境中 (判断标准为mason目录)
+vim.g.env_dev = vim.fn.isdirectory(vim.fn.stdpath('data') .. '/mason')
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 
