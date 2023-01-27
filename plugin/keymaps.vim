@@ -10,7 +10,7 @@ xnoremap >  >gv
 " 用LSP查看文档
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 " 分页时按q直接退出
-if g:paging | nnoremap q <Cmd>exit<CR> | endif
+if get(g:, 'paging', v:false) | nnoremap q <Cmd>exit<CR> | endif
 
 nmap  <C-a>  <Plug>(dial-increment)
 nmap  <C-x>  <Plug>(dial-decrement)

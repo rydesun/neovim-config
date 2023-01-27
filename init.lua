@@ -31,8 +31,8 @@ vim.g.plug_dev = vim.g.env_dev
 
 -- pager不需要启用这些插件
 if vim.g.paging then
-    vim.g.plug_cmd = false
-    vim.g.plug_dev = false
+  vim.g.plug_cmd = false
+  vim.g.plug_dev = false
 end
 -- }}}
 
@@ -117,7 +117,8 @@ local _, err = pcall(function() require 'lazy'.setup 'plugins' end)
 if err ~= nil then
   if err:find([[module 'lazy' not found]]) then
     vim.schedule(function()
-      vim.api.nvim_err_writeln('缺少lazy.nvim')
+      vim.api.nvim_err_write('插件没有加载(缺失插件管理器lazy.nvim): ')
+      vim.api.nvim_err_writeln('需要执行bootstrap.lua')
     end)
   else error(err) end
 end

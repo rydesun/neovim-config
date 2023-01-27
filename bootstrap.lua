@@ -9,3 +9,7 @@ local packer_compiled = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua
 if vim.fn.filereadable(packer_compiled) then
   vim.fn.delete(packer_compiled)
 end
+
+require 'init'
+
+require 'lazy'.sync { wait = true }
