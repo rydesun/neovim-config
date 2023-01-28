@@ -17,7 +17,7 @@ return {
 
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons',
-    cond = cond },
+    cond = cond, lazy = true },
 
   -- 浮动通知
   { 'rcarriga/nvim-notify',
