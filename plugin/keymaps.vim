@@ -9,8 +9,6 @@ xnoremap <  <gv
 xnoremap >  >gv
 " 用LSP查看文档
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
-" 分页时按q直接退出
-if get(g:, 'paging', v:false) | nnoremap q <Cmd>exit<CR> | endif
 
 nmap  <C-a>  <Plug>(dial-increment)
 nmap  <C-x>  <Plug>(dial-decrement)
@@ -18,6 +16,9 @@ vmap  <C-a>  <Plug>(dial-increment)
 vmap  <C-x>  <Plug>(dial-decrement)
 vmap g<C-a> g<Plug>(dial-increment)
 vmap g<C-x> g<Plug>(dial-decrement)
+
+nnoremap  <C-l>  <C-l><Cmd>lua pcall(function() require'notify'.dismiss {
+			\ silent = true, pending = true } end)<CR>
 
 " z组：折叠
 nnoremap <silent>  zj  <Cmd>lua require'ufo'.goNextClosedFold()<CR>
@@ -39,12 +40,17 @@ xmap ga <Plug>(LiveEasyAlign)
 nmap ga <Plug>(LiveEasyAlign)
 
 " q组：关闭
-" 不影响用其他的键位录制宏
-nnoremap <silent>  qw  <C-w>c
-nnoremap <silent>  qf  <Cmd>Bdelete<CR>
-nnoremap <silent>  qt  <Cmd>tabclose<CR>
-nnoremap <silent>  qc  <Cmd>cclose<CR>
-nnoremap <silent>  ql  <Cmd>lclose<CR>
+" 分页时按q直接退出
+if get(g:, 'paging', v:false)
+	nnoremap q <Cmd>exit<CR>
+else
+	" 不影响用其他的键位录制宏
+	nnoremap <silent>  qw  <C-w>c
+	nnoremap <silent>  qf  <Cmd>Bdelete<CR>
+	nnoremap <silent>  qt  <Cmd>tabclose<CR>
+	nnoremap <silent>  qc  <Cmd>cclose<CR>
+	nnoremap <silent>  ql  <Cmd>lclose<CR>
+endif
 
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
