@@ -12,8 +12,9 @@ if vim.g.ansi then
   })
 end
 
--- 是否在开发环境中 (判断标准为mason目录)
-vim.g.env_dev = vim.fn.isdirectory(vim.fn.stdpath('data') .. '/mason')
+-- 是否在开发环境中 (判断依据为文件.install_dev)
+vim.g.env_dev = bool(vim.fn.filereadable(
+  vim.fn.stdpath('data') .. '/lazy/.install_dev'))
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 
