@@ -28,9 +28,8 @@ return {
     cond = cond, event = event, config = autoconfig() },
 
   -- 文件浏览器
-  { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x',
-    cond = cond, event = event, config = autoconfig(),
-    dependencies = { 'MunifTanjim/nui.nvim' } },
+  { 'nvim-tree/nvim-tree.lua',
+    cond = cond, event = event, config = autoconfig() },
 
   -- 编辑目录
   { 'elihunter173/dirbuf.nvim',

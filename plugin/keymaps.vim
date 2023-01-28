@@ -187,7 +187,7 @@ vmap     <silent>  <leader>00  <Plug>SnipRun
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   <Cmd>Neotree toggle reveal_force_cwd<CR>
+nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
