@@ -5,11 +5,11 @@ local autoconfig = require 'lib'.autoconfig
 return {
   -- 平滑滚动
   { 'karb94/neoscroll.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 缩进线
   { 'lukas-reineke/indent-blankline.nvim',
-    cond = cond, config = autoconfig() },
+    cond = cond, opts = autoconfig() },
 
   -- 检测缩进
   { 'nmac427/guess-indent.nvim',
@@ -21,7 +21,7 @@ return {
 
   -- 折叠
   { 'kevinhwang91/nvim-ufo',
-    cond = cond, config = autoconfig(),
+    cond = cond, opts = autoconfig(),
     dependencies = { 'kevinhwang91/promise-async' } },
 
   -- 选区diff
@@ -38,5 +38,5 @@ return {
 
   -- 显示颜色
   { 'NvChad/nvim-colorizer.lua',
-    cond = cond, config = autoconfig() },
+    cond = cond, opts = autoconfig() },
 }

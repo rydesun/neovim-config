@@ -48,7 +48,7 @@ return {
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       { 'L3MON4D3/LuaSnip',
-        config = autoconfig 'luasnip' },
+        opts = autoconfig 'luasnip' },
     } },
 
   -- 自动匹配

@@ -1,4 +1,4 @@
-require 'indent_blankline'.setup {
+return {
   -- 缩进线字符
   char = '┊',
 

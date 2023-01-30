@@ -1,4 +1,4 @@
-require 'gitsigns'.setup {
+return {
   signs = {
     add = { text = '+│' },
     change = { text = '~│' },

@@ -1,4 +1,4 @@
-require'crates'.setup {
+return {
   text = {
     loading = "  查询中 ",
     version = "  %s ",

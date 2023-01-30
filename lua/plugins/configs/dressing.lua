@@ -1,4 +1,4 @@
-require 'dressing'.setup {
+return {
   input = {
     win_options = {
       -- 不透明窗口

@@ -1,4 +1,4 @@
-require 'toggleterm'.setup {
+return {
   open_mapping = [[<c-\>]],
 
   -- 不要变暗

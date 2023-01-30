@@ -18,7 +18,7 @@ return {
       -- JSON schema
       'b0o/schemastore.nvim',
       -- 单独配置Rust
-      { 'simrat39/rust-tools.nvim', config = autoconfig() },
+      { 'simrat39/rust-tools.nvim', opts = autoconfig() },
     } },
 
   -- 集成非LSP工具。用null-ls的配置 + mason安装的工具
@@ -30,7 +30,7 @@ return {
 
   -- 补全时显示函数签名
   { 'ray-x/lsp_signature.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
   -- }}}
 
   -- {{{ 本地开发 (tree-sitter)
@@ -60,7 +60,7 @@ return {
 
   -- 大纲视图
   { 'stevearc/aerial.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
   -- }}}
 
   -- {{{ 本地开发 (特定语言)
@@ -75,7 +75,7 @@ return {
 
   -- Rust
   { 'saecki/crates.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- LaTex
   { 'lervag/vimtex',
@@ -90,7 +90,7 @@ return {
 
   -- 覆盖率
   { 'andythigpen/nvim-coverage',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 调试打印
   { 'andrewferrier/debugprint.nvim',

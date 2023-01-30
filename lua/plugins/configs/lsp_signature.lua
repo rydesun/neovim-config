@@ -1,3 +1,3 @@
-require "lsp_signature".setup {
+return {
   hint_enable = false,
 }

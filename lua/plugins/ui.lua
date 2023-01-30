@@ -9,7 +9,7 @@ return {
 
   -- 状态栏
   { 'nvim-lualine/lualine.nvim',
-    cond = cond, config = autoconfig() },
+    cond = cond, opts = autoconfig() },
 
   -- 标签栏
   { dir = vim.fn.stdpath('config') .. '/pack/local/opt/tabline',
@@ -29,7 +29,7 @@ return {
 
   -- 文件浏览器
   { 'nvim-tree/nvim-tree.lua',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 编辑目录
   { 'elihunter173/dirbuf.nvim',
@@ -50,7 +50,7 @@ return {
 
   -- 自定义界面
   { 'stevearc/dressing.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 保持窗口布局
   { 'famiu/bufdelete.nvim',

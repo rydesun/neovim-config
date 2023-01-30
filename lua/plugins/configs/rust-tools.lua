@@ -1,4 +1,4 @@
-require 'rust-tools'.setup {
+return {
   server = {
     settings = {
       ['rust-analyzer'] = {

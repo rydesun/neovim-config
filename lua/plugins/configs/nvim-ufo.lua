@@ -3,7 +3,7 @@ vim.o.foldlevel = 99
 -- 新打开的buffer不应用foldlevel的值
 vim.o.foldlevelstart = 99
 
-require 'ufo'.setup {
+return {
   -- 关闭闪烁
   open_fold_hl_timeout = 0,
   -- 自动折叠

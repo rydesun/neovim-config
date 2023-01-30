@@ -1,4 +1,4 @@
-require 'neoscroll'.setup {
+return {
   -- 不要隐藏光标
   hide_cursor = false,
 

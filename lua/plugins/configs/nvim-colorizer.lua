@@ -1,4 +1,4 @@
-require 'colorizer'.setup {
+return {
   user_default_options = {
     mode = 'virtualtext',
     names = false, -- 颜色名称不高亮

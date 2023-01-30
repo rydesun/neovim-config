@@ -1,6 +1,6 @@
 local lib = require 'plugins.configs.nvim-tree.lib'
 
-require 'nvim-tree'.setup {
+return {
   -- 让位dirbuf.nvim接管
   hijack_directories = { enable = false },
 

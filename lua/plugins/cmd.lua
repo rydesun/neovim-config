@@ -13,11 +13,11 @@ return {
 
   -- 终端窗口
   { 'akinsho/toggleterm.nvim', version = '*',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 集成Git
   { 'lewis6991/gitsigns.nvim',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- Git diff
   { 'sindrets/diffview.nvim',

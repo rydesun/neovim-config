@@ -1,4 +1,4 @@
-require 'aerial'.setup {
+return {
   layout = {
     max_width = 40,
     default_direction = 'float',
