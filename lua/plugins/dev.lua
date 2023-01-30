@@ -66,21 +66,21 @@ return {
   -- {{{ 本地开发 (特定语言)
   -- 预览Markdown
   { 'iamcco/markdown-preview.nvim',
-    cond = cond, event = event,
+    cond = cond,
     build = function() vim.fn['mkdp#util#install']() end },
 
   -- 为Markdown生成TOC
   { 'mzlogin/vim-markdown-toc',
-    cond = cond, event = event },
+    cond = cond },
 
   -- Rust
   { 'saecki/crates.nvim',
-    cond = cond, event = event, opts = autoconfig() },
+    cond = cond, opts = autoconfig() },
 
   -- LaTex
   { 'lervag/vimtex',
     enabled = vim.fn.executable('latex') > 0,
-    cond = cond, event = event },
+    cond = cond },
   -- }}}
 
   -- {{{ 本地开发 (其他)
