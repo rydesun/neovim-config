@@ -1,4 +1,14 @@
 local augend = require 'dial.augend'
+local map = require 'dial.map'
+
+local kopts = { noremap = true }
+vim.keymap.set('n', '<C-a>', map.inc_normal(), kopts)
+vim.keymap.set('n', '<C-x>', map.dec_normal(), kopts)
+vim.keymap.set('v', '<C-a>', map.inc_visual(), kopts)
+vim.keymap.set('v', '<C-x>', map.dec_visual(), kopts)
+vim.keymap.set('v', 'g<C-a>', map.inc_gvisual(), kopts)
+vim.keymap.set('v', 'g<C-x>', map.dec_gvisual(), kopts)
+
 require 'dial.config'.augends:register_group {
   default = {
     augend.semver.alias.semver,

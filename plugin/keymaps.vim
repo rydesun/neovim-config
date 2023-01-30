@@ -10,13 +10,6 @@ xnoremap >  >gv
 " 用LSP查看文档
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 
-nmap  <C-a>  <Plug>(dial-increment)
-nmap  <C-x>  <Plug>(dial-decrement)
-vmap  <C-a>  <Plug>(dial-increment)
-vmap  <C-x>  <Plug>(dial-decrement)
-vmap g<C-a> g<Plug>(dial-increment)
-vmap g<C-x> g<Plug>(dial-decrement)
-
 nnoremap  <C-l>  <C-l><Cmd>lua pcall(function() require'notify'.dismiss {
 			\ silent = true, pending = true } end)<CR>
 
