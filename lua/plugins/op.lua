@@ -5,7 +5,7 @@ local autoconfig = require 'lib'.autoconfig
 return {
   -- 增强%
   { 'andymass/vim-matchup',
-    cond = cond, event = event, config = autoconfig() },
+    cond = cond, config = autoconfig() },
 
   -- 增强[
   { 'tpope/vim-unimpaired',
