@@ -96,7 +96,7 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 ls / | nvim -R --cmd 'let paging=1'
 ```
 
-可以处理 ANSI 转义码 (调用 nvim 的内置 term)，颜色可以显示
+可以处理 ANSI 转义码，显示颜色
 
 ```bash
 ls --color=always / | nvim -R --cmd 'let paging=1 | let ansi=1'
@@ -109,7 +109,10 @@ ls --color=always / | nvim -R --cmd 'let paging=1 | let ansi=1'
 scrollback_pager nvim -R --cmd "let paging=1 | let ansi=1"
 ```
 
-处理 ANSI 的代码实现在 [`lua/utils/term-cat.lua`](lua/utils/term-cat.lua) 中。
+处理 ANSI 转义码的代码实现在
+[`lua/utils/term-cat.lua`](lua/utils/term-cat.lua) 中。
 其实是先把当前 buffer 写入到一个临时文件，再打开一个内置终端，
 调用 `cat` 命令输出该文件。
 
+参考：[https://github.com/kovidgoyal/kitty/issues/2327](
+https://github.com/kovidgoyal/kitty/issues/2327)

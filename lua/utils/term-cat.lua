@@ -10,7 +10,7 @@ function M.run(to_utf8, replace)
   if replace then vim.api.nvim_command('bdelete') end
 
   -- 在内置终端中打开
-  vim.api.nvim_command('term cat ' .. tempfile .. '; cat')
+  vim.api.nvim_command('term cat ' .. tempfile .. ' -')
   vim.bo.filetype = 'vim-paging'
 end
 
