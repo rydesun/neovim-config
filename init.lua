@@ -123,6 +123,18 @@ if err ~= nil then
     end)
   else error(err) end
 end
+
+-- 本地插件
+-- 恢复lazy.nvim修改过的packpath
+vim.opt.packpath:prepend(vim.fn.stdpath 'config')
+
+-- 标签栏
+vim.api.nvim_command 'packadd tabline'
+require 'tabline'.setup()
+
+-- 自动设置工作目录
+vim.api.nvim_command 'packadd rooter'
+require 'rooter'.setup { '.git', 'Makefile', 'package.json' }
 -- }}}
 
 -- {{{ 命令行

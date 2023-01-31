@@ -11,10 +11,6 @@ return {
   { 'nvim-lualine/lualine.nvim',
     cond = cond, opts = autoconfig() },
 
-  -- 标签栏
-  { dir = vim.fn.stdpath('config') .. '/pack/local/opt/tabline',
-    cond = cond, config = true },
-
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons',
     cond = cond, lazy = true },
