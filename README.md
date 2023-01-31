@@ -114,5 +114,44 @@ scrollback_pager nvim -R --cmd "let paging=1 | let ansi=1"
 其实是先把当前 buffer 写入到一个临时文件，再打开一个内置终端，
 调用 `cat` 命令输出该文件。
 
-参考：[https://github.com/kovidgoyal/kitty/issues/2327](
-https://github.com/kovidgoyal/kitty/issues/2327)
+参考：<https://github.com/kovidgoyal/kitty/issues/2327>
+
+## 目录结构
+
+复杂的配置应该按功能划分，拆成高内聚的小插件。
+可以放在 `pack/` 目录里，用 neovim 内置的包管理。
+或者用传统的 rtp 也行。
+再把插件的文件分散到 `lua/`、`autoload/`、`ftplugin/`、`plugin/`
+等目录当中去。
+
+**最少维护：简单的目录结构**
+
+[`lua/plugins/`](lua/plugins/) 插件列表  
+[`lua/plugins/configs/`](lua/plugins/configs/) 每个插件的设置  
+
+```lua
+-- lua/plugins/*.lua
+{ '...', opts = autoconfig() }
+```
+`autoconfig()` 自动从目录 `lua/plugins/configs/`
+加载与插件同名的 .lua 配置文件。
+不用再硬编码包路径，能省一点是一点。
+
+[`pack/`](pack/) 自己管理的插件  
+- [`pack/local/opt/rooter/`](pack/local/opt/rooter/)  
+一个简单的自动设置工作目录的插件。
+当前 buffer 的上级目录匹配 pattern 时，自动执行 lcd
+
+- [`pack/local/opt/tabline/`](pack/local/opt/tabline/)  
+标签栏样式 (不是 bufferline)。
+我喜欢在另一个 Tab 中运行测试。
+这个插件和 asynctasks.vim 插件结合使用时十分方便，
+直接在标签栏上显示 term 的运行情况。
+
+[`plugin/`](plugin/) 是传统的 Vim 目录。
+本来是作为插件目录被使用，也可以用来放配置文件。
+如果 init.lua 的内容太多，
+可以拆出一部分放在这个目录里面，
+只是 `plugin/*` 各个文件的加载顺序无法保证。
+不了解的话，可以参考
+<https://github.com/lymslive/vimllearn/blob/master/z/20181219_1.md>
