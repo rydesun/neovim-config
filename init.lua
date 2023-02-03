@@ -135,6 +135,9 @@ require 'tabline'.setup()
 -- 自动设置工作目录
 vim.api.nvim_command 'packadd rooter'
 require 'rooter'.setup { '.git', 'Makefile', 'package.json' }
+
+-- 修改quickfix界面
+vim.api.nvim_command 'packadd qftf'
 -- }}}
 
 -- {{{ 命令行

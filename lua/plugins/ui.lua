@@ -31,6 +31,10 @@ return {
   { 'elihunter173/dirbuf.nvim',
     cond = cond },
 
+  -- 改进quickfix
+  { 'kevinhwang91/nvim-bqf',
+    cond = cond, event = event },
+
   -- 查找
   { 'nvim-telescope/telescope.nvim',
     cond = cond, event = event, config = autoconfig(),
