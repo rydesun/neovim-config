@@ -163,6 +163,7 @@ cnoremap           <C-n>       <Down>
 " }}}
 
 " {{{ 按键 (Leader单键)
+" 另外有插件treesj.nvim占用 s j m
 let g:mapleader=' ' | noremap <Space> <Nop>
 let g:maplocalleader=' w'
 

@@ -9,3 +9,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = { '*' },
   callback = function() vim.api.nvim_command 'DisableWhitespace' end
 })
+
+-- 不自动设置按键映射
+vim.g.better_whitespace_operator = ''

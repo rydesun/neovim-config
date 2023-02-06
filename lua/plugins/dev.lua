@@ -54,6 +54,10 @@ return {
   { 'mizlan/iswap.nvim',
     cond = cond, event = event, config = true },
 
+  -- SplitJoin
+  { 'Wansmer/treesj',
+    cond = cond, event = event, config = true },
+
   -- 编辑注入代码块
   { 'AckslD/nvim-FeMaco.lua',
     cond = cond, event = event, config = true },
