@@ -10,8 +10,18 @@ xnoremap >  >gv
 " 用LSP查看文档
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 
-nnoremap  <C-l>  <C-l><Cmd>lua pcall(function() require'notify'.dismiss {
-			\ silent = true, pending = true } end)<CR>
+lua << EOF
+vim.keymap.set('n', '<C-l>', function()
+  pcall(function()
+    require 'notify'.dismiss { silent = true, pending = true }
+  end)
+  vim.cmd.nohlsearch()
+  vim.cmd.diffupdate()
+  vim.cmd.normal {
+    vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
+  }
+end)
+EOF
 
 " z组：折叠
 nnoremap <silent>  zj  <Cmd>lua require'ufo'.goNextClosedFold()<CR>
@@ -84,16 +94,14 @@ imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
 " {{{ 按键 (新增行为)
 " leap.nvim跳转
 lua << EOF
-vim.api.nvim_set_keymap('n', '-', '', {
-  callback = function()
-    require 'leap'.leap {
-      target_windows = vim.tbl_filter(
-        function(win) return vim.api.nvim_win_get_config(win).focusable end,
-        vim.api.nvim_tabpage_list_wins(0)
-      )
-    }
-  end,
-})
+vim.keymap.set('n', '-', function()
+  require 'leap'.leap {
+    target_windows = vim.tbl_filter(
+      function(win) return vim.api.nvim_win_get_config(win).focusable end,
+      vim.api.nvim_tabpage_list_wins(0)
+    )
+  }
+end)
 EOF
 
 " []组：前后跳转
