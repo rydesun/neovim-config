@@ -189,7 +189,7 @@ vmap     <silent>  <leader>00  <Plug>SnipRun
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
+nnoremap <silent>  <leader>e   <Cmd>exec 'NvimTreeFindFileToggle '.getcwd()<CR>
 nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
@@ -239,6 +239,12 @@ nnoremap <silent>  <leader>tn  :TestNearest<CR>
 nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
+
+" n组：笔记
+nnoremap <silent>  <leader>ns  <Cmd>ObsidianSearch<CR>
+nnoremap <silent>  <leader>nf  <Cmd>ObsidianQuickSwitch<CR>
+nnoremap <silent>  <leader>ne  <Cmd>NvimTreeFindFileToggle
+			\ ~/Data/Documents/Obsidian Vault<CR>
 
 " LocalLeader组：特定文件类型
 " Rust

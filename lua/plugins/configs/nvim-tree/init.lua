@@ -4,9 +4,6 @@ return {
   -- 让位dirbuf.nvim接管
   hijack_directories = { enable = false },
 
-  -- 使用buffer的工作目录
-  respect_buf_cwd = true,
-
   -- 与dressing.nvim集成
   select_prompts = true,
 

@@ -29,6 +29,11 @@ return {
     cond = cond, event = event,
     init = function() vim.g.fcitx5_remote = 'fcitx5-remote' end },
 
+  -- Obsidian笔记
+  { 'epwalsh/obsidian.nvim',
+    enabled = vim.fn.executable('obsidian') > 0,
+    cond = cond, event = event, opts = autoconfig() },
+
   -- kitty配置文件的语法高亮
   { 'fladson/vim-kitty',
     enabled = vim.fn.executable('kitty') > 0,
