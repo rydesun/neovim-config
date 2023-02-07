@@ -55,4 +55,8 @@ return {
   -- 保持窗口布局
   { 'famiu/bufdelete.nvim',
     cond = cond, event = event },
+
+  -- 高亮与当前匹配的单词
+  { 'RRethy/vim-illuminate',
+    cond = cond, event = event, config = autoconfig() },
 }
