@@ -88,6 +88,10 @@ return {
   -- }}}
 
   -- {{{ 本地开发 (其他)
+  -- Structural search and replace
+  { 'cshuaimin/ssr.nvim',
+    cond = cond, event = event, config = true },
+
   -- 测试
   { 'vim-test/vim-test',
     cond = cond, event = event, init = autoconfig() },

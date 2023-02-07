@@ -202,6 +202,8 @@ nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
+nnoremap <silent>  <leader>S  <Cmd>lua require'ssr'.open()<CR>
+xnoremap <silent>  <leader>S  <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)
