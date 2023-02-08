@@ -25,6 +25,11 @@ return {
     cond = cond, event = event, config = true,
     dependencies = 'leap.nvim' },
 
+  -- 增加a和i的文本对象
+  { 'echasnovski/mini.ai', version = '*',
+    cond = cond, event = event,
+    config = function() require'mini.ai'.setup() end },
+
   -- 更多的文本对象
   { 'chrisgrieser/nvim-various-textobjs',
     cond = cond, event = event, opts = { useDefaultKeymaps = true } },
