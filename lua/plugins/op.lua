@@ -20,6 +20,11 @@ return {
     cond = cond, event = event, opts = autoconfig(),
     dependencies = 'leap.nvim' },
 
+  -- 远距离操作文本对象
+  { 'ggandor/leap-spooky.nvim',
+    cond = cond, event = event, config = true,
+    dependencies = 'leap.nvim' },
+
   -- 更多的文本对象
   { 'chrisgrieser/nvim-various-textobjs',
     cond = cond, event = event, opts = { useDefaultKeymaps = true } },
