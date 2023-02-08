@@ -269,8 +269,9 @@ autocmd filetype markdown call MarkdownKeymap()
 " {{{ 按键 (文本对象)
 " 另外有插件nvim-treesitter的配置
 
-xmap     ih        :Gitsigns select_hunk<CR>
-omap     ih        :Gitsigns select_hunk<CR>
+" Git hunk
+onoremap <silent>  ih  <Cmd>Gitsigns select_hunk<CR>
+xnoremap <silent>  ih  :Gitsigns select_hunk<CR>
 
 " 缩进
 xmap     ii        <Plug>(indent-object_linewise-none)

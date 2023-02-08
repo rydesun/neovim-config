@@ -48,7 +48,7 @@ return {
 
   -- 文本对象
   { 'nvim-treesitter/nvim-treesitter-textobjects',
-    cond = cond, event = event },
+    cond = cond },
 
   -- 交换对象
   { 'mizlan/iswap.nvim',
