@@ -28,8 +28,8 @@ return {
     cond = cond, event = event, opts = autoconfig() },
 
   -- 编辑目录
-  { 'elihunter173/dirbuf.nvim',
-    cond = cond },
+  { 'stevearc/oil.nvim',
+    cond = cond, config = true },
 
   -- 改进quickfix
   { 'kevinhwang91/nvim-bqf',

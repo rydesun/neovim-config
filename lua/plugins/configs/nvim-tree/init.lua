@@ -1,9 +1,6 @@
 local lib = require 'plugins.configs.nvim-tree.lib'
 
 return {
-  -- 让位dirbuf.nvim接管
-  hijack_directories = { enable = false },
-
   -- 与dressing.nvim集成
   select_prompts = true,
 
