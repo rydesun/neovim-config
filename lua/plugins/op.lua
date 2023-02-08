@@ -32,7 +32,7 @@ return {
 
   -- 更多的文本对象
   { 'chrisgrieser/nvim-various-textobjs',
-    cond = cond, event = event, opts = { useDefaultKeymaps = true } },
+    cond = cond, event = event, config = true },
 
   -- 多重光标
   { 'mg979/vim-visual-multi',

@@ -269,13 +269,27 @@ autocmd filetype markdown call MarkdownKeymap()
 " {{{ 按键 (文本对象)
 " 另外有插件nvim-treesitter的配置
 
+" 缩进
+onoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
+xnoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
+
+" 单词按分隔符划分
+onoremap <silent>  is  <Cmd>lua require'various-textobjs'.subword(true)<CR>
+xnoremap <silent>  is  <Cmd>lua require'various-textobjs'.subword(true)<CR>
+onoremap <silent>  as  <Cmd>lua require'various-textobjs'.subword(false)<CR>
+xnoremap <silent>  as  <Cmd>lua require'various-textobjs'.subword(false)<CR>
+
+" diagnostic
+onoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
+xnoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
+
 " Git hunk
 onoremap <silent>  ih  <Cmd>Gitsigns select_hunk<CR>
 xnoremap <silent>  ih  :Gitsigns select_hunk<CR>
 
 " AST节点
-onoremap <silent>  p   <Cmd>lua require'leap-ast'.leap()<CR>
-xnoremap <silent>  p   <Cmd>lua require'leap-ast'.leap()<CR>
+onoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
+xnoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
 " }}}
 
 " vim: foldmethod=marker:foldlevel=0
