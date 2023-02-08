@@ -15,6 +15,11 @@ return {
   { 'ggandor/leap.nvim',
     cond = cond, event = event },
 
+  -- 增强f和t
+  { 'ggandor/flit.nvim',
+    cond = cond, event = event, opts = autoconfig(),
+    dependencies = 'leap.nvim' },
+
   -- 更多的文本对象
   { 'chrisgrieser/nvim-various-textobjs',
     cond = cond, event = event, opts = { useDefaultKeymaps = true } },
