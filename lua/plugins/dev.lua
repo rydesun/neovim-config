@@ -46,9 +46,13 @@ return {
   { 'nvim-treesitter/nvim-treesitter-context',
     cond = cond },
 
-  -- 文本对象
+  -- AST文本对象(精确)
   { 'nvim-treesitter/nvim-treesitter-textobjects',
     cond = cond },
+
+  -- AST文本对象(选择标签)
+  { 'ggandor/leap-ast.nvim',
+    cond = cond, event = event },
 
   -- 交换对象
   { 'mizlan/iswap.nvim',

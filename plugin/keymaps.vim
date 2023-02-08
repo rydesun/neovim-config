@@ -272,6 +272,10 @@ autocmd filetype markdown call MarkdownKeymap()
 " Git hunk
 onoremap <silent>  ih  <Cmd>Gitsigns select_hunk<CR>
 xnoremap <silent>  ih  :Gitsigns select_hunk<CR>
+
+" AST节点
+onoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
+xnoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
 " }}}
 
 " vim: foldmethod=marker:foldlevel=0
