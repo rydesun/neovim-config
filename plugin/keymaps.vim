@@ -272,32 +272,6 @@ autocmd filetype markdown call MarkdownKeymap()
 " Git hunk
 onoremap <silent>  ih  <Cmd>Gitsigns select_hunk<CR>
 xnoremap <silent>  ih  :Gitsigns select_hunk<CR>
-
-" 缩进
-xmap     ii        <Plug>(indent-object_linewise-none)
-omap     ii        <Plug>(indent-object_blockwise-none)
-xmap     ai        <Plug>(indent-object_linewise-start)
-omap     ai        <Plug>(indent-object_linewise-start)
-xmap     iI        <Plug>(indent-object_linewise-end)
-omap     iI        <Plug>(indent-object_linewise-end)
-xmap     aI        <Plug>(indent-object_linewise-both)
-omap     aI        <Plug>(indent-object_linewise-both)
-omap     ij        <Plug>(indent-object_linewise-none-keep-start)
-xmap     ij        <Plug>(indent-object_linewise-none-keep-start)
-omap     ik        <Plug>(indent-object_linewise-none-keep-end)
-xmap     ik        <Plug>(indent-object_linewise-none-keep-end)
-omap     iJ        <Plug>(indent-object_linewise-end-keep-start)
-xmap     iJ        <Plug>(indent-object_linewise-end-keep-start)
-omap     iK        <Plug>(indent-object_linewise-start-keep-end)
-xmap     iK        <Plug>(indent-object_linewise-start-keep-end)
-omap     ibj       <Plug>(indent-object_blockwise-none-keep-start)
-xmap     ibj       <Plug>(indent-object_blockwise-none-keep-start)
-omap     ibJ       <Plug>(indent-object_blockwise-end-keep-start)
-xmap     ibJ       <Plug>(indent-object_blockwise-end-keep-start)
-omap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
-xmap     ibk       <Plug>(indent-object_blockwise-none-keep-end)
-omap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
-xmap     ibK       <Plug>(indent-object_blockwise-start-keep-end)
 " }}}
 
 " vim: foldmethod=marker:foldlevel=0

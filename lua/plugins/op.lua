@@ -15,16 +15,16 @@ return {
   { 'ggandor/leap.nvim',
     cond = cond, event = event },
 
+  -- 更多的文本对象
+  { 'chrisgrieser/nvim-various-textobjs',
+    cond = cond, event = event, opts = { useDefaultKeymaps = true } },
+
   -- 多重光标
   { 'mg979/vim-visual-multi',
     cond = cond, event = event },
 
   -- 成对符号
   { 'machakann/vim-sandwich',
-    cond = cond, event = event },
-
-  -- 缩进对象
-  { 'urxvtcd/vim-indent-object',
     cond = cond, event = event },
 
   -- 快速注释
