@@ -22,7 +22,7 @@ return {
 
   -- 远距离操作文本对象
   { 'ggandor/leap-spooky.nvim',
-    cond = cond, event = event, config = true,
+    cond = cond, event = event, opts = autoconfig(),
     dependencies = 'leap.nvim' },
 
   -- 增加a和i的文本对象

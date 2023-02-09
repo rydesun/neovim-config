@@ -1,24 +1,24 @@
 " {{{ 按键 (覆盖默认行为)
 noremap  H  ^
 noremap  L  $
-noremap  Q  @q
-noremap  ;  :
-noremap  :  ;
+nnoremap Q  @q
+nnoremap ;  :
+nnoremap :  ;
 " 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
 " 用LSP查看文档
 nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
 
+nnoremap <silent>  M  m
+" leap.nvim跳转
 lua << EOF
-vim.keymap.set('n', '<C-l>', function()
-  pcall(function()
-    require 'notify'.dismiss { silent = true, pending = true }
-  end)
-  vim.cmd.nohlsearch()
-  vim.cmd.diffupdate()
-  vim.cmd.normal {
-    vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
+vim.keymap.set('n', 'm', function()
+  require 'leap'.leap {
+    target_windows = vim.tbl_filter(
+      function(win) return vim.api.nvim_win_get_config(win).focusable end,
+      vim.api.nvim_tabpage_list_wins(0)
+    )
   }
 end)
 EOF
@@ -89,21 +89,22 @@ imap     <silent>  <C-x><C-e>  <Cmd>lua require'telescope.builtin'.symbols {
 				\ sources = {'emoji', 'kaomoji', 'gitmoji'} }<CR>
 imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
 				\ sources = {'nerd'} }<CR>
-" }}}
 
-" {{{ 按键 (新增行为)
-" leap.nvim跳转
 lua << EOF
-vim.keymap.set('n', '-', function()
-  require 'leap'.leap {
-    target_windows = vim.tbl_filter(
-      function(win) return vim.api.nvim_win_get_config(win).focusable end,
-      vim.api.nvim_tabpage_list_wins(0)
-    )
+vim.keymap.set('n', '<C-l>', function()
+  pcall(function()
+    require 'notify'.dismiss { silent = true, pending = true }
+  end)
+  vim.cmd.nohlsearch()
+  vim.cmd.diffupdate()
+  vim.cmd.normal {
+    vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
   }
 end)
 EOF
+" }}}
 
+" {{{ 按键 (新增行为)
 " []组：前后跳转
 " 另外有插件提供更多映射
 nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
@@ -172,7 +173,7 @@ cnoremap           <C-n>       <Down>
 
 " {{{ 按键 (Leader单键)
 " 另外有插件treesj.nvim占用 s j m
-let g:mapleader=' ' | noremap <Space> <Nop>
+let g:mapleader=' ' | nnoremap <Space> <Nop>
 let g:maplocalleader=' w'
 
 " 数字组：编译运行
@@ -274,10 +275,10 @@ onoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true
 xnoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
 
 " 单词按分隔符划分
-onoremap <silent>  is  <Cmd>lua require'various-textobjs'.subword(true)<CR>
-xnoremap <silent>  is  <Cmd>lua require'various-textobjs'.subword(true)<CR>
-onoremap <silent>  as  <Cmd>lua require'various-textobjs'.subword(false)<CR>
-xnoremap <silent>  as  <Cmd>lua require'various-textobjs'.subword(false)<CR>
+onoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword(true)<CR>
+xnoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword(true)<CR>
+onoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword(false)<CR>
+xnoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword(false)<CR>
 
 " diagnostic
 onoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
