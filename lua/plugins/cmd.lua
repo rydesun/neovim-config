@@ -21,7 +21,7 @@ return {
 
   -- Git diff
   { 'sindrets/diffview.nvim',
-    cond = cond, event = event },
+    cond = cond, event = event, opts = autoconfig() },
 
   -- 切换输入法
   { 'lilydjwg/fcitx.vim',
