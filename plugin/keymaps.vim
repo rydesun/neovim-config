@@ -29,6 +29,7 @@ nnoremap <silent>  zk  <Cmd>lua require'ufo'.goPreviousClosedFold()<CR>
 nnoremap <silent>  zv  <Cmd>lua require'ufo'.peekFoldedLinesUnderCursor()<CR>
 " 保持foldlevel的值
 nnoremap <silent>  zR  <Cmd>lua require 'ufo'.openAllFolds()<CR>
+nnoremap <silent>  zr  <Cmd>lua require 'ufo'.openFoldsExceptKinds()<CR>
 nnoremap <silent>  zM  <Cmd>lua require 'ufo'.closeAllFolds()<CR>
 
 " g组：按词跳转
@@ -39,8 +40,7 @@ nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
 nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 " 表格对齐
-xmap ga <Plug>(LiveEasyAlign)
-nmap ga <Plug>(LiveEasyAlign)
+map ga <Plug>(LiveEasyAlign)
 
 " q组：关闭
 " 分页时按q直接退出
@@ -184,8 +184,7 @@ nnoremap <silent>  <leader>4   <Cmd>AsyncTask coverage<CR>
 nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
 nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
 nnoremap <silent>  <leader>0t  <Cmd>AsyncTask repl<CR>
-nmap     <silent>  <leader>00  <Plug>SnipRun
-vmap     <silent>  <leader>00  <Plug>SnipRun
+noremap  <silent>  <leader>00  :SnipRun<CR>
 
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
