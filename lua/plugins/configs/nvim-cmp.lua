@@ -4,8 +4,11 @@ local view_kinds = require 'plugins.configs.lspkind'.texts()
 
 cmp.setup {
   mapping = cmp.mapping.preset.insert {
+    -- 滚动文档
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    -- 如果没有选中项，select = true 使用第一条进行展开
+    ['<C-y>'] = cmp.mapping.confirm { select = true },
   },
   snippet = {
     expand = function(args) require('luasnip').lsp_expand(args.body) end,
