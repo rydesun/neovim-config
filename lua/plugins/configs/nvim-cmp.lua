@@ -67,8 +67,6 @@ local cmdline_opts = {
   },
 }
 
-cmp.setup.cmdline('/', cmdline_opts)
-cmp.setup.cmdline('?', cmdline_opts)
 cmp.setup.cmdline(':',
   vim.tbl_extend('error', cmdline_opts, {
     sources = {
