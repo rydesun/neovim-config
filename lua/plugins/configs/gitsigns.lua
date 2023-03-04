@@ -5,6 +5,7 @@ return {
     delete = { text = '_│' },
     topdelete = { text = '‾│' },
     changedelete = { text = '≃│' },
-    untracked = { text = ' ┆' },
+    -- 不提示未追踪的文件
+    untracked = { text = '' },
   },
 }

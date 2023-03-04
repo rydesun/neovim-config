@@ -2,9 +2,9 @@ local M = {}
 
 function M.git_branch()
   local head = vim.b.gitsigns_head
-  return (head == nil or head == '') and ''
-      or (head == 'master' or head == 'main') and ' '
-      or ' ' .. head
+  return head == nil and ''
+      or (head == 'master' or head == 'main' or head == '') and ' '
+      or ' ' .. head .. ' '
 end
 
 function M.git_file_status()

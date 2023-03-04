@@ -17,9 +17,10 @@ local function everforest_custom()
     palette.statusline1, palette.bg1)
 
   -- virtual text
-  for _, name in pairs { 'VirtualTextError', 'VirtualTextWarning', } do
-    vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_red)
-  end
+  vim.fn['everforest#highlight'](
+    'VirtualTextError', palette.grey0, palette.bg_red)
+  vim.fn['everforest#highlight'](
+    'VirtualTextWarning', palette.grey0, palette.bg_yellow)
   for _, name in pairs { 'VirtualTextInfo', 'VirtualTextHint' } do
     vim.fn['everforest#highlight'](name, palette.grey0, palette.bg_green)
   end
