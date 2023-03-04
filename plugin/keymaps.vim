@@ -35,6 +35,7 @@ nnoremap <silent>  zM  <Cmd>lua require 'ufo'.closeAllFolds()<CR>
 " g组：按词跳转
 " 另外有插件debugprint.nvim占用g?
 nnoremap <silent>  gd  <Cmd>Telescope lsp_definitions<CR>
+nnoremap <silent>  gD  <Cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent>  gy  <Cmd>Telescope lsp_type_definitions<CR>
 nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
 nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
@@ -268,10 +269,15 @@ autocmd filetype markdown call MarkdownKeymap()
 
 " {{{ 按键 (文本对象)
 " 另外有插件nvim-treesitter的配置
+" mini.ai占用a和i
 
 " 缩进
 onoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
 xnoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
+
+" 数字
+onoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>
+xnoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>
 
 " 单词按分隔符划分
 onoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword(true)<CR>
