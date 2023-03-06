@@ -43,18 +43,8 @@ nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 " 表格对齐
 map ga <Plug>(LiveEasyAlign)
 
-" q组：关闭
 " 分页时按q直接退出
-if get(g:, 'paging', v:false)
-	nnoremap q <Cmd>exit<CR>
-else
-	" 不影响用其他的键位录制宏
-	nnoremap <silent>  qw  <C-w>c
-	nnoremap <silent>  qf  <Cmd>Bdelete<CR>
-	nnoremap <silent>  qt  <Cmd>tabclose<CR>
-	nnoremap <silent>  qc  <Cmd>cclose<CR>
-	nnoremap <silent>  ql  <Cmd>lclose<CR>
-endif
+if get(g:, 'paging', v:false) | nnoremap q <Cmd>exit<CR> | endif
 
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
