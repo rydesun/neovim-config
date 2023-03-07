@@ -214,10 +214,24 @@ nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.
 				\ run('diff', true)<CR>
 nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.
 				\ run('diff', false)<CR>
-nnoremap <silent>  <leader>gs  <Cmd>lua require'utils/term-git'.
-				\ run('show', false)<CR>
 nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.
 				\ run('diff --staged', false)<CR>
+" 搜索git所有的提交内容
+lua << EOF
+function git_pickaxe(all)
+  return function()
+    prompt = all and 'Git Pickaxe' or 'Git Pickaxe %'
+    vim.ui.input({ prompt = prompt }, function(query)
+      if not query or query == '' then return end
+      arg = string.format("-G'%s'", query)
+      if not all then arg = '% ' .. arg end
+      vim.cmd.DiffviewFileHistory (arg)
+    end)
+  end
+end
+vim.keymap.set('n', '<leader>gs', git_pickaxe(false))
+vim.keymap.set('n', '<leader>gS', git_pickaxe(true))
+EOF
 
 " t组：操作终端、测试
 nnoremap <silent>  <leader>tt  <Cmd>ToggleTerm direction=float<CR>
