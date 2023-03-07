@@ -118,7 +118,8 @@ nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
 " 交换节点
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
-" 移动光标、调整窗口
+" 移动光标、调整窗口、关闭
+nnoremap           <A-w>       <C-w>c
 nnoremap           <A-j>       <Cmd>wincmd j<CR>
 nnoremap           <A-k>       <Cmd>wincmd k<CR>
 nnoremap           <A-h>       <Cmd>wincmd h<CR>
@@ -132,14 +133,9 @@ tnoremap           <A-k>       <Cmd>wincmd k<CR>
 tnoremap           <A-h>       <Cmd>wincmd h<CR>
 tnoremap           <A-l>       <Cmd>wincmd l<CR>
 tnoremap           <A-q>       <C-\><C-n>
-
-" <Esc>组：关闭
-nnoremap <silent>  <Esc><Esc>  <Cmd>nohlsearch<CR>
-nnoremap <silent>  <Esc>q      <Cmd>cclose<CR>
-nnoremap <silent>  <Esc>l      <Cmd>lclose<CR>
-nnoremap <silent>  <Esc>f      <Cmd>Bdelete<CR>
-nnoremap <silent>  <Esc>t      <Cmd>tabclose<CR>
-nnoremap <silent>  <Esc>w      <C-w>c
+nnoremap           <A-q>       <Cmd>cclose<CR>
+nnoremap           <A-f>       <Cmd>Bdelete<CR>
+nnoremap           <A-t>       <Cmd>tabclose<CR>
 
 " 命令行
 cnoremap <expr>    %%          expand('%:p:h').'/'
