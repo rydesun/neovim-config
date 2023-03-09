@@ -204,7 +204,9 @@ nnoremap <silent>  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nnoremap <silent>  <leader>hR  <Cmd>Gitsigns reset_buffer<CR>
 nnoremap <silent>  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 nnoremap <silent>  <leader>hb  <Cmd>lua require'gitsigns'.blame_line{full=true}<CR>
+nnoremap <silent>  <leader>hB  <Cmd>Gitsigns toggle_current_line_blame<CR>
 nnoremap <silent>  <leader>hd  <Cmd>Gitsigns toggle_deleted<CR>
+nnoremap <silent>  <leader>hw  <Cmd>Gitsigns toggle_word_diff<CR>
 
 nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
 nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>
@@ -244,10 +246,11 @@ nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
 
 " n组：笔记
+nnoremap <silent>  <leader>nn  <Cmd>ObsidianDraft<CR>
 nnoremap <silent>  <leader>ns  <Cmd>ObsidianSearch<CR>
 nnoremap <silent>  <leader>nf  <Cmd>ObsidianQuickSwitch<CR>
-nnoremap <silent>  <leader>ne  <Cmd>NvimTreeFindFileToggle
-			\ ~/Data/Documents/Obsidian Vault<CR>
+nnoremap <silent>  <leader>ne  <Cmd>NvimTreeObsidian<CR>
+nnoremap <silent>  <leader>nS  <Cmd>ObsidianSync<CR>
 
 " LocalLeader组：特定文件类型
 " Rust
