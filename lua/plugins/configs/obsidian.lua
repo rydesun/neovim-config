@@ -17,7 +17,7 @@ vim.api.nvim_create_user_command(
   'ObsidianSync', function()
     msg = 'vault backup: ' .. vim.fn.strftime '%F %T'
     vim.api.nvim_command(string.format(
-      "!cd '%s' && git add . && git commit -m '%s' && git push",
+      "!cd '%s' && git add . && git commit -m '%s'; git pull -r && git push",
       default_dir, msg))
   end, {}
 )
