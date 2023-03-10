@@ -35,6 +35,10 @@ if vim.g.paging then
   vim.g.plug_cmd = false
   vim.g.plug_dev = false
 end
+
+-- obsidian目录
+vim.g.obsidian_dir = '~/Data/Documents/Obsidian Vault'
+vim.g.obsidian_diary_dir = '日记'
 -- }}}
 
 -- {{{ 选项 (自身界面)
