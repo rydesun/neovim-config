@@ -1,6 +1,6 @@
 local cond = vim.g.plug_view
 local event = 'VeryLazy'
-local autoconfig = require 'lib'.autoconfig
+local autoconfig = require 'libs'.autoconfig
 
 return {
   -- 平滑滚动

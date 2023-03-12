@@ -1,5 +1,5 @@
 -- {{{ 环境
-local bool = require 'lib'.bool
+local bool = require 'libs'.bool
 -- 是否作为pager处理文本
 vim.g.paging = bool(vim.g.paging)
 -- 是否需要处理ANSI转义序列

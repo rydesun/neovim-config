@@ -3,7 +3,7 @@ if not vim.g.env_dev then return {} end
 
 local cond = vim.g.plug_dev
 local event = 'VeryLazy'
-local autoconfig = require 'lib'.autoconfig
+local autoconfig = require 'libs'.autoconfig
 
 return {
   -- {{{ 本地开发 (LSP)

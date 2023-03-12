@@ -1,6 +1,6 @@
 local cond = vim.g.plug_ui
 local event = 'VeryLazy'
-local autoconfig = require 'lib'.autoconfig
+local autoconfig = require 'libs'.autoconfig
 
 return {
   -- 配色主题

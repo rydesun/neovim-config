@@ -1,6 +1,6 @@
 local components = require 'plugins.configs.lualine.components'
 local extensions = require 'plugins.configs.lualine.extensions'
-local transform_color = require 'lib'.transform_color(0.3, 30)
+local transform_color = require 'libs'.transform_color(0.3, 30)
 
 return {
   options = {

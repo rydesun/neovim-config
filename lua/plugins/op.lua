@@ -1,6 +1,6 @@
 local cond = vim.g.plug_op
 local event = 'VeryLazy'
-local autoconfig = require 'lib'.autoconfig
+local autoconfig = require 'libs'.autoconfig
 
 return {
   -- 增强%
