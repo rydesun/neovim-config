@@ -1,4 +1,5 @@
 local lib = require 'plugins.configs.nvim-tree.lib'
+local keymaps = require 'plugins.configs.nvim-tree.keymaps'
 
 return {
   -- 与dressing.nvim集成
@@ -19,17 +20,6 @@ return {
     relativenumber = true,
     -- 侧边栏符号覆盖在行号上面
     signcolumn = 'number',
-
-    mappings = {
-      list = {
-        { key = 'l', action = 'edit' },
-        { key = 'h', action = 'close_node' },
-        { key = '<C-k>', action = 'prev_git_item' },
-        { key = '<C-j>', action = 'next_git_item' },
-        { key = '<<', action = 'git_add', action_cb = lib.git_add },
-        { key = '>>', action = 'git_unstage', action_cb = lib.git_unstage },
-      },
-    },
   },
 
   renderer = {
@@ -60,7 +50,7 @@ return {
   filters = { dotfiles = true },
 
   -- 打开文件后自动关闭
-  actions = {
-    open_file = { quit_on_open = true },
-  },
+  actions = { open_file = { quit_on_open = true } },
+
+  on_attach = function(buffer) keymaps.init(buffer) end
 }

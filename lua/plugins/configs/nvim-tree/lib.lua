@@ -1,17 +1,11 @@
 local M = {}
 
-local lib = require 'nvim-tree.lib'
-
-function M.git_add()
-  local node = lib.get_node_at_cursor()
-  vim.api.nvim_command('silent !git add ' .. node.absolute_path)
-  lib.refresh_tree()
+function M.git_add(path)
+  vim.api.nvim_command('silent !git add ' .. path)
 end
 
-function M.git_unstage()
-  local node = lib.get_node_at_cursor()
-  vim.api.nvim_command('silent !git restore --staged ' .. node.absolute_path)
-  lib.refresh_tree()
+function M.git_unstage(path)
+  vim.api.nvim_command('silent !git restore --staged ' .. path)
 end
 
 function M.center_floating()
