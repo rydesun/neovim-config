@@ -40,13 +40,11 @@ function M.draw()
     local bufnr = vim.api.nvim_win_get_buf(vim.api.nvim_tabpage_get_win(tabpage))
     local is_selected = tabpage == vim.api.nvim_get_current_tabpage()
     local hl_tab = is_selected and '%#TabLineSel#' or '%#TabLine#'
-    local hl_separator = is_selected and '%#TabLineSepSel#' or '%#TabLineSep#'
     local hl_space = '%#TabLineFill#'
 
     local label = {
-      hl_separator, '',
-      hl_tab, title(bufnr),
-      hl_separator, '',
+      hl_tab, ' ', title(bufnr), ' ',
+      -- 两个标签的中间
       hl_space, ' ',
     }
     table.insert(tabline, table.concat(label))

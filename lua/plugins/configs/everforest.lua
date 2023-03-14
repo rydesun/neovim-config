@@ -12,9 +12,7 @@ local function everforest_custom()
     vim.fn['everforest#get_configuration']().colors_override)
 
   -- tabline
-  vim.fn['everforest#highlight']('TabLineSep', palette.bg3, palette.bg1)
-  vim.fn['everforest#highlight']('TabLineSepSel',
-    palette.statusline1, palette.bg1)
+  vim.cmd.hi('clear TabLineFill')
 
   -- virtual text
   vim.fn['everforest#highlight'](
