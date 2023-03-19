@@ -1,16 +1,14 @@
-不喜欢打开 nvim 噼里啪啦一通安装后才能用，
-想要 nvim 在新机器上立刻可以投入使用。
+试图找到一种简单的 nvim 配置的写法。
 
-**最小干扰：在新机器上立刻可用！**
+**最小干扰：在新机器上立刻可用**
 
-无需安装任何插件，无需任何额外步骤，
-配置立刻处于可用的状态 (除了少数按键不可用)。
-仅仅提供一条不干扰使用的报错信息，
-表明缺少插件管理器 lazy.nvim。
+即使没有外部插件，配置也应该处于可用的状态 (除了少数按键不可用)。
+正常流程不会有安装行为。
+
+仅仅提供一条简短的报错信息，表明缺少插件管理器 lazy.nvim。
 没有 lazy.nvim 就不会安装插件。
 安装任务交给了 [`bootstrap.lua`](bootstrap.lua) 这个
 仅用于首次安装的文件，只有运行该文件才会安装 lazy.nvim。
-正常流程 init.lua 不会有安装行为。
 
 ## 安装
 
@@ -18,7 +16,8 @@
 不会自动安装插件。
 
 让 nvim 执行安装脚本 `bootstrap.lua`，
-即可安装插件管理器 lazy.nvim 和所有插件
+即可安装插件管理器 lazy.nvim 和所有插件。
+所以手动执行该命令
 
 ```bash
 VIM_DEV=1 nvim --headless -u bootstrap.lua +qa
@@ -27,7 +26,7 @@ VIM_DEV=1 nvim --headless -u bootstrap.lua +qa
 插件应该可以正常工作了。此外，没有任何语言是必须提供支持的，
 所以再自行安装 tree-sitter 的 parser 以及从 mason 安装 LSP。
 
-**按需安装插件：区分本地开发环境和服务器。**
+**按需安装插件：区分本地开发环境和简单环境。**
 
 环境变量 `VIM_DEV=1` 是可选的，代表 nvim 在开发代码的环境中，
 将会额外安装 [`lua/plugins/dev.lua`](lua/plugins/dev.lua)
@@ -63,6 +62,22 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 比如 <kbd>Ctrl</kbd> + <kbd>z</kbd> 没之前说的方法好按，
 而且左手小指已经承担了太多的任务，
 尽量不要再给左手小指增加负担了。
+
+其实我在用 [keyd](https://github.com/rvaiya/keyd)
+<details>
+  <summary>我的 keyd 配置</summary>
+
+  ```ini
+  [ids]
+  *
+
+  [main]
+  # 右 Alt 按住不放是 Ctrl，按一次松开是 Escape
+  rightalt = overload(control, esc)
+  rightcontrol = rightalt
+  ```
+</details>
+<br>
 
 按键映射集中在单文件
 [`plugin/keymaps.vim`](plugin/keymaps.vim)
