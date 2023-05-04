@@ -18,7 +18,7 @@ return {
     lualine_c = {
       { 'fileformat', symbols = { unix = '' }, padding = { left = 1, right = 0 } },
       { components.filename, path = 3,
-        symbols = { modified = ' ', readonly = '', unnamed = '' } },
+        symbols = { modified = ' ', readonly = '󰍶', unnamed = '' } },
     },
     lualine_x = { components.encoding },
     lualine_y = {
@@ -43,5 +43,5 @@ return {
       },
     },
   },
-  extensions = { extensions.man, 'nvim-tree', 'quickfix', 'toggleterm' },
+  extensions = { extensions.man, 'lazy', 'nvim-tree', 'quickfix', 'toggleterm' },
 }
