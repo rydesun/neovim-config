@@ -28,6 +28,11 @@ return {
     enabled = vim.fn.executable('fcitx5') > 0,
     cond = cond, event = event },
 
+  -- 查看JSON
+  { 'gennaro-tedesco/nvim-jqx',
+    enabled = vim.fn.executable('jq') > 0,
+    cond = cond, ft = { 'json', 'yaml' } },
+
   -- Obsidian笔记
   { 'epwalsh/obsidian.nvim',
     enabled = vim.fn.executable('obsidian') > 0,
@@ -36,11 +41,6 @@ return {
   -- kitty配置文件的语法高亮
   { 'fladson/vim-kitty',
     enabled = vim.fn.executable('kitty') > 0,
-    cond = cond },
-
-  -- tridactyl配置文件的语法高亮
-  { 'tridactyl/vim-tridactyl',
-    enabled = vim.fn.executable('firefox') > 0,
     cond = cond },
 
   -- 检查启动时间
