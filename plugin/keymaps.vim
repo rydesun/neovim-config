@@ -2,8 +2,8 @@
 noremap  H  ^
 noremap  L  $
 nnoremap Q  @q
-nnoremap ;  :
-nnoremap :  ;
+noremap  ;  :
+noremap  :  ;
 " 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
@@ -68,7 +68,9 @@ nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
 nnoremap <silent>  sg  <Cmd>Telescope git_status<CR>
 " Vim
 nnoremap <silent>  svv <Cmd>Telescope help_tags<CR>
-nnoremap <silent>  svk <Cmd>Telescope keymaps show_plug=false<CR>
+nnoremap <silent>  svk <Cmd>lua require'telescope.builtin'.live_grep { search_dirs={
+                                \ vim.fn.stdpath'config'..'/plugin/keymaps.vim'}}<CR>
+nnoremap <silent>  svK <Cmd>Telescope keymaps show_plug=false<CR>
 nnoremap <silent>  svo <Cmd>Telescope vim_options<CR>
 nnoremap <silent>  svh <Cmd>Telescope highlights<CR>
 
