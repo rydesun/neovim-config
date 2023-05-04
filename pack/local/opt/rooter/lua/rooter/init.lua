@@ -9,7 +9,7 @@ function M.setup(patterns)
     { 'VimEnter', 'BufReadPost', 'BufEnter', 'BufWritePost' }, {
     pattern = { '*' },
     callback = function()
-      if vim.w.rooter_disabled == true then return end
+      if vim.w.rooter_disabled or vim.t.rooter_disabled then return end
       if vim.o.buftype ~= '' then return end
 
       local p = lib.get(patterns)
@@ -22,19 +22,33 @@ function M.setup(patterns)
   vim.api.nvim_create_user_command(
     'RooterLcd',
     function(opts)
-      vim.w.rooter_disabled = true
       vim.api.nvim_command('lcd ' .. opts.args)
+      vim.w.rooter_disabled = true
+    end,
+    { nargs = 1, complete = 'dir' })
+
+  vim.api.nvim_create_user_command(
+    'RooterTcd',
+    function(opts)
+      vim.api.nvim_command('tcd ' .. opts.args)
+      vim.t.rooter_disabled = true
     end,
     { nargs = 1, complete = 'dir' })
 
   vim.api.nvim_create_user_command(
     'RooterDisable',
-    function() vim.w.rooter_disabled = true end,
+    function()
+      vim.w.rooter_disabled = true
+      vim.t.rooter_disabled = true
+    end,
     {})
 
   vim.api.nvim_create_user_command(
     'RooterEnable',
-    function() vim.w.rooter_disabled = false end,
+    function()
+      vim.w.rooter_disabled = false
+      vim.t.rooter_disabled = false
+    end,
     {})
 end
 

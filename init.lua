@@ -55,6 +55,8 @@ vim.o.title = true
 vim.o.laststatus = 3
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
+-- 水平拆分窗口保持内容不动
+vim.o.splitkeep = 'screen'
 
 -- 开启侧边栏的相对行号
 vim.o.relativenumber = true
