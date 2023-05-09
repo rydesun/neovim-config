@@ -180,7 +180,8 @@ nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>exec 'NvimTreeFindFileToggle '.getcwd()<CR>
 nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
-nnoremap <silent>  <leader>o   <Cmd>AerialToggle<CR>
+nnoremap <silent>  <leader>o   <Cmd>AerialToggle float<CR>
+nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
 nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
