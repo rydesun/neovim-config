@@ -1,6 +1,7 @@
 local M = {}
 
 local api = require 'nvim-tree.api'
+local core = require 'nvim-tree.core'
 
 local lib = require 'plugins.configs.nvim-tree.lib'
 
@@ -17,9 +18,17 @@ function M.init(bufnr)
     }
   end
   vim.keymap.set('n', 'l', api.node.open.edit, opts 'Open')
+  vim.keymap.set('n', 'o', api.tree.change_root_to_node, opts 'CD')
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts 'Close Directory')
   vim.keymap.set('n', '<C-k>', api.node.navigate.git.prev, opts 'Prev Git')
   vim.keymap.set('n', '<C-j>', api.node.navigate.git.next, opts 'Next Git')
+  vim.keymap.set('n', ',', function()
+    local cwd = core.get_cwd()
+    vim.notify("RooterLcd " .. cwd)
+    api.tree.toggle()
+    vim.cmd.RooterLcd(cwd)
+    api.tree.toggle()
+  end, opts 'Rooter lcd')
   vim.keymap.set('n', '<<', function()
     local node = api.tree.get_node_under_cursor()
     lib.git_add(node.absolute_path)
