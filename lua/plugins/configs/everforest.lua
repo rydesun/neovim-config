@@ -3,13 +3,15 @@ vim.g.everforest_better_performance = 1
 vim.g.everforest_disable_terminal_colors = 1
 
 vim.g.everforest_background = 'hard'
-vim.g.everforest_sign_column_background = 'none'
 vim.g.everforest_disable_italic_comment = 1
 
 local function everforest_custom()
   -- 在更改background选项后，必须重新获取palette
   local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
     vim.fn['everforest#get_configuration']().colors_override)
+
+  -- 浮动窗口
+  vim.fn['everforest#highlight']('FloatBorder', palette.bg4, palette.none)
 
   -- tabline
   vim.cmd.hi('clear TabLineFill')
@@ -28,9 +30,6 @@ local function everforest_custom()
 
   -- 折叠行
   vim.fn['everforest#highlight']('Folded', palette.aqua, palette.bg_blue)
-
-  -- 浮动窗口
-  vim.api.nvim_command('hi! FloatBorder guibg=None')
 
   -- nvim-cmp
   vim.fn['everforest#highlight']('PmenuSel', palette.none, palette.bg_visual)
