@@ -24,6 +24,7 @@ function M.filename:init(options)
   M.filename.super:init(options)
   self.status_colors = {
     cwd = highlight.create_component_highlight_group(
+      -- TODO: 在配色主题中配置此处的颜色
       { fg = '#5f6d67' }, 'filename_cwd', self.options),
   }
 end

@@ -13,6 +13,13 @@ local function everforest_custom()
   -- 浮动窗口
   vim.fn['everforest#highlight']('FloatBorder', palette.bg4, palette.none)
 
+  -- cursor
+  vim.fn['everforest#highlight']('CursorLine', palette.none, palette.bg0)
+
+  -- winbar
+  vim.fn['everforest#highlight']('WinBar', palette.none, palette.bg_blue)
+  vim.fn['everforest#highlight']('WinBarNC', palette.none, palette.bg_blue)
+
   -- tabline
   vim.cmd.hi('clear TabLineFill')
 
