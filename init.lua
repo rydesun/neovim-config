@@ -105,6 +105,9 @@ vim.o.fileencodings = 'ucs-bom,utf-8,gbk,sjis,euc-jp,big5,gb18030,latin1'
 vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
 vim.o.listchars = 'tab:|·,space:␣,trail:☲,extends:►,precedes:◄'
+-- 软换行保持缩进
+vim.o.breakindent = true
+vim.o.showbreak = '└─'
 -- 隐藏空行的tilde
 vim.opt.fillchars:append 'eob: '
 -- 去掉鼠标右键的菜单
@@ -138,15 +141,15 @@ end
 vim.opt.packpath:prepend(vim.fn.stdpath 'config')
 
 -- 标签栏
-vim.api.nvim_command 'packadd tabline'
+vim.cmd 'packadd tabline'
 require 'tabline'.setup()
 
 -- 自动设置工作目录
-vim.api.nvim_command 'packadd rooter'
+vim.cmd 'packadd rooter'
 require 'rooter'.setup { '.git', 'Makefile', 'package.json' }
 
 -- 修改quickfix界面
-vim.api.nvim_command 'packadd qftf'
+vim.cmd 'packadd qftf'
 -- }}}
 
 -- {{{ 命令行
