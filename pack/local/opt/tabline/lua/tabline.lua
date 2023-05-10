@@ -34,7 +34,7 @@ local function title(bufnr)
 end
 
 function M.draw()
-  local tabline = { ' ' }
+  local tabline = {}
 
   for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
     local bufnr = vim.api.nvim_win_get_buf(vim.api.nvim_tabpage_get_win(tabpage))

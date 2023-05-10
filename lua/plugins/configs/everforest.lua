@@ -1,4 +1,3 @@
-vim.g.everforest_better_performance = 1
 -- 使用终端自身的配色
 vim.g.everforest_disable_terminal_colors = 1
 
@@ -22,6 +21,8 @@ local function everforest_custom()
   hi('WinBarNC', palette.none, palette.bg_blue)
 
   -- tabline
+  hi('TabLine', palette.grey2, palette.bg2, 'bold')
+  hi('TabLineSel', palette.grey2, palette.bg_visual, 'bold')
   vim.cmd 'hi clear TabLineFill'
 
   -- virtual text
@@ -42,8 +43,14 @@ local function everforest_custom()
   -- nvim-cmp
   hi('PmenuSel', palette.none, palette.bg_visual)
 
+  -- nvim-tree
+  vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeNormalFloat'
+
+  -- nvim-treesitter-context
+  hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
+
   -- vim-better-whitespace
-  hi('ExtraWhitespace', palette.none, palette.bg_red)
+  hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 
   -- leap.nvim
   vim.cmd 'hi link LeapLabelPrimary Search'
