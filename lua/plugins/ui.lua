@@ -29,7 +29,7 @@ return {
 
   -- 编辑目录
   { 'stevearc/oil.nvim',
-    cond = cond, config = true },
+    cond = cond, config = true, opts = autoconfig() },
 
   -- 改进quickfix
   { 'kevinhwang91/nvim-bqf',

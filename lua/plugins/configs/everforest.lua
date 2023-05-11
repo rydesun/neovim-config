@@ -46,6 +46,14 @@ local function everforest_custom()
   -- nvim-tree
   vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeNormalFloat'
 
+  -- oil.nvim
+  vim.cmd 'hi! link OilDir NvimTreeFolderName'
+  vim.cmd 'hi! link OilCreate GreenSign'
+  vim.cmd 'hi! link OilDelete RedSign'
+  vim.cmd 'hi! link OilMove OrangeSign'
+  vim.cmd 'hi! link OilCopy AquaSign'
+  vim.cmd 'hi! link OilChange BlueSign'
+
   -- nvim-treesitter-context
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
 
