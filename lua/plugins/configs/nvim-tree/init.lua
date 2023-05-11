@@ -31,8 +31,16 @@ return {
 
     icons = {
       -- git状态显示在侧边栏上
-      git_placement = "signcolumn",
+      git_placement = 'signcolumn',
       glyphs = {
+        default = '󰈔',
+        symlink = '󰪹',
+        folder = {
+          empty = '󰉖',
+          empty_open = '',
+          symlink = '󰉒',
+          symlink_open = '󰷏',
+        },
         git = {
           unstaged = ' *',
           staged = ' +',
