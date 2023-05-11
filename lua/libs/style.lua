@@ -1,5 +1,9 @@
 local M = {}
 
+function M.border()
+  return { '▄', '▄', '▄', '█', '▀', '▀', '▀', '█' }
+end
+
 local symbols = {
   Class         = { '󰆦 ', '类' },
   Color         = { '󰏘 ', '󰏘 ' },

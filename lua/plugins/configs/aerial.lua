@@ -1,4 +1,5 @@
-local border = { '▄', '▄', '▄', '█', '▀', '▀', '▀', '█' }
+local style = require 'libs.style'
+local border = style.border()
 
 return {
   show_guides = true,
@@ -19,5 +20,5 @@ return {
     border = border,
     win_opts = { winblend = 0 },
   },
-  icons = require 'libs.kind'.symbols(),
+  icons = style.symbols(),
 }

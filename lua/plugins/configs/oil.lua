@@ -1,4 +1,4 @@
-local border = { '▄', '▄', '▄', '█', '▀', '▀', '▀', '█' }
+local border = require 'libs.style'.border()
 
 return {
   -- 不显示concealed ID

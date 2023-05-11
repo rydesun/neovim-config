@@ -1,6 +1,6 @@
 local cmp = require 'cmp'
 local types = require 'cmp.types'
-local view_kinds = require 'libs.kind'.texts()
+local view_kinds = require 'libs.style'.texts()
 
 cmp.setup {
   mapping = cmp.mapping.preset.insert {
