@@ -114,22 +114,17 @@ ls / | nvim -R --cmd 'let paging=1'
 可以处理 ANSI 转义码，显示颜色
 
 ```bash
-ls --color=always / | nvim -R --cmd 'let paging=1 | let ansi=1'
+ls --color=always / | sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 ```
 
 作为 kitty 的 scrollback pager 来使用，
 在配置文件 `kitty.conf` 中添加一行
 
 ```bash
-scrollback_pager nvim -R --cmd "let paging=1 | let ansi=1"
+scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 ```
 
-处理 ANSI 转义码的代码实现在
-[`lua/utils/term-cat.lua`](lua/utils/term-cat.lua) 中。
-其实是先把当前 buffer 写入到一个临时文件，再打开一个内置终端，
-调用 `cat` 命令输出该文件。
-
-参考：<https://github.com/kovidgoyal/kitty/issues/2327>
+参考：<https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731>
 
 ## 目录结构
 

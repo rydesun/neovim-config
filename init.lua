@@ -1,20 +1,27 @@
 -- {{{ 环境
 local bool = require 'libs'.bool
+
+-- 是否需要处理ANSI转义序列(在内置终端中输出)
+-- 值必须是指定的文件描述符
+if bool(vim.g.termcat) then vim.g.paging, vim.g.ansi = true, vim.g.termcat end
+
 -- 是否作为pager处理文本
 vim.g.paging = bool(vim.g.paging)
--- 是否需要处理ANSI转义序列
--- 警告：这将会在在内置终端中输出而不是在当前buffer
-vim.g.ansi = bool(vim.g.ansi)
-if vim.g.ansi then
+if bool(vim.g.ansi) then
   vim.api.nvim_create_autocmd('VimEnter', {
     pattern = { '*' },
-    callback = function() require 'utils/term-cat'.run(true, true) end
+    callback = function()
+      vim.cmd.term('cat </dev/fd/' .. vim.g.ansi)
+      vim.bo.filetype = 'ansi'
+    end
   })
+  vim.o.scrollback = 100000
 end
 
 -- 是否在开发环境中 (判断依据为文件.install_dev)
 vim.g.env_dev = bool(vim.fn.filereadable(
   vim.fn.stdpath('data') .. '/lazy/.install_dev'))
+
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux'
 
