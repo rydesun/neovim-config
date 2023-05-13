@@ -8,30 +8,30 @@ return {
     section_separators = '',
   },
   sections = {
-    lualine_a = {
-      { components.filetype,
-        icons_enabled = true, colored = false,
-        color = blob_color,
-      },
-    },
-    lualine_b = {
-      { components.git_branch },
-    },
+    lualine_a = { { components.filetype, color = blob_color } },
+    lualine_b = { { components.git_branch } },
     lualine_c = {
       { components.encoding, padding = { left = 1, right = 0 } },
-      { 'fileformat', padding = { left = 1, right = 0 },
-        symbols = { unix = '', dos = '<DOS>', mac = '<CR>' },
+      {
+        'fileformat',
+        symbols = { unix = '', dos = '<DOS>', mac = '<MAC>' },
+        padding = { left = 1, right = 0 },
       },
-      { components.filename, path = 3,
-        symbols = { modified = '󰆓 ', readonly = '󰍶 ', unnamed = '' } },
+      {
+        components.filename,
+        symbols = { modified = '󰆓 ', readonly = '󰍶 ', unnamed = '' }
+      },
     },
     lualine_x = {
-      { 'diagnostics',
+      {
+        'diagnostics',
         symbols = { error = '● ', warn = '▲ ', info = '■ ', hint = '■ ' },
       },
     },
     lualine_y = { { '%2l/%L' } },
-    lualine_z = { {'progress', color = blob_color} },
+    lualine_z = { { 'progress', color = blob_color } },
   },
-  extensions = { extensions.man, 'lazy', 'quickfix', 'toggleterm' },
+  extensions = {
+    extensions.man, extensions.nvim_tree, extensions.telescope,
+    'lazy', 'quickfix', 'toggleterm' },
 }

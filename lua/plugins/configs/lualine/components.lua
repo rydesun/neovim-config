@@ -15,7 +15,7 @@ end
 M.filetype = require 'lualine.components.filetype':extend()
 
 function M.filetype:update_status()
-  local filetype = M.filetype.super:update_status()
+  local filetype = self.super:update_status()
   return filetype ~= '' and filetype or '-'
 end
 
@@ -40,10 +40,13 @@ local highlight = require 'lualine.highlight'
 
 function M.filename:init(options)
   M.filename.super:init(options)
+  -- 固定选项
+  self.options.path = 3
+
   self.status_colors = {
     cwd = highlight.create_component_highlight_group(
       -- TODO: 在配色主题中配置此处的颜色
-      { fg = '#5f6d67' }, 'filename_cwd', self.options),
+      { fg = '#5f6d67' }, 'filepath_cwd', self.options),
   }
 end
 

@@ -13,7 +13,7 @@ local transform_color = require 'libs'.transform_color(0.3, 30)
 
 function M.blob_color()
   local color = M.filetype_color(transform_color)
-  return color and { bg = color } or {}
+  return color and { bg = color, gui = 'bold' } or {}
 end
 
 return M
