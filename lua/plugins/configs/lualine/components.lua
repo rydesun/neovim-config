@@ -3,18 +3,36 @@ local M = {}
 function M.git_branch()
   local head = vim.b.gitsigns_head
   return head == nil and ''
-      or (head == 'master' or head == 'main' or head == '') and '󰊢 '
-      or '󰊢 ' .. head .. ' '
-end
-
-function M.git_file_status()
-  local status = vim.b.gitsigns_status
-  return (status == nil or status == '') and '' or ' '
+      or (head == 'master' or head == 'main') and '⋆'
+      or ' ' .. head
 end
 
 function M.encoding()
   local fenc = vim.o.fenc
-  return fenc == 'utf-8' and '' or fenc
+  return (fenc == 'utf-8' or fenc == '') and '' or '(' .. fenc .. ')'
+end
+
+M.filetype = require 'lualine.components.filetype':extend()
+
+function M.filetype:update_status()
+  local filetype = M.filetype.super:update_status()
+  return filetype ~= '' and filetype or '-'
+end
+
+function M.filetype:apply_icon()
+  local ok, devicons = pcall(require, 'nvim-web-devicons')
+  if not ok then return nil end
+
+  if self.status == '-' then
+    self.status = '󰈙 -'
+    return
+  end
+
+  local icon = devicons.get_icon_color_by_filetype(
+    vim.bo.filetype, { default = false })
+  if icon == nil then icon = '' end
+
+  self.status = icon .. ' ' .. self.status
 end
 
 M.filename = require 'lualine.components.filename':extend()

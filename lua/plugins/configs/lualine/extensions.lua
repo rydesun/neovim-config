@@ -5,9 +5,10 @@ M.man = {
   sections = {
     lualine_a = { function() return 'MAN' end },
     lualine_b = {
-      { 'filename', file_status = false, padding = { left = 1, right = 0 } }
+      { 'filename', file_status = false }
     },
-    lualine_z = { { '%L/%-2l' } },
+    lualine_y = { { '%2l/%L' } },
+    lualine_z = { { 'progress' } },
   },
 }
 

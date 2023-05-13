@@ -1,47 +1,37 @@
 local components = require 'plugins.configs.lualine.components'
 local extensions = require 'plugins.configs.lualine.extensions'
-local transform_color = require 'libs'.transform_color(0.3, 30)
+local blob_color = require 'plugins.configs.lualine.lib'.blob_color
 
 return {
   options = {
-    section_separators = { left = '', right = '' },
     component_separators = '',
+    section_separators = '',
   },
   sections = {
     lualine_a = {
-      { '%L-%-2l', padding = { left = 1, right = 0 } },
+      { components.filetype,
+        icons_enabled = true, colored = false,
+        color = blob_color,
+      },
     },
     lualine_b = {
-      { components.git_branch, padding = { left = 1, right = 0 } },
-      { components.git_file_status, padding = 0 },
+      { components.git_branch },
     },
     lualine_c = {
-      { 'fileformat', symbols = { unix = '' }, padding = { left = 1, right = 0 } },
+      { components.encoding, padding = { left = 1, right = 0 } },
+      { 'fileformat', padding = { left = 1, right = 0 },
+        symbols = { unix = '', dos = '<DOS>', mac = '<CR>' },
+      },
       { components.filename, path = 3,
-        symbols = { modified = ' ', readonly = '󰍶', unnamed = '' } },
+        symbols = { modified = '󰆓 ', readonly = '󰍶 ', unnamed = '' } },
     },
-    lualine_x = { components.encoding },
-    lualine_y = {
+    lualine_x = {
       { 'diagnostics',
         symbols = { error = '● ', warn = '▲ ', info = '■ ', hint = '■ ' },
-        diagnostics_color = {
-          error = 'DiagnosticFloatingError',
-          warn  = 'DiagnosticFloatingWarn',
-          info  = 'DiagnosticFloatingInfo',
-          hint  = 'DiagnosticFloatingHint',
-        },
       },
     },
-    lualine_z = {
-      { 'filetype', padding = { left = 0, right = 1 },
-        icons_enabled = true, colored = false,
-        color = function()
-          local color = require 'plugins.configs.lualine.lib'
-              .filetype_color(transform_color)
-          return color and { bg = color } or {}
-        end,
-      },
-    },
+    lualine_y = { { '%2l/%L' } },
+    lualine_z = { {'progress', color = blob_color} },
   },
-  extensions = { extensions.man, 'lazy', 'nvim-tree', 'quickfix', 'toggleterm' },
+  extensions = { extensions.man, 'lazy', 'quickfix', 'toggleterm' },
 }
