@@ -32,6 +32,14 @@ return {
     lualine_z = { { 'progress', color = blob_color } },
   },
   extensions = {
-    extensions.man, extensions.nvim_tree, extensions.telescope,
-    'lazy', 'quickfix', 'toggleterm' },
+    extensions.aerial,
+    extensions.diffview_files,
+    extensions.diffview_file_history,
+    extensions.man,
+    extensions.nvim_tree,
+    extensions.telescope,
+    'lazy',
+    'quickfix',
+    'toggleterm',
+  },
 }

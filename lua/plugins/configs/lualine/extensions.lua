@@ -1,5 +1,14 @@
 local blob_color = require 'plugins.configs.lualine.lib'.blob_color
 
+local function template_onlyname(filetype, name)
+  return {
+    filetypes = { filetype },
+    sections = {
+      lualine_a = { { function() return name end, color = blob_color } },
+    },
+  }
+end
+
 local function template(name)
   return {
     lualine_a = { { function() return name end, color = blob_color } },
@@ -9,6 +18,16 @@ local function template(name)
 end
 
 local M = {}
+
+M.aerial = {
+  filetypes = { 'aerial' },
+  sections = template 'aerial',
+}
+
+M.diffview_files = template_onlyname('DiffviewFiles', 'Diffview Files')
+
+M.diffview_file_history = template_onlyname(
+  'DiffviewFileHistory', 'Diffview File History')
 
 M.man = {
   filetypes = { 'man' },
@@ -22,11 +41,6 @@ M.nvim_tree = {
   sections = template 'NvimTree',
 }
 
-M.telescope = {
-  filetypes = { 'TelescopePrompt' },
-  sections = {
-    lualine_a = { { function() return 'Telescope' end, color = blob_color } },
-  },
-}
+M.telescope = template_onlyname('TelescopePrompt', 'Telescope')
 
 return M

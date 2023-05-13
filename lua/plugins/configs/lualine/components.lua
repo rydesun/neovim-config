@@ -52,20 +52,17 @@ end
 
 function M.filename:update_status()
   local path = M.filename.super:update_status() -- 可能被压缩
-  local full_path = vim.fn.expand('%:p')
-  local parent = vim.fn.getcwd() .. '/'
-  local home = vim.env.HOME
-  home = home:sub(string.len(home)) == '/' and home or home .. '/'
-  local short_parent = parent:gsub('^' .. home, '~/')
+  local full_path = vim.fn.expand('%:p:~')
+  local parent = vim.fn.fnamemodify(vim.fn.getcwd()..'/', ':~')
 
   local cwd_hl = highlight.component_format_highlight(self.status_colors.cwd)
   local file_hl = self:get_default_hl()
 
-  if path == '' or full_path == nil then return cwd_hl .. short_parent end
+  if path == '' or full_path == nil then return cwd_hl .. parent end
   if full_path:find(parent, 1, true) ~= 1 then return file_hl .. path end
 
   local count_slash = 0
-  for _ in short_parent:gmatch('/') do count_slash = count_slash + 1 end
+  for _ in parent:gmatch('/') do count_slash = count_slash + 1 end
   local splitter_idx = 0
   for i = 1, #path do
     splitter_idx = splitter_idx + 1
