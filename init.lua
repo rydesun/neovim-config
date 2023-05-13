@@ -3,17 +3,22 @@ local bool = require 'libs'.bool
 
 -- 是否需要处理ANSI转义序列(在内置终端中输出)
 -- 值必须是指定的文件描述符
-if bool(vim.g.termcat) then vim.g.pager, vim.g.ansi = true, vim.g.termcat end
+if bool(vim.g.termcat) then
+  vim.g.pager, vim.g.pipe_fd = true, vim.g.termcat
+end
 
 -- 是否作为pager处理文本
 vim.g.pager = bool(vim.g.pager)
 
-if bool(vim.g.ansi) then
+if bool(vim.g.pipe_fd) then
   vim.api.nvim_create_autocmd('VimEnter', {
     pattern = { '*' },
     callback = function()
-      vim.cmd.term('cat </dev/fd/' .. vim.g.ansi)
-      vim.bo.filetype = 'ansi'
+      vim.cmd.term('cat </dev/fd/' .. vim.g.pipe_fd
+        .. '&& sleep 1' -- sleep防止cat过早被截断
+        .. '&& printf "\x1b]2;"' -- 去掉[Process exited]
+      )
+      vim.bo.filetype = 'termcat'
     end
   })
   vim.o.scrollback = 100000

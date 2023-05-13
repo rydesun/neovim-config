@@ -43,4 +43,9 @@ M.nvim_tree = {
 
 M.telescope = template_onlyname('TelescopePrompt', 'Telescope')
 
+M.termcat = {
+  filetypes = { 'termcat' },
+  sections = template 'TermCat',
+}
+
 return M

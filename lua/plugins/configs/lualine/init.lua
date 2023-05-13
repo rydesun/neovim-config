@@ -38,6 +38,7 @@ return {
     extensions.man,
     extensions.nvim_tree,
     extensions.telescope,
+    extensions.termcat,
     'lazy',
     'quickfix',
     'toggleterm',

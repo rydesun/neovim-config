@@ -2,7 +2,7 @@
 vim.g.show_spaces_that_precede_tabs = 1
 
 vim.g.better_whitespace_filetypes_blacklist = {
-  'qf', 'help', 'markdown', 'ansi', 'xxd',
+  'qf', 'help', 'markdown', 'termcat', 'xxd',
 }
 
 -- 不在内置终端中显示
