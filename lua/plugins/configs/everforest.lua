@@ -67,9 +67,6 @@ local function everforest_custom()
   -- sniprun
   vim.cmd 'hi link SniprunVirtualTextOk VirtualTextInfo'
   vim.cmd 'hi link SniprunVirtualTextErr VirtualTextInfo'
-
-  -- 分页时
-  if vim.g.paging then hi('MsgArea', palette.none, palette.bg2) end
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {

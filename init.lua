@@ -3,10 +3,11 @@ local bool = require 'libs'.bool
 
 -- 是否需要处理ANSI转义序列(在内置终端中输出)
 -- 值必须是指定的文件描述符
-if bool(vim.g.termcat) then vim.g.paging, vim.g.ansi = true, vim.g.termcat end
+if bool(vim.g.termcat) then vim.g.pager, vim.g.ansi = true, vim.g.termcat end
 
 -- 是否作为pager处理文本
-vim.g.paging = bool(vim.g.paging)
+vim.g.pager = bool(vim.g.pager)
+
 if bool(vim.g.ansi) then
   vim.api.nvim_create_autocmd('VimEnter', {
     pattern = { '*' },
@@ -38,7 +39,7 @@ vim.g.plug_cmd = true
 vim.g.plug_dev = vim.g.env_dev
 
 -- pager不需要启用这些插件
-if vim.g.paging then
+if vim.g.pager then
   vim.g.plug_cmd = false
   vim.g.plug_dev = false
 end
@@ -77,18 +78,11 @@ vim.api.nvim_create_autocmd('TermOpen', {
   callback = function() vim.opt_local.relativenumber = false end
 })
 
-if vim.g.paging then
+if vim.g.pager then
   -- 分页时不需要行号和命令行
+  vim.o.number = false
   vim.o.relativenumber = false
   vim.o.cmdheight = 0
-  -- 分页时不需要状态栏(排除man文件类型)
-  -- laststatus会被lualine覆盖，所以需要autocmd
-  vim.api.nvim_create_autocmd('UIEnter', {
-    pattern = { '*' },
-    callback = function()
-      if vim.bo.filetype ~= 'man' then vim.o.laststatus = 0 end
-    end
-  })
 end
 
 -- LSP
@@ -140,7 +134,9 @@ if err ~= nil then
       vim.api.nvim_err_write('插件没有加载(缺失插件管理器lazy.nvim): ')
       vim.api.nvim_err_writeln('需要执行bootstrap.lua')
     end)
-  else error(err) end
+  else
+    error(err)
+  end
 end
 
 -- 本地插件

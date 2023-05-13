@@ -108,7 +108,7 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 同时禁用一些插件来提升启动速度
 
 ```bash
-ls / | nvim -R --cmd 'let paging=1'
+ls / | nvim -R --cmd 'let pager=1'
 ```
 
 可以处理 ANSI 转义码，显示颜色

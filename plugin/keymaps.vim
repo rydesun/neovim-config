@@ -37,7 +37,7 @@ nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 map ga <Plug>(LiveEasyAlign)
 
 " 分页时按q直接退出
-if get(g:, 'paging', v:false) | nnoremap q <Cmd>exit<CR> | endif
+if get(g:, 'pager', v:false) | nnoremap q <Cmd>exit<CR> | endif
 
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
