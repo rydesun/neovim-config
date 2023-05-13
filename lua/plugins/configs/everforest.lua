@@ -44,7 +44,7 @@ local function everforest_custom()
   hi('PmenuSel', palette.none, palette.bg_visual)
 
   -- nvim-tree
-  vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeNormalFloat'
+  vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeFloat'
 
   -- oil.nvim
   vim.cmd 'hi! link OilDir NvimTreeFolderName'

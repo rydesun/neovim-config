@@ -8,20 +8,13 @@ noremap  :  ;
 xnoremap <  <gv
 xnoremap >  >gv
 " 用LSP查看文档
-nnoremap <silent>  K  <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent>  K   <Cmd>lua vim.lsp.buf.hover()<CR>
 
-nnoremap <silent>  M  m
 " leap.nvim跳转
-lua << EOF
-vim.keymap.set('n', 'm', function()
-  require 'leap'.leap {
-    target_windows = vim.tbl_filter(
-      function(win) return vim.api.nvim_win_get_config(win).focusable end,
-      vim.api.nvim_tabpage_list_wins(0)
-    )
-  }
-end)
-EOF
+map                m   <Plug>(leap-forward-to)
+map                M   <Plug>(leap-backward-to)
+map                gm  <Plug>(leap-from-window)
+noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
 " z组：折叠
 nnoremap <silent>  zj  <Cmd>lua require'ufo'.goNextClosedFold()<CR>
@@ -299,10 +292,6 @@ xnoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
 " Git hunk
 onoremap <silent>  ih  <Cmd>Gitsigns select_hunk<CR>
 xnoremap <silent>  ih  :Gitsigns select_hunk<CR>
-
-" AST节点
-onoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
-xnoremap <silent>  m   <Cmd>lua require'leap-ast'.leap()<CR>
 " }}}
 
 " vim: foldmethod=marker:foldlevel=0
