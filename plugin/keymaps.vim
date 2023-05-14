@@ -111,6 +111,7 @@ imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
+nnoremap <silent>  <C-'>       <Cmd>lua require'treesitter-context'.go_to_context()<CR>
 " 交换节点
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
 " 移动光标、调整窗口、关闭
@@ -190,6 +191,14 @@ xnoremap <silent>  <leader>S  <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)
+" c组：复制
+nnoremap <silent>  <leader>cN  <Cmd>echo     expand('%:t')<CR>
+nnoremap <silent>  <leader>cn  <Cmd>let @+ = expand('%:t')<CR>
+nnoremap <silent>  <leader>cF  <Cmd>echo     expand('%:p:~')<CR>
+nnoremap <silent>  <leader>cf  <Cmd>let @+ = expand('%:p:~')<CR>
+nnoremap <silent>  <leader>cD  <Cmd>echo     expand('%:p:~:h')..'/'<CR>
+nnoremap <silent>  <leader>cd  <Cmd>let @+ = expand('%:p:~:h')..'/'<CR>
+
 " h组g组：Git Hunk
 nnoremap <silent>  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>
 xnoremap <silent>  <leader>hs  :Gitsigns stage_hunk<CR>

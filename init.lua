@@ -15,7 +15,7 @@ if bool(vim.g.pipe_fd) then
     pattern = { '*' },
     callback = function()
       vim.cmd.term('cat </dev/fd/' .. vim.g.pipe_fd
-        .. '&& sleep 1' -- sleep防止cat过早被截断
+        .. '&& sleep 1'          -- sleep防止cat过早被截断
         .. '&& printf "\x1b]2;"' -- 去掉[Process exited]
       )
       vim.bo.filetype = 'termcat'
@@ -114,8 +114,10 @@ vim.o.listchars = 'tab:|·,space:␣,trail:☷,extends:►,precedes:◄'
 -- 软换行保持缩进
 vim.o.breakindent = true
 vim.o.showbreak = '└─'
--- 隐藏空行的tilde
-vim.opt.fillchars:append 'eob: '
+-- 修改窗口分隔符，隐藏空行的tilde
+vim.opt.fillchars = 'horiz:▄,horizup:█,horizdown:▄'
+    .. ',vert:█,vertleft:█,vertright:█,verthoriz:█'
+    .. ',eob: '
 -- 去掉鼠标右键的菜单
 vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格
