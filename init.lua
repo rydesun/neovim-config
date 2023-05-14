@@ -11,17 +11,15 @@ end
 vim.g.pager = bool(vim.g.pager)
 
 if bool(vim.g.pipe_fd) then
+  vim.o.scrollback = 100000
   vim.api.nvim_create_autocmd('VimEnter', {
     pattern = { '*' },
     callback = function()
-      vim.cmd.term('cat </dev/fd/' .. vim.g.pipe_fd
-        .. '&& sleep 1'          -- sleep防止cat过早被截断
-        .. '&& printf "\x1b]2;"' -- 去掉[Process exited]
-      )
+      local cmd = 'cat </dev/fd/%d && sleep 10000'
+      vim.cmd.term(cmd:format(vim.g.pipe_fd))
       vim.bo.filetype = 'termcat'
-    end
+    end,
   })
-  vim.o.scrollback = 100000
 end
 
 -- 是否在开发环境中 (判断依据为文件.install_dev)
