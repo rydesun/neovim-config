@@ -12,6 +12,10 @@ function M.encoding()
   return (fenc == 'utf-8' or fenc == '') and '' or '(' .. fenc .. ')'
 end
 
+function M.cwd()
+  return vim.fn.fnamemodify(vim.fn.getcwd()..'/', ':~')
+end
+
 M.filetype = require 'lualine.components.filetype':extend()
 
 function M.filetype:update_status()

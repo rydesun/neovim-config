@@ -1,3 +1,4 @@
+local components = require 'plugins.configs.lualine.components'
 local blob_color = require 'plugins.configs.lualine.lib'.blob_color
 
 local function template_onlyname(filetype, name)
@@ -38,7 +39,9 @@ M.man = {
 
 M.nvim_tree = {
   filetypes = { 'NvimTree' },
-  sections = template 'NvimTree',
+  sections = vim.tbl_extend('force', template 'NvimTree', {
+    lualine_b = { { components.cwd } },
+  }),
 }
 
 M.telescope = template_onlyname('TelescopePrompt', 'Telescope')

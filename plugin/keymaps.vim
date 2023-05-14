@@ -171,7 +171,7 @@ noremap  <silent>  <leader>00  :SnipRun<CR>
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
-nnoremap <silent>  <leader>e   <Cmd>exec 'NvimTreeFindFileToggle '.getcwd()<CR>
+nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle<CR>
 nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
 nnoremap <silent>  <leader>o   <Cmd>AerialToggle float<CR>
 nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
