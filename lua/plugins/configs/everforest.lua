@@ -25,6 +25,10 @@ local function everforest_custom()
   hi('TabLineSel', palette.grey2, palette.bg_visual, 'bold')
   vim.cmd 'hi clear TabLineFill'
 
+  -- statusline
+  vim.cmd 'hi StatusLineNC gui=bold,italic'
+  hi('StatusLineTermNC', palette.fg, palette.bg1, 'bold,italic')
+
   -- virtual text
   local virtual_text = {
     { 'VirtualTextError',   palette.bg_red },

@@ -13,7 +13,7 @@ function M.encoding()
 end
 
 function M.cwd()
-  return vim.fn.fnamemodify(vim.fn.getcwd()..'/', ':~')
+  return vim.fn.fnamemodify(vim.fn.getcwd() .. '/', ':~')
 end
 
 M.filetype = require 'lualine.components.filetype':extend()
@@ -40,43 +40,54 @@ function M.filetype:apply_icon()
 end
 
 M.filename = require 'lualine.components.filename':extend()
-local highlight = require 'lualine.highlight'
 
 function M.filename:init(options)
   M.filename.super:init(options)
   -- 固定选项
   self.options.path = 3
 
-  self.status_colors = {
-    cwd = highlight.create_component_highlight_group(
-      -- TODO: 在配色主题中配置此处的颜色
-      { fg = '#5f6d67' }, 'filepath_cwd', self.options),
+  self.options.hl = {
+    cwd = '%#StatusLineNC#',
+    file = '%#StatusLineTermNC#',
   }
 end
 
 function M.filename:update_status()
-  local path = M.filename.super:update_status() -- 可能被压缩
+  local compact_path = M.filename.super:update_status() -- 可能只有标志没有文件名
   local full_path = vim.fn.expand('%:p:~')
-  local parent = vim.fn.fnamemodify(vim.fn.getcwd()..'/', ':~')
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd() .. '/', ':~')
 
-  local cwd_hl = highlight.component_format_highlight(self.status_colors.cwd)
-  local file_hl = self:get_default_hl()
+  -- 只有家目录时不显示
+  if full_path == '' and cwd == '~/' then return compact_path end
 
-  if path == '' or full_path == nil then return cwd_hl .. parent end
-  if full_path:find(parent, 1, true) ~= 1 then return file_hl .. path end
+  -- 没有文件名没有标志时只显示cwd
+  if compact_path == '' then return self.options.hl.cwd .. cwd end
 
-  local count_slash = 0
-  for _ in parent:gmatch('/') do count_slash = count_slash + 1 end
-  local splitter_idx = 0
-  for i = 1, #path do
-    splitter_idx = splitter_idx + 1
-    local c = path:sub(i, i)
-    if c == '/' then count_slash = count_slash - 1 end
-    if count_slash == 0 then break end
+  -- 没有文件名但有标志时显示cwd和标志
+  if full_path == '' then
+    return self.options.hl.cwd .. cwd .. self.options.hl.file .. compact_path
   end
-  local path_left = path:sub(1, splitter_idx)
-  local path_right = path:sub(splitter_idx + 1)
-  return cwd_hl .. path_left .. file_hl .. path_right
+
+  -- cwd不匹配时直接显示文件路径
+  if full_path:find(cwd, 1, true) ~= 1 then
+    return self.options.hl.file .. compact_path
+  end
+
+  -- 通过计算cwd的slash个数来划分compact_path
+  local count_slash = 0
+  for _ in cwd:gmatch('/') do count_slash = count_slash + 1 end
+  local split_idx
+  for i = 1, #compact_path do
+    local c = compact_path:sub(i, i)
+    if c == '/' then count_slash = count_slash - 1 end
+    if count_slash == 0 then
+      split_idx = i; break
+    end
+  end
+  local compact_path_left = compact_path:sub(1, split_idx)
+  local compact_path_right = compact_path:sub(split_idx + 1)
+  return self.options.hl.cwd .. compact_path_left
+      .. self.options.hl.file .. compact_path_right
 end
 
 return M
