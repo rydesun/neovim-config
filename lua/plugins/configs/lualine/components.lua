@@ -18,6 +18,15 @@ end
 
 M.filetype = require 'lualine.components.filetype':extend()
 
+function M.filetype:init(options)
+  local defaults = {
+    unset = '󰈙 -',
+    fallback_icon = '',
+  }
+  M.filetype.super:init(options)
+  self.options = vim.tbl_deep_extend('keep', self.options or {}, defaults)
+end
+
 function M.filetype:update_status()
   local filetype = self.super:update_status()
   return filetype ~= '' and filetype or '-'
@@ -28,13 +37,13 @@ function M.filetype:apply_icon()
   if not ok then return nil end
 
   if self.status == '-' then
-    self.status = '󰈙 -'
+    self.status = self.options.unset
     return
   end
 
   local icon = devicons.get_icon_color_by_filetype(
     vim.bo.filetype, { default = false })
-  if icon == nil then icon = '' end
+  if icon == nil then icon = self.options.fallback_icon end
 
   self.status = icon .. ' ' .. self.status
 end
@@ -42,18 +51,20 @@ end
 M.filename = require 'lualine.components.filename':extend()
 
 function M.filename:init(options)
-  M.filename.super:init(options)
-  -- 固定选项
-  self.options.path = 3
-
-  self.options.hl = {
-    cwd = '%#StatusLineNC#',
-    file = '%#StatusLineTermNC#',
+  defaults = {
+    hl = {
+      cwd = '%#StatusLineNC#',
+      file = '%#StatusLineTermNC#',
+    }
   }
+  M.filename.super:init(options)
+  self.options.path = 3 -- 固定选项
+  self.options = vim.tbl_deep_extend('keep', self.options or {}, defaults)
 end
 
 function M.filename:update_status()
-  local compact_path = M.filename.super:update_status() -- 可能只有标志没有文件名
+  -- 可能只有标志没有文件名
+  local compact_path = M.filename.super:update_status()
   local full_path = vim.fn.expand('%:p:~')
   local cwd = vim.fn.fnamemodify(vim.fn.getcwd() .. '/', ':~')
 
