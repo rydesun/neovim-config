@@ -32,7 +32,7 @@ M.diffview_file_history = template_onlyname(
 
 M.man = {
   filetypes = { 'man' },
-  sections = vim.tbl_extend('force', template 'Manpage', {
+  sections = vim.tbl_extend('force', template ' Man', {
     lualine_b = { { 'filename', file_status = false } },
   }),
 }
@@ -44,11 +44,17 @@ M.nvim_tree = {
   }),
 }
 
-M.telescope = template_onlyname('TelescopePrompt', 'Telescope')
+M.telescope = {
+  filetypes = { 'TelescopePrompt' },
+  sections = {
+    lualine_a = { { function() return 'Telescope' end, color = blob_color } },
+    lualine_b = { { components.cwd } },
+  },
+}
 
 M.termcat = {
   filetypes = { 'termcat' },
-  sections = template 'TermCat',
+  sections = template ' TermCat',
 }
 
 return M

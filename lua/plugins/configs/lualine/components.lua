@@ -20,8 +20,9 @@ M.filetype = require 'lualine.components.filetype':extend()
 
 function M.filetype:init(options)
   local defaults = {
+    terminal = ' ',
     unset = '󰈙 -',
-    fallback_icon = '',
+    fallback_icon = '󰈙',
   }
   M.filetype.super:init(options)
   self.options = vim.tbl_deep_extend('keep', self.options or {}, defaults)
@@ -37,21 +38,28 @@ function M.filetype:apply_icon()
   if not ok then return nil end
 
   if self.status == '-' then
-    self.status = self.options.unset
+    if vim.bo.buftype == 'terminal' then
+      self.status = self.options.terminal
+    else
+      self.status = self.options.unset
+    end
     return
   end
 
   local icon = devicons.get_icon_color_by_filetype(
     vim.bo.filetype, { default = false })
-  if icon == nil then icon = self.options.fallback_icon end
-
-  self.status = icon .. ' ' .. self.status
+  if icon == nil then
+    icon = vim.bo.buftype == 'nofile' and '' or self.options.fallback_icon
+  end
+  if icon ~= '' then
+    self.status = icon .. ' ' .. self.status
+  end
 end
 
 M.filename = require 'lualine.components.filename':extend()
 
 function M.filename:init(options)
-  defaults = {
+  local defaults = {
     hl = {
       cwd = '%#StatusLineNC#',
       file = '%#StatusLineTermNC#',
