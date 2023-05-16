@@ -54,7 +54,11 @@ return {
   { 'ggandor/leap-ast.nvim',
     cond = cond, event = event },
 
-  -- 交换对象
+  -- 导航和交换AST节点
+  { 'ziontee113/syntax-tree-surfer',
+    cond = cond, event = event, config = true },
+
+  -- 按标签交换AST节点
   { 'mizlan/iswap.nvim',
     cond = cond, event = event, config = true },
 

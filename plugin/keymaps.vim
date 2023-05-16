@@ -91,7 +91,7 @@ EOF
 " }}}
 
 " {{{ 按键 (新增行为)
-" []组：前后跳转
+" []组：前后跳转，切换选项
 " 另外有插件提供更多映射
 nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
@@ -106,15 +106,20 @@ nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=79<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 
-" CtrlAlt组
+" Ctrl组：前后跳转
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
-nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
-nnoremap <silent>  <C-'>       <Cmd>lua require'treesitter-context'.go_to_context()<CR>
-" 交换节点
+nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
+xnoremap <silent>  <C-j>       <Cmd>STSSelectNextSiblingNode<CR>
+xnoremap <silent>  <C-k>       <Cmd>STSSelectPrevSiblingNode<CR>
+xnoremap <silent>  <C-l>       <Cmd>STSSelectParentNode<CR>
+xnoremap <silent>  <C-h>       <Cmd>STSSelectChildNode<CR>
+
+" Alt组：移动对象，移动光标到窗口，调整窗口大小，关闭
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
-" 移动光标、调整窗口、关闭
+xnoremap <silent>  <A-j>       <Cmd>STSSwapNextVisual<CR>
+xnoremap <silent>  <A-k>       <Cmd>STSSwapPrevVisual<CR>
 nnoremap           <A-w>       <C-w>c
 nnoremap           <A-j>       <Cmd>wincmd j<CR>
 nnoremap           <A-k>       <Cmd>wincmd k<CR>
