@@ -9,10 +9,13 @@ function M.filetype_color(post_effect)
   if post_effect ~= nil then return post_effect(color) else return color end
 end
 
-local transform_color = require 'libs'.transform_color(0.3, 30)
+local transform_dark_color = require 'libs'.transform_color(0.3, 30)
+local transform_light_color = require 'libs'.transform_color(0.7, 30)
 
 function M.blob_color()
-  local color = M.filetype_color(transform_color)
+  local color = vim.o.background == 'dark'
+      and M.filetype_color(transform_dark_color)
+      or M.filetype_color(transform_light_color)
   return color and { bg = color, gui = 'bold' } or {}
 end
 

@@ -4,11 +4,18 @@ vim.g.everforest_disable_terminal_colors = 1
 vim.g.everforest_background = 'hard'
 vim.g.everforest_disable_italic_comment = 1
 
+local hi = vim.fn['everforest#highlight']
+
+-- 在更改background选项后，必须重新获取palette
+local function get_palette()
+  return vim.fn['everforest#get_palette'](
+    vim.g.everforest_background,
+    vim.fn['everforest#get_configuration']().colors_override
+  )
+end
+
 local function everforest_custom()
-  local hi = vim.fn['everforest#highlight']
-  -- 在更改background选项后，必须重新获取palette
-  local palette = vim.fn['everforest#get_palette'](vim.g.everforest_background,
-    vim.fn['everforest#get_configuration']().colors_override)
+  local palette = get_palette()
 
   -- 浮动窗口
   hi('FloatBorder', palette.bg4, palette.none)
@@ -28,6 +35,12 @@ local function everforest_custom()
   -- statusline
   vim.cmd 'hi StatusLineNC gui=bold,italic'
   hi('StatusLineTermNC', palette.fg, palette.bg1, 'bold,italic')
+
+  -- Diagnostic Text
+  vim.cmd 'hi! link DiagnosticError Red'
+  vim.cmd 'hi! link DiagnosticWarn Yellow'
+  vim.cmd 'hi! link DiagnosticInfo Blue'
+  vim.cmd 'hi! link DiagnosticHint Green'
 
   -- virtual text
   local virtual_text = {
