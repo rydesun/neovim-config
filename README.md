@@ -12,9 +12,6 @@
 
 ## 安装
 
-这份配置不是开箱即用的，因为没有 lazy.nvim 的情况下
-不会自动安装插件。
-
 让 nvim 执行安装脚本 `bootstrap.lua`，
 即可安装插件管理器 lazy.nvim 和所有插件。
 所以手动执行该命令
@@ -37,6 +34,29 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 `~/.local/share/nvim/lazy/` 下生成一个文件 `.install_dev`，
 这样在配置文件中通过判断该文件是否存在，
 就可以知道是否需要安装开发用插件。
+
+## 支持 Pager
+
+把 nvim 当成 pager 来使用时，禁用一些插件来提升启动速度
+
+```bash
+ls ~ | nvim -R --cmd 'let pager=1'
+```
+
+可以处理 ANSI 转义码，显示颜色
+
+```bash
+ls --color=always ~ | sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
+```
+
+因为可以支持 ANSI 转义码，所以可以作为 kitty 的 scrollback pager 来使用。
+在配置文件 `kitty.conf` 中添加一行
+
+```bash
+scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
+```
+
+参考：<https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731>
 
 ## 按键映射
 
@@ -101,30 +121,6 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 > 你按得很好，下次不许再按了。
 >
 > —— <cite>nvim</cite>
-
-## Pager
-
-把 nvim 当成 pager 来使用，
-同时禁用一些插件来提升启动速度
-
-```bash
-ls / | nvim -R --cmd 'let pager=1'
-```
-
-可以处理 ANSI 转义码，显示颜色
-
-```bash
-ls --color=always / | sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
-```
-
-作为 kitty 的 scrollback pager 来使用，
-在配置文件 `kitty.conf` 中添加一行
-
-```bash
-scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
-```
-
-参考：<https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731>
 
 ## 目录结构
 
