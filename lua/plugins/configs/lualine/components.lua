@@ -9,7 +9,7 @@ end
 
 function M.encoding()
   local fenc = vim.o.fenc
-  return (fenc == 'utf-8' or fenc == '') and '' or '(' .. fenc .. ')'
+  return (fenc == 'utf-8' or fenc == '') and '' or '(fenc=' .. fenc .. ')'
 end
 
 function M.cwd()
@@ -85,6 +85,13 @@ function M.filename:update_status()
   -- 没有文件名但有标志时显示cwd和标志
   if full_path == '' then
     return self.options.hl.cwd .. cwd .. self.options.hl.file .. compact_path
+  end
+
+  -- 如果是URL
+  local protocol = full_path:match '^[%w-]+://'
+  if protocol then
+    local rest = compact_path:match '^[^/]+//(.*)'
+    return self.options.hl.cwd .. protocol .. self.options.hl.file .. rest
   end
 
   -- cwd不匹配时直接显示文件路径

@@ -14,11 +14,12 @@ return {
       { components.encoding, padding = { left = 1, right = 0 } },
       {
         'fileformat',
-        symbols = { unix = '', dos = '<DOS>', mac = '<MAC>' },
+        symbols = { unix = '', dos = '<ff=dos>', mac = '<ff=mac>' },
         padding = { left = 1, right = 0 },
       },
       {
         components.filename,
+        cond = function() return vim.bo.buftype ~= 'nofile' end,
         symbols = { modified = '󰆓 ', readonly = '󰍶 ', unnamed = '' }
       },
     },
