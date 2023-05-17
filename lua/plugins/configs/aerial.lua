@@ -3,6 +3,15 @@ local border = style.border()
 
 return {
   show_guides = true,
+  guides = {
+    mid_item = '├ ',
+    last_item = '└ ',
+    nested_top = '│ ',
+  },
+
+  -- 允许映射到neoscroll
+  post_jump_cmd = "normal zz",
+
   float = {
     border = border,
 
@@ -16,9 +25,11 @@ return {
       return conf
     end,
   },
+
   nav = {
     border = border,
     win_opts = { winblend = 0 },
   },
+
   icons = style.symbols(),
 }

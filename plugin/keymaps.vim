@@ -116,6 +116,9 @@ xnoremap <silent>  <C-k>       <Cmd>STSSelectPrevSiblingNode<CR>
 xnoremap <silent>  <C-l>       <Cmd>STSSelectParentNode<CR>
 xnoremap <silent>  <C-h>       <Cmd>STSSelectChildNode<CR>
 
+nnoremap <silent>  <C-A-j>     <Cmd>AerialNext<CR>
+nnoremap <silent>  <C-A-k>     <Cmd>AerialPrev<CR>
+
 " Alt组：移动对象，移动光标到窗口，调整窗口大小，关闭
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
 xnoremap <silent>  <A-j>       <Cmd>STSSwapNextVisual<CR>
