@@ -14,7 +14,7 @@ function M.setup(patterns)
 
       local p = lib.get(patterns)
       if vim.fn.isdirectory(p) then
-        pcall(function() vim.api.nvim_command('lcd ' .. p) end)
+        pcall(vim.api.nvim_command, 'lcd ' .. p)
       end
     end,
   })

@@ -128,20 +128,16 @@ vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
 -- }}}
 
 -- {{{ 插件
-vim.g.mapleader = ' '
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
 
-local _, err = pcall(function() require 'lazy'.setup 'plugins' end)
-if err ~= nil then
-  if err:find([[module 'lazy' not found]]) then
-    vim.schedule(function()
-      vim.api.nvim_err_write('插件没有加载(缺失插件管理器lazy.nvim): ')
-      vim.api.nvim_err_writeln('需要执行bootstrap.lua')
-    end)
-  else
-    error(err)
-  end
+local ok, lazy = pcall(require, 'lazy')
+if ok then
+  vim.g.mapleader = ' ' -- lazy需要
+  lazy.setup 'plugins'
+else
+  local msg = '插件没有加载(缺失插件管理器lazy.nvim): 需要执行bootstrap.lua'
+  vim.schedule(function() vim.api.nvim_err_writeln(msg) end)
 end
 
 -- 本地插件
