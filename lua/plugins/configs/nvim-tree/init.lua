@@ -2,10 +2,6 @@ local lib = require 'plugins.configs.nvim-tree.lib'
 local keymaps = require 'plugins.configs.nvim-tree.keymaps'
 
 return {
-  -- 打开时root与buffer cwd一致
-  -- 如果想要更新root，可以关闭后重新打开
-  respect_buf_cwd = true,
-
   -- BufEnter自动选中文件(不改root)
   update_focused_file = { enable = true },
 
