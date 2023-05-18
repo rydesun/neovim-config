@@ -1,8 +1,15 @@
 -- 使用终端自身的配色
 vim.g.everforest_disable_terminal_colors = 1
 
-vim.g.everforest_background = 'hard'
+-- 不要斜体
 vim.g.everforest_disable_italic_comment = 1
+
+vim.api.nvim_create_autocmd('ColorSchemePre', {
+  pattern = 'everforest',
+  callback = function()
+    vim.g.everforest_background = vim.o.background == 'dark' and 'hard' or 'soft'
+  end,
+})
 
 local hi = vim.fn['everforest#highlight']
 
@@ -78,12 +85,12 @@ local function everforest_custom()
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 
   -- leap.nvim
-  vim.cmd 'hi link LeapLabelPrimary Search'
-  vim.cmd 'hi link LeapLabelSecondary DiffText'
+  vim.cmd 'hi! link LeapLabelPrimary Search'
+  vim.cmd 'hi! link LeapLabelSecondary DiffText'
 
   -- sniprun
-  vim.cmd 'hi link SniprunVirtualTextOk VirtualTextInfo'
-  vim.cmd 'hi link SniprunVirtualTextErr VirtualTextInfo'
+  vim.cmd 'hi! link SniprunVirtualTextOk VirtualTextInfo'
+  vim.cmd 'hi! link SniprunVirtualTextErr VirtualTextInfo'
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {
