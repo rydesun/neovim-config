@@ -1,49 +1,43 @@
-local cond = vim.g.plug_cmd
-local event = 'VeryLazy'
-local autoconfig = require 'libs'.autoconfig
-
-return {
+return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
   -- 异步执行
-  { 'skywind3000/asyncrun.vim',
-    cond = cond, event = event },
+  { 'skywind3000/asyncrun.vim' },
 
   -- 任务系统
-  { 'skywind3000/asynctasks.vim',
-    cond = cond, event = event, config = autoconfig() },
+  { 'skywind3000/asynctasks.vim', config_file = true },
 
   -- 终端窗口
-  { 'akinsho/toggleterm.nvim', version = '*',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'akinsho/toggleterm.nvim', version = '*', opts_file = true },
 
   -- 集成Git
-  { 'lewis6991/gitsigns.nvim',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'lewis6991/gitsigns.nvim', opts_file = true },
 
   -- Git diff
-  { 'sindrets/diffview.nvim',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'sindrets/diffview.nvim', opts_file = true },
 
   -- 切换输入法
-  { 'lilydjwg/fcitx.vim',
-    enabled = vim.fn.executable('fcitx5') > 0,
-    cond = cond, event = event },
+  { 'lilydjwg/fcitx.vim', enabled = vim.fn.executable('fcitx5') > 0 },
 
   -- 查看JSON
-  { 'gennaro-tedesco/nvim-jqx',
+  {
+    'gennaro-tedesco/nvim-jqx',
     enabled = vim.fn.executable('jq') > 0,
-    cond = cond, ft = { 'json', 'yaml' } },
+    ft = { 'json', 'yaml' },
+  },
 
   -- Obsidian笔记
-  { 'epwalsh/obsidian.nvim',
+  {
+    'epwalsh/obsidian.nvim',
     enabled = vim.fn.executable('obsidian') > 0,
-    cond = cond, event = event, opts = autoconfig() },
+    opts_file = true,
+  },
 
   -- kitty配置文件的语法高亮
-  { 'fladson/vim-kitty',
+  {
+    'fladson/vim-kitty',
     enabled = vim.fn.executable('kitty') > 0,
-    cond = cond },
+    nolazy = true,
+  },
 
   -- 检查启动时间
-  { 'dstein64/vim-startuptime',
-    cond = cond, event = event },
-}
+  { 'dstein64/vim-startuptime' },
+})

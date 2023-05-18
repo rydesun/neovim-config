@@ -1,58 +1,45 @@
-local cond = vim.g.plug_ui
-local event = 'VeryLazy'
-local autoconfig = require 'libs'.autoconfig
-
-return {
+return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   -- 配色主题
-  { 'sainnhe/everforest',
-    cond = cond, config = autoconfig() },
+  { 'sainnhe/everforest', nolazy = true, config_file = true },
 
   -- 状态栏
-  { 'nvim-lualine/lualine.nvim',
-    cond = cond, opts = autoconfig() },
+  { 'nvim-lualine/lualine.nvim', nolazy = true, opts_file = true },
 
   -- 图标字体
-  { 'nvim-tree/nvim-web-devicons',
-    cond = cond, lazy = true, opts = autoconfig() },
+  { 'nvim-tree/nvim-web-devicons', lazy = true, opts_file = true },
 
   -- 浮动通知
-  { 'rcarriga/nvim-notify',
-    cond = cond, event = event, config = autoconfig() },
+  { 'rcarriga/nvim-notify', config_file = true },
 
   -- 搜索提示
-  { 'kevinhwang91/nvim-hlslens',
-    cond = cond, event = event, config = autoconfig() },
+  { 'kevinhwang91/nvim-hlslens', config_file = true },
 
   -- 文件浏览器
-  { 'nvim-tree/nvim-tree.lua',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'nvim-tree/nvim-tree.lua', opts_file = true },
 
   -- 编辑目录
-  { 'stevearc/oil.nvim',
-    cond = cond, config = true, opts = autoconfig() },
+  { 'stevearc/oil.nvim', nolazy = true, opts_file = true },
 
   -- 改进quickfix
-  { 'kevinhwang91/nvim-bqf',
-    cond = cond, event = event },
+  { 'kevinhwang91/nvim-bqf' },
 
   -- 查找
-  { 'nvim-telescope/telescope.nvim',
-    cond = cond, event = event, config = autoconfig(),
+  {
+    'nvim-telescope/telescope.nvim',
+    config_file = true,
     dependencies = {
       -- 搜索支持fzf语法
-      { 'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       -- 补全符号
       'nvim-telescope/telescope-symbols.nvim',
       -- 管理yank
       'AckslD/nvim-neoclip.lua',
-    } },
+    },
+  },
 
   -- 自定义界面
-  { 'stevearc/dressing.nvim',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'stevearc/dressing.nvim', opts_file = true },
 
   -- 保持窗口布局
-  { 'famiu/bufdelete.nvim',
-    cond = cond, event = event },
-}
+  { 'famiu/bufdelete.nvim' },
+})

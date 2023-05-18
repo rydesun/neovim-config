@@ -135,14 +135,6 @@ scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 [`lua/plugins/`](lua/plugins/) 插件列表  
 [`lua/plugins/configs/`](lua/plugins/configs/) 每个插件的设置  
 
-```lua
--- lua/plugins/*.lua
-{ '...', opts = autoconfig() }
-```
-`autoconfig()` 自动从目录 `lua/plugins/configs/`
-加载与插件同名的 .lua 配置文件。
-不用再硬编码包路径，能省一点是一点。
-
 [`pack/`](pack/) 自己管理的插件  
 - [`pack/local/opt/rooter/`](pack/local/opt/rooter/)  
 一个简单的自动设置工作目录的插件。

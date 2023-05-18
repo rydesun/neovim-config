@@ -1,42 +1,33 @@
-local cond = vim.g.plug_view
-local event = 'VeryLazy'
-local autoconfig = require 'libs'.autoconfig
-
-return {
+return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   -- 平滑滚动
-  { 'karb94/neoscroll.nvim',
-    cond = cond, event = event, opts = autoconfig() },
+  { 'karb94/neoscroll.nvim', opts_file = true },
 
   -- 缩进线
-  { 'lukas-reineke/indent-blankline.nvim',
-    cond = cond, opts = autoconfig() },
+  { 'lukas-reineke/indent-blankline.nvim', nolazy = true, opts_file = true },
 
   -- 检测缩进
-  { 'nmac427/guess-indent.nvim',
-    cond = cond, config = true },
+  { 'nmac427/guess-indent.nvim', nolazy = true, config = true },
 
   -- 空白符
-  { 'ntpeters/vim-better-whitespace',
-    cond = cond, init = autoconfig() },
+  { 'ntpeters/vim-better-whitespace', nolazy = true, init_file = true },
 
   -- 折叠
-  { 'kevinhwang91/nvim-ufo',
-    cond = cond, opts = autoconfig(),
-    dependencies = { 'kevinhwang91/promise-async' } },
+  {
+    'kevinhwang91/nvim-ufo',
+    nolazy = true,
+    opts_file = true,
+    dependencies = 'kevinhwang91/promise-async',
+  },
 
   -- 选区diff
-  { 'AndrewRadev/linediff.vim',
-    cond = cond, event = event, config = autoconfig() },
+  { 'AndrewRadev/linediff.vim', config_file = true },
 
   -- 查看hex
-  { 'fidian/hexmode',
-    cond = cond },
+  { 'fidian/hexmode', nolazy = true },
 
   -- 翻译
-  { 'voldikss/vim-translator',
-    cond = cond, event = event },
+  { 'voldikss/vim-translator' },
 
   -- 显示颜色
-  { 'NvChad/nvim-colorizer.lua',
-    cond = cond, opts = autoconfig() },
-}
+  { 'NvChad/nvim-colorizer.lua', nolazy = true, opts_file = true },
+})
