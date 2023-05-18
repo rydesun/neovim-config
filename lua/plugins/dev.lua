@@ -3,15 +3,15 @@ if not vim.g.env_dev then return {} end
 
 return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- {{{ 本地开发 (LSP)
-  -- 集成LSP和DAP等工具
   {
-    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
     nolazy = true,
     config_file = true,
     dependencies = {
-      -- 自动配置
-      'neovim/nvim-lspconfig', 'williamboman/mason-lspconfig.nvim',
-      -- 在此使用default_capabilities
+      -- 集成LSP和DAP等工具
+      { 'williamboman/mason.nvim', config = true },
+      'neovim/nvim-lspconfig',
+      -- 提供被cmp修改后的default_capabilities
       'hrsh7th/cmp-nvim-lsp',
       -- JSON schema
       'b0o/schemastore.nvim',
@@ -23,8 +23,11 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 集成非LSP工具。用null-ls的配置 + mason安装的工具
   {
     'jayp0521/mason-null-ls.nvim',
-    config_file = true,
-    dependencies = { 'mason.nvim', 'jose-elias-alvarez/null-ls.nvim' },
+    opts_file = true,
+    dependencies = {
+      { 'williamboman/mason.nvim', config = true },
+      { 'jose-elias-alvarez/null-ls.nvim', config = true },
+    },
   },
 
   -- 补全时显示函数签名

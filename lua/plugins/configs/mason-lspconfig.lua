@@ -5,7 +5,6 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true
 }
 
-require 'mason'.setup {}
 require 'mason-lspconfig'.setup()
 require 'mason-lspconfig'.setup_handlers {
   function(server_name)
@@ -23,8 +22,6 @@ require 'mason-lspconfig'.setup_handlers {
             library = vim.api.nvim_list_runtime_paths(),
             checkThirdParty = false,
           },
-          -- 开启遥测
-          telemetry = { enable = true },
         }
       }
     }
@@ -53,6 +50,17 @@ require 'mason-lspconfig'.setup_handlers {
           schemas = require 'schemastore'.json.schemas(),
           validate = { enable = true },
         }
+      },
+    }
+  end,
+
+  yamlls = function()
+    lspconfig.yamlls.setup {
+      capabilities = capabilities,
+      settings = {
+        yaml = {
+          schemas = require 'schemastore'.yaml.schemas(),
+        },
       },
     }
   end,

@@ -1,9 +1,6 @@
 local null_ls = require 'null-ls'
-local mason_null_ls = require 'mason-null-ls'
 
-vim.schedule(null_ls.setup)
-
-mason_null_ls.setup {
+return {
   automatic_setup = true,
   handlers = {
     flake8 = function()
