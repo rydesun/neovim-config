@@ -15,11 +15,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   { 'ggandor/leap-spooky.nvim', opts_file = true, dependencies = 'leap.nvim' },
 
   -- 增加a和i的文本对象
-  {
-    'echasnovski/mini.ai',
-    version = '*',
-    config = function() require 'mini.ai'.setup() end,
-  },
+  { 'echasnovski/mini.ai', version = '*', opts_file = 'mini-ai' },
 
   -- 更多的文本对象
   { 'chrisgrieser/nvim-various-textobjs', config = true },
