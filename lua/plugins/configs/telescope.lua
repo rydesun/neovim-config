@@ -41,3 +41,43 @@ require 'neoclip'.setup {
     }
   }
 }
+
+local builtin = require 'telescope.builtin'
+local actions = require 'telescope.actions'
+
+local function autoselect(picker)
+  picker:clear_completion_callbacks()
+  if picker.manager.linked_states.size ~= 1 then return end
+  actions.select_default(picker.prompt_bufnr)
+end
+
+vim.api.nvim_create_user_command('TelescopeGitStatus', function()
+  builtin.git_status { on_complete = { autoselect } }
+end, {})
+
+vim.api.nvim_create_user_command('TelescopeCwdBuffers', function()
+  builtin.buffers {
+    only_cwd = true, ignore_current_buffer = true, sort_lastused = true,
+    on_complete = { autoselect } }
+end, {})
+
+vim.api.nvim_create_user_command('TelescopeBuffers', function()
+  builtin.buffers {
+    ignore_current_buffer = true, sort_lastused = true,
+    on_complete = { autoselect } }
+end, {})
+
+vim.api.nvim_create_user_command('TelescopeGoto', function(opts)
+  builtin.find_files({
+    search_file = opts.fargs[1],
+    on_complete = {
+      function(picker)
+        picker:clear_completion_callbacks()
+        if picker.manager.linked_states.size ~= 1 then return end
+        local first_entry = picker.manager:get_entry(1)
+        if first_entry.value:find '/' ~= nil then return end
+        actions.select_default(picker.prompt_bufnr)
+      end,
+    }
+  })
+end, { nargs = 1 })

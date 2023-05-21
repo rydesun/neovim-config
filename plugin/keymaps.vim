@@ -45,20 +45,21 @@ nnoremap           s   <NOP>
 nnoremap <silent>  S   <Cmd>Telescope<CR>
 nnoremap <silent>  sl  <Cmd>Telescope resume<CR>
 nnoremap <silent>  ss  <Cmd>Telescope live_grep<CR>
+nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
+nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
+nnoremap <silent>  sg  <Cmd>TelescopeGitStatus<CR>
+nnoremap <silent>  sb  <Cmd>TelescopeCwdBuffers<CR>
+nnoremap <silent>  sB  <Cmd>TelescopeBuffers<CR>
+
 nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
 			\ skip_empty_lines=true<CR>
 nnoremap <silent>  s;  <Cmd>Telescope command_history<CR>
 " quickfix/loclist
 nnoremap <silent>  sq  <Cmd>Telescope diagnostics<CR>
 nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
-nnoremap <silent>  sm  <Cmd>Telescope marks<CR>
 " 文件列表(历史打开)
 nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
 nnoremap <silent>  sO  <Cmd>Telescope oldfiles only_cwd=true<CR>
-" 文件列表(当前工作区)
-nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
-nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
-nnoremap <silent>  sg  <Cmd>Telescope git_status<CR>
 " Vim
 nnoremap <silent>  svv <Cmd>Telescope help_tags<CR>
 nnoremap <silent>  svk <Cmd>lua require'telescope.builtin'.live_grep { search_dirs={
@@ -165,7 +166,7 @@ cnoremap           <C-n>       <Down>
 " {{{ 按键 (Leader单键)
 " 另外有插件treesj.nvim占用 s j m
 let g:mapleader=' ' | nnoremap <Space> <Nop>
-let g:maplocalleader=' w'
+let g:maplocalleader='\'
 
 " 数字组：编译运行
 nnoremap <silent>  <leader>1   <Cmd>AsyncTask run<CR>
@@ -265,6 +266,9 @@ nnoremap <silent>  <leader>nf  <Cmd>ObsidianQuickSwitch<CR>
 nnoremap <silent>  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nnoremap <silent>  <leader>nS  <Cmd>ObsidianSync<CR>
 nnoremap <silent>  <leader>nC  <Cmd>ObsidianCommit<CR>
+
+" w组：项目
+nnoremap <silent>  <leader>wr  <Cmd>TelescopeGoto README<CR>
 
 " LocalLeader组：特定文件类型
 " Rust
