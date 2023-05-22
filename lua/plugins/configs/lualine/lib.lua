@@ -10,7 +10,7 @@ function M.filetype_color(post_effect)
 end
 
 local transform_dark_color = require 'libs'.transform_color(0.3, 30)
-local transform_light_color = require 'libs'.transform_color(0.7, 30)
+local transform_light_color = require 'libs'.transform_color(0.5, 56)
 
 function M.blob_color()
   local color = vim.o.background == 'dark'
