@@ -37,9 +37,10 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- {{{ 本地开发 (tree-sitter)
   {
     'nvim-treesitter/nvim-treesitter',
-    nolazy = true,
-    config_file = true,
     build = ':TSUpdate',
+    config = function()
+      require 'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+    end,
   },
 
   -- 查看CST
@@ -49,6 +50,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'nvim-treesitter/nvim-treesitter-context', nolazy = true },
 
   -- AST文本对象(精确)
+  -- 不需要开启，因为有mini.ai在使用query
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
   -- AST文本对象(选择标签)
