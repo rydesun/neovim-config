@@ -6,7 +6,7 @@ return {
     flake8 = function()
       null_ls.register(null_ls.builtins.diagnostics.flake8.with {
         diagnostics_postprocess = function(diagnostic)
-          diagnostic.severity = vim.diagnostic.severity["HINT"]
+          diagnostic.severity = vim.diagnostic.severity.HINT
         end,
       })
     end,
@@ -18,7 +18,7 @@ return {
           virtual_text = false,
         },
         diagnostics_postprocess = function(diagnostic)
-          diagnostic.severity = vim.diagnostic.severity["HINT"]
+          diagnostic.severity = vim.diagnostic.severity.HINT
         end,
       })
     end,
