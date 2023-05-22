@@ -1,6 +1,36 @@
 local lib = require 'plugins.configs.nvim-tree.lib'
 local keymaps = require 'plugins.configs.nvim-tree.keymaps'
 
+local glyphs = {
+  default = '󰈔',
+  symlink = '󰪹',
+  bookmark = ' ♥',
+  folder = {
+    empty = '󰉖',
+    empty_open = '',
+    symlink = '󰉒',
+    symlink_open = '󰷏',
+  },
+}
+
+-- 在virtual console中的图标会显示为圆圈
+if vim.g.env_console then
+  local ok, circles = pcall(require, 'circles')
+  if ok then glyphs = circles.get_nvimtree_glyphs() end
+  glyphs.folder.arrow_closed = '►'
+  glyphs.folder.arrow_open = '▼'
+end
+
+glyphs.git = {
+  unstaged = ' *',
+  staged = ' +',
+  unmerged = ' x',
+  renamed = vim.g.env_console and ' →' or ' ➜',
+  untracked = ' %',
+  deleted = ' _',
+  ignored = ' -',
+}
+
 return {
   -- BufEnter自动选中文件(不改root)
   update_focused_file = { enable = true },
@@ -32,26 +62,7 @@ return {
     icons = {
       -- git状态显示在侧边栏上
       git_placement = 'signcolumn',
-      glyphs = {
-        default = '󰈔',
-        symlink = '󰪹',
-        bookmark = ' ♥',
-        folder = {
-          empty = '󰉖',
-          empty_open = '',
-          symlink = '󰉒',
-          symlink_open = '󰷏',
-        },
-        git = {
-          unstaged = ' *',
-          staged = ' +',
-          unmerged = ' x',
-          renamed = ' ➜',
-          untracked = ' %',
-          deleted = ' _',
-          ignored = ' -',
-        },
-      },
+      glyphs = glyphs,
     },
   },
 

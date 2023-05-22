@@ -1,6 +1,6 @@
 return {
   -- 缩进线字符
-  char = '┊',
+  char = vim.g.env_console and '│' or '┊',
 
   -- 不显示第一层
   show_first_indent_level = false,

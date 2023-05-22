@@ -37,16 +37,21 @@ local symbols = {
 
 function M.symbols()
   local tbl = {}
-  for k, v in pairs(symbols) do
-    tbl[k] = v[1]
+  if vim.g.env_console then
+    for k, v in pairs(symbols) do tbl[k] = '•' end
+  else
+    for k, v in pairs(symbols) do tbl[k] = v[1] end
   end
   return tbl
 end
 
 function M.texts()
   local tbl = {}
-  for k, v in pairs(symbols) do
-    tbl[k] = v[2]
+  if vim.g.env_console then
+    -- 在virtual console中使用英文
+    for k, v in pairs(symbols) do tbl[k] = k end
+  else
+    for k, v in pairs(symbols) do tbl[k] = v[2] end
   end
   return tbl
 end

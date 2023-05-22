@@ -8,6 +8,17 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons', lazy = true, opts_file = true },
 
+  -- 图标回退到圆圈
+  {
+    'projekt0n/circles.nvim',
+    -- 仅在virtual console中生效
+    cond = vim.g.env_console,
+    -- 在console中也能显示的圆圈
+    opts = { icons = { empty = '•', filled = '○', lsp_prefix = '◙' } },
+    priority = 1,
+    dependencies = 'nvim-tree/nvim-web-devicons',
+  },
+
   -- 浮动通知
   { 'rcarriga/nvim-notify', config_file = true },
 
