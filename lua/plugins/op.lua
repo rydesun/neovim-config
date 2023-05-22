@@ -48,13 +48,8 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
     }
   },
 
-  -- 自动匹配
-  {
-    'windwp/nvim-autopairs',
-    config_file = true,
-    -- 与补全插件集成
-    dependencies = 'nvim-cmp',
-  },
+  -- 输入闭合符号
+  { 'altermo/ultimate-autopair.nvim', config = true },
 
   -- 撤销历史
   { 'mbbill/undotree', config_file = true },
