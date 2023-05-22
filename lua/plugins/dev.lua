@@ -39,9 +39,13 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      require 'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+      require 'nvim-treesitter.configs'.setup {
+        highlight = { enable = true }, autotag = { enable = true } }
     end,
   },
+
+  -- 自动输入闭合tag
+  { 'windwp/nvim-ts-autotag', nolazy = true },
 
   -- 查看CST
   { 'nvim-treesitter/playground' },
