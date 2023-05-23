@@ -81,6 +81,10 @@ local function everforest_custom()
   -- nvim-treesitter-context
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
 
+  -- vim-matchup
+  vim.cmd 'hi! link MatchWord CurrentWord'
+  vim.cmd 'hi! link MatchWordCur CurrentWord'
+
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 

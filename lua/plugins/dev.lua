@@ -40,7 +40,8 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
     build = ':TSUpdate',
     config = function()
       require 'nvim-treesitter.configs'.setup {
-        highlight = { enable = true }, autotag = { enable = true } }
+        highlight = { enable = true }, autotag = { enable = true },
+        matchup = { enable = true, disable_virtual_text = true } }
     end,
   },
 
