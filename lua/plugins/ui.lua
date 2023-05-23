@@ -3,7 +3,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   { 'sainnhe/everforest', nolazy = true, config_file = true },
 
   -- 状态栏
-  { 'nvim-lualine/lualine.nvim', nolazy = true, opts_file = true },
+  { 'nvim-lualine/lualine.nvim', opts_file = true },
 
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons', lazy = true, opts_file = true },

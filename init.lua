@@ -64,6 +64,8 @@ vim.opt.shortmess:append 'S'
 vim.o.title = true
 -- 只显示一个窗口的状态栏
 vim.o.laststatus = 3
+-- 之后让插件来设置状态栏
+if vim.g.plug_ui then vim.o.statusline = ' ' end
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
 -- 水平拆分窗口保持内容不动
