@@ -45,6 +45,20 @@ cmp.setup {
       else
         vim_item.kind = '│ ' .. (view_kinds[vim_item.kind] or vim_item.kind)
       end
+
+      local maxwidth = 20
+      local label = vim_item.abbr
+      if #label > maxwidth then
+        local truncated_label = vim.fn.strcharpart(label, 0, maxwidth)
+        local i = maxwidth
+        -- 可能包含中文
+        while vim.fn.strdisplaywidth(truncated_label) > maxwidth do
+          i = i - 1
+          truncated_label = vim.fn.strcharpart(label, 0, i)
+        end
+        vim_item.abbr = truncated_label .. '⋯'
+      end
+
       return vim_item
     end
   },
