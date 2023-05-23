@@ -89,7 +89,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'mzlogin/vim-markdown-toc', nolazy = true },
 
   -- Rust
-  { 'saecki/crates.nvim', nolazy = true, opts_file = true },
+  { 'saecki/crates.nvim', event = 'BufRead Cargo.toml', opts_file = true },
 
   -- LaTex
   { 'lervag/vimtex', nolazy = true, enabled = vim.fn.executable('latex') > 0 },
