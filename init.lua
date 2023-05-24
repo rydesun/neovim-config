@@ -164,18 +164,18 @@ vim.cmd 'packadd qftf'
 -- 统计中文字符数量
 vim.api.nvim_create_user_command(
   'CountZhChars',
-  function(_) require 'utils/zh':count() end,
+  function() require 'uilts.zh'.count() end,
   {}
 )
 
 -- 修复中英文间空格
 vim.api.nvim_create_user_command(
   'TypoSpace',
-  function(_) require 'utils/zh':typo_space() end,
+  function() require 'uilts.zh'.typo_space() end,
   {}
 )
 
-local cabbrev = require 'utils/cabbrev'
+local cabbrev = require 'utils.cabbrev'
 
 -- 以root权限写入
 cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
