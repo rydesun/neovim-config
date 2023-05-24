@@ -48,7 +48,7 @@ cmp.setup {
 
       local maxwidth = 20
       local label = vim_item.abbr
-      if #label > maxwidth then
+      if entry.source.name ~= 'cmdline' and #label > maxwidth then
         local truncated_label = vim.fn.strcharpart(label, 0, maxwidth)
         local i = maxwidth
         -- 可能包含中文
@@ -86,8 +86,6 @@ local cmdline_opts = {
 
 cmp.setup.cmdline(':',
   vim.tbl_extend('error', cmdline_opts, {
-    sources = {
-      { name = 'cmdline' }
-    }
+    sources = { { name = 'cmdline', keyword_length = 3 } }
   })
 )
