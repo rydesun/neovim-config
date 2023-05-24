@@ -24,6 +24,9 @@ end
 local function everforest_custom()
   local palette = get_palette()
 
+  -- 临时配色，之后被lualine接管
+  hi('statusline', palette.grey1, palette.bg1)
+
   -- 浮动窗口
   hi('FloatBorder', palette.bg4, palette.none)
 
