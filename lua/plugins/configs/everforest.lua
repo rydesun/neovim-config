@@ -23,6 +23,7 @@ end
 
 local function everforest_custom()
   local palette = get_palette()
+  local transparent_background = vim.g.everforest_transparent_background or 0
 
   -- 临时配色，之后被lualine接管
   hi('statusline', palette.grey1, palette.bg1)
@@ -45,6 +46,9 @@ local function everforest_custom()
   -- statusline
   vim.cmd 'hi StatusLineNC gui=bold,italic'
   hi('StatusLineTermNC', palette.fg, palette.bg1, 'bold,italic')
+  if transparent_background == 2 then
+    vim.cmd 'hi StatusLineTermNC guibg=none'
+  end
 
   -- Diagnostic Text
   vim.cmd 'hi! link DiagnosticError Red'
@@ -58,11 +62,13 @@ local function everforest_custom()
     { 'VirtualTextWarning', palette.bg_yellow },
     { 'VirtualTextInfo',    palette.bg_green },
     { 'VirtualTextHint',    palette.bg_green },
+    { 'InlayHint',          palette.bg2 },
   }
-  for _, zip in pairs(virtual_text) do hi(zip[1], palette.grey0, zip[2]) end
-
-  -- InlayHint
-  hi('InlayHint', palette.grey0, palette.bg2)
+  for _, zip in pairs(virtual_text) do
+    local name, fg, bg = zip[1], palette.grey0, zip[2]
+    if transparent_background > 0 then bg = palette.none end
+    hi(name, fg, bg)
+  end
 
   -- 折叠行
   hi('Folded', palette.aqua, palette.bg_blue)
