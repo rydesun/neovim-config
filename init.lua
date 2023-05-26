@@ -119,9 +119,10 @@ vim.o.listchars = 'tab:|·,space:␣,trail:☷,extends:►,precedes:◄'
 vim.o.breakindent = true
 vim.o.showbreak = '└─'
 -- 修改窗口分隔符，隐藏空行的tilde
-vim.opt.fillchars = 'horiz:▄,horizup:█,horizdown:▄'
+vim.o.fillchars = 'horiz:▄,horizup:█,horizdown:▄'
     .. ',vert:█,vertleft:█,vertright:█,verthoriz:█'
     .. ',eob: '
+if not vim.g.env_console then vim.opt.fillchars:append { diff = '╲' } end
 -- 去掉鼠标右键的菜单
 vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格

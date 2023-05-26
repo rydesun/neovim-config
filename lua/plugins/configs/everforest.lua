@@ -70,6 +70,10 @@ local function everforest_custom()
     hi(name, fg, bg)
   end
 
+  -- Diff
+  hi('DiffChange', palette.none, palette.bg_dim)
+  hi('DiffText', palette.none, palette.bg_blue)
+
   -- 折叠行
   hi('Folded', palette.aqua, palette.bg_blue)
 
