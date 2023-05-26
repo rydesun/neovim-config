@@ -81,18 +81,18 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 预览Markdown
   {
     'iamcco/markdown-preview.nvim',
-    nolazy = true,
+    ft = 'markdown',
     build = function() vim.fn['mkdp#util#install']() end,
   },
 
   -- 为Markdown生成TOC
-  { 'mzlogin/vim-markdown-toc', nolazy = true },
+  { 'mzlogin/vim-markdown-toc', ft = 'markdown' },
 
   -- Rust
   { 'saecki/crates.nvim', event = 'BufRead Cargo.toml', opts_file = true },
 
   -- LaTex
-  { 'lervag/vimtex', nolazy = true, enabled = vim.fn.executable('latex') > 0 },
+  { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable('latex') > 0 },
   -- }}}
 
   -- {{{ 本地开发 (其他)
@@ -110,9 +110,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
 
   -- Code Runner
   { 'michaelb/sniprun', config = true, build = 'bash ./install.sh' },
-
-  -- EditorConfig
-  { 'gpanders/editorconfig.nvim', nolazy = true },
   -- }}}
 })
 
