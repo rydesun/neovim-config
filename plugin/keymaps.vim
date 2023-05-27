@@ -125,6 +125,7 @@ map      <silent>  <A-p>       <Plug>(matchup-[%)
 map      <silent>  <A-n>       <Plug>(matchup-]%)
 imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
 imap     <silent>  <A-n>       <C-o><Plug>(matchup-]%)
+inoremap           <A-i>       <C-k>
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
 xnoremap <silent>  <A-j>       <Cmd>STSSwapNextVisual<CR>
 xnoremap <silent>  <A-k>       <Cmd>STSSwapPrevVisual<CR>
@@ -151,18 +152,13 @@ cnoremap <expr>    %%          expand('%:p:h').'/'
 " }}}
 
 " {{{ 按键 (Emacs编辑)
-inoremap           <C-a>       <Home>
-inoremap           <C-e>       <End>
-inoremap           <C-b>       <Left>
-inoremap           <C-f>       <Right>
-inoremap           <A-b>       <C-Left>
-inoremap           <A-f>       <C-Right>
+noremap!           <C-a>       <Home>
+noremap!           <C-e>       <End>
+noremap!           <C-b>       <Left>
+noremap!           <C-f>       <Right>
+noremap!           <A-b>       <C-Left>
+noremap!           <A-f>       <C-Right>
 
-cnoremap           <C-a>       <Home>
-cnoremap           <C-b>       <Left>
-cnoremap           <C-f>       <Right>
-cnoremap           <A-b>       <C-Left>
-cnoremap           <A-f>       <C-Right>
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 " }}}
@@ -191,7 +187,7 @@ nnoremap <silent>  <leader>o   <Cmd>AerialToggle float<CR>
 nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
-nnoremap <silent>  <leader>K   <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent>  <leader>K   <Cmd>call feedkeys('K', 'in')<CR>
 nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 
 " LSP
@@ -293,8 +289,8 @@ autocmd filetype markdown call MarkdownKeymap()
 " }}}
 
 " {{{ 按键 (文本对象)
-" 另外有插件nvim-treesitter的配置
 " mini.ai占用a和i
+" sandwich改变了is as ib ab
 
 " 缩进
 onoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
