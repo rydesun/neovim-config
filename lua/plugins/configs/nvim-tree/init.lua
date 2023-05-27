@@ -59,6 +59,8 @@ return {
     -- 开启缩进线
     indent_markers = { enable = true },
 
+    root_folder_label = ':~:s?^?↑ ?',
+
     icons = {
       -- git状态显示在侧边栏上
       git_placement = 'signcolumn',

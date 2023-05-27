@@ -132,6 +132,8 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 -- 补全路径时的过滤规则
 vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
+-- 更好看的diff
+vim.opt.diffopt:append 'linematch:60'
 -- }}}
 
 -- {{{ 插件
