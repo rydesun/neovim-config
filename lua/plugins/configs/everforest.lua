@@ -50,6 +50,9 @@ local function everforest_custom()
     vim.cmd 'hi StatusLineTermNC guibg=none'
   end
 
+  -- quickfix
+  hi('QuickFixLine', palette.none, palette.bg_green)
+
   -- Diagnostic Text
   vim.cmd 'hi! link DiagnosticError Red'
   vim.cmd 'hi! link DiagnosticWarn Yellow'

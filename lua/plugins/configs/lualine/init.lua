@@ -38,10 +38,10 @@ return {
     extensions.diffview_file_history,
     extensions.man,
     extensions.nvim_tree,
+    extensions.quickfix,
     extensions.telescope,
     extensions.termcat,
     'lazy',
-    'quickfix',
     'toggleterm',
   },
 }

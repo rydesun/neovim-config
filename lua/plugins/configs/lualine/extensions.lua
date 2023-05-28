@@ -44,6 +44,11 @@ M.nvim_tree = {
   }),
 }
 
+M.quickfix = require 'lualine.extensions.quickfix'
+local quickfix_color = M.quickfix.sections.lualine_a[1].color
+M.quickfix.sections.lualine_y = { { '%2l/%L' } }
+M.quickfix.sections.lualine_z = { { 'progress', color = quickfix_color } }
+
 M.telescope = {
   filetypes = { 'TelescopePrompt' },
   sections = {

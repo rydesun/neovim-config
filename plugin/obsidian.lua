@@ -38,16 +38,10 @@ local function sync(push, async)
     "cd '%s' && git pull -r && git push",
     vim.g.obsidian_dir)
   return function()
-    local prefix = async and 'AsyncRun' or '!'
+    local prefix = async and 'AsyncRun -mode=term -focus=? -rows=6' or '!'
     local cmd = prefix .. ' ' .. cmd_commit
     if push then cmd = cmd .. ';' .. cmd_push end
-
     vim.api.nvim_command(cmd)
-    if async then
-      local cur_win = vim.api.nvim_get_current_win()
-      vim.cmd.copen()
-      vim.api.nvim_set_current_win(cur_win)
-    end
   end
 end
 

@@ -1,7 +1,6 @@
 " {{{ 按键 (覆盖默认行为)
 noremap  H  ^
 noremap  L  $
-nnoremap Q  @q
 noremap  ;  :
 noremap  :  ;
 " 修改缩进后保持选中
@@ -18,11 +17,11 @@ noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
 " g组：按词跳转
 " 另外有插件debugprint.nvim占用g?
-nnoremap <silent>  gd  <Cmd>Telescope lsp_definitions<CR>
+nnoremap <silent>  gd  <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>  gD  <Cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent>  gy  <Cmd>Telescope lsp_type_definitions<CR>
-nnoremap <silent>  gi  <Cmd>Telescope lsp_implementations<CR>
-nnoremap <silent>  gr  <Cmd>Telescope lsp_references<CR>
+nnoremap <silent>  gy  <Cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent>  gi  <Cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent>  gr  <Cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
 " 表格对齐
 map ga <Plug>(LiveEasyAlign)
