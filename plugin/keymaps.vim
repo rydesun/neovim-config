@@ -16,15 +16,6 @@ map                M   <Plug>(leap-backward-to)
 map                gm  <Plug>(leap-from-window)
 noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
-" z组：折叠
-nnoremap <silent>  zj  <Cmd>lua require'ufo'.goNextClosedFold()<CR>
-nnoremap <silent>  zk  <Cmd>lua require'ufo'.goPreviousClosedFold()<CR>
-nnoremap <silent>  zv  <Cmd>lua require'ufo'.peekFoldedLinesUnderCursor()<CR>
-" 保持foldlevel的值
-nnoremap <silent>  zR  <Cmd>lua require 'ufo'.openAllFolds()<CR>
-nnoremap <silent>  zr  <Cmd>lua require 'ufo'.openFoldsExceptKinds()<CR>
-nnoremap <silent>  zM  <Cmd>lua require 'ufo'.closeAllFolds()<CR>
-
 " g组：按词跳转
 " 另外有插件debugprint.nvim占用g?
 nnoremap <silent>  gd  <Cmd>Telescope lsp_definitions<CR>
