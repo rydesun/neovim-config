@@ -70,6 +70,7 @@ vim.o.laststatus = 3
 if vim.g.plug_ui then vim.o.statusline = ' ' end
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
+vim.cmd.autocmd 'FileType qf setlocal scrolloff=0'
 -- 水平拆分窗口保持内容不动
 vim.o.splitkeep = 'screen'
 -- 弹出菜单的最大高度

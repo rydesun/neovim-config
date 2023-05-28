@@ -133,9 +133,12 @@ tnoremap           <A-k>       <Cmd>wincmd k<CR>
 tnoremap           <A-h>       <Cmd>wincmd h<CR>
 tnoremap           <A-l>       <Cmd>wincmd l<CR>
 tnoremap           <A-q>       <C-\><C-n>
-nnoremap           <A-q>       <Cmd>cclose<CR>
 nnoremap           <A-f>       <Cmd>Bdelete<CR>
 nnoremap           <A-t>       <Cmd>tabclose<CR>
+nnoremap           <A-q>       <Cmd>call <SID>toggleQuickFix()<CR>
+function! s:toggleQuickFix()
+    if getqflist({'winid' : 0}).winid | cclose | else | copen | endif
+endfunction
 
 " 命令行
 cnoremap <expr>    %%          expand('%:p:h').'/'
