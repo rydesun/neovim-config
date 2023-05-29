@@ -214,6 +214,7 @@ nnoremap <silent>  <leader>hb  <Cmd>lua require'gitsigns'.blame_line{full=true}<
 nnoremap <silent>  <leader>hB  <Cmd>Gitsigns toggle_current_line_blame<CR>
 nnoremap <silent>  <leader>hd  <Cmd>Gitsigns toggle_deleted<CR>
 nnoremap <silent>  <leader>hw  <Cmd>Gitsigns toggle_word_diff<CR>
+nnoremap <silent>  <leader>hq  <Cmd>Gitsigns setqflist all<CR>
 
 nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
 nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>

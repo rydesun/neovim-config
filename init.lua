@@ -70,7 +70,7 @@ vim.o.laststatus = 3
 if vim.g.plug_ui then vim.o.statusline = ' ' end
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
-vim.cmd.autocmd 'FileType qf setlocal scrolloff=0'
+vim.cmd 'autocmd FileType qf setlocal scrolloff=0'
 -- 水平拆分窗口保持内容不动
 vim.o.splitkeep = 'screen'
 -- 弹出菜单的最大高度
@@ -209,6 +209,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'Visual', timeout = 80 }
   end,
 })
+
+-- ripgrep
+if vim.fn.executable 'rg' > 0 then
+  vim.o.grepprg = 'rg --vimgrep --smart-case'
+  vim.o.grepformat = '%f:%l:%c:%m'
+end
+vim.cmd 'autocmd QuickFixCmdPost *grep* cwindow'
+vim.api.nvim_create_user_command('G', 'silent! grep! <args>',
+  { nargs = '+', complete = 'file' })
+vim.api.nvim_create_user_command('Gadd', 'silent! grepadd! <args>',
+  { nargs = '+', complete = 'file' })
+vim.api.nvim_create_user_command('Gfix',
+  'G FIXME | Gadd TODO', {})
+vim.api.nvim_create_user_command('Gfixall',
+  'G FIXME | Gadd TODO | Gadd XXX | Gadd HACK', {})
 -- }}}
 
 -- vim: foldmethod=marker:foldlevel=0
