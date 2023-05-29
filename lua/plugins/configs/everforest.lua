@@ -25,6 +25,8 @@ local function everforest_custom()
   local palette = get_palette()
   local transparent_background = vim.g.everforest_transparent_background or 0
 
+  vim.cmd 'hi ErrorMsg gui=bold,reverse'
+
   -- 临时配色，之后被lualine接管
   hi('statusline', palette.grey1, palette.bg1)
 
@@ -39,9 +41,9 @@ local function everforest_custom()
   hi('WinBarNC', palette.none, palette.bg_blue)
 
   -- tabline
-  hi('TabLine', palette.grey2, palette.bg2, 'bold')
-  hi('TabLineSel', palette.grey2, palette.bg_visual, 'bold')
-  vim.cmd 'hi clear TabLineFill'
+  hi('TabLine', palette.fg, palette.bg_dim)
+  hi('TabLineSel', palette.fg, palette.none)
+  hi('TabLineFill', palette.fg, palette.bg_dim)
 
   -- statusline
   vim.cmd 'hi StatusLineNC gui=bold,italic'
@@ -61,11 +63,11 @@ local function everforest_custom()
 
   -- virtual text
   local virtual_text = {
-    { 'VirtualTextError',   palette.bg_red },
+    { 'VirtualTextError', palette.bg_red },
     { 'VirtualTextWarning', palette.bg_yellow },
-    { 'VirtualTextInfo',    palette.bg_green },
-    { 'VirtualTextHint',    palette.bg_green },
-    { 'InlayHint',          palette.bg2 },
+    { 'VirtualTextInfo', palette.bg_green },
+    { 'VirtualTextHint', palette.bg_green },
+    { 'InlayHint', palette.bg2 },
   }
   for _, zip in pairs(virtual_text) do
     local name, fg, bg = zip[1], palette.grey0, zip[2]

@@ -156,7 +156,9 @@ vim.opt.packpath:prepend(vim.fn.stdpath 'config')
 
 -- 标签栏
 vim.cmd 'packadd tabline'
-require 'tabline'.setup()
+require 'tabline'.setup(vim.g.env_console and {} or {
+  terminal_ok = '✔', terminal_fail = '✖',
+})
 
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
