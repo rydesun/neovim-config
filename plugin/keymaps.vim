@@ -45,7 +45,9 @@ nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
 			\ skip_empty_lines=true<CR>
 nnoremap <silent>  s;  <Cmd>Telescope command_history<CR>
 " quickfix/loclist
-nnoremap <silent>  sq  <Cmd>Telescope diagnostics<CR>
+nnoremap <silent>  sn  <Cmd>lua require'hlslens'.exportLastSearchToQuickfix();
+      \ vim.cmd 'cwindow'; vim.cmd 'noh'<CR>
+nnoremap <silent>  sq  <Cmd>lua vim.diagnostic.setqflist()<CR>
 nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
 " 文件列表(历史打开)
 nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
@@ -180,7 +182,7 @@ nnoremap <silent>  <leader>o   <Cmd>AerialToggle float<CR>
 nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
-nnoremap <silent>  <leader>K   <Cmd>call feedkeys('K', 'in')<CR>
+nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
 nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 
 " LSP

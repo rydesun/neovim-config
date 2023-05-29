@@ -1,58 +1,54 @@
-require'hlslens'.setup{nearest_only = true}
+local hlslens = require 'hlslens'
 
-local hlslens = require'hlslens'
-local config = require'hlslens.config'
-local lensBak
+hlslens.setup {}
 
-local keymap = vim.api.nvim_set_keymap
-local kopts = {noremap = true, silent = true}
-keymap('n', 'n',
-  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-  kopts)
-keymap('n', 'N',
-  [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-  kopts)
-keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-
--- https://github.com/kevinhwang91/nvim-hlslens#integrate-with-other-plugins
-local function override_lens(render, posList, nearest, idx, relIdx)
-    local _ = relIdx
-    local lnum, col = unpack(posList[idx])
-
-    local text, chunks
-    if nearest then
-        text = ('[%d/%d]'):format(idx, #posList)
-        chunks = {{' ', 'Ignore'}, {text, 'VM_Extend'}}
-    else
-        text = ('[%d]'):format(idx)
-        chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
-    end
-    render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+local function hlslens_start(key)
+  return function()
+    local ok, res = pcall(vim.cmd.normal, { vim.v.count1 .. key, bang = true })
+    if not ok then vim.api.nvim_err_writeln(res) end
+    hlslens.start()
+  end
 end
 
-local function vmlens_start()
-    if hlslens then
-        lensBak = config.override_lens
-        config.override_lens = override_lens
-        hlslens.start(true)
-    end
+local kopts = { noremap = true, silent = true }
+vim.keymap.set('n', 'n', hlslens_start 'n', kopts)
+vim.keymap.set('n', 'N', hlslens_start 'N', kopts)
+vim.keymap.set('n', '*', hlslens_start '*', kopts)
+vim.keymap.set('n', '#', hlslens_start '#', kopts)
+vim.keymap.set('n', 'g*', hlslens_start 'g*', kopts)
+vim.keymap.set('n', 'g#', hlslens_start 'g#', kopts)
+
+
+-- https://github.com/kevinhwang91/nvim-hlslens#vim-visual-multi
+local function vm_override_lens(render, posList, nearest, idx, relIdx)
+  local _ = relIdx
+  local lnum, col = unpack(posList[idx])
+
+  local text, chunks
+  if nearest then
+    text = ('[%d/%d]'):format(idx, #posList)
+    chunks = { { ' ', 'Ignore' }, { text, 'VM_Extend' } }
+  else
+    text = ('[%d]'):format(idx)
+    chunks = { { ' ', 'Ignore' }, { text, 'HlSearchLens' } }
+  end
+  render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
 end
 
-local function vmlens_exit()
-    if hlslens then
-        config.override_lens = lensBak
-        hlslens.start(true)
-    end
-end
+local config = require 'hlslens.config'
+local default_override_lens = config.override_lens
 
-vim.api.nvim_create_autocmd({"User"}, {
-  pattern = {"visual_multi_start"},
-  callback = function() vmlens_start() end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'visual_multi_start',
+  callback = function()
+    config.override_lens = vm_override_lens
+    hlslens.start(true)
+  end,
 })
-vim.api.nvim_create_autocmd({"User"}, {
-  pattern = {"visual_multi_exit"},
-  callback = function() vmlens_exit() end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'visual_multi_exit',
+  callback = function()
+    config.override_lens = default_override_lens
+    hlslens.start(true)
+  end,
 })
