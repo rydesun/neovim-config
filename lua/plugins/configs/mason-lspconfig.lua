@@ -36,6 +36,16 @@ require 'mason-lspconfig'.setup_handlers {
         return default_config.root_dir(fname) or
             require 'lspconfig.util'.find_git_ancestor(fname)
       end,
+      settings = {
+        python = {
+          analysis = {
+            diagnosticSeverityOverrides = {
+              reportOptionalMemberAccess = "warning",
+              reportPrivateImportUsage = "information",
+            }
+          },
+        },
+      },
     }
   end,
 

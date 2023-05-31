@@ -2,6 +2,9 @@ local view_ivy = { theme = 'ivy', trim_text = true }
 local view_dropdown = { theme = 'dropdown', previewer = false }
 
 require 'telescope'.setup {
+  defaults = {
+    file_ignore_patterns = { '__pycache__' },
+  },
   pickers = {
     lsp_definitions = view_ivy,
     lsp_type_definitions = view_ivy,
