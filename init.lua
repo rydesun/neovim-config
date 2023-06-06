@@ -162,7 +162,10 @@ require 'tabline'.setup(vim.g.env_console and {} or {
 
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
-require 'rooter'.setup { '.git', 'Makefile', 'package.json' }
+require 'rooter'.setup(
+  { '.git', 'Makefile', 'package.json' },
+  { '__init__.py' }
+)
 
 -- 修改quickfix界面
 vim.cmd 'packadd qftf'

@@ -2,9 +2,7 @@ M = {}
 
 local lib = require 'rooter.lib'
 
-function M.setup(patterns)
-  if type(patterns) ~= 'table' or #patterns == 0 then error 'bad arg' end
-
+function M.setup(right_pat, left_pat)
   vim.api.nvim_create_autocmd(
     { 'VimEnter', 'BufReadPost', 'BufEnter', 'BufWritePost' }, {
     pattern = { '*' },
@@ -12,7 +10,7 @@ function M.setup(patterns)
       if vim.w.rooter_disabled or vim.t.rooter_disabled then return end
       if vim.o.buftype ~= '' then return end
 
-      local p = lib.get(patterns)
+      local p = lib.get(right_pat, left_pat)
       if vim.fn.isdirectory(p) then
         pcall(vim.api.nvim_command, 'lcd ' .. p)
       end
