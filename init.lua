@@ -82,18 +82,16 @@ vim.o.relativenumber = true
 vim.o.signcolumn = 'number'
 -- 行号的最低宽度
 vim.o.numberwidth = 3
--- 终端不需要侧边栏
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = { '*' },
-  callback = function() vim.opt_local.relativenumber = false end
-})
 
-if vim.g.pager then
-  -- 分页时不需要行号和命令行
-  vim.o.number = false
-  vim.o.relativenumber = false
-  vim.o.cmdheight = 0
+local function disable_number()
+  vim.opt_local.number = false
+  vim.opt_local.relativenumber = false
 end
+-- 分页或者终端不需要行号
+if vim.g.pager then disable_number() end
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*', callback = disable_number,
+})
 
 -- LSP
 vim.diagnostic.config {
