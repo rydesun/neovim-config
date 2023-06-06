@@ -9,7 +9,7 @@ end
 
 function M.encoding()
   local fenc = vim.o.fenc
-  return (fenc == 'utf-8' or fenc == '') and '' or '(fenc=' .. fenc .. ')'
+  return (fenc == 'utf-8' or fenc == '') and '' or '(' .. fenc .. ')'
 end
 
 function M.cwd()

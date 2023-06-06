@@ -2,6 +2,7 @@ local style = require 'libs.style'
 local border = style.border()
 
 return {
+  backends = { cpp = { 'lsp' } },
   show_guides = true,
   guides = {
     mid_item = '├ ',

@@ -15,7 +15,12 @@ return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
   { 'sindrets/diffview.nvim', opts_file = true },
 
   -- 切换输入法
-  { 'lilydjwg/fcitx.vim', enabled = vim.fn.executable('fcitx5') > 0 },
+  {
+    'lilydjwg/fcitx.vim',
+    enabled = vim.fn.executable('fcitx5') > 0,
+    -- 不用dbus-python
+    init = function() vim.g.fcitx5_remote = 'fcitx5-remote' end,
+  },
 
   -- 查看JSON
   {
