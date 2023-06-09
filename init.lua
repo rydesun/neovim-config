@@ -161,11 +161,11 @@ require 'tabline'.setup(vim.g.env_console and {} or {
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
 require 'rooter'.setup(
-  -- 目录内包含(父目录从右到左检查)
-  { '.git', 'Makefile', 'package.json' },
-  -- 目录内包含(父目录从左到右检查)
+  -- 目录内包含(检查每一级父目录，从右到左)
+  { 'package.json', 'Cargo.toml', '.git', 'Makefile', 'LICENSE*' },
+  -- 目录内包含(检查每一级父目录，从左到右)
   { '__init__.py' },
-  -- 目录名匹配(父目录从右到左检查)
+  -- 目录名匹配(检查每一级父目录，从右到左)
   { 'src', 'etc' }
 )
 

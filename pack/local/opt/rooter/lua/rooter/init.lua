@@ -3,50 +3,47 @@ M = {}
 local lib = require 'rooter.lib'
 
 function M.setup(right_own, left_own, right_names)
+  M.pinned = {}
+
   vim.api.nvim_create_autocmd(
     { 'VimEnter', 'BufReadPost', 'BufEnter', 'BufWritePost' }, {
-    pattern = { '*' },
-    callback = function()
-      if vim.w.rooter_disabled or vim.t.rooter_disabled then return end
-      if vim.o.buftype ~= '' then return end
+      pattern = { '*' },
+      callback = function()
+        if M.disabled then return end
+        if vim.o.buftype ~= '' then return end
 
-      local p = lib.get(right_own, left_own, right_names)
-      if vim.fn.isdirectory(p) then
-        pcall(vim.api.nvim_command, 'lcd ' .. p)
-      end
-    end,
-  })
+        local current_dir = vim.fn.expand '%:p:h'
+        for _, dir in ipairs(M.pinned) do
+          if current_dir:sub(1, string.len(dir)) == dir then
+            pcall(vim.api.nvim_command, 'lcd ' .. dir)
+            return
+          end
+        end
+
+        local dir = lib.get(right_own, left_own, right_names)
+        if vim.fn.isdirectory(dir) then
+          pcall(vim.api.nvim_command, 'lcd ' .. dir)
+        end
+      end,
+    })
 
   vim.api.nvim_create_user_command(
-    'RooterLcd',
+    'RooterPin',
     function(opts)
-      vim.api.nvim_command('lcd ' .. opts.args)
-      vim.w.rooter_disabled = true
-    end,
-    { nargs = 1, complete = 'dir' })
-
-  vim.api.nvim_create_user_command(
-    'RooterTcd',
-    function(opts)
-      vim.api.nvim_command('tcd ' .. opts.args)
-      vim.t.rooter_disabled = true
+      local dir = vim.fn.fnamemodify(opts.args, ':p')
+      M.pinned = { dir }
+      vim.api.nvim_command('lcd ' .. dir)
     end,
     { nargs = 1, complete = 'dir' })
 
   vim.api.nvim_create_user_command(
     'RooterDisable',
-    function()
-      vim.w.rooter_disabled = true
-      vim.t.rooter_disabled = true
-    end,
+    function() M.disabled = true end,
     {})
 
   vim.api.nvim_create_user_command(
     'RooterEnable',
-    function()
-      vim.w.rooter_disabled = false
-      vim.t.rooter_disabled = false
-    end,
+    function() M.disabled = false end,
     {})
 end
 
