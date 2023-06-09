@@ -82,6 +82,12 @@ local function everforest_custom()
   -- 折叠行
   hi('Folded', palette.aqua, palette.bg_blue)
 
+  -- telescope
+  hi('TelescopeResultsDiffChange', palette.blue, palette.none)
+  hi('TelescopeResultsDiffAdd', palette.red, palette.none)
+  hi('TelescopeResultsDiffDelete', palette.yellow, palette.none)
+  hi('TelescopeResultsDiffUntracked', palette.purple, palette.none)
+
   -- nvim-cmp
   hi('PmenuSel', palette.none, palette.bg_visual)
 

@@ -24,7 +24,19 @@ require 'telescope'.setup {
     oldfiles = view_dropdown,
 
     find_files = view_dropdown,
-    git_status = view_dropdown,
+    git_status = {
+      theme = 'dropdown',
+      previewer = false,
+      git_icons = {
+        added = '+',
+        changed = '•',
+        copied = '>',
+        deleted = '-',
+        renamed = vim.g.env_console and ' →' or ' ➜',
+        unmerged = 'x',
+        untracked = '%',
+      },
+    },
 
     help_tags = view_ivy,
 
