@@ -2,7 +2,7 @@ M = {}
 
 local lib = require 'rooter.lib'
 
-function M.setup(right_pat, left_pat)
+function M.setup(right_own, left_own, right_names)
   vim.api.nvim_create_autocmd(
     { 'VimEnter', 'BufReadPost', 'BufEnter', 'BufWritePost' }, {
     pattern = { '*' },
@@ -10,7 +10,7 @@ function M.setup(right_pat, left_pat)
       if vim.w.rooter_disabled or vim.t.rooter_disabled then return end
       if vim.o.buftype ~= '' then return end
 
-      local p = lib.get(right_pat, left_pat)
+      local p = lib.get(right_own, left_own, right_names)
       if vim.fn.isdirectory(p) then
         pcall(vim.api.nvim_command, 'lcd ' .. p)
       end

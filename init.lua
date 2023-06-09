@@ -161,8 +161,12 @@ require 'tabline'.setup(vim.g.env_console and {} or {
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
 require 'rooter'.setup(
+  -- 目录内包含(父目录从右到左检查)
   { '.git', 'Makefile', 'package.json' },
-  { '__init__.py' }
+  -- 目录内包含(父目录从左到右检查)
+  { '__init__.py' },
+  -- 目录名匹配(父目录从右到左检查)
+  { 'src', 'etc' }
 )
 
 -- 修改quickfix界面
