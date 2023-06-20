@@ -17,8 +17,12 @@ local function dir_owns(dir, filename_pattern, l_to_r)
       is_found, matched_dir = true, current_dir
       if not l_to_r then loop = false end
     end
-    current_dir = get_parent_dir(current_dir)
-    if current_dir == '/' then loop = false end
+    local parent_dir = get_parent_dir(current_dir)
+    if parent_dir == current_dir then
+      loop = false
+    else
+      current_dir = parent_dir
+    end
   end
   return is_found, matched_dir
 end
