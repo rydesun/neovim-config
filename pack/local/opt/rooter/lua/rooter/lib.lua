@@ -18,7 +18,7 @@ local function dir_owns(dir, filename_pattern, l_to_r)
       if not l_to_r then loop = false end
     end
     local parent_dir = get_parent_dir(current_dir)
-    if parent_dir == current_dir then
+    if parent_dir == '.' or parent_dir == current_dir then
       loop = false
     else
       current_dir = parent_dir
@@ -44,8 +44,12 @@ local function dir_match_names(dir, patterns)
       if vim.fn.fnamemodify(current_dir, ':t') == pattern then
         is_found, loop = true, false
       else
-        current_dir = get_parent_dir(current_dir)
-        if current_dir == '/' then loop = false end
+        local parent_dir = get_parent_dir(current_dir)
+        if parent_dir == '.' or parent_dir == current_dir then
+          loop = false
+        else
+          current_dir = parent_dir
+        end
       end
     end
     if is_found then return current_dir end
