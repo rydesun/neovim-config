@@ -40,8 +40,9 @@ require 'mason-lspconfig'.setup_handlers {
         python = {
           analysis = {
             diagnosticSeverityOverrides = {
-              reportOptionalMemberAccess = "warning",
-              reportPrivateImportUsage = "information",
+              reportOptionalMemberAccess = 'warning',
+              reportPrivateImportUsage = 'information',
+              reportWildcardImportFromLibrary = 'information',
             }
           },
         },
@@ -79,4 +80,7 @@ require 'mason-lspconfig'.setup_handlers {
 -- 使用系统端安装的包
 if vim.fn.executable 'clangd' > 0 then
   lspconfig.clangd.setup { capabilities = capabilities }
+end
+if vim.fn.executable 'haskell-language-server' > 0 then
+  lspconfig.hls.setup { capabilities = capabilities }
 end
