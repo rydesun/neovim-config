@@ -170,6 +170,7 @@ nnoremap <silent>  <leader>3   <Cmd>AsyncTask build-release<CR>
 nnoremap <silent>  <leader>4   <Cmd>AsyncTask coverage<CR>
 nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
 nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <leader>9   <Cmd>AsyncTask custom<CR>
 nnoremap <silent>  <leader>0t  <Cmd>AsyncTask repl<CR>
 noremap  <silent>  <leader>00  :SnipRun<CR>
 nnoremap <silent>  <leader>0-  <Cmd>AsyncTaskTogglePos<CR>
@@ -296,7 +297,9 @@ autocmd filetype rust call RustKeymap()
 
 " Markdown
 function! MarkdownKeymap() abort
-	nmap <buffer><silent> <LocalLeader>p <Plug>MarkdownPreviewToggle
+	nmap     <buffer><silent> <LocalLeader>p <Plug>MarkdownPreviewToggle
+	nnoremap <buffer><silent> <LocalLeader>f <Cmd>TypoSpace<CR>
+	nnoremap <buffer><silent> <LocalLeader>g <Cmd>ObsidianFollowLink<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
 " }}}
