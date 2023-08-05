@@ -172,6 +172,22 @@ nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
 nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
 nnoremap <silent>  <leader>0t  <Cmd>AsyncTask repl<CR>
 noremap  <silent>  <leader>00  :SnipRun<CR>
+nnoremap <silent>  <leader>0-  <Cmd>AsyncTaskTogglePos<CR>
+lua << EOF
+local pos = {'TAB', 'right', 'bottom'}
+vim.api.nvim_create_user_command('AsyncTaskTogglePos', function()
+  local next_i = 0
+  for i, v in ipairs(pos) do
+    if vim.g.asynctasks_term_pos == v then
+      next_i = i == #pos and 1 or i+1
+      break
+    end
+  end
+  if next_i == 0 then next_i = 1 end
+  vim.g.asynctasks_term_pos = pos[next_i]
+  vim.notify('asynctasks_term_pos: '..vim.g.asynctasks_term_pos)
+end, {})
+EOF
 
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p
