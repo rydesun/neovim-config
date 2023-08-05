@@ -116,7 +116,8 @@ vim.o.fileformats = 'unix,dos,mac'
 vim.o.listchars = 'tab:|·,space:␣,trail:☷,extends:►,precedes:◄'
 -- 软换行保持缩进
 vim.o.breakindent = true
-vim.o.showbreak = '└─'
+vim.o.breakindentopt = 'min:50'
+vim.o.showbreak = '+++'
 -- 修改窗口分隔符，隐藏空行的tilde
 vim.o.fillchars = 'horiz:▄,horizup:█,horizdown:▄'
     .. ',vert:█,vertleft:█,vertright:█,verthoriz:█'
@@ -177,14 +178,14 @@ vim.cmd 'packadd qftf'
 -- 统计中文字符数量
 vim.api.nvim_create_user_command(
   'CountZhChars',
-  function() require 'uilts.zh'.count() end,
+  function() require 'utils.zh'.count() end,
   {}
 )
 
 -- 修复中英文间空格
 vim.api.nvim_create_user_command(
   'TypoSpace',
-  function() require 'uilts.zh'.typo_space() end,
+  function() require 'utils.zh'.typo_space() end,
   {}
 )
 
