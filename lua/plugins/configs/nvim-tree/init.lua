@@ -26,7 +26,7 @@ glyphs.git = {
   staged = ' +',
   unmerged = ' x',
   renamed = vim.g.env_console and ' →' or ' ➜',
-  untracked = ' %',
+  untracked = ' ?',
   deleted = ' _',
   ignored = ' -',
 }

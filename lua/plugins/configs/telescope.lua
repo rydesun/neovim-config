@@ -1,7 +1,8 @@
+local telescope = require 'telescope'
 local view_ivy = { theme = 'ivy', trim_text = true }
 local view_dropdown = { theme = 'dropdown', previewer = false }
 
-require 'telescope'.setup {
+telescope.setup {
   defaults = {
     file_ignore_patterns = { '__pycache__' },
   },
@@ -34,7 +35,7 @@ require 'telescope'.setup {
         deleted = '-',
         renamed = vim.g.env_console and ' →' or ' ➜',
         unmerged = 'x',
-        untracked = '%',
+        untracked = '?',
       },
     },
 
@@ -45,9 +46,9 @@ require 'telescope'.setup {
   },
 }
 
-require 'telescope'.load_extension 'fzf'
+telescope.load_extension 'fzf'
 
-require 'telescope'.load_extension 'neoclip'
+telescope.load_extension 'neoclip'
 require 'neoclip'.setup {
   keys = {
     telescope = {
