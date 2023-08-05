@@ -31,6 +31,7 @@ function M.setup(right_own, left_own, right_names)
     'RooterPin',
     function(opts)
       local dir = vim.fn.fnamemodify(opts.args, ':p')
+      if dir:sub(-1) == '/' then dir = dir:sub(1, -2) end
       M.pinned = { dir }
       vim.api.nvim_command('lcd ' .. dir)
     end,
