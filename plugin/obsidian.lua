@@ -29,6 +29,11 @@ if vim.g.obsidian_diary_dir then
   )
 end
 
+local function git_add()
+  local cmd_add = string.format("cd '%s' && git add .", vim.g.obsidian_dir)
+  vim.api.nvim_command('!' .. cmd_add)
+end
+
 local function sync(push, async)
   local msg = 'vault backup: ' .. vim.fn.strftime '%F %T'
   local cmd_commit = string.format(
@@ -45,5 +50,6 @@ local function sync(push, async)
   end
 end
 
+vim.api.nvim_create_user_command('ObsidianGitAdd', git_add, {})
 vim.api.nvim_create_user_command('ObsidianSync', sync(true, true), {})
 vim.api.nvim_create_user_command('ObsidianCommit', sync(false, true), {})

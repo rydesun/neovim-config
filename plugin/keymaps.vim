@@ -261,6 +261,7 @@ nnoremap <silent>  <leader>ns  <Cmd>ObsidianSearch<CR>
 nnoremap <silent>  <leader>nf  <Cmd>ObsidianQuickSwitch<CR>
 nnoremap <silent>  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nnoremap <silent>  <leader>nS  <Cmd>ObsidianSync<CR>
+nnoremap <silent>  <leader>nc  <Cmd>ObsidianGitAdd<CR>
 nnoremap <silent>  <leader>nC  <Cmd>ObsidianCommit<CR>
 
 " w组：项目
