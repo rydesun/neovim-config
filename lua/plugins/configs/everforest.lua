@@ -4,12 +4,7 @@ vim.g.everforest_disable_terminal_colors = 1
 -- 不要斜体
 vim.g.everforest_disable_italic_comment = 1
 
-vim.api.nvim_create_autocmd('ColorSchemePre', {
-  pattern = 'everforest',
-  callback = function()
-    vim.g.everforest_background = vim.o.background == 'dark' and 'hard' or 'soft'
-  end,
-})
+vim.g.everforest_background = 'hard'
 
 local hi = vim.fn['everforest#highlight']
 
@@ -81,6 +76,11 @@ local function everforest_custom()
 
   -- 折叠行
   hi('Folded', palette.aqua, palette.bg_blue)
+  -- 在Diff时改回原值
+  vim.api.nvim_create_autocmd('OptionSet', {
+    pattern = 'diff',
+    callback = function() hi('Folded', palette.grey1, palette.bg1) end,
+  })
 
   -- telescope
   hi('TelescopeResultsDiffChange', palette.blue, palette.none)
@@ -92,7 +92,8 @@ local function everforest_custom()
   hi('PmenuSel', palette.none, palette.bg_visual)
 
   -- nvim-tree
-  vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeFloat'
+  vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeNormalFloat'
+  vim.cmd 'hi! link NvimTreeSignColumn NvimTreeNormalFloat'
 
   -- oil.nvim
   vim.cmd 'hi! link OilDir NvimTreeFolderName'
