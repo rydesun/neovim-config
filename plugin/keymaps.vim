@@ -35,6 +35,9 @@ nnoremap           s   <NOP>
 nnoremap <silent>  S   <Cmd>Telescope<CR>
 nnoremap <silent>  sl  <Cmd>Telescope resume<CR>
 nnoremap <silent>  ss  <Cmd>Telescope live_grep<CR>
+nnoremap <silent>  sS <Cmd>lua require'telescope.builtin'.live_grep {
+      \ additional_args={'-uu'},
+      \ file_ignore_patterns = {'.git', 'node_modules', '.venv'} }<CR>
 nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
 nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
 nnoremap <silent>  sg  <Cmd>TelescopeGitStatus<CR>
@@ -200,7 +203,6 @@ nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
 nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
-nnoremap <silent>  <leader>D   <Cmd>lua require'utils/devdocs':open_cursor()<CR>
 
 " LSP
 nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
@@ -302,6 +304,11 @@ function! MarkdownKeymap() abort
 	nnoremap <buffer><silent> <LocalLeader>g <Cmd>ObsidianFollowLink<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
+
+" 查询文档
+nnoremap <silent> <LocalLeader>vv  <Cmd>DevdocsOpenCurrentFloat<CR>
+nnoremap <silent> <LocalLeader>va  <Cmd>DevdocsOpenFloat<CR>
+nnoremap <silent> <LocalLeader>vt  <Cmd>DevdocsToggle<CR>
 " }}}
 
 " {{{ 按键 (文本对象)

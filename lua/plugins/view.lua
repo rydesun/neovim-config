@@ -3,7 +3,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   { 'karb94/neoscroll.nvim', opts_file = true },
 
   -- 缩进线
-  { 'lukas-reineke/indent-blankline.nvim', nolazy = true, opts_file = true },
+  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts_file = true },
 
   -- 检测缩进
   { 'nmac427/guess-indent.nvim', nolazy = true, config = true },

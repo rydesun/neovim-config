@@ -27,7 +27,7 @@ vim.g.env_dev = bool(vim.fn.filereadable(
   vim.fn.stdpath('data') .. '/lazy/.install_dev'))
 
 -- 是否处于Linux console
-vim.g.env_console = vim.env.TERM == 'linux'
+vim.g.env_console = vim.env.TERM == 'linux' and vim.fn.has 'gui_running' == 0
 
 -- 是否启用该类型的插件
 -- 自身界面
@@ -143,6 +143,7 @@ vim.opt.rtp:prepend(lazypath)
 local ok, lazy = pcall(require, 'lazy')
 if ok then
   vim.g.mapleader = ' ' -- lazy需要
+  vim.g.maplocalleader = '\\'
   lazy.setup 'plugins'
 else
   local msg = '插件没有加载(缺失插件管理器lazy.nvim): 需要执行bootstrap.lua'
@@ -162,11 +163,11 @@ require 'tabline'.setup(vim.g.env_console and {} or {
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
 require 'rooter'.setup(
-  -- 目录内包含(检查每一级父目录，从右到左)
-  { 'package.json', 'Cargo.toml', '.git', 'Makefile', 'LICENSE*' },
-  -- 目录内包含(检查每一级父目录，从左到右)
+  -- 目录内包含(向上检查每一级父目录)
+  { 'package.json', 'Cargo.toml', '.git', 'Makefile' },
+  -- 目录内包含(向下检查每一级子目录)
   { '__init__.py' },
-  -- 目录名匹配(检查每一级父目录，从右到左)
+  -- 目录名匹配(向上检查每一级父目录)
   { 'src', 'etc' }
 )
 

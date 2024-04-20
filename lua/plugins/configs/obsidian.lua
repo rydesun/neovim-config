@@ -4,4 +4,8 @@ return {
     folder = vim.g.obsidian_diary_dir,
   },
   disable_frontmatter = true,
+
+  ui = {
+    enable = false,
+  }
 }

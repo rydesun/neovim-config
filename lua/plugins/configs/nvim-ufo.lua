@@ -25,7 +25,9 @@ return {
   -- 关闭闪烁
   open_fold_hl_timeout = 0,
   -- LSP自动折叠指定的kinds
-  close_fold_kinds = { 'imports' },
+  close_fold_kinds_for_ft = {
+    default = { 'imports' },
+  },
   -- 不透明
   preview = { win_config = { winblend = 0 } },
 }

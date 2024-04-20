@@ -22,13 +22,13 @@ if vim.g.env_console then
 end
 
 glyphs.git = {
-  unstaged = ' *',
-  staged = ' +',
-  unmerged = ' x',
+  unstaged = '*',
+  staged = '+',
+  unmerged = 'x',
   renamed = vim.g.env_console and ' →' or ' ➜',
-  untracked = ' ?',
-  deleted = ' _',
-  ignored = ' -',
+  untracked = '?',
+  deleted = '_',
+  ignored = '-',
 }
 
 return {
@@ -45,11 +45,6 @@ return {
       open_win_config = lib.center_floating,
       quit_on_focus_loss = false,
     },
-
-    -- 开启相对行号
-    relativenumber = true,
-    -- 侧边栏符号覆盖在行号上面
-    signcolumn = 'number',
   },
 
   renderer = {

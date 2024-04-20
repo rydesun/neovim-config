@@ -45,13 +45,12 @@ M.nvim_tree = {
 }
 
 M.quickfix = require 'lualine.extensions.quickfix'
-local quickfix_color = M.quickfix.sections.lualine_a[1].color
-local quickfix_func = M.quickfix.sections.lualine_a[1][1]
-M.quickfix.sections.lualine_a[1][1] = function()
+local quickfix_func = M.quickfix.sections.lualine_a[1]
+M.quickfix.sections.lualine_a[1] = function()
   return quickfix_func() == 'Location List' and 'Location' or 'Quickfix'
 end
 M.quickfix.sections.lualine_y = { { '%2l/%L' } }
-M.quickfix.sections.lualine_z = { { 'progress', color = quickfix_color } }
+M.quickfix.sections.lualine_z = { { 'progress' } }
 
 M.telescope = {
   filetypes = { 'TelescopePrompt' },

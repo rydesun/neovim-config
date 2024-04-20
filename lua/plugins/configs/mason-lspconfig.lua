@@ -65,6 +65,22 @@ require 'mason-lspconfig'.setup_handlers {
     }
   end,
 
+  cssls = function()
+    lspconfig.cssls.setup {
+      capabilities = capabilities,
+      init_options = {
+        provideFormatter = false, -- 只用 prettier
+      },
+    }
+  end,
+
+  stylelint_lsp = function()
+    lspconfig.cssls.setup {
+      filetypes = { 'css', 'scss', 'less' },
+      capabilities = capabilities,
+    }
+  end,
+
   yamlls = function()
     lspconfig.yamlls.setup {
       capabilities = capabilities,

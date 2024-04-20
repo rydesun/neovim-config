@@ -5,9 +5,4 @@ return {
     RRGGBBAA = true,
     AARRGGBB = true,
   },
-  filetypes = {
-    '*',
-    css = { mode = 'background', css = true },
-    scss = { mode = 'background', css = true },
-  },
 }

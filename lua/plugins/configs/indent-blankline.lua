@@ -1,10 +1,13 @@
 return {
-  -- 缩进线字符
-  char = vim.g.env_console and '│' or '┊',
+  indent = {
+    -- 缩进线字符
+    char = vim.g.env_console and '│' or '┊',
+    tab_char = '│',
 
-  -- 不显示第一层
-  show_first_indent_level = false,
+    -- wrap行上也能显示
+    repeat_linebreak = true,
+  },
 
-  -- 不在末尾行上显示
-  show_trailing_blankline_indent = false,
+  -- 不显示上下文范围
+  scope = { enabled = false },
 }

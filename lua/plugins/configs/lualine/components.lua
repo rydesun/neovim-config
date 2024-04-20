@@ -22,7 +22,7 @@ M.filetype = require 'lualine.components.filetype':extend()
 function M.filetype:init(options)
   local defaults = {
     terminal = ' ',
-    unset = '󰈙 -',
+    unset = 'NEOVIM',
     fallback_icon = '󰈙',
   }
   M.filetype.super:init(options)

@@ -53,6 +53,7 @@ require 'dial.config'.augends:register_group {
     augend.constant.new { elements = { "top", "bottom" } },
     augend.constant.new { elements = { "left", "right" } },
     augend.constant.new { elements = { "margin", "padding" } },
+    augend.constant.new { elements = { "disable", "enable"}, word = false },
 
     -- 日志等级
     augend.constant.new { elements = {

@@ -20,13 +20,13 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
     }
   },
 
-  -- 集成非LSP工具。用null-ls的配置 + mason安装的工具
+  -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
   {
     'jayp0521/mason-null-ls.nvim',
     opts_file = true,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
-      { 'jose-elias-alvarez/null-ls.nvim', config = true },
+      { 'nvimtools/none-ls.nvim', config = true },
     },
   },
 
@@ -38,18 +38,12 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
-        highlight = { enable = true }, autotag = { enable = true },
-        matchup = { enable = true, disable_virtual_text = true } }
-    end,
+    main = 'nvim-treesitter.configs',
+    opts = { highlight = { enable = true }, autotag = { enable = true } },
   },
 
   -- 自动输入闭合tag
   { 'windwp/nvim-ts-autotag', nolazy = true },
-
-  -- 查看CST
-  { 'nvim-treesitter/playground' },
 
   -- 上下文
   { 'nvim-treesitter/nvim-treesitter-context', nolazy = true },
@@ -110,6 +104,9 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
 
   -- Code Runner
   { 'michaelb/sniprun', config = true, build = 'bash ./install.sh' },
+
+  -- 文档
+  { 'luckasRanarison/nvim-devdocs', opts_file = true },
   -- }}}
 })
 
