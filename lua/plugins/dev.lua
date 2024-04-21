@@ -87,6 +87,13 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
 
   -- LaTex
   { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable('latex') > 0 },
+
+  -- Hugo
+  {
+    'phelipetls/vim-hugo',
+    enabled = vim.fn.executable('hugo') > 0,
+    nolazy = true,
+  },
   -- }}}
 
   -- {{{ 本地开发 (其他)
