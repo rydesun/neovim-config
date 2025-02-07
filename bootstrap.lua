@@ -1,7 +1,7 @@
 -- 该文件确保所有插件安装成功
 -- 用于首次安装。后续无需加载
 
-local bool = require 'lib'.bool
+local bool = require 'libs'.bool
 
 -- 安装插件管理器
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
