@@ -28,7 +28,7 @@ require 'mason-lspconfig'.setup_handlers {
   end,
 
   pyright = function()
-    local default_config = require 'lspconfig.server_configurations.pyright'
+    local default_config = require 'lspconfig.configs.pyright'
         .default_config
     lspconfig.pyright.setup {
       capabilities = capabilities,
