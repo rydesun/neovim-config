@@ -34,7 +34,7 @@ cmp.setup {
     format = function(entry, vim_item)
       if vim_item.kind == 'Snippet' and
           entry.source:get_debug_name() == 'nvim_lsp:emmet_ls' then
-          vim_item.abbr = 'Emmet'
+        vim_item.abbr = 'Emmet'
       end
 
       if vim_item.kind == 'Text' then
@@ -49,17 +49,23 @@ cmp.setup {
         vim_item.kind = '│ ' .. (view_kinds[vim_item.kind] or vim_item.kind)
       end
 
+      if entry.source.name == 'cmdline' or vim_item.menu == nil then
+        return vim_item
+      end
+      vim_item.menu_hl_group = 'Comment'
+      vim_item.menu = vim.fn.trim(vim_item.menu)
+
+      local menu = vim_item.menu
       local maxwidth = 20
-      local label = vim_item.abbr
-      if entry.source.name ~= 'cmdline' and #label > maxwidth then
-        local truncated_label = vim.fn.strcharpart(label, 0, maxwidth)
+      if  #menu > maxwidth then
+        local truncated_menu = vim.fn.strcharpart(menu, 0, maxwidth)
         local i = maxwidth
         -- 可能包含中文
-        while vim.fn.strdisplaywidth(truncated_label) > maxwidth do
+        while vim.fn.strdisplaywidth(truncated_menu) > maxwidth do
           i = i - 1
-          truncated_label = vim.fn.strcharpart(label, 0, i)
+          truncated_menu = vim.fn.strcharpart(menu, 0, i)
         end
-        vim_item.abbr = truncated_label .. '⋯'
+        vim_item.menu = truncated_menu .. '⋯'
       end
 
       return vim_item
