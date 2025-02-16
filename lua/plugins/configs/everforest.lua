@@ -62,7 +62,6 @@ local function everforest_custom()
     { 'VirtualTextWarning', palette.bg_yellow },
     { 'VirtualTextInfo', palette.bg_green },
     { 'VirtualTextHint', palette.bg_green },
-    { 'InlayHint', palette.bg2 },
   }
   for _, zip in pairs(virtual_text) do
     local name, fg, bg = zip[1], palette.grey0, zip[2]

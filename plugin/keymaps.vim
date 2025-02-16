@@ -101,6 +101,8 @@ nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
 nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=79<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
+nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
+nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
 
 " Ctrl组：前后跳转
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
@@ -289,11 +291,10 @@ nnoremap <silent>  <leader>wr  <Cmd>TelescopeGoto README<CR>
 " LocalLeader组：特定文件类型
 " Rust
 function! RustKeymap() abort
-	nnoremap <buffer><silent> <LocalLeader>a <Cmd>RustHoverActions<CR>
-	nnoremap <buffer><silent> <LocalLeader>r <Cmd>RustRunnables<CR>
-	nnoremap <buffer><silent> <LocalLeader>e <Cmd>RustExpandMacro<CR>
-	nnoremap <buffer><silent> <LocalLeader>u <Cmd>RustParentModule<CR>
-	nnoremap <buffer><silent> <LocalLeader>c <Cmd>RustOpenCargo<CR>
+	nnoremap <buffer><silent> <LocalLeader>r <Cmd>RustLsp runnables<CR>
+	nnoremap <buffer><silent> <LocalLeader>e <Cmd>RustLsp expandMacro<CR>
+	nnoremap <buffer><silent> <LocalLeader>u <Cmd>RustLsp parentModule<CR>
+	nnoremap <buffer><silent> <LocalLeader>c <Cmd>RustLsp openCargo<CR>
 endfunction
 autocmd filetype rust call RustKeymap()
 

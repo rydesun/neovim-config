@@ -16,7 +16,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
       -- JSON schema
       'b0o/schemastore.nvim',
       -- 单独配置Rust
-      { 'simrat39/rust-tools.nvim', opts_file = true },
+      { 'mrcjkb/rustaceanvim', version = '^5', config_file = true },
     }
   },
 

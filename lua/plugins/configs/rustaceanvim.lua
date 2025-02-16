@@ -1,9 +1,9 @@
-return {
+vim.g.rustaceanvim = {
   server = {
     settings = {
       ['rust-analyzer'] = {
         completion = {
-          -- 去掉snippet
+          -- 去掉postfix snippet
           postfix = { enable = false },
           -- 允许补全私有字段
           privateEditable = { enable = true },
@@ -13,12 +13,4 @@ return {
       }
     }
   },
-  tools = {
-    inlay_hints = {
-      highlight = 'InlayHint',
-      other_hints_prefix = '⇒ ',
-      show_parameter_hints = false,
-    },
-    hover_actions = { auto_focus = true },
-  }
 }
