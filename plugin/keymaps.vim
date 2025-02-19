@@ -140,7 +140,7 @@ tnoremap           <A-k>       <Cmd>wincmd k<CR>
 tnoremap           <A-h>       <Cmd>wincmd h<CR>
 tnoremap           <A-l>       <Cmd>wincmd l<CR>
 tnoremap           <A-q>       <C-\><C-n>
-nnoremap           <A-f>       <Cmd>Bdelete<CR>
+nnoremap           <A-f>       <Cmd>lua Snacks.bufdelete()<CR>
 nnoremap           <A-t>       <Cmd>tabclose<CR>
 nnoremap           <A-q>       <Cmd>call <SID>toggleQuickFix()<CR>
 function! s:toggleQuickFix()
@@ -315,10 +315,6 @@ nnoremap <silent> <LocalLeader>vt  <Cmd>DevdocsToggle<CR>
 " {{{ 按键 (文本对象)
 " mini.ai占用a和i
 " sandwich改变了is as ib ab
-
-" 缩进
-onoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
-xnoremap <silent>  ii  <Cmd>lua require'various-textobjs'.indentation(true, true)<CR>
 
 " 数字
 onoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>

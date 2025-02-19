@@ -87,6 +87,11 @@ local function everforest_custom()
   hi('TelescopeResultsDiffDelete', palette.yellow, palette.none)
   hi('TelescopeResultsDiffUntracked', palette.purple, palette.none)
 
+  -- snacks
+  hi('SnacksNormal', palette.fg, palette.none)
+  hi('SnacksNormalNC', palette.fg, palette.none)
+  hi('SnacksPicker', palette.fg, palette.none)
+
   -- nvim-cmp
   hi('PmenuSel', palette.none, palette.bg_visual)
 

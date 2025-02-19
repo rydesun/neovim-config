@@ -1,4 +1,6 @@
 return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
+  { 'folke/snacks.nvim', nolazy = true, opts_file = true },
+
   -- 配色主题
   { 'sainnhe/everforest', nolazy = true, config_file = true },
 
@@ -21,9 +23,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
     priority = 1,
     dependencies = 'nvim-tree/nvim-web-devicons',
   },
-
-  -- 浮动通知
-  { 'rcarriga/nvim-notify', config_file = true },
 
   -- 搜索提示
   { 'kevinhwang91/nvim-hlslens', config_file = true },
@@ -50,10 +49,4 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
       'AckslD/nvim-neoclip.lua',
     },
   },
-
-  -- 自定义界面
-  { 'stevearc/dressing.nvim', opts_file = true },
-
-  -- 保持窗口布局
-  { 'famiu/bufdelete.nvim' },
 })
