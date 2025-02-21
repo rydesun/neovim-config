@@ -57,7 +57,7 @@ cmp.setup {
 
       local menu = vim_item.menu
       local maxwidth = 20
-      if  #menu > maxwidth then
+      if #menu > maxwidth then
         local truncated_menu = vim.fn.strcharpart(menu, 0, maxwidth)
         local i = maxwidth
         -- 可能包含中文
@@ -73,28 +73,21 @@ cmp.setup {
   },
 }
 
-local cmdline_opts = {
-  view = {
-    entries = { name = 'wildmenu', separator = ' · ' }
-  },
+cmp.setup.cmdline(':', {
+  sources = { { name = 'cmdline', keyword_length = 3 } },
+  formatting = { fields = { 'abbr' } },
   mapping = {
     ['<Tab>'] = {
       c = function()
-        if not cmp.visible() then return end
+        if not cmp.visible() then cmp.complete() end
         cmp.select_next_item { behavior = types.cmp.SelectBehavior.Insert }
       end,
     },
     ['<S-Tab>'] = {
       c = function()
-        if not cmp.visible() then return end
+        if not cmp.visible() then cmp.complete() end
         cmp.select_prev_item { behavior = types.cmp.SelectBehavior.Insert }
       end,
     },
   },
-}
-
-cmp.setup.cmdline(':',
-  vim.tbl_extend('error', cmdline_opts, {
-    sources = { { name = 'cmdline', keyword_length = 3 } }
-  })
-)
+})

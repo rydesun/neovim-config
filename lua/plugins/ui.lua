@@ -7,6 +7,13 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   -- 状态栏
   { 'nvim-lualine/lualine.nvim', opts_file = true },
 
+  {
+    'folke/noice.nvim',
+    nolazy = true,
+    opts_file = true,
+    dependencies = { 'MunifTanjim/nui.nvim' },
+  },
+
   -- 显示窗口对应的文件名
   { 'b0o/incline.nvim', opts_file = true },
 
