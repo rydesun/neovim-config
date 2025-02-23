@@ -24,6 +24,7 @@ local function everforest_custom()
 
   -- 临时配色，之后被lualine接管
   hi('statusline', palette.grey1, palette.bg1)
+  hi('WinBar', palette.grey1, palette.bg1)
 
   -- 浮动窗口
   hi('FloatBorder', palette.bg4, palette.none)
@@ -31,21 +32,10 @@ local function everforest_custom()
   -- cursor
   hi('CursorLine', palette.none, palette.bg0)
 
-  -- winbar
-  hi('WinBar', palette.none, palette.bg_blue)
-  hi('WinBarNC', palette.none, palette.bg_blue)
-
   -- tabline
   hi('TabLine', palette.fg, palette.bg_dim)
   hi('TabLineSel', palette.fg, palette.none)
   hi('TabLineFill', palette.fg, palette.bg_dim)
-
-  -- statusline
-  vim.cmd 'hi StatusLineNC gui=bold,italic'
-  hi('StatusLineTermNC', palette.fg, palette.bg1, 'bold,italic')
-  if transparent_background == 2 then
-    vim.cmd 'hi StatusLineTermNC guibg=none'
-  end
 
   -- quickfix
   hi('QuickFixLine', palette.none, palette.bg_green)

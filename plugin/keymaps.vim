@@ -146,9 +146,6 @@ nnoremap           <A-q>       <Cmd>call <SID>toggleQuickFix()<CR>
 function! s:toggleQuickFix()
     if getqflist({'winid' : 0}).winid | cclose | else | copen | endif
 endfunction
-
-" 命令行
-cnoremap <expr>    %%          expand('%:p:h').'/'
 " }}}
 
 " {{{ 按键 (Emacs编辑)

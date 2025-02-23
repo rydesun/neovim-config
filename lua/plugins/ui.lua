@@ -14,9 +14,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
     dependencies = { 'MunifTanjim/nui.nvim' },
   },
 
-  -- 显示窗口对应的文件名
-  { 'b0o/incline.nvim', opts_file = true },
-
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons', lazy = true, opts_file = true },
 

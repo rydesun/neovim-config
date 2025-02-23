@@ -66,8 +66,11 @@ vim.o.showmode = false
 vim.o.title = true
 -- 只显示一个窗口的状态栏
 vim.o.laststatus = 3
--- 之后让插件来设置状态栏
-if vim.g.plug_ui then vim.o.statusline = ' ' end
+-- 先占位，插件启动后再设置状态栏
+if vim.g.plug_ui then
+  vim.o.statusline = ' '
+  vim.o.winbar = ' '
+end
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
 vim.cmd 'autocmd FileType qf setlocal scrolloff=0'
