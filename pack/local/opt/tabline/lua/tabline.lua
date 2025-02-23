@@ -13,7 +13,12 @@ function M.setup(opts)
   vim.api.nvim_create_autocmd('TermClose', {
     pattern = '*',
     callback = function(msg)
-      vim.api.nvim_buf_set_var(msg.buf, 'term_exit_code', vim.v.event.status)
+      pcall(
+        vim.api.nvim_buf_set_var,
+        msg.buf,
+        'term_exit_code',
+        vim.v.event.status
+      )
       vim.cmd 'redrawtabline'
     end
   })
