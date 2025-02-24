@@ -5,55 +5,42 @@ function M.border()
 end
 
 local symbols = {
-  Class         = { '󰆦 ', '类' },
-  Color         = { '󰏘 ', '󰏘 ' },
-  Constant      = { '󰐀 ', '常量' },
-  Constructor   = { ' ', '构造器' },
-  Enum          = { ' ', '枚举' },
-  EnumMember    = { ' ', '枚举成员' },
-  Event         = { '󰉁 ', '󰉁 ' },
-  Field         = { '󰌕 ', '字段' },
-  File          = { '󰈙 ', '󰈙 ' },
-  Folder        = { ' ', ' ' },
-  Function      = { '󰯻 ', '函数' },
-  Interface     = { ' ', '接口' },
-  Keyword       = { '󰌆 ', '关键字' },
-  Method        = { '󰬍 ', '方法' },
-  Module        = { '󰏖 ', '模块' },
-  Operator      = { '󰆖 ', '运算符' },
-  Package       = { '󰏖 ', '包' },
-  Property      = { '󰌕 ', '属性' },
-  Reference     = { '󰈇 ', '󰈇 ' },
-  Snippet       = { '󰚄 ', '片段' },
-  String        = { '󰅳 ', '字符串' },
-  Struct        = { '󰆧 ', '结构体' },
-  Text          = { ' ', '文本' },
-  TypeParameter = { ' ', '类型参数' },
-  Unit          = { '󰑭', '󰑭' },
-  Value         = { '󰎠 ', '󰎠 ' },
-  Variable      = { '󰈜 ', '变量' },
-  Collapsed     = { ' ', ' ' },
+  Module        = ' ',
+  Interface     = 'T󰫶',
+  Class         = 'T󰫰',
+  Struct        = 'T󰬀',
+  Enum          = ' ',
+  EnumMember    = ' ',
+  Field         = '󰓼 ',
+  Property      = '󰓼 ',
+  Function      = '󰡱 ',
+  Method        = '󰡱 ',
+  Constructor   = '󰡱 ',
+  Variable      = '󰫧 ',
+  Constant      = '󰜗 ',
+  Keyword       = ' ',
+  TypeParameter = ' ',
+  Snippet       = '󰨾 ',
+
+  Color         = '󰏘 ',
+  Event         = ' ',
+  File          = '󰭷 ',
+  Folder        = '󰉋 ',
+  Operator      = '󰆕 ',
+  Reference     = ' ',
+  Unit          = '󰟢 ',
+  Text          = ' ',
+  Value         = '󰎠 ',
 }
 
 function M.symbols()
-  local tbl = {}
+  -- 在virtual console中使用英文
   if vim.g.env_console then
-    for k, v in pairs(symbols) do tbl[k] = '•' end
-  else
-    for k, v in pairs(symbols) do tbl[k] = v[1] end
+    local tbl = {}
+    for k, _ in pairs(symbols) do tbl[k] = k end
+    return tbl
   end
-  return tbl
-end
-
-function M.texts()
-  local tbl = {}
-  if vim.g.env_console then
-    -- 在virtual console中使用英文
-    for k, v in pairs(symbols) do tbl[k] = k end
-  else
-    for k, v in pairs(symbols) do tbl[k] = v[2] end
-  end
-  return tbl
+  return vim.deepcopy(symbols)
 end
 
 return M

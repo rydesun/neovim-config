@@ -46,7 +46,7 @@ cmp.setup {
           vim_item.kind_hl_group = 'CmpItemKind'
         end
       else
-        vim_item.kind = '│ ' .. (view_kinds[vim_item.kind] or vim_item.kind)
+        vim_item.kind = view_kinds[vim_item.kind] or vim_item.kind
       end
 
       if entry.source.name == 'cmdline' or vim_item.menu == nil then
