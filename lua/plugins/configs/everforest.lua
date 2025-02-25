@@ -84,6 +84,7 @@ local function everforest_custom()
 
   -- nvim-cmp
   hi('PmenuSel', palette.none, palette.bg_visual)
+  vim.cmd 'hi! link CmpItemKindText CmpItemKind'
 
   -- nvim-tree
   vim.cmd 'hi! link NvimTreeEndOfBuffer NvimTreeNormalFloat'

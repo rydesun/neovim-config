@@ -37,17 +37,10 @@ cmp.setup {
         vim_item.abbr = 'Emmet'
       end
 
-      if vim_item.kind == 'Text' then
-        local source_name = entry.source.name
-        if source_name == 'buffer' then
-          vim_item.kind = ''
-        else
-          vim_item.kind = string.format('(%s)', source_name)
-          vim_item.kind_hl_group = 'CmpItemKind'
-        end
-      else
-        vim_item.kind = view_kinds[vim_item.kind] or vim_item.kind
+      if vim_item.kind == 'Text' and entry.source.name == 'buffer' then
+        vim_item.kind = ''
       end
+      vim_item.kind = view_kinds[vim_item.kind] or vim_item.kind
 
       if entry.source.name == 'cmdline' or vim_item.menu == nil then
         return vim_item
