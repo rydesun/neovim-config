@@ -7,14 +7,11 @@ local winbar = {
   lualine_b = { {
     components.filename,
     path = 1,
-    file_status = false,
+    file_status = true,
     cond = function() return vim.bo.buftype ~= 'nofile' end,
-    symbols = { unnamed = '' },
+    symbols = { modified = '*', readonly = '!', unnamed = '' },
   } },
-  lualine_c = {
-    { function() return vim.bo.modified and '󰆓' or '' end },
-    { function() return vim.bo.readonly and '󰍶' or '' end },
-  },
+  lualine_c = {},
   lualine_x = {
     components.encoding,
     {
@@ -43,7 +40,12 @@ return {
     lualine_a = { components.git_branch },
     lualine_b = { components.cwd },
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = {
+      {
+        require("noice").api.status.command.get,
+        cond = require("noice").api.status.command.has,
+      },
+    },
     lualine_y = {},
     lualine_z = {},
   },

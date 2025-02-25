@@ -32,7 +32,7 @@ end
 
 function M.custom_title(index, tabpage)
   local bufnr = vim.api.nvim_win_get_buf(vim.api.nvim_tabpage_get_win(tabpage))
-  local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+  local buftype = vim.api.nvim_get_option_value('buftype', { buf = bufnr })
   return (buftype == 'terminal') and M.term_title(bufnr) or index
 end
 

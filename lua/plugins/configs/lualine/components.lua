@@ -78,8 +78,8 @@ function M.filename:update_status()
 
   local split_idx = compact_path:match('.*()/')
   if split_idx then
-    compact_path_left = compact_path:sub(1, split_idx)
-    compact_path_right = compact_path:sub(split_idx + 1)
+    local compact_path_left = compact_path:sub(1, split_idx)
+    local compact_path_right = compact_path:sub(split_idx + 1)
     return compact_path_left .. self.options.hl_main .. compact_path_right
   else
     return self.options.hl_main .. compact_path
