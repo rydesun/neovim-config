@@ -68,7 +68,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'AckslD/nvim-FeMaco.lua', config = true },
 
   -- 大纲视图
-  { 'stevearc/aerial.nvim', opts_file = true },
+  { 'oskarrrrrrr/symbols.nvim', config_file = true },
   -- }}}
 
   -- {{{ 本地开发 (特定语言)

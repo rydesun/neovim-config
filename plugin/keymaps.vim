@@ -114,9 +114,6 @@ xnoremap <silent>  <C-k>       <Cmd>STSSelectPrevSiblingNode<CR>
 xnoremap <silent>  <C-l>       <Cmd>STSSelectParentNode<CR>
 xnoremap <silent>  <C-h>       <Cmd>STSSelectChildNode<CR>
 
-nnoremap <silent>  <C-A-j>     <Cmd>AerialNext<CR>
-nnoremap <silent>  <C-A-k>     <Cmd>AerialPrev<CR>
-
 " Alt组：移动对象，移动光标，调整窗口大小，关闭
 map      <silent>  <A-p>       <Plug>(matchup-[%)
 map      <silent>  <A-n>       <Plug>(matchup-]%)
@@ -197,8 +194,7 @@ nnoremap <silent>  <leader>p   "+p
 nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle!<CR>
 nnoremap <silent>  <leader>u   <Cmd>UndotreeToggle<CR>
-nnoremap <silent>  <leader>o   <Cmd>AerialToggle float<CR>
-nnoremap <silent>  <leader>O   <Cmd>AerialNavToggle<CR>
+nnoremap <silent>  <leader>o   <Cmd>SymbolsToggle<CR>
 nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
 xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
 nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
