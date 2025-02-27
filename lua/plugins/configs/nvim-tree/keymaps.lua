@@ -3,8 +3,6 @@ local M = {}
 local api = require 'nvim-tree.api'
 local core = require 'nvim-tree.core'
 
-local lib = require 'plugins.configs.nvim-tree.lib'
-
 function M.init(bufnr)
   api.config.mappings.default_on_attach(bufnr)
 
@@ -26,6 +24,24 @@ function M.init(bufnr)
   vim.keymap.set('n', ']b', api.marks.navigate.next, opts 'Next bookmark')
   vim.keymap.set('n', '[b', api.marks.navigate.prev, opts 'Prev bookmark')
 
+  vim.keymap.set('n', 'sf', function()
+    local node = api.tree.get_node_under_cursor()
+    if not node then return end
+    if node.parent and node.type == "file" then node = node.parent end
+    require 'telescope.builtin'.find_files {
+      search_dirs = { node.absolute_path },
+    }
+  end, opts 'Telescope Find Files')
+
+  vim.keymap.set('n', 'ss', function()
+    local node = api.tree.get_node_under_cursor()
+    if not node then return end
+    if node.parent and node.type == "file" then node = node.parent end
+    require 'telescope.builtin'.live_grep {
+      search_dirs = { node.absolute_path },
+    }
+  end, opts 'Telescope Find Files')
+
   vim.keymap.set('n', ',', function()
     local cwd = core.get_cwd()
     vim.notify("RooterPin " .. cwd)
@@ -36,12 +52,12 @@ function M.init(bufnr)
 
   vim.keymap.set('n', '<<', function()
     local node = api.tree.get_node_under_cursor()
-    lib.git_add(node.absolute_path)
+    vim.api.nvim_command('silent !git add ' .. node.absolute_path)
   end, opts 'Git Add')
 
   vim.keymap.set('n', '>>', function()
     local node = api.tree.get_node_under_cursor()
-    lib.git_unstage(node.absolute_path)
+    vim.api.nvim_command('silent !git restore --staged ' .. node.absolute_path)
   end, opts 'Git Unstage')
 end
 

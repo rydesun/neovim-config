@@ -1,4 +1,3 @@
-local lib = require 'plugins.configs.nvim-tree.lib'
 local keymaps = require 'plugins.configs.nvim-tree.keymaps'
 
 local glyphs = {
