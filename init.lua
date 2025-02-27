@@ -100,13 +100,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 vim.diagnostic.config {
   -- 不在侧边栏显示符号
   signs = false,
-  underline = {
-    severity = { min = vim.diagnostic.severity.ERROR },
-  },
-  virtual_text = {
-    severity = { min = vim.diagnostic.severity.WARN },
-    prefix = '🞬',
-  }
+  virtual_text = { prefix = '🞬' },
 }
 -- }}}
 
@@ -116,16 +110,12 @@ vim.o.fileencodings = 'ucs-bom,utf-8,gbk,sjis,euc-jp,big5,gb18030,latin1'
 -- 默认使用unix换行符(并且识别mac)
 vim.o.fileformats = 'unix,dos,mac'
 -- list模式的可见字符
-vim.o.listchars = 'tab:|·,space:␣,trail:☷,extends:►,precedes:◄'
+vim.o.listchars = 'tab:|·,space:␣,trail:␣,extends:►,precedes:◄'
 -- 软换行保持缩进
 vim.o.breakindent = true
-vim.o.breakindentopt = 'min:50'
-vim.o.showbreak = '+++'
--- 修改窗口分隔符，隐藏空行的tilde
-vim.o.fillchars = 'horiz:▄,horizup:█,horizdown:▄'
-    .. ',vert:█,vertleft:█,vertright:█,verthoriz:█'
-    .. ',eob: '
-if not vim.g.env_console then vim.opt.fillchars:append { diff = '╲' } end
+vim.o.showbreak = '▲'
+-- 隐藏空行的tilde
+vim.o.fillchars = 'eob: ,diff:·'
 -- 去掉鼠标右键的菜单
 vim.o.mousemodel = 'extend'
 -- 合并中文行时不加空格

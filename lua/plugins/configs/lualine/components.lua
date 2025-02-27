@@ -60,7 +60,7 @@ M.filename = require 'lualine.components.filename':extend()
 function M.filename:init(options)
   M.filename.super:init(options)
   self.options = vim.tbl_deep_extend('keep', self.options or {},
-    { hl_main = '%#MiniTablineCurrent#' }
+    { hl_main = '%#deniteStatusLinePath#' }
   )
 end
 

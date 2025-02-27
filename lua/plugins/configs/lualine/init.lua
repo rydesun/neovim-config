@@ -40,13 +40,13 @@ return {
     lualine_a = { components.git_branch },
     lualine_b = { components.cwd },
     lualine_c = {},
-    lualine_x = {
+    lualine_x = {},
+    lualine_y = {
       {
         require("noice").api.status.command.get,
         cond = require("noice").api.status.command.has,
       },
     },
-    lualine_y = {},
     lualine_z = {},
   },
 

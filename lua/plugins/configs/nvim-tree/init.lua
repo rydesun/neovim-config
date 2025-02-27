@@ -6,10 +6,13 @@ local glyphs = {
   symlink = '󰪹',
   bookmark = ' ♥',
   folder = {
+    arrow_closed = '›',
+    arrow_open = '▼',
+    default = '󰉋',
     empty = '󰉖',
     empty_open = '',
     symlink = '󰉒',
-    symlink_open = '󰷏',
+    symlink_open = '',
   },
 }
 
@@ -17,15 +20,14 @@ local glyphs = {
 if vim.g.env_console then
   local ok, circles = pcall(require, 'circles')
   if ok then glyphs = circles.get_nvimtree_glyphs() end
-  glyphs.folder.arrow_closed = '►'
-  glyphs.folder.arrow_open = '▼'
+  glyphs.folder.arrow_closed = '▶'
 end
 
 glyphs.git = {
   unstaged = '*',
   staged = '+',
   unmerged = 'x',
-  renamed = vim.g.env_console and ' →' or ' ➜',
+  renamed = '→',
   untracked = '?',
   deleted = '_',
   ignored = '-',
@@ -38,14 +40,7 @@ return {
   -- 已经打开的目录不显示git符号
   git = { show_on_open_dirs = false },
 
-  view = {
-    -- 浮动窗口
-    float = {
-      enable = true,
-      open_win_config = lib.center_floating,
-      quit_on_focus_loss = false,
-    },
-  },
+  view = { width = {} },
 
   renderer = {
     -- 压缩目录层次
@@ -54,12 +49,11 @@ return {
     -- 开启缩进线
     indent_markers = { enable = true },
 
-    root_folder_label = ':~:s?^?↑ ?',
-
     icons = {
       -- git状态显示在侧边栏上
       git_placement = 'signcolumn',
       glyphs = glyphs,
+      symlink_arrow = " → ",
     },
   },
 

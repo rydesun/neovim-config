@@ -1,5 +1,4 @@
 local style = require 'libs.style'
-local border = style.border()
 
 return {
   backends = { cpp = { 'lsp' } },
@@ -14,8 +13,6 @@ return {
   post_jump_cmd = "normal zz",
 
   float = {
-    border = border,
-
     -- https://github.com/stevearc/aerial.nvim/issues/107#issuecomment-1272243325
     relative = "win",
     override = function(conf, source_winid)

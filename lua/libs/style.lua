@@ -1,9 +1,5 @@
 local M = {}
 
-function M.border()
-  return { '▄', '▄', '▄', '█', '▀', '▀', '▀', '█' }
-end
-
 local symbols = {
   -- CompletionItemKind
   Module        = { ' ', 'mod' },
