@@ -32,10 +32,6 @@ require 'mason-lspconfig'.setup_handlers {
         .default_config
     lspconfig.pyright.setup {
       capabilities = capabilities,
-      root_dir = function(fname)
-        return default_config.root_dir(fname) or
-            require 'lspconfig.util'.find_git_ancestor(fname)
-      end,
       settings = {
         python = {
           analysis = {
