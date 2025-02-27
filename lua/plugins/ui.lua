@@ -1,15 +1,15 @@
 return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
-  { 'folke/snacks.nvim', nolazy = true, opts_file = true },
+  { 'folke/snacks.nvim', lazy = false, opts_file = true },
 
   -- 配色主题
-  { 'sainnhe/everforest', nolazy = true, config_file = true },
+  { 'sainnhe/everforest', lazy = false, priority = 1000, config_file = true },
 
   -- 状态栏
   { 'nvim-lualine/lualine.nvim', opts_file = true },
 
   {
     'folke/noice.nvim',
-    nolazy = true,
+    lazy = false,
     opts_file = true,
     dependencies = { 'MunifTanjim/nui.nvim' },
   },
@@ -35,7 +35,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   { 'nvim-tree/nvim-tree.lua', opts_file = true },
 
   -- 编辑目录
-  { 'stevearc/oil.nvim', nolazy = true, opts_file = true },
+  { 'stevearc/oil.nvim', lazy = false, opts_file = true },
 
   -- 改进quickfix
   { 'kevinhwang91/nvim-bqf', opts = { auto_resize_height = true } },

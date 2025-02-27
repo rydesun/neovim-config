@@ -2,7 +2,7 @@ local M = {}
 
 function M.setdefault(cond, event, spec)
   for _, plugin in pairs(spec) do
-    if not plugin.nolazy and not plugin.lazy
+    if plugin.lazy == nil
         and not plugin.cmd and not plugin.ft
         and not plugin.keys and plugin.event == nil then
       plugin.event = event

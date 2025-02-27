@@ -40,7 +40,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
   {
     'fladson/vim-kitty',
     enabled = vim.fn.executable('kitty') > 0,
-    nolazy = true,
+    lazy = false,
   },
 
   -- 检查启动时间

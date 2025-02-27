@@ -5,7 +5,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- {{{ 本地开发 (LSP)
   {
     'williamboman/mason-lspconfig.nvim',
-    nolazy = true,
+    lazy = false,
     config_file = true,
     dependencies = {
       -- 集成LSP和DAP等工具
@@ -43,10 +43,10 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   },
 
   -- 自动输入闭合tag
-  { 'windwp/nvim-ts-autotag', nolazy = true },
+  { 'windwp/nvim-ts-autotag', lazy = false },
 
   -- 上下文
-  { 'nvim-treesitter/nvim-treesitter-context', nolazy = true },
+  { 'nvim-treesitter/nvim-treesitter-context', lazy = false },
 
   -- AST文本对象(精确)
   -- 不需要开启，因为有mini.ai在使用query
@@ -92,7 +92,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   {
     'phelipetls/vim-hugo',
     enabled = vim.fn.executable('hugo') > 0,
-    nolazy = true,
+    lazy = false,
   },
   -- }}}
 

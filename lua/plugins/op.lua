@@ -1,6 +1,6 @@
 return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   -- 增强%
-  { 'andymass/vim-matchup', nolazy = true, config_file = true },
+  { 'andymass/vim-matchup', lazy = false, config_file = true },
 
   -- 增强[
   { 'tpope/vim-unimpaired' },
@@ -48,7 +48,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   },
 
   -- snippets (不需要nvim-cmp也能用)
-  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', nolazy = true },
+  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', lazy = false },
 
   -- 输入闭合符号
   { 'altermo/ultimate-autopair.nvim', config = true },

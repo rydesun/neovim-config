@@ -6,15 +6,15 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts_file = true },
 
   -- 检测缩进
-  { 'nmac427/guess-indent.nvim', nolazy = true, config = true },
+  { 'nmac427/guess-indent.nvim', lazy = false, config = true },
 
   -- 空白符
-  { 'ntpeters/vim-better-whitespace', nolazy = true, init_file = true },
+  { 'ntpeters/vim-better-whitespace', lazy = false, init_file = true },
 
   -- 折叠
   {
     'kevinhwang91/nvim-ufo',
-    nolazy = true,
+    lazy = false,
     opts_file = true,
     dependencies = 'kevinhwang91/promise-async',
   },
@@ -23,11 +23,11 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   { 'AndrewRadev/linediff.vim', config_file = true },
 
   -- 查看hex
-  { 'fidian/hexmode', nolazy = true },
+  { 'fidian/hexmode', lazy = false },
 
   -- 翻译
   { 'voldikss/vim-translator' },
 
   -- 显示颜色
-  { 'NvChad/nvim-colorizer.lua', nolazy = true, opts_file = true },
+  { 'NvChad/nvim-colorizer.lua', lazy = false, opts_file = true },
 })
