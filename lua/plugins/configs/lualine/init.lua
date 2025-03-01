@@ -43,11 +43,16 @@ return {
     lualine_x = {},
     lualine_y = {
       {
-        require("noice").api.status.command.get,
-        cond = require("noice").api.status.command.has,
+        require 'noice'.api.status.command.get,
+        cond = require 'noice'.api.status.command.has,
       },
     },
-    lualine_z = {},
+    lualine_z = {
+      {
+        require 'noice'.api.status.mode.get,
+        cond = require 'noice'.api.status.mode.has,
+      },
+    },
   },
 
   extensions = {

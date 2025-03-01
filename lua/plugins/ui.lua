@@ -7,11 +7,18 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   -- 状态栏
   { 'nvim-lualine/lualine.nvim', opts_file = true },
 
+  -- cmdline
   {
     'folke/noice.nvim',
     lazy = false,
     opts_file = true,
-    dependencies = { 'MunifTanjim/nui.nvim' },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      {
+        'rcarriga/nvim-notify',
+        opts = { render = 'wrapped-compact', stages = 'fade' }
+      },
+    },
   },
 
   -- 图标字体

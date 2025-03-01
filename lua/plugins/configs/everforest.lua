@@ -55,6 +55,9 @@ local function custom_plugin()
   -- diffview: 更暗的空文本区域
   vim.cmd 'hi! link DiffviewDiffDeleteDim NonText'
 
+  -- noice: 更暗的底部消息背景
+  hi('NoiceMini', palette.none, palette.bg_dim)
+
   -- nvim-cmp: text类型不使用fg
   vim.cmd 'hi! link CmpItemKindText CmpItemKind'
 

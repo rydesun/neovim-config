@@ -43,6 +43,7 @@ nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
 nnoremap <silent>  sg  <Cmd>TelescopeGitStatus<CR>
 nnoremap <silent>  sb  <Cmd>TelescopeCwdBuffers<CR>
 nnoremap <silent>  sB  <Cmd>TelescopeBuffers<CR>
+nnoremap <silent>  sm  <Cmd>Noice pick<CR>
 
 nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
 			\ skip_empty_lines=true<CR>

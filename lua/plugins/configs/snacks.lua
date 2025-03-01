@@ -17,7 +17,7 @@ return {
   bigfile = { enabled = true },
   image = { enabled = true },
   input = { enabled = true },
-  notifier = { enabled = true, level = vim.log.levels.INFO },
+  picker = { enabled = true },
   scope = { enabled = true, treesitter = { enabled = false } },
 
   styles = {

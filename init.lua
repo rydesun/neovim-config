@@ -59,7 +59,7 @@ end
 -- 去除启动页面的介绍
 vim.opt.shortmess:append 'I'
 -- 不在右下角提示搜索
-vim.opt.shortmess:append 'S'
+vim.opt.shortmess:append 'sS'
 -- 不在lastline显示当前模式
 vim.o.showmode = false
 -- 设置虚拟终端的标题
