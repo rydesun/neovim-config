@@ -16,7 +16,6 @@ map                gm  <Plug>(leap-from-window)
 noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
 " g组：按词跳转
-" 另外有插件debugprint.nvim占用g?
 nnoremap <silent>  gd  <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>  gD  <Cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent>  gy  <Cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -270,6 +269,14 @@ nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
 
+" l组：调试打印日志
+nnoremap <silent>  <leader>ll  <Cmd>Chainsaw messageLog<CR>
+nnoremap <silent>  <leader>lt  <Cmd>Chainsaw timeLog<CR>
+noremap  <silent>  <leader>lv  <Cmd>Chainsaw variableLog<CR>
+noremap  <silent>  <leader>ly  <Cmd>Chainsaw typeLog<CR>
+noremap  <silent>  <leader>la  <Cmd>Chainsaw assertLog<CR>
+noremap  <silent>  <leader>lx  <Cmd>Chainsaw removeLogs<CR>
+
 " n组：笔记
 nnoremap <silent>  <leader>nn  <Cmd>ObsidianDraft<CR>
 nnoremap <silent>  <leader>ns  <Cmd>ObsidianSearch<CR>
@@ -281,8 +288,9 @@ nnoremap <silent>  <leader>nC  <Cmd>ObsidianCommit<CR>
 
 " w组：项目
 nnoremap <silent>  <leader>wr  <Cmd>TelescopeGoto README<CR>
+" }}}
 
-" LocalLeader组：特定文件类型
+" {{{ 按键 (LocalLeader) 特定文件类型
 " Rust
 function! RustKeymap() abort
 	nnoremap <buffer><silent> <LocalLeader>r <Cmd>RustLsp runnables<CR>

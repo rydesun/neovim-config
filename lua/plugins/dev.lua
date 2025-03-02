@@ -107,7 +107,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'andythigpen/nvim-coverage', opts_file = true },
 
   -- 调试打印
-  { 'andrewferrier/debugprint.nvim', config = true },
+  { 'chrisgrieser/nvim-chainsaw', config = true },
 
   -- Code Runner
   { 'michaelb/sniprun', config = true, build = 'bash ./install.sh' },
