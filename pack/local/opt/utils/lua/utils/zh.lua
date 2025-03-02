@@ -14,4 +14,20 @@ function M.typo_space()
   vim.cmd.nohlsearch()
 end
 
+function M.setup()
+  -- 统计中文字符数量
+  vim.api.nvim_create_user_command(
+    'CountZhChars',
+    function() M.count() end,
+    {}
+  )
+
+  -- 修复中英文间空格
+  vim.api.nvim_create_user_command(
+    'TypoSpace',
+    function() M.typo_space() end,
+    {}
+  )
+end
+
 return M

@@ -1,5 +1,5 @@
 return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
-  { 'folke/snacks.nvim', lazy = false, opts_file = true },
+  { 'folke/snacks.nvim', lazy = false, priority = 1000, opts_file = true },
 
   -- 配色主题
   { 'sainnhe/everforest', lazy = false, priority = 1000, config_file = true },

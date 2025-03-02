@@ -166,40 +166,30 @@ require 'rooter'.setup(
 
 -- 修改quickfix界面
 vim.cmd 'packadd qftf'
+
+-- 其他小工具
+vim.cmd 'packadd utils'
+require 'utils'.setup()
 -- }}}
 
 -- {{{ 命令行
--- 统计中文字符数量
-vim.api.nvim_create_user_command(
-  'CountZhChars',
-  function() require 'utils.zh'.count() end,
-  {}
-)
-
--- 修复中英文间空格
-vim.api.nvim_create_user_command(
-  'TypoSpace',
-  function() require 'utils.zh'.typo_space() end,
-  {}
-)
-
-local cabbrev = require 'utils.cabbrev'
+local cmd_alias = require 'libs'.cmd_alias
 
 -- 以root权限写入
-cabbrev.alias('ww', 'w !sudo tee % >/dev/null')
+cmd_alias('ww', 'w !sudo tee % >/dev/null')
 
 -- 创建不存在的父目录
-cabbrev.alias('mp', '!mkdir -p %:h')
+cmd_alias('mp', '!mkdir -p %:h')
 
 -- 设置缩进
 for _, n in pairs { 2, 4, 8 } do
   local c = tostring(n)
   local input = 'i' .. c
   local replace = string.format('setl sw=%s ts=%s et', c, c)
-  cabbrev.alias(input, replace)
+  cmd_alias(input, replace)
   input = 'i' .. c .. 't'
   replace = string.format('setl sw=%s ts=%s noet', c, c)
-  cabbrev.alias(input, replace)
+  cmd_alias(input, replace)
 end
 -- }}}
 

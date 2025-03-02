@@ -27,4 +27,18 @@ function M.transform_color(contrast_factor, brightness_offset)
   end
 end
 
+function M.cmd_alias(input, replace)
+  local cmd = 'cnoreabbrev <expr> %s v:lua._cmd_expr("%s", "%s")'
+  vim.api.nvim_command(cmd:format(input, input, replace))
+end
+
+function _G._cmd_expr(input, replace)
+  if vim.fn.getcmdtype() == ':' and
+    vim.fn.getcmdline():match('^'..input..'$') then
+    return replace
+  else
+    return input
+  end
+end
+
 return M

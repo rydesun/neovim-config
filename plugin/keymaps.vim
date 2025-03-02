@@ -236,12 +236,10 @@ nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
 nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>
 xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>gH  <Cmd>DiffviewFileHistory<CR>
-nnoremap <silent>  <leader>gd  <Cmd>lua require'utils/term-git'.
-				\ run('diff', true)<CR>
-nnoremap <silent>  <leader>ga  <Cmd>lua require'utils/term-git'.
-				\ run('diff', false)<CR>
-nnoremap <silent>  <leader>gt  <Cmd>lua require'utils/term-git'.
-				\ run('diff --staged', false)<CR>
+nnoremap <silent>  <leader>gd  <Cmd>GitDiffCurrent<CR>
+nnoremap <silent>  <leader>ga  <Cmd>GitDiffAll<CR>
+nnoremap <silent>  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>
+nnoremap <silent>  <leader>gT  <Cmd>GitDiffStagedAll<CR>
 " 搜索git所有的提交内容
 lua << EOF
 function git_pickaxe(all)
