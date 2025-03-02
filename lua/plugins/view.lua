@@ -29,5 +29,5 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   { 'voldikss/vim-translator' },
 
   -- 显示颜色
-  { 'NvChad/nvim-colorizer.lua', lazy = false, opts_file = true },
+  { 'brenoprata10/nvim-highlight-colors', lazy = false, opts_file = true },
 })

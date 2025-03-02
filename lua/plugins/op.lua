@@ -57,7 +57,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   { 'mbbill/undotree', config_file = true },
 
   -- 编辑颜色
-  { 'uga-rosa/ccc.nvim' },
+  { 'max397574/colortils.nvim', cmd = 'Colortils', config = true },
 
   -- Tim Pope's dot.
   { 'tpope/vim-repeat' },
