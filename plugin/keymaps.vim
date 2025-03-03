@@ -21,7 +21,7 @@ nnoremap <silent>  gD  <Cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent>  gy  <Cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent>  gi  <Cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent>  gr  <Cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent>  gs  <Cmd>Telescope grep_string<CR>
+noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 " 表格对齐
 map ga <Plug>(LiveEasyAlign)
 
@@ -31,46 +31,30 @@ if get(g:, 'pager', v:false) | nnoremap q <Cmd>exit<CR> | endif
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
 nnoremap           s   <NOP>
-nnoremap <silent>  S   <Cmd>Telescope<CR>
-nnoremap <silent>  sl  <Cmd>Telescope resume<CR>
-nnoremap <silent>  ss  <Cmd>Telescope live_grep<CR>
-nnoremap <silent>  sS <Cmd>lua require'telescope.builtin'.live_grep {
-      \ additional_args={'-uu'},
-      \ file_ignore_patterns = {'.git', 'node_modules', '.venv'} }<CR>
-nnoremap <silent>  sf  <Cmd>Telescope find_files<CR>
-nnoremap <silent>  sF  <Cmd>Telescope find_files hidden=true no_ignore=true<CR>
-nnoremap <silent>  sg  <Cmd>TelescopeGitStatus<CR>
-nnoremap <silent>  sb  <Cmd>TelescopeCwdBuffers<CR>
-nnoremap <silent>  sB  <Cmd>TelescopeBuffers<CR>
-nnoremap <silent>  sm  <Cmd>Noice pick<CR>
+nnoremap <silent>  S   <Cmd>lua Snacks.picker()<CR>
+nnoremap <silent>  sl  <Cmd>lua Snacks.picker.resume()<CR>
 
-nnoremap <silent>  s/  <Cmd>Telescope current_buffer_fuzzy_find
-			\ skip_empty_lines=true<CR>
-nnoremap <silent>  s;  <Cmd>Telescope command_history<CR>
+nnoremap <silent>  ss  <Cmd>lua Snacks.picker.grep()<CR>
+nnoremap <silent>  sf  <Cmd>lua Snacks.picker.files()<CR>
+nnoremap <silent>  sg  <Cmd>lua Snacks.picker.git_status()<CR>
+nnoremap <silent>  so  <Cmd>lua Snacks.picker.recent()<CR>
+nnoremap <silent>  sp  <Cmd>lua Snacks.picker.projects()<CR>
+nnoremap <silent>  s/  <Cmd>lua Snacks.picker.lines()<CR>
+nnoremap <silent>  s;  <Cmd>lua Snacks.picker.command_history()<CR>
 " quickfix/loclist
 nnoremap <silent>  sn  <Cmd>lua require'hlslens'.exportLastSearchToQuickfix();
-      \ vim.cmd 'cwindow'; vim.cmd 'noh'<CR>
+			\ vim.cmd 'cwindow'; vim.cmd 'noh'<CR>
 nnoremap <silent>  sq  <Cmd>lua vim.diagnostic.setqflist()<CR>
-nnoremap <silent>  sj  <Cmd>Telescope jumplist<CR>
-" 文件列表(历史打开)
-nnoremap <silent>  so  <Cmd>Telescope oldfiles<CR>
-nnoremap <silent>  sO  <Cmd>Telescope oldfiles only_cwd=true<CR>
+nnoremap <silent>  sj  <Cmd>lua Snacks.picker.jumps()<CR>
 " Vim
-nnoremap <silent>  svv <Cmd>Telescope help_tags<CR>
-nnoremap <silent>  svk <Cmd>lua require'telescope.builtin'.live_grep { search_dirs={
-                                \ vim.fn.stdpath'config'..'/plugin/keymaps.vim'}}<CR>
-nnoremap <silent>  svK <Cmd>Telescope keymaps show_plug=false<CR>
-nnoremap <silent>  svo <Cmd>Telescope vim_options<CR>
-nnoremap <silent>  svh <Cmd>Telescope highlights<CR>
+nnoremap <silent>  svv <Cmd>lua Snacks.picker.help()<CR>
+nnoremap <silent>  svh <Cmd>lua Snacks.picker.highlights()<CR>
+nnoremap <silent>  svk <Cmd>lua Snacks.picker.grep { dirs={
+			\ vim.fn.stdpath'config'..'/plugin/keymaps.vim'}}<CR>
+nnoremap <silent>  svm <Cmd>Noice pick<CR>
 
 " OMNI组：特殊种类的补全
-imap     <silent>  <C-x><C-r>  <Cmd>Telescope registers<CR>
-imap     <silent>  <C-x><C-p>  <Cmd>Telescope neoclip theme=cursor<CR>
-imap     <silent>  <C-x><C-s>  <Cmd>Telescope symbols<CR>
-imap     <silent>  <C-x><C-e>  <Cmd>lua require'telescope.builtin'.symbols {
-				\ sources = {'emoji', 'kaomoji', 'gitmoji'} }<CR>
-imap     <silent>  <C-x><C-n>  <Cmd>lua require'telescope.builtin'.symbols {
-				\ sources = {'nerd'} }<CR>
+imap     <silent>  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', function()
@@ -283,9 +267,6 @@ nnoremap <silent>  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nnoremap <silent>  <leader>nS  <Cmd>ObsidianSync<CR>
 nnoremap <silent>  <leader>nc  <Cmd>ObsidianGitAdd<CR>
 nnoremap <silent>  <leader>nC  <Cmd>ObsidianCommit<CR>
-
-" w组：项目
-nnoremap <silent>  <leader>wr  <Cmd>TelescopeGoto README<CR>
 " }}}
 
 " {{{ 按键 (LocalLeader) 特定文件类型
@@ -305,11 +286,6 @@ function! MarkdownKeymap() abort
 	nnoremap <buffer><silent> <LocalLeader>g <Cmd>ObsidianFollowLink<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
-
-" 查询文档
-nnoremap <silent> <LocalLeader>vv  <Cmd>DevdocsOpenCurrentFloat<CR>
-nnoremap <silent> <LocalLeader>va  <Cmd>DevdocsOpenFloat<CR>
-nnoremap <silent> <LocalLeader>vt  <Cmd>DevdocsToggle<CR>
 " }}}
 
 " {{{ 按键 (文本对象)

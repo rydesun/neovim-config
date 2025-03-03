@@ -28,19 +28,15 @@ function M.init(bufnr)
     local node = api.tree.get_node_under_cursor()
     if not node then return end
     if node.parent and node.type == "file" then node = node.parent end
-    require 'telescope.builtin'.find_files {
-      search_dirs = { node.absolute_path },
-    }
-  end, opts 'Telescope Find Files')
+    Snacks.picker.files { dirs = { node.absolute_path } }
+  end, opts 'Fuzzy Find Files')
 
   vim.keymap.set('n', 'ss', function()
     local node = api.tree.get_node_under_cursor()
     if not node then return end
     if node.parent and node.type == "file" then node = node.parent end
-    require 'telescope.builtin'.live_grep {
-      search_dirs = { node.absolute_path },
-    }
-  end, opts 'Telescope Find Files')
+    Snacks.picker.grep { dirs = { node.absolute_path } }
+  end, opts 'Fuzzy Grep')
 
   vim.keymap.set('n', ',', function()
     local cwd = core.get_cwd()

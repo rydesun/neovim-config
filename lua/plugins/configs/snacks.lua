@@ -13,11 +13,30 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+local picker = {
+  sources = {
+    -- 即使搜索hidden和ignored也始终排除这些目录。注意.git目录早已被排除
+    files = {
+      exclude = { 'build/', 'target/', 'node_modules/', '__pycache__/',
+        '.venv/' }
+    },
+    grep = {
+      exclude = { 'build/', 'target/', 'node_modules/', '__pycache__/',
+        '.venv/' }
+    },
+  },
+  previewers = {
+    -- 关闭builtin，使用delta
+    diff = { builtin = false },
+    git = { builtin = false },
+  },
+}
+
 return {
   bigfile = { enabled = true },
   image = { enabled = true },
   input = { enabled = true },
-  picker = { enabled = true },
+  picker = picker,
   scope = { enabled = true, treesitter = { enabled = false } },
 
   styles = {

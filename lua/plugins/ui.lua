@@ -46,18 +46,4 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
 
   -- 改进quickfix
   { 'kevinhwang91/nvim-bqf', opts = { auto_resize_height = true } },
-
-  -- 查找
-  {
-    'nvim-telescope/telescope.nvim',
-    config_file = true,
-    dependencies = {
-      -- 搜索支持fzf语法
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      -- 补全符号
-      'nvim-telescope/telescope-symbols.nvim',
-      -- 管理yank
-      'AckslD/nvim-neoclip.lua',
-    },
-  },
 })

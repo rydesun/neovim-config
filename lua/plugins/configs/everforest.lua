@@ -64,12 +64,6 @@ local function custom_plugin()
   -- nvim-treesitter-context: 行号同色
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
 
-  -- telescope: git status
-  vim.cmd 'hi! link TelescopeResultsDiffChange Blue'
-  vim.cmd 'hi! link TelescopeResultsDiffAdd Red'
-  vim.cmd 'hi! link TelescopeResultsDiffDelete Yellow'
-  vim.cmd 'hi! link TelescopeResultsDiffUntracked Purple'
-
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 

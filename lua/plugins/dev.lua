@@ -112,9 +112,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
 
   -- Code Runner
   { 'michaelb/sniprun', config = true, build = 'bash ./install.sh' },
-
-  -- 文档
-  { 'luckasRanarison/nvim-devdocs', opts_file = true },
   -- }}}
 })
 
