@@ -217,9 +217,9 @@ nnoremap <silent>  <leader>hw  <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <silent>  <leader>hq  <Cmd>Gitsigns setqflist all<CR>
 
 nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
-nnoremap <silent>  <leader>gh  <Cmd>DiffviewFileHistory %<CR>
-xnoremap <silent>  <leader>gh  :DiffviewFileHistory<CR>
-nnoremap <silent>  <leader>gH  <Cmd>DiffviewFileHistory<CR>
+xnoremap <silent>  <leader>gl  :DiffviewFileHistory<CR>
+nnoremap <silent>  <leader>gl  <Cmd>lua Snacks.picker.git_log_file()<CR>
+nnoremap <silent>  <leader>gL  <Cmd>lua Snacks.picker.git_log()<CR>
 nnoremap <silent>  <leader>gd  <Cmd>GitDiffCurrent<CR>
 nnoremap <silent>  <leader>ga  <Cmd>GitDiffAll<CR>
 nnoremap <silent>  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>

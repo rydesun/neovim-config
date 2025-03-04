@@ -24,11 +24,29 @@ local picker = {
       exclude = { 'build/', 'target/', 'node_modules/', '__pycache__/',
         '.venv/' }
     },
+    -- 不要checkout，改成预览
+    git_log_file = { confirm = 'git_show_file' },
+    git_log_line = { confirm = 'git_show_file' },
+    git_log = { confirm = 'git_show' },
+  },
+  layouts = {
+    -- 奇怪的无边框设计
+    vscode = { layout = { backdrop = true } },
   },
   previewers = {
     -- 关闭builtin，使用delta
     diff = { builtin = false },
     git = { builtin = false },
+  },
+  actions = {
+    git_show_file = function(picker, item)
+      picker:close()
+      require 'gitsigns'.show(item.commit)
+    end,
+    git_show = function(picker, item)
+      picker:close()
+      vim.cmd('DiffviewFileHistory --range=' .. item.commit)
+    end,
   },
 }
 
