@@ -53,9 +53,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   -- 输入闭合符号
   { 'altermo/ultimate-autopair.nvim', config = true },
 
-  -- 撤销历史
-  { 'mbbill/undotree', config_file = true },
-
   -- 编辑颜色
   { 'max397574/colortils.nvim', cmd = 'Colortils', config = true },
 
