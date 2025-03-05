@@ -19,7 +19,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   },
 
   -- 单独配置Rust: 使用系统端的rust-analyzer，不要从mason安装
-  { 'mrcjkb/rustaceanvim', version = '^5', config_file = true },
+  { 'mrcjkb/rustaceanvim', version = '^5', lazy = false, config_file = true },
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
   {
@@ -30,9 +30,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
       { 'nvimtools/none-ls.nvim', config = true },
     },
   },
-
-  -- 补全时显示函数签名
-  { 'ray-x/lsp_signature.nvim', opts_file = true },
   -- }}}
 
   -- {{{ 本地开发 (tree-sitter)

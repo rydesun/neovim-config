@@ -87,6 +87,8 @@ nnoremap <silent>  [om         <Cmd>set colorcolumn=79<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
+nnoremap <silent>  [ow         <Cmd>lua vim.lsp.buf.document_highlight()<CR>
+nnoremap <silent>  ]ow         <Cmd>lua vim.lsp.buf.clear_references()<CR>
 
 " Ctrl组：前后跳转
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
