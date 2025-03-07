@@ -164,9 +164,6 @@ require 'rooter'.setup(
   { 'src', 'etc' }
 )
 
--- 修改quickfix界面
-vim.cmd 'packadd qftf'
-
 -- 其他小工具
 vim.cmd 'packadd utils'
 require 'utils'.setup()

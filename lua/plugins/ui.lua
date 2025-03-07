@@ -45,5 +45,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   { 'stevearc/oil.nvim', lazy = false, opts_file = true },
 
   -- 改进quickfix
-  { 'kevinhwang91/nvim-bqf', opts = { auto_resize_height = true } },
+  { 'stevearc/quicker.nvim', ft = 'qf', opts_file = true },
+  { 'kevinhwang91/nvim-bqf', ft = 'qf', opts_file = true },
 })
