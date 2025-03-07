@@ -51,11 +51,6 @@ picker.sources.grep = { exclude = exclude }
 picker.sources.smart = { multi = { 'buffers', 'recent' } }
 picker.sources.buffers = { current = false }
 
--- 不要checkout，改成预览
-picker.sources.git_log_file = { confirm = 'git_show_file' }
-picker.sources.git_log_line = { confirm = 'git_show_file' }
-picker.sources.git_log = { confirm = 'git_show' }
-
 picker.sources.highlights = {
   confirm = function(p, item)
     p:close()
@@ -66,14 +61,31 @@ picker.sources.highlights = {
 -- 搜索所有SymbolKind（除了lua_ls）。同时影响lsp_workspace_symbols
 picker.sources.lsp_symbols = { filter = { default = true } }
 
+-- 不要checkout，改成预览
+picker.sources.git_log = { confirm = 'git_log' }
+picker.sources.git_log_file = { confirm = 'git_log_file' }
+picker.sources.git_log_line = { confirm = 'git_log_file' }
+picker.sources.git_branches = { confirm = 'git_log_branch' }
+picker.sources.git_stash = { confirm = 'git_log_stash' }
+
 picker.actions = {
-  git_show_file = function(p, item)
-    p:close()
-    require 'gitsigns'.show(item.commit)
-  end,
-  git_show = function(p, item)
+  git_log = function(p, item)
     p:close()
     vim.cmd('DiffviewFileHistory --range=' .. item.commit)
+  end,
+  git_log_file = function(p, item)
+    p:close()
+    local cmd = 'DiffviewFileHistory --range=%s %s'
+    vim.cmd(cmd:format(item.commit, table.concat(item.files, ' ')))
+  end,
+  git_log_branch = function(p, item)
+    p:close()
+    vim.cmd('DiffviewFileHistory --range=origin/HEAD...' .. item.commit
+      .. ' --cherry-pick --right-only')
+  end,
+  git_log_stash = function(p, item)
+    p:close()
+    vim.cmd('DiffviewFileHistory -g --range=' .. item.stash)
   end,
 }
 

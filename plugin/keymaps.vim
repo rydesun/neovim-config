@@ -221,6 +221,7 @@ nnoremap <silent>  <leader>go  <Cmd>DiffviewOpen<CR>
 xnoremap <silent>  <leader>gl  :DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>gl  <Cmd>lua Snacks.picker.git_log_file()<CR>
 nnoremap <silent>  <leader>gL  <Cmd>lua Snacks.picker.git_log()<CR>
+nnoremap <silent>  <leader>gb  <Cmd>lua Snacks.picker.git_branches()<CR>
 nnoremap <silent>  <leader>gd  <Cmd>GitDiffCurrent<CR>
 nnoremap <silent>  <leader>ga  <Cmd>GitDiffAll<CR>
 nnoremap <silent>  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>
