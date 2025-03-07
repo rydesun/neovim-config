@@ -15,7 +15,7 @@ map                M   <Plug>(leap-backward-to)
 map                gm  <Plug>(leap-from-window)
 noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
-" g组：按词跳转
+" g组：按当前词跳转
 nnoremap <silent>  gd  <Cmd>lua Snacks.picker.lsp_definitions()<CR>
 nnoremap <silent>  gD  <Cmd>lua Snacks.picker.lsp_declarations()<CR>
 nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
@@ -43,15 +43,14 @@ nnoremap <silent>  so  <Cmd>lua Snacks.picker.smart()<CR>
 nnoremap <silent>  sp  <Cmd>lua Snacks.picker.projects()<CR>
 nnoremap <silent>  s/  <Cmd>lua Snacks.picker.lines()<CR>
 nnoremap <silent>  s;  <Cmd>lua Snacks.picker.command_history()<CR>
-" quickfix/loclist
-nnoremap <silent>  sq  <Cmd>lua vim.diagnostic.setqflist()<CR>
-nnoremap <silent>  sj  <Cmd>lua Snacks.picker.jumps()<CR>
+nnoremap <silent>  sq  <Cmd>lua Snacks.picker.diagnostics()<CR>
 " Vim
+nnoremap <silent>  svm <Cmd>lua Snacks.picker.noice()<CR>
 nnoremap <silent>  svv <Cmd>lua Snacks.picker.help()<CR>
 nnoremap <silent>  svh <Cmd>lua Snacks.picker.highlights()<CR>
+nnoremap <silent>  svK <Cmd>lua Snacks.picker.keymaps()<CR>
 nnoremap <silent>  svk <Cmd>lua Snacks.picker.grep { dirs={
 			\ vim.fn.stdpath'config'..'/plugin/keymaps.vim'}}<CR>
-nnoremap <silent>  svm <Cmd>Noice pick<CR>
 
 " OMNI组：特殊种类的补全
 imap     <silent>  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>

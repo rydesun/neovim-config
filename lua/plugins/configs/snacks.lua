@@ -17,8 +17,27 @@ local picker = {
   sources = {},
   icons = { kinds = require 'libs.style'.symbols() },
   win = {
-    -- 不要全选，要移动到开头
-    input = { keys = { ['<c-a>'] = false } },
+    input = {
+      keys = {
+        -- 不要全选，要移动到开头
+        ['<c-a>'] = false,
+        -- c-g已被终端设置占用
+        ['<c-g>'] = false,
+        ['<a-l>'] = { 'toggle_live', mode = { 'i', 'n' } },
+      }
+    },
+  }
+}
+
+picker.sources.projects = {
+  win = {
+    input = {
+      keys = {
+        -- c-g已被终端设置占用
+        ['<c-g>'] = false,
+        ['<c-s>'] = { { 'tcd', 'picker_grep' }, mode = { 'n', 'i' } },
+      }
+    }
   }
 }
 
