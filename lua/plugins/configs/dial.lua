@@ -1,13 +1,14 @@
 local augend = require 'dial.augend'
 local map = require 'dial.map'
 
-local kopts = { noremap = true }
-vim.keymap.set('n', '<C-a>', map.inc_normal(), kopts)
-vim.keymap.set('n', '<C-x>', map.dec_normal(), kopts)
-vim.keymap.set('v', '<C-a>', map.inc_visual(), kopts)
-vim.keymap.set('v', '<C-x>', map.dec_visual(), kopts)
-vim.keymap.set('v', 'g<C-a>', map.inc_gvisual(), kopts)
-vim.keymap.set('v', 'g<C-x>', map.dec_gvisual(), kopts)
+vim.keymap.set('n', '<C-a>', function() map.manipulate('increment', 'normal') end)
+vim.keymap.set('v', '<C-a>', function() map.manipulate('increment', 'visual') end)
+vim.keymap.set('n', '<C-x>', function() map.manipulate('decrement', 'normal') end)
+vim.keymap.set('v', '<C-x>', function() map.manipulate('decrement', 'visual') end)
+vim.keymap.set('n', 'g<C-a>', function() map.manipulate('increment', 'gnormal') end)
+vim.keymap.set('n', 'g<C-x>', function() map.manipulate('decrement', 'gnormal') end)
+vim.keymap.set('v', 'g<C-a>', function() map.manipulate('increment', 'gvisual') end)
+vim.keymap.set('v', 'g<C-x>', function() map.manipulate('decrement', 'gvisual') end)
 
 require 'dial.config'.augends:register_group {
   default = {
@@ -32,6 +33,9 @@ require 'dial.config'.augends:register_group {
     augend.date.alias["%H:%M"],
     augend.constant.alias.ja_weekday_full,
 
+    -- RGB
+    augend.hexcolor.new {},
+
     -- 运算符
     augend.constant.new { elements = { "and", "or" } },
     augend.constant.new { elements = { "AND", "OR" } },
@@ -53,17 +57,17 @@ require 'dial.config'.augends:register_group {
     augend.constant.new { elements = { "top", "bottom" } },
     augend.constant.new { elements = { "left", "right" } },
     augend.constant.new { elements = { "margin", "padding" } },
-    augend.constant.new { elements = { "disable", "enable"}, word = false },
+    augend.constant.new { elements = { "disable", "enable" }, word = false },
 
     -- 日志等级
     augend.constant.new { elements = {
-      "trace", "debug", "info", "warn", "warning", "error", "critical", "fatal",
+      "trace", "debug", "info", "warn", "error", "critical", "fatal",
     } },
     augend.constant.new { elements = {
-      "TRACE", "DEBUG", "INFO", "WARN", "WARNING", "ERROR", "CRITICAL", "FATAL",
+      "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "FATAL",
     } },
     augend.constant.new { elements = {
-      "Trace", "Debug", "Info", "Warn", "Warning", "Error", "Critical", "Fatal",
+      "Trace", "Debug", "Info", "Warn", "Error", "Critical", "Fatal",
     }, word = false },
   },
 }
