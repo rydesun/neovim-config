@@ -92,8 +92,10 @@ nnoremap <silent>  ]ow         <Cmd>lua vim.lsp.buf.clear_references()<CR>
 " Ctrl组：前后跳转
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
-nnoremap <silent>  <C-j>       <Cmd>Gitsigns next_hunk<CR>
-nnoremap <silent>  <C-k>       <Cmd>Gitsigns prev_hunk<CR>
+nnoremap <silent>  <C-j>       <Cmd>Gitsigns nav_hunk next<CR>
+nnoremap <silent>  <C-k>       <Cmd>Gitsigns nav_hunk prev<CR>
+nnoremap <silent>  <S-C-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
+nnoremap <silent>  <S-C-k>     <Cmd>Gitsigns nav_hunk prev target=staged<CR>
 xnoremap <silent>  <C-j>       <Cmd>STSSelectNextSiblingNode<CR>
 xnoremap <silent>  <C-k>       <Cmd>STSSelectPrevSiblingNode<CR>
 xnoremap <silent>  <C-l>       <Cmd>STSSelectParentNode<CR>
