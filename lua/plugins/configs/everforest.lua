@@ -28,11 +28,17 @@ local function custom_basic()
 
   -- 浮动窗口: 不要bg
   hi('FloatBorder', palette.grey0, palette.none)
+  hi('FloatTitle', palette.fg, palette.none, 'bold')
 
   -- TabLine使用更暗的背景色
   hi('TabLine', palette.grey2, palette.bg_dim)
   hi('TabLineFill', palette.grey1, palette.bg_dim)
   hi('TabLineSel', palette.fg, palette.bg3)
+
+  -- LSP信息: 更明显的高亮
+  hi('LspReferenceText', palette.bg0, palette.purple)
+  hi('LspReferenceRead', palette.bg0, palette.aqua)
+  hi('LspReferenceWrite', palette.bg0, palette.orange)
 
   -- 更暗的diagnostic下划线和虚拟文本
   hi('VirtualTextError', soft_palette.bg_red, palette.none)
@@ -60,6 +66,12 @@ local function custom_plugin()
 
   -- nvim-cmp: text类型不使用fg
   vim.cmd 'hi! link CmpItemKindText CmpItemKind'
+
+  -- nvim-treesitter
+  hi('TSNote', palette.none, palette.none, 'bold,underline', palette.green)
+  hi('TSWarning', palette.none, palette.none, 'bold,underline', palette.yellow)
+  hi('TSDanger', palette.none, palette.none, 'bold,underline', palette.red)
+  hi('TSTodo', palette.none, palette.none, 'bold,underline', palette.blue)
 
   -- nvim-treesitter-context: 行号同色
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
