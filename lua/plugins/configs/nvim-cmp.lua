@@ -9,7 +9,10 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- 如果没有选中项，select = true 使用第一条进行展开
     ['<C-y>'] = cmp.mapping.confirm { select = true },
-    ['<C-l>'] = cmp.mapping.confirm { select = true },
+    ['<C-l>'] = cmp.mapping.confirm { select = true,
+      -- 候选项覆盖后面的文本
+      behavior = cmp.ConfirmBehavior.Replace,
+    },
   },
   snippet = {
     expand = function(args) require('luasnip').lsp_expand(args.body) end,
