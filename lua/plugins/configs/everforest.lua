@@ -76,6 +76,10 @@ local function custom_plugin()
   -- nvim-treesitter-context: 行号同色
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
 
+  -- sniprun：修改默认配色
+  vim.cmd 'hi! link SniprunFloatingWinOk HintFloat'
+  vim.cmd 'hi! link SniprunFloatingWinErr ErrorFloat'
+
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 

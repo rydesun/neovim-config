@@ -148,31 +148,28 @@ let g:mapleader=' ' | nnoremap <Space> <Nop>
 let g:maplocalleader='\'
 
 " 数字组：编译运行
-nnoremap <silent>  <leader>1   <Cmd>AsyncTask run<CR>
-nnoremap <silent>  <leader>2   <Cmd>AsyncTask build<CR>
-nnoremap <silent>  <leader>3   <Cmd>AsyncTask build-release<CR>
-nnoremap <silent>  <leader>4   <Cmd>AsyncTask coverage<CR>
-nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
-nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
-nnoremap <silent>  <leader>9   <Cmd>AsyncTask custom<CR>
-nnoremap <silent>  <leader>0t  <Cmd>AsyncTask repl<CR>
-noremap  <silent>  <leader>00  :SnipRun<CR>
-nnoremap <silent>  <leader>0-  <Cmd>AsyncTaskTogglePos<CR>
-lua << EOF
-local pos = {'TAB', 'right', 'bottom'}
-vim.api.nvim_create_user_command('AsyncTaskTogglePos', function()
-  local next_i = 0
-  for i, v in ipairs(pos) do
-    if vim.g.asynctasks_term_pos == v then
-      next_i = i == #pos and 1 or i+1
-      break
-    end
-  end
-  if next_i == 0 then next_i = 1 end
-  vim.g.asynctasks_term_pos = pos[next_i]
-  vim.notify('asynctasks_term_pos: '..vim.g.asynctasks_term_pos)
-end, {})
-EOF
+nnoremap <silent>  <leader>1   <Cmd>AsyncTask cwd-run<CR>
+nnoremap <silent>  <leader>2   <Cmd>AsyncTask cwd-build<CR>
+nnoremap <silent>  <leader>3   <Cmd>AsyncTask cwd-build-release<CR>
+
+nnoremap <silent>  <leader>4   <Cmd>AsyncTask cwd-command1<CR>
+nnoremap <silent>  <leader>5   <Cmd>AsyncTask cwd-command2<CR>
+nnoremap <silent>  <leader>6   <Cmd>AsyncTask file-command2<CR>
+nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-command1<CR>
+
+nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-run<CR>
+nnoremap <silent>  <leader>9   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <leader>0   <Cmd>AsyncTask repl<CR>
+
+nnoremap <silent>  <leader>-   <Cmd>AsyncTaskTogglePos<CR>
+
+noremap  <silent>  <leader><Enter>    <Cmd>SnipRun<CR>
+noremap  <silent>  <leader><S-Enter>  <Cmd>call <SID>SnipRunFile()<CR>
+function s:SnipRunFile() abort
+	let l:caret=winsaveview()
+	execute '%SnipRun'
+	call winrestview(l:caret)
+endfunction
 
 xnoremap <silent>  <leader>y   "+y
 nnoremap <silent>  <leader>p   "+p

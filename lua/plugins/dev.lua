@@ -108,8 +108,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'chrisgrieser/nvim-chainsaw', config = true },
 
   -- Code Runner
-  { 'michaelb/sniprun', config = true, build = 'bash ./install.sh' },
-  -- }}}
+  { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh' },
 })
 
 -- vim: foldmethod=marker:foldlevel=0
