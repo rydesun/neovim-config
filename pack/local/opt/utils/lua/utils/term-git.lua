@@ -11,7 +11,12 @@ function M.run(subcmd, only_this)
   vim.api.nvim_command(cmd)
   vim.api.nvim_buf_set_keymap(0, 'n', 'q', '', {
     noremap = true,
-    callback = function() vim.api.nvim_buf_delete(0, {}) end,
+    callback = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local alt = vim.fn.bufnr("#")
+      if alt ~= buf and vim.fn.buflisted(alt) == 1 then vim.cmd 'bprevious' end
+      vim.api.nvim_buf_delete(buf, {})
+    end,
   })
 end
 
