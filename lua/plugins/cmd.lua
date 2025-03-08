@@ -10,9 +10,8 @@ return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
 
   -- 集成Git
   { 'lewis6991/gitsigns.nvim', opts_file = true },
-
-  -- Git diff
   { 'sindrets/diffview.nvim', opts_file = true },
+  { 'NeogitOrg/neogit', opts_file = true },
 
   -- 切换输入法
   {
