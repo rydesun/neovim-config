@@ -58,19 +58,10 @@ if not vim.g.env_console then
 end
 -- 去除启动页面的介绍
 vim.opt.shortmess:append 'I'
--- 不在右下角提示搜索
-vim.opt.shortmess:append 'sS'
 -- 不在lastline显示当前模式
 vim.o.showmode = false
 -- 设置虚拟终端的标题
 vim.o.title = true
--- 只显示一个窗口的状态栏
-vim.o.laststatus = 3
--- 先占位，插件启动后再设置状态栏
-if vim.g.plug_ui then
-  vim.o.statusline = ' '
-  vim.o.winbar = ' '
-end
 -- 滚动页面时光标距离上下边缘的预留行数
 vim.o.scrolloff = 5
 vim.cmd 'autocmd FileType qf setlocal scrolloff=0'

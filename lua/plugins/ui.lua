@@ -1,3 +1,9 @@
+-- 先占位，插件启动后让插件设置状态栏
+vim.o.statusline = ' '
+vim.o.winbar = ' '
+-- 不在右下角提示搜索
+vim.opt.shortmess:append 'sS'
+
 return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   { 'folke/snacks.nvim', lazy = false, priority = 1000, opts_file = true },
 

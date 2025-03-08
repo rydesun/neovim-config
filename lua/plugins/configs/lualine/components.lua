@@ -4,7 +4,7 @@ function M.git_branch()
   local head = vim.b.gitsigns_head
   return head == nil and ''
       or (head == 'master' or head == 'main') and ' '
-      or ' ' .. head
+      or '  ' .. head
 end
 
 function M.encoding()

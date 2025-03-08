@@ -31,6 +31,9 @@ local winbar = {
 
 return {
   options = {
+    -- 只显示一个窗口的状态栏
+    globalstatus = true,
+
     component_separators = '',
     section_separators = '',
   },
@@ -44,7 +47,11 @@ return {
     lualine_y = {
       {
         require 'noice'.api.status.command.get,
-        cond = require 'noice'.api.status.command.has,
+        cond = function()
+          local mode = vim.fn.mode()
+          return (mode == 'v' or mode == 'V' or mode == '\22') and
+              require 'noice'.api.status.command.has()
+        end,
       },
     },
     lualine_z = {
