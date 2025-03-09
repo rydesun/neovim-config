@@ -6,7 +6,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   { 'tpope/vim-unimpaired' },
 
   -- 移动光标
-  { 'ggandor/leap.nvim' },
+  { 'ggandor/leap.nvim', opts_file = true },
   { 'ggandor/flit.nvim', opts_file = true, dependencies = 'leap.nvim' },
 
   -- 增加a和i的文本对象

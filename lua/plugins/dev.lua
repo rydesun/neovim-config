@@ -50,11 +50,14 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 不需要开启，因为有mini.ai在使用query
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
-  -- 按标签交换AST节点
+  -- 交换AST节点(标签选择)
   { 'mizlan/iswap.nvim', config = true },
 
+  -- 导航AST节点
+  { 'aaronik/treewalker.nvim', config = true },
+
   -- SplitJoin
-  { 'Wansmer/treesj', config = true },
+  { 'Wansmer/treesj', config = true, opts = { use_default_keymaps = false } },
 
   -- 大纲视图
   { 'oskarrrrrrr/symbols.nvim', config_file = true },

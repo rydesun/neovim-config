@@ -25,7 +25,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
   {
     'obsidian-nvim/obsidian.nvim',
     enabled = vim.fn.executable('obsidian') > 0,
-    ft = 'markdown',
     opts_file = true,
   },
 })

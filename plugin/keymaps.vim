@@ -92,16 +92,23 @@ imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns nav_hunk next<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns nav_hunk prev<CR>
-nnoremap <silent>  <S-C-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
-nnoremap <silent>  <S-C-k>     <Cmd>Gitsigns nav_hunk prev target=staged<CR>
+nnoremap <silent>  <C-S-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
+nnoremap <silent>  <C-S-k>     <Cmd>Gitsigns nav_hunk prev target=staged<CR>
 
-" Alt组：移动对象，移动光标，调整窗口大小，关闭
+" Ctrl+Alt组：语法跳转
+noremap  <silent>  <C-A-j>     <Cmd>Treewalker Down<CR>
+noremap  <silent>  <C-A-k>     <Cmd>Treewalker Up<CR>
+noremap  <silent>  <C-A-u>     <Cmd>Treewalker Left<CR>
+noremap  <silent>  <C-A-d>     <Cmd>Treewalker Right<CR>
+
+" Alt组：移动语法节点，移动光标，调整窗口大小，关闭
+nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>
+nnoremap <silent>  <A-m>       <Cmd>IMoveNode<CR>
 map      <silent>  <A-p>       <Plug>(matchup-[%)
 map      <silent>  <A-n>       <Plug>(matchup-]%)
 imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
 imap     <silent>  <A-n>       <C-o><Plug>(matchup-]%)
 inoremap           <A-i>       <C-k>
-nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
 nnoremap           <A-w>       <C-w>c
 nnoremap           <A-j>       <Cmd>wincmd j<CR>
 nnoremap           <A-k>       <Cmd>wincmd k<CR>
@@ -145,9 +152,11 @@ cnoremap           <C-n>       <Down>
 " }}}
 
 " {{{ 按键 (Leader单键)
-" 另外有插件treesj.nvim占用 s j m
 let g:mapleader=' ' | nnoremap <Space> <Nop>
 let g:maplocalleader='\'
+
+nnoremap <silent>  <leader>s   <Cmd>lua require'treesj'.split()<CR>
+nnoremap <silent>  <leader>j   <Cmd>lua require'treesj'.join()<CR>
 
 " 数字组：编译运行
 nnoremap <silent>  <leader>1   <Cmd>AsyncTask cwd-run<CR>
