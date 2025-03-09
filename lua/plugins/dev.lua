@@ -37,11 +37,11 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
-    opts = { highlight = { enable = true }, autotag = { enable = true } },
+    opts = { highlight = { enable = true } },
   },
 
   -- 自动输入闭合tag
-  { 'windwp/nvim-ts-autotag', lazy = false },
+  { 'windwp/nvim-ts-autotag', lazy = false, config = true },
 
   -- 上下文
   { 'nvim-treesitter/nvim-treesitter-context', lazy = false },
