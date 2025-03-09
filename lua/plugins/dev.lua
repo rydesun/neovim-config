@@ -50,20 +50,11 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 不需要开启，因为有mini.ai在使用query
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
-  -- AST文本对象(选择标签)
-  { 'ggandor/leap-ast.nvim' },
-
-  -- 导航和交换AST节点
-  { 'ziontee113/syntax-tree-surfer', config = true },
-
   -- 按标签交换AST节点
   { 'mizlan/iswap.nvim', config = true },
 
   -- SplitJoin
   { 'Wansmer/treesj', config = true },
-
-  -- 编辑注入代码块
-  { 'AckslD/nvim-FeMaco.lua', config = true },
 
   -- 大纲视图
   { 'oskarrrrrrr/symbols.nvim', config_file = true },
@@ -76,9 +67,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
     ft = 'markdown',
     build = function() vim.fn['mkdp#util#install']() end,
   },
-
-  -- 为Markdown生成TOC
-  { 'mzlogin/vim-markdown-toc', ft = 'markdown' },
 
   -- Rust
   { 'saecki/crates.nvim', event = 'BufRead Cargo.toml', opts_file = true },
@@ -95,9 +83,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- }}}
 
   -- {{{ 本地开发 (其他)
-  -- Structural search and replace
-  { 'cshuaimin/ssr.nvim', config = true },
-
   -- 测试
   { 'vim-test/vim-test', init_file = true },
 

@@ -25,9 +25,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   -- 查看hex
   { 'fidian/hexmode', lazy = false },
 
-  -- 翻译
-  { 'voldikss/vim-translator' },
-
   -- 显示颜色
   { 'brenoprata10/nvim-highlight-colors', lazy = false, opts_file = true },
 })

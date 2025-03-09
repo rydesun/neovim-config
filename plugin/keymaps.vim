@@ -12,8 +12,6 @@ nnoremap <silent>  K   <Cmd>lua vim.lsp.buf.hover()<CR>
 " leap.nvim跳转
 map                m   <Plug>(leap-forward-to)
 map                M   <Plug>(leap-backward-to)
-map                gm  <Plug>(leap-from-window)
-noremap  <silent>  '   <Cmd>lua require'leap-ast'.leap()<CR>
 
 " g组：按当前词跳转
 nnoremap <silent>  gd  <Cmd>lua Snacks.picker.lsp_definitions()<CR>
@@ -96,10 +94,6 @@ nnoremap <silent>  <C-j>       <Cmd>Gitsigns nav_hunk next<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns nav_hunk prev<CR>
 nnoremap <silent>  <S-C-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
 nnoremap <silent>  <S-C-k>     <Cmd>Gitsigns nav_hunk prev target=staged<CR>
-xnoremap <silent>  <C-j>       <Cmd>STSSelectNextSiblingNode<CR>
-xnoremap <silent>  <C-k>       <Cmd>STSSelectPrevSiblingNode<CR>
-xnoremap <silent>  <C-l>       <Cmd>STSSelectParentNode<CR>
-xnoremap <silent>  <C-h>       <Cmd>STSSelectChildNode<CR>
 
 " Alt组：移动对象，移动光标，调整窗口大小，关闭
 map      <silent>  <A-p>       <Plug>(matchup-[%)
@@ -108,8 +102,6 @@ imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
 imap     <silent>  <A-n>       <C-o><Plug>(matchup-]%)
 inoremap           <A-i>       <C-k>
 nnoremap <silent>  <A-s>       <Cmd>ISwapNodeWith<CR>
-xnoremap <silent>  <A-j>       <Cmd>STSSwapNextVisual<CR>
-xnoremap <silent>  <A-k>       <Cmd>STSSwapPrevVisual<CR>
 nnoremap           <A-w>       <C-w>c
 nnoremap           <A-j>       <Cmd>wincmd j<CR>
 nnoremap           <A-k>       <Cmd>wincmd k<CR>
@@ -187,8 +179,6 @@ nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle!<CR>
 nnoremap <silent>  <leader>u   <Cmd>lua Snacks.picker.undo {layout='sidebar'}<CR>
 nnoremap <silent>  <leader>o   <Cmd>SymbolsToggle<CR>
-nnoremap <silent>  <leader>k   <Cmd>TranslateW --engines=haici<CR>
-xnoremap <silent>  <leader>k   "ty:call translator#start('echo',0,0,0,0,@t)<CR>
 nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
 
 " LSP
@@ -196,8 +186,6 @@ nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
-nnoremap <silent>  <leader>S  <Cmd>lua require'ssr'.open()<CR>
-xnoremap <silent>  <leader>S  <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)

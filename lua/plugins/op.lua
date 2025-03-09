@@ -7,12 +7,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
 
   -- 移动光标
   { 'ggandor/leap.nvim' },
-
-  -- 增强f和t
   { 'ggandor/flit.nvim', opts_file = true, dependencies = 'leap.nvim' },
-
-  -- 远距离操作文本对象
-  { 'ggandor/leap-spooky.nvim', opts_file = true, dependencies = 'leap.nvim' },
 
   -- 增加a和i的文本对象
   { 'echasnovski/mini.ai', version = '*', opts_file = 'mini-ai' },
