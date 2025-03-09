@@ -48,8 +48,7 @@ if vim.g.pager then
 end
 
 -- obsidian目录
-vim.g.obsidian_dir = '~/Data/Documents/Obsidian Vault'
-vim.g.obsidian_diary_dir = '日记'
+vim.g.obsidian_dir = vim.fn.expand('~/Data/Documents/Obsidian Vault')
 -- }}}
 
 -- {{{ 选项 (自身界面)

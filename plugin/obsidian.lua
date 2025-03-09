@@ -1,8 +1,4 @@
-if not vim.g.obsidian_dir then
-  return
-end
-
-vim.g.obsidian_dir = vim.fn.expand(vim.g.obsidian_dir)
+if not vim.g.obsidian_dir then return end
 
 vim.api.nvim_create_user_command(
   'NvimTreeObsidian', 'NvimTreeFindFileToggle ' .. vim.g.obsidian_dir, {}
@@ -16,18 +12,6 @@ vim.api.nvim_create_user_command(
     vim.cmd.edit(path)
   end, {}
 )
-
-if vim.g.obsidian_diary_dir then
-  vim.api.nvim_create_user_command(
-    'ObsidianDiary',
-    function()
-      local name = vim.fn.strftime '%F'
-      local path = string.format('%s/%s/%s.md',
-        vim.g.obsidian_dir, vim.g.obsidian_diary_dir, name)
-      vim.cmd.edit(path)
-    end, {}
-  )
-end
 
 local function git_add()
   local cmd_add = string.format("cd '%s' && git add .", vim.g.obsidian_dir)
