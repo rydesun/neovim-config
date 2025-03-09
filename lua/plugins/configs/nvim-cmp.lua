@@ -4,7 +4,7 @@ local view_kinds = require 'libs.style'.symbols()
 
 cmp.setup {
   mapping = cmp.mapping.preset.insert {
-    -- 滚动文档
+    -- 滚动文档(补全项菜单右侧出现的文档)
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- 如果没有选中项，select = true 使用第一条进行展开

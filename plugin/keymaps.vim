@@ -132,14 +132,22 @@ function! s:toggleQuickFix()
 endfunction
 " }}}
 
-" {{{ 按键 (Emacs编辑)
+" {{{ 按键 (Emacs风格)
 noremap!           <C-a>       <Home>
 noremap!           <C-e>       <End>
-noremap!           <C-b>       <Left>
-noremap!           <C-f>       <Right>
 noremap!           <A-b>       <C-Left>
 noremap!           <A-f>       <C-Right>
 
+" 允许滚动函数传参时出现的文档
+noremap! <silent>  <C-b>       <Cmd>lua NoiceScrollDoc(-4, '<Left>', 'i')<CR>
+noremap! <silent>  <C-f>       <Cmd>lua NoiceScrollDoc(4, '<Right>', 'i')<CR>
+snoremap <silent>  <C-b>       <Cmd>lua NoiceScrollDoc(-4, '<Left>', 'i')<CR>
+snoremap <silent>  <C-f>       <Cmd>lua NoiceScrollDoc(4, '<Right>', 'i')<CR>
+" 注意开启插件Neoscroll会覆盖此设置，所以Neosroll的配置内需要再次设置一次
+nnoremap <silent>  <C-b>       <Cmd>lua NoiceScrollDoc(-4, '<C-b>', 'n')<CR>
+nnoremap <silent>  <C-f>       <Cmd>lua NoiceScrollDoc(4, '<C-f>', 'n')<CR>
+
+" 根据前缀补全
 cnoremap           <C-p>       <Up>
 cnoremap           <C-n>       <Down>
 " }}}
