@@ -7,7 +7,7 @@ capabilities.textDocument.foldingRange = {
 
 local handlers = {
   -- mason安装的ls如果没有单独配置，则使用此配置
-  function(name) lspconfig[name].setup { capabilities = capabilities } end
+  function(name) lspconfig[name].setup { capabilities = capabilities } end,
 }
 
 handlers.lua_ls = function(name)
@@ -24,6 +24,44 @@ handlers.lua_ls = function(name)
   }
   lspconfig[name].setup { capabilities = capabilities, settings = settings }
 end
+
+handlers.basedpyright = function(name)
+  local settings = {
+    basedpyright = {
+      analysis = {
+        diagnosticMode = 'workspace',
+        -- 允许忽略未知类型错误，需要在pyproject.toml里修改回strict
+        typeCheckingMode = 'standard',
+      },
+    },
+  }
+  lspconfig[name].setup { capabilities = capabilities, settings = settings }
+end
+
+handlers.ruff = function(name)
+  local init_options = {
+    -- 让basedpyright提供lint，ruff只提供format
+    settings = { lint = { enable = false } },
+  }
+  lspconfig[name].setup {
+    capabilities = capabilities,
+    init_options = init_options,
+  }
+end
+
+-- 关闭ruff的hover，只用basedpyright提供的hover
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover',
+    { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then return end
+    if client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
 
 handlers.jsonls = function(name)
   local settings = {}
@@ -53,6 +91,7 @@ end
 handlers.cssls = function(name)
   lspconfig[name].setup {
     capabilities = capabilities,
+    -- 让prettier来格式化
     init_options = { provideFormatter = false },
   }
 end
