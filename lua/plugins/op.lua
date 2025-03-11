@@ -22,7 +22,7 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   { 'machakann/vim-sandwich' },
 
   -- 快速注释
-  { 'numToStr/Comment.nvim', config = true },
+  { 'numToStr/Comment.nvim', opts_file = true },
 
   -- 表格对齐
   { 'junegunn/vim-easy-align' },
