@@ -1,4 +1,13 @@
 [*.lua]
 indent_style = space
 indent_size = 2
+max_line_length = 80
+quote_style = single
+call_arg_parentheses = remove
+trailing_table_separator = smart
+space_around_table_append_operator = true
 align_array_table = false
+
+[*.vim]
+indent_style = tab
+indent_size = 8
