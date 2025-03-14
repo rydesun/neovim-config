@@ -6,9 +6,15 @@ capabilities.textDocument.foldingRange = {
 }
 
 local handlers = {
-  -- mason安装的ls如果没有单独配置，则使用此配置
+  -- mason安装的ls如果没有单独配置，则使用此配置自动setup
   function(name) lspconfig[name].setup { capabilities = capabilities } end,
 }
+
+-- mason-lspconfig的自动setup可以被空handler取消
+-- 交给rustaceanvim管理
+handlers.rust_analyzer = function() end
+-- 交给typescript-tools.nvim管理
+handlers.ts_ls = function() end
 
 handlers.lua_ls = function(name)
   local settings = {}
@@ -93,6 +99,13 @@ handlers.cssls = function(name)
     capabilities = capabilities,
     -- 让prettier来格式化
     init_options = { provideFormatter = false },
+  }
+end
+
+handlers.typos_lsp = function(name)
+  lspconfig[name].setup {
+    capabilities = capabilities,
+    init_options = { diagnosticSeverity = 'Hint' },
   }
 end
 

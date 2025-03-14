@@ -86,6 +86,8 @@ nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
 nnoremap <silent>  [ow         <Cmd>lua vim.lsp.buf.document_highlight()<CR>
 nnoremap <silent>  ]ow         <Cmd>lua vim.lsp.buf.clear_references()<CR>
+nnoremap <silent>  [os         <Cmd>FormatOnSaveEnable<CR>
+nnoremap <silent>  ]os         <Cmd>FormatOnSaveDisable<CR>
 
 " Ctrl组：前后跳转
 imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
@@ -193,8 +195,9 @@ nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
 " LSP
 nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
+nnoremap <silent>  <leader>f  <Cmd>LspFormat<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
+nnoremap <silent>  <leader>F  <Cmd>LspFixAll<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)

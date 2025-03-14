@@ -15,11 +15,15 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
       'hrsh7th/cmp-nvim-lsp',
       -- JSON schema
       'b0o/schemastore.nvim',
-    }
+    },
   },
 
-  -- 单独配置Rust: 使用系统端的rust-analyzer，不要从mason安装
+  -- 单独配置Rust
   { 'mrcjkb/rustaceanvim', version = '^5', lazy = false, config_file = true },
+
+  -- 单独配置Typescript
+  { 'pmizio/typescript-tools.nvim', lazy = false, opts_file = true },
+
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
   {
@@ -75,12 +79,12 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   { 'saecki/crates.nvim', event = 'BufRead Cargo.toml', opts_file = true },
 
   -- LaTex
-  { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable('latex') > 0 },
+  { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable 'latex' > 0 },
 
   -- Hugo
   {
     'phelipetls/vim-hugo',
-    enabled = vim.fn.executable('hugo') > 0,
+    enabled = vim.fn.executable 'hugo' > 0,
     lazy = false,
   },
   -- }}}
