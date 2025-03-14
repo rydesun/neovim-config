@@ -19,14 +19,9 @@ handlers.ts_ls = function() end
 handlers.lua_ls = function(name)
   local settings = {}
   settings.Lua = {
-    runtime = { version = 'LuaJIT' },
-    workspace = {
-      checkThirdParty = false,
-      library = {
-        vim.env.VIMRUNTIME,
-        '${3rd}/luv/library',
-      },
-    },
+    -- 启用inlayhint
+    hint = { enable = true, setType = true },
+    -- 其他关键设置已经交给lazydev处理
   }
   lspconfig[name].setup { capabilities = capabilities, settings = settings }
 end

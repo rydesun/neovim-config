@@ -24,6 +24,12 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 单独配置Typescript
   { 'pmizio/typescript-tools.nvim', lazy = false, opts_file = true },
 
+  -- lua_ls：面向nvim编程
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+  },
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
   {

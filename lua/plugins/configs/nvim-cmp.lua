@@ -15,15 +15,16 @@ cmp.setup {
     },
   },
   snippet = {
-    expand = function(args) require('luasnip').lsp_expand(args.body) end,
+    expand = function(args) require 'luasnip'.lsp_expand(args.body) end,
   },
   sources = cmp.config.sources(
+    { { name = 'lazydev' } },
     { { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'path' } },
     { { name = 'omni' },
       {
         name = 'buffer',
         option = {
-          get_bufnrs = function() return vim.api.nvim_list_bufs() end }
+          get_bufnrs = function() return vim.api.nvim_list_bufs() end },
       },
     }
   ),
@@ -33,6 +34,7 @@ cmp.setup {
     },
     documentation = cmp.config.window.bordered(),
   },
+  ---@diagnostic disable-next-line: missing-fields
   formatting = {
     format = function(entry, vim_item)
       if vim_item.kind == 'Snippet' and
@@ -65,12 +67,13 @@ cmp.setup {
       end
 
       return vim_item
-    end
+    end,
   },
 }
 
 cmp.setup.cmdline(':', {
   sources = { { name = 'cmdline', keyword_length = 3 } },
+  ---@diagnostic disable-next-line: missing-fields
   formatting = { fields = { 'abbr' } },
   mapping = {
     ['<Tab>'] = {
