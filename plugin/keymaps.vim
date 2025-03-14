@@ -80,7 +80,7 @@ nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
 nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
 nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
-nnoremap <silent>  [om         <Cmd>set colorcolumn=79<CR>
+nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
@@ -164,16 +164,15 @@ nnoremap <silent>  <leader>j   <Cmd>lua require'treesj'.join()<CR>
 nnoremap <silent>  <leader>1   <Cmd>AsyncTask cwd-run<CR>
 nnoremap <silent>  <leader>2   <Cmd>AsyncTask cwd-build<CR>
 nnoremap <silent>  <leader>3   <Cmd>AsyncTask cwd-build-release<CR>
+nnoremap <silent>  <leader>4   <Cmd>AsyncTask cwd-test<CR>
+nnoremap <silent>  <leader>5   <Cmd>AsyncTask cwd-command<CR>
 
-nnoremap <silent>  <leader>4   <Cmd>AsyncTask cwd-command1<CR>
-nnoremap <silent>  <leader>5   <Cmd>AsyncTask cwd-command2<CR>
-nnoremap <silent>  <leader>6   <Cmd>AsyncTask file-command2<CR>
-nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-command1<CR>
+nnoremap <silent>  <leader>6   <Cmd>AsyncTask file-command<CR>
+nnoremap <silent>  <leader>7   <Cmd>AsyncTask file-run<CR>
+nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-build<CR>
+nnoremap <silent>  <leader>9   <Cmd>AsyncTask file-test<CR>
 
-nnoremap <silent>  <leader>8   <Cmd>AsyncTask file-run<CR>
-nnoremap <silent>  <leader>9   <Cmd>AsyncTask file-build<CR>
 nnoremap <silent>  <leader>0   <Cmd>AsyncTask repl<CR>
-
 nnoremap <silent>  <leader>-   <Cmd>AsyncTaskTogglePos<CR>
 
 noremap  <silent>  <leader><Enter>    <Cmd>SnipRun<CR>
@@ -307,10 +306,10 @@ onoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>
 xnoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>
 
 " 单词按分隔符划分
-onoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword(true)<CR>
-xnoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword(true)<CR>
-onoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword(false)<CR>
-xnoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword(false)<CR>
+onoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword('inner')<CR>
+xnoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword('inner')<CR>
+onoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword('outer')<CR>
+xnoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword('outer')<CR>
 
 " diagnostic
 onoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
