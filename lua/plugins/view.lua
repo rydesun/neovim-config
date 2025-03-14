@@ -25,6 +25,9 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
   -- 查看hex
   { 'fidian/hexmode', lazy = false },
 
+  -- 预览markdown
+  { 'OXY2DEV/markview.nvim', lazy = false, config = true },
+
   -- 显示颜色
   { 'brenoprata10/nvim-highlight-colors', lazy = false, opts_file = true },
 })
