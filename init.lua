@@ -24,7 +24,7 @@ end
 
 -- 是否在开发环境中 (判断依据为文件.install_dev)
 vim.g.env_dev = bool(vim.fn.filereadable(
-  vim.fn.stdpath('data') .. '/lazy/.install_dev'))
+  vim.fn.stdpath 'data' .. '/lazy/.install_dev'))
 
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux' and vim.fn.has 'gui_running' == 0
@@ -48,7 +48,7 @@ if vim.g.pager then
 end
 
 -- obsidian目录
-vim.g.obsidian_dir = vim.fn.expand('~/Data/Documents/Obsidian Vault')
+vim.g.obsidian_dir = vim.fn.expand '~/Data/Documents/Obsidian Vault'
 -- }}}
 
 -- {{{ 选项 (自身界面)
@@ -120,7 +120,7 @@ vim.opt.diffopt:append 'linematch:60'
 -- }}}
 
 -- {{{ 插件
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
 
 local ok, lazy = pcall(require, 'lazy')
@@ -145,14 +145,17 @@ require 'tabline'.setup(vim.g.env_console and {} or {
 
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
-require 'rooter'.setup(
+require 'rooter'.setup {
   -- 目录内包含(向上检查每一级父目录)
-  { 'package.json', 'Cargo.toml', '.git', 'Makefile' },
+  { mode = 'contains', upward = true,
+    'package.json', 'Cargo.toml', 'pyproject.toml', '.git', 'Makefile' },
   -- 目录内包含(向下检查每一级子目录)
-  { '__init__.py' },
+  { mode = 'contains', upward = false,
+    '__init__.py' },
   -- 目录名匹配(向上检查每一级父目录)
-  { 'src', 'etc' }
-)
+  { mode = 'dirname', upward = true,
+    'src', 'etc' },
+}
 
 -- 其他小工具
 vim.cmd 'packadd utils'
