@@ -33,9 +33,11 @@ nnoremap <silent>  S   <Cmd>lua Snacks.picker()<CR>
 nnoremap <silent>  sl  <Cmd>lua Snacks.picker.resume()<CR>
 
 nnoremap <silent>  ss  <Cmd>lua Snacks.picker.grep()<CR>
+nnoremap <silent>  sS  <Cmd>lua Snacks.picker.grep{exclude={}}<CR>
 nnoremap <silent>  sn  <Cmd>lua Snacks.picker.lsp_symbols()<CR>
 nnoremap <silent>  sN  <Cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>
 nnoremap <silent>  sf  <Cmd>lua Snacks.picker.files()<CR>
+nnoremap <silent>  sF  <Cmd>lua Snacks.picker.files{exclude={}}<CR>
 nnoremap <silent>  sg  <Cmd>lua Snacks.picker.git_status()<CR>
 nnoremap <silent>  so  <Cmd>lua Snacks.picker.smart()<CR>
 nnoremap <silent>  sp  <Cmd>lua Snacks.picker.projects()<CR>

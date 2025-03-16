@@ -41,9 +41,9 @@ picker.sources.projects = {
   }
 }
 
--- 即使搜索hidden和ignored也始终排除这些目录。注意.git目录早已被排除
+-- 即使搜索hidden和ignored也始终排除这些路径。注意.git目录早已被排除
 local exclude = { 'build/', 'target/', 'node_modules/', '__pycache__/',
-  '.venv/' }
+  '.pytest_cache/', '.venv/', '*.lock', '*-lock.json' }
 picker.sources.files = { exclude = exclude }
 picker.sources.grep = { exclude = exclude }
 
