@@ -78,20 +78,20 @@ nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{
 				\ severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
-nnoremap <silent>  [of         <Cmd>set laststatus=2<CR>
-nnoremap <silent>  ]of         <Cmd>set laststatus=3<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
 nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
 nnoremap <silent>  [ow         <Cmd>lua vim.lsp.buf.document_highlight()<CR>
 nnoremap <silent>  ]ow         <Cmd>lua vim.lsp.buf.clear_references()<CR>
-nnoremap <silent>  [os         <Cmd>FormatOnSaveEnable<CR>
-nnoremap <silent>  ]os         <Cmd>FormatOnSaveDisable<CR>
+nnoremap <silent>  [of         <Cmd>FormatOnSaveEnable<CR>
+nnoremap <silent>  ]of         <Cmd>FormatOnSaveDisable<CR>
 
 " Ctrl组：前后跳转
-imap     <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
-imap     <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
+inoremap <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
+inoremap <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
+snoremap <silent>  <C-j>       <cmd>lua require'luasnip'.jump(1)<Cr>
+snoremap <silent>  <C-k>       <cmd>lua require'luasnip'.jump(-1)<Cr>
 nnoremap <silent>  <C-j>       <Cmd>Gitsigns nav_hunk next<CR>
 nnoremap <silent>  <C-k>       <Cmd>Gitsigns nav_hunk prev<CR>
 nnoremap <silent>  <C-S-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
