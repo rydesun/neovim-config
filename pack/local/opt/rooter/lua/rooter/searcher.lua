@@ -1,11 +1,5 @@
 local M = {}
 
-function M.set_bufvar_rootpath(rules)
-  local start_dir = vim.fn.expand '%:p:h'
-  local found_dir = M.search(start_dir, rules)
-  vim.b.rootpath = found_dir and found_dir or start_dir
-end
-
 function M.search(start_dir, rules)
   local components = vim.fn.split(start_dir, '/')
   for _, pattern_set in ipairs(rules) do

@@ -39,10 +39,16 @@ function M.init(bufnr)
   end, opts 'Fuzzy Grep')
 
   vim.keymap.set('n', ',', function()
-    local cwd = core.get_cwd()
-    vim.notify("RooterPin " .. cwd)
+    local target_dir
+    local node = api.tree.get_node_under_cursor()
+    if node and node.type == "directory" then
+      target_dir = node.absolute_path
+    else
+      target_dir = core.get_cwd()
+    end
     api.tree.toggle()
-    vim.cmd.RooterPin(cwd)
+    vim.cmd.RooterPin(target_dir)
+    vim.notify("RooterPin " .. target_dir)
     api.tree.toggle()
   end, opts 'Rooter Pin Cwd')
 
