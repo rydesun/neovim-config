@@ -14,6 +14,8 @@ map                m   <Plug>(leap-forward-to)
 map                M   <Plug>(leap-backward-to)
 
 " g组：按当前词跳转
+" 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
+" mini.ai提供g[ g]
 nnoremap <silent>  gd  <Cmd>lua Snacks.picker.lsp_definitions()<CR>
 nnoremap <silent>  gD  <Cmd>lua Snacks.picker.lsp_declarations()<CR>
 nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
@@ -71,7 +73,8 @@ EOF
 
 " {{{ 按键 (新增行为)
 " []组：前后跳转，切换选项
-" 另外有插件提供更多映射
+" 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
+" vim-unimpaired提供更多映射
 nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{
@@ -300,8 +303,7 @@ autocmd filetype markdown call MarkdownKeymap()
 " }}}
 
 " {{{ 按键 (文本对象)
-" mini.ai占用a和i
-" sandwich改变了is as ib ab
+" 注意mini.ai占用a和i，修改a和i前需要先确认mini-ai.lua
 
 " 数字
 onoremap <silent>  i0  <Cmd>lua require'various-textobjs'.number(true)<CR>
@@ -312,6 +314,12 @@ onoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword('inner')<CR>
 xnoremap <silent>  iS  <Cmd>lua require'various-textobjs'.subword('inner')<CR>
 onoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword('outer')<CR>
 xnoremap <silent>  aS  <Cmd>lua require'various-textobjs'.subword('outer')<CR>
+
+" 缩进
+onoremap <silent>  iI  <Cmd>lua require'various-textobjs'.indentation('inner','inner')<CR>
+xnoremap <silent>  iI  <Cmd>lua require'various-textobjs'.indentation('inner','inner')<CR>
+onoremap <silent>  aI  <Cmd>lua require'various-textobjs'.indentation('outer','inner')<CR>
+xnoremap <silent>  aI  <Cmd>lua require'various-textobjs'.indentation('outer','inner')<CR>
 
 " diagnostic
 onoremap <silent>  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
