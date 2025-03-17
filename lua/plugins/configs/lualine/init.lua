@@ -7,7 +7,6 @@ local winbar = {
   lualine_b = { {
     components.filename,
     path = 1,
-    file_status = true,
     cond = function() return vim.bo.buftype ~= 'nofile' end,
     symbols = { modified = '*', readonly = '!', unnamed = '' },
   } },

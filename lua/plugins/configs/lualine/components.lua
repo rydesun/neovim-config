@@ -23,7 +23,7 @@ function M.filetype:init(options)
   self.options = vim.tbl_deep_extend('keep', self.options or {}, {
     terminal = '',
     unknown = '󰡯',
-    unset = ' text',
+    unset = ' ',
   })
 end
 
@@ -59,31 +59,51 @@ M.filename = require 'lualine.components.filename':extend()
 
 function M.filename:init(options)
   M.filename.super:init(options)
+
+  -- 必须禁掉原方法中的symbols，防止update_status返回重复的symbols
+  self.options.file_status = false
+
   self.options = vim.tbl_deep_extend('keep', self.options or {},
-    { hl_main = '%#deniteStatusLinePath#' }
+    {
+      hl_main = '%#deniteStatusLinePath#',
+      hl_hint = '%#deniteInput#',
+      hl_warn = '%#deniteStatusLineNumber#',
+    }
   )
 end
 
 function M.filename:update_status()
-  local compact_path = M.filename.super:update_status()
-  if compact_path == '' then return '' end
-  local full_path = vim.fn.expand('%:p:~')
+  local symbols = ''
+  if vim.bo.modified then
+    symbols = symbols .. self.options.hl_hint .. self.options.symbols.modified
+  end
+  if vim.bo.modifiable == false or vim.bo.readonly == true then
+    symbols = symbols .. self.options.hl_warn .. self.options.symbols.readonly
+  end
 
+  local compact_path = M.filename.super:update_status()
+  -- unnamed buffer
+  if compact_path == '' then return symbols end
+
+  local raw_path = vim.fn.expand '%:p:~'
+  local path = ''
   -- 如果是URL
-  local protocol = full_path:match '^[%w-]+://'
+  local protocol = raw_path:match '^[%w-]+://'
   if protocol then
     local rest = compact_path:match '^[^/]+//(.*)'
-    return protocol .. self.options.hl_main .. rest
+    path = protocol .. self.options.hl_main .. rest
+  else
+    local split_idx = compact_path:match '.*()/'
+    if split_idx then
+      local compact_path_left = compact_path:sub(1, split_idx)
+      local compact_path_right = compact_path:sub(split_idx + 1)
+      path = compact_path_left .. self.options.hl_main .. compact_path_right
+    else
+      path = self.options.hl_main .. compact_path
+    end
   end
 
-  local split_idx = compact_path:match('.*()/')
-  if split_idx then
-    local compact_path_left = compact_path:sub(1, split_idx)
-    local compact_path_right = compact_path:sub(split_idx + 1)
-    return compact_path_left .. self.options.hl_main .. compact_path_right
-  else
-    return self.options.hl_main .. compact_path
-  end
+  if symbols == '' then return path else return path .. ' ' .. symbols end
 end
 
 return M
