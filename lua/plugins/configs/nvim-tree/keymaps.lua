@@ -47,8 +47,8 @@ function M.init(bufnr)
       target_dir = core.get_cwd()
     end
     api.tree.toggle()
-    vim.cmd.RooterPin(target_dir)
     vim.notify("RooterPin " .. target_dir)
+    vim.cmd.RooterPin(target_dir)
     api.tree.toggle()
   end, opts 'Rooter Pin Cwd')
 

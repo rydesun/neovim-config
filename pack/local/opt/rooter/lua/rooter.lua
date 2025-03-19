@@ -20,8 +20,22 @@ function M.setup(rules)
       end
       M.pin_rootpath(dir)
       M.set_buffer_cwd() -- pin后需要立即生效
+      M.inspect()
     end,
     { nargs = 1, complete = 'dir' })
+
+  vim.api.nvim_create_user_command(
+    'RooterUnpinAll',
+    function()
+      M.unpin_all()
+      M.inspect()
+    end,
+    {})
+
+  vim.api.nvim_create_user_command(
+    'RooterInspect',
+    function() M.inspect() end,
+    {})
 
   vim.api.nvim_create_user_command(
     'RooterDisable',
@@ -66,6 +80,10 @@ function M.pin_rootpath(dir)
   table.insert(M.pinned_rootpaths, dir)
 end
 
+function M.unpin_all()
+  M.pinned_rootpaths = {}
+end
+
 function M.get_pinned_rootpath()
   if #M.pinned_rootpaths == 0 then return end
   local current_dir = vim.fn.expand '%:p:h' .. '/'
@@ -80,6 +98,15 @@ function M.get_rootpath()
   local start_dir = vim.fn.expand '%:p:h'
   local found_dir = searcher.search(start_dir, M.rules)
   return found_dir and found_dir or start_dir
+end
+
+function M.inspect()
+  if #M.pinned_rootpaths > 0 then
+    local list = table.concat(M.pinned_rootpaths, '\n')
+    vim.notify('rooter: pinned dirs:\n' .. list)
+  else
+    vim.notify 'rooter: pinned dirs: {}'
+  end
 end
 
 return M
