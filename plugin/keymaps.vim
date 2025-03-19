@@ -13,15 +13,13 @@ map                M   <Plug>(leap-backward-to)
 
 " g组：按当前词跳转
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
-" mini.ai提供g[ g]
+" mini.align提供ga gA，mini.ai提供g[ g]
 nnoremap <silent>  gd  <Cmd>lua Snacks.picker.lsp_definitions()<CR>
 nnoremap <silent>  gD  <Cmd>lua Snacks.picker.lsp_declarations()<CR>
 nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
 nnoremap <silent>  gi  <Cmd>lua Snacks.picker.lsp_implementations()<CR>
 nnoremap <silent>  gr  <Cmd>lua Snacks.picker.lsp_references()<CR>
 noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
-" 表格对齐
-map ga <Plug>(LiveEasyAlign)
 
 " 分页时按q直接退出
 if get(g:, 'pager', v:false) | nnoremap q <Cmd>exit<CR> | endif
