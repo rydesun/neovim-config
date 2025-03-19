@@ -107,6 +107,7 @@ noremap  <silent>  <C-A-d>     <Cmd>Treewalker Right<CR>
 " Alt组：移动语法节点，移动光标，调整窗口大小，关闭
 nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>
 nnoremap <silent>  <A-m>       <Cmd>IMoveNode<CR>
+nnoremap <silent>  <A-o>       <Cmd>lua require'symbols'.api.action'show-symbol-under-cursor'<CR>
 map      <silent>  <A-p>       <Plug>(matchup-[%)
 map      <silent>  <A-n>       <Plug>(matchup-]%)
 imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
