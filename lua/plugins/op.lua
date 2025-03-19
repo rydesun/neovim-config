@@ -39,14 +39,14 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
-    }
+    },
   },
 
   -- snippets (不需要nvim-cmp也能用)
   { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', lazy = false },
 
   -- 输入闭合符号
-  { 'altermo/ultimate-autopair.nvim', config = true },
+  { 'altermo/ultimate-autopair.nvim', branch = 'v0.6', config = true },
 
   -- 编辑颜色
   { 'max397574/colortils.nvim', cmd = 'Colortils', config = true },
