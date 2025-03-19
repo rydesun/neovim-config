@@ -144,7 +144,7 @@ scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 标签栏样式 (不是 bufferline)。
 我喜欢在另一个 Tab 中运行测试。
 这个插件和 asynctasks.vim 插件结合使用时十分方便，
-直接在标签栏上显示 term 的运行情况。
+直接在标签栏上显示后台 terminal 的运行情况，不用切过去看。
 
 [`plugin/`](plugin/) 是传统的 Vim 目录。
 本来是作为插件目录被使用，也可以用来放配置文件。

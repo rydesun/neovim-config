@@ -31,7 +31,7 @@ local function custom_basic()
   hi('FloatTitle', palette.fg, palette.none, 'bold')
 
   -- TabLine使用更暗的背景色
-  hi('TabLine', palette.grey2, palette.bg_dim)
+  hi('TabLine', palette.grey1, palette.bg_dim)
   hi('TabLineFill', palette.grey1, palette.bg_dim)
   hi('TabLineSel', palette.fg, palette.bg3)
 
