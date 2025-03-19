@@ -15,11 +15,10 @@ local glyphs = {
   },
 }
 
--- 在virtual console中的图标会显示为圆圈
 if vim.g.env_console then
-  local ok, circles = pcall(require, 'circles')
-  if ok then glyphs = circles.get_nvimtree_glyphs() end
-  glyphs.folder.arrow_closed = '▶'
+  glyphs = {
+    folder = { arrow_closed = '▶', arrow_open = '▼' },
+  }
 end
 
 glyphs.git = {
@@ -48,11 +47,13 @@ return {
     -- 开启缩进线
     indent_markers = { enable = true },
 
+    root_folder_label = ':~:s?$? ?',
+
     icons = {
       -- git状态显示在侧边栏上
       git_placement = 'signcolumn',
       glyphs = glyphs,
-      symlink_arrow = " → ",
+      symlink_arrow = ' → ',
     },
   },
 
@@ -62,5 +63,5 @@ return {
   -- 打开文件后自动关闭
   actions = { open_file = { quit_on_open = true } },
 
-  on_attach = function(buffer) keymaps.init(buffer) end
+  on_attach = function(buffer) keymaps.init(buffer) end,
 }

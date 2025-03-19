@@ -22,23 +22,25 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
       'MunifTanjim/nui.nvim',
       {
         'rcarriga/nvim-notify',
-        opts = { render = 'wrapped-compact', stages = 'fade' }
+        opts = { render = 'wrapped-compact', stages = 'fade' },
       },
     },
   },
 
   -- 图标字体
-  { 'nvim-tree/nvim-web-devicons', lazy = true, opts_file = true },
-
-  -- 图标回退到圆圈
   {
-    'projekt0n/circles.nvim',
-    -- 仅在virtual console中生效
+    'nvim-tree/nvim-web-devicons',
+    cond = not vim.g.env_console,
+    opts_file = true,
+  },
+  -- 图标字体回退(仅在virtual console中生效)
+  {
+    'echasnovski/mini.icons',
     cond = vim.g.env_console,
-    -- 在console中也能显示的圆圈
-    opts = { icons = { empty = '•', filled = '○', lsp_prefix = '◙' } },
-    priority = 1,
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require 'mini.icons'.setup { style = 'ascii' }
+      MiniIcons.mock_nvim_web_devicons()
+    end,
   },
 
   -- 搜索提示

@@ -130,7 +130,7 @@ if ok then
   lazy.setup 'plugins'
 else
   local msg = '插件没有加载(缺失插件管理器lazy.nvim): 需要执行bootstrap.lua'
-  vim.schedule(function() vim.api.nvim_err_writeln(msg) end)
+  vim.schedule(function() vim.notify(msg, vim.log.levels.WARN) end)
 end
 
 -- 本地插件

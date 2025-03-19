@@ -45,18 +45,24 @@ return {
     lualine_x = {},
     lualine_y = {
       {
-        require 'noice'.api.status.command.get,
+        function() return require 'noice'.api.status.command.get() end,
         cond = function()
+          local ok, noice = pcall(require, 'noice')
+          if not ok then return end
           local mode = vim.fn.mode()
           return (mode == 'v' or mode == 'V' or mode == '\22') and
-              require 'noice'.api.status.command.has()
+              noice.api.status.command.has()
         end,
       },
     },
     lualine_z = {
       {
-        require 'noice'.api.status.mode.get,
-        cond = require 'noice'.api.status.mode.has,
+        function() return require 'noice'.api.status.mode.get() end,
+        cond = function()
+          local ok, noice = pcall(require, 'noice')
+          if not ok then return end
+          return noice.api.status.mode.has()
+        end,
       },
     },
   },
