@@ -6,8 +6,6 @@ noremap  :  ;
 " 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
-" 用LSP查看文档
-nnoremap <silent>  K   <Cmd>lua vim.lsp.buf.hover()<CR>
 
 " leap.nvim跳转
 map                m   <Plug>(leap-forward-to)
