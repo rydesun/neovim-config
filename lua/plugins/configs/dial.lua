@@ -42,7 +42,7 @@ require 'dial.config'.augends:register_group {
     augend.constant.alias.ja_weekday_full,
 
     -- RGB
-    augend.hexcolor.new {},
+    augend.hexcolor.new { case = 'prefer_upper' },
 
     -- 运算符
     augend.constant.new { elements = { 'and', 'or' } },
