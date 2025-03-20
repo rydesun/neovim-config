@@ -1,9 +1,11 @@
+---@module "snacks"
+
 -- NvimTree修改文件名的同时通过LSP修改模块名
 local prev = { new_name = '', old_name = '' }
 vim.api.nvim_create_autocmd('User', {
   pattern = 'NvimTreeSetup',
   callback = function()
-    local events = require('nvim-tree.api').events
+    local events = require 'nvim-tree.api'.events
     events.subscribe(events.Event.NodeRenamed, function(data)
       if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
         data = data
@@ -24,9 +26,9 @@ local picker = {
         -- c-g已被终端设置占用
         ['<c-g>'] = false,
         ['<a-l>'] = { 'toggle_live', mode = { 'i', 'n' } },
-      }
+      },
     },
-  }
+  },
 }
 
 picker.sources.projects = {
@@ -36,9 +38,9 @@ picker.sources.projects = {
         -- c-g已被终端设置占用
         ['<c-g>'] = false,
         ['<c-s>'] = { { 'tcd', 'picker_grep' }, mode = { 'n', 'i' } },
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 -- 即使搜索hidden和ignored也始终排除这些路径。注意.git目录早已被排除
@@ -47,9 +49,23 @@ local exclude = { 'build/', 'target/', 'node_modules/', '__pycache__/',
 picker.sources.files = { exclude = exclude }
 picker.sources.grep = { exclude = exclude }
 
--- 去掉files，直接用picker.files即可。而且不影响性能
-picker.sources.smart = { multi = { 'buffers', 'recent' } }
 picker.sources.buffers = { current = false }
+picker.sources.smart = {
+  -- 来源里去掉files(不如单独用picker.files，并且不影响smart性能)
+  multi = { 'buffers', 'recent' },
+  -- 没输入pattern时，让buffers保持在最上面
+  matcher = { sort_empty = false },
+  format = function(item, p)
+    local ret = {}
+    if item.buf then
+      local buf = string.format('%3d', item.buf):gsub(' ', '0')
+      ret[#ret+1] = { buf, 'SnacksPickerBufNr' }
+      ret[#ret+1] = { ' ' }
+    end
+    vim.list_extend(ret, Snacks.picker.format.filename(item, p))
+    return ret
+  end,
+}
 
 picker.sources.highlights = {
   confirm = function(p, item)
