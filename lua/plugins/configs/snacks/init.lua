@@ -116,6 +116,10 @@ picker.previewers = {
   git = { builtin = false },
 }
 
+-- 添加自制的源
+picker.sources = vim.tbl_extend('error', picker.sources,
+  require 'plugins.configs.snacks.picker.sources')
+
 return {
   bigfile = {},
   image = {},

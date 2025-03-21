@@ -38,6 +38,7 @@ nnoremap <silent>  sf  <Cmd>lua Snacks.picker.files()<CR>
 nnoremap <silent>  sF  <Cmd>lua Snacks.picker.files{exclude={}}<CR>
 nnoremap <silent>  sg  <Cmd>lua Snacks.picker.git_status()<CR>
 nnoremap <silent>  so  <Cmd>lua Snacks.picker.smart()<CR>
+nnoremap <silent>  st  <Cmd>lua Snacks.picker.tagstack()<CR>
 nnoremap <silent>  sp  <Cmd>lua Snacks.picker.projects()<CR>
 nnoremap <silent>  s/  <Cmd>lua Snacks.picker.lines()<CR>
 nnoremap <silent>  s;  <Cmd>lua Snacks.picker.command_history()<CR>
@@ -231,6 +232,7 @@ xnoremap <silent>  <leader>gl  :DiffviewFileHistory<CR>
 nnoremap <silent>  <leader>gl  <Cmd>lua Snacks.picker.git_log_file()<CR>
 nnoremap <silent>  <leader>gL  <Cmd>lua Snacks.picker.git_log()<CR>
 nnoremap <silent>  <leader>gb  <Cmd>lua Snacks.picker.git_branches()<CR>
+nnoremap <silent>  <leader>gB  <Cmd>lua Snacks.gitbrowse()<CR>
 nnoremap <silent>  <leader>gd  <Cmd>GitDiffCurrent<CR>
 nnoremap <silent>  <leader>ga  <Cmd>GitDiffAll<CR>
 nnoremap <silent>  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>
