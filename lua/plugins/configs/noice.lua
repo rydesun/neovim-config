@@ -1,12 +1,4 @@
 return {
-  routes = {
-    -- 过滤掉写入信息，除非是新文件
-    {
-      filter = { event = 'msg_show', find = '^".+" %d+L, %d+B ' },
-      opts = { skip = true },
-    },
-    { filter = { event = 'msg_show' }, view = 'mini' },
-  },
   views = {
     mini = { win_options = { winblend = 0 }, format = { ' {message}' } },
   },

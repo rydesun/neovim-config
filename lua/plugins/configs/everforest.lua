@@ -35,6 +35,9 @@ local function custom_basic()
   hi('TabLineFill', palette.grey1, palette.bg_dim)
   hi('TabLineSel', palette.fg, palette.bg3)
 
+  -- Todo改成下划线
+  hi('Todo', palette.none, palette.none, 'bold,underline', palette.blue)
+
   -- LSP信息: 更明显的高亮
   hi('LspReferenceText', palette.bg0, palette.purple)
   hi('LspReferenceRead', palette.bg0, palette.aqua)
@@ -71,7 +74,6 @@ local function custom_plugin()
   hi('TSNote', palette.none, palette.none, 'bold,underline', palette.green)
   hi('TSWarning', palette.none, palette.none, 'bold,underline', palette.yellow)
   hi('TSDanger', palette.none, palette.none, 'bold,underline', palette.red)
-  hi('TSTodo', palette.none, palette.none, 'bold,underline', palette.blue)
 
   -- nvim-treesitter-context: 行号同色
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)

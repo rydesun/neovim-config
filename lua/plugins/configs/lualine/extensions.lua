@@ -37,7 +37,7 @@ M.quickfix.winbar = {
 M.termcat = {
   filetypes = { 'termcat' },
   winbar = {
-    lualine_a = { function() return ' cat' end },
+    lualine_a = { function() return ' term' end },
     lualine_x = { '%2l/%L' },
     lualine_y = { 'progress' },
   },

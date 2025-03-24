@@ -3,42 +3,43 @@ local keymaps = require 'plugins.configs.nvim-tree.keymaps'
 local glyphs = {
   default = '󰈔',
   symlink = '󰪹',
-  bookmark = ' ♥',
+  bookmark = '󰓎',
   folder = {
-    arrow_closed = '›',
-    arrow_open = '▼',
+    arrow_closed = '+',
+    arrow_open = '-',
     default = '󰉋',
     empty = '󰉖',
     empty_open = '',
     symlink = '󰉒',
     symlink_open = '',
   },
-}
-
-if vim.g.env_console then
-  glyphs = {
-    folder = { arrow_closed = '▶', arrow_open = '▼' },
-  }
-end
-
-glyphs.git = {
-  unstaged = '*',
-  staged = '+',
-  unmerged = 'x',
-  renamed = '→',
-  untracked = '?',
-  deleted = '_',
-  ignored = '-',
+  git = {
+    unstaged = '*',
+    staged = '+',
+    unmerged = 'x',
+    renamed = '→',
+    untracked = '?',
+    deleted = '_',
+    ignored = '-',
+  },
 }
 
 return {
   -- BufEnter自动选中文件(不改root)
   update_focused_file = { enable = true },
 
+  -- 自动调整宽度
+  view = { width = {} },
+
   -- 已经打开的目录不显示git符号
   git = { show_on_open_dirs = false },
 
-  view = { width = {} },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
+    icons = { error = '●', warning = '▲', info = '■', hint = '■' },
+  },
 
   renderer = {
     -- 压缩目录层次
@@ -47,11 +48,12 @@ return {
     -- 开启缩进线
     indent_markers = { enable = true },
 
-    root_folder_label = ':~:s?$? ?',
+    root_folder_label = ':~',
 
     icons = {
-      -- git状态显示在侧边栏上
-      git_placement = 'signcolumn',
+      git_placement = 'right_align',
+      diagnostics_placement = 'signcolumn',
+      bookmarks_placement = 'before',
       glyphs = glyphs,
       symlink_arrow = ' → ',
     },

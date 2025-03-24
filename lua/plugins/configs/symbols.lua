@@ -9,14 +9,11 @@ require 'symbols'.setup(r.DefaultFilters, r.AsciiSymbols, {
     auto_resize = {
       min_width = 30,
     },
-    chars = {
-      folded = '›',
-      unfolded = '▼',
-    }
+    chars = { folded = '+', unfolded = '-' },
   },
   providers = {
     lsp = {
-      kinds = { default = require 'libs.style'.symbols(true) }
-    }
-  }
+      kinds = { default = require 'libs.style'.symbols(true) },
+    },
+  },
 })
