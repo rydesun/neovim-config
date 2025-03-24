@@ -26,6 +26,7 @@ local picker = {
         -- c-g已被终端设置占用
         ['<c-g>'] = false,
         ['<a-l>'] = { 'toggle_live', mode = { 'i', 'n' } },
+        ['<c-o>'] = { 'system_open', mode = { 'i', 'n' } },
       },
     },
   },
@@ -102,6 +103,10 @@ picker.actions = {
   git_log_stash = function(p, item)
     p:close()
     vim.cmd('DiffviewFileHistory -g --range=' .. item.stash)
+  end,
+  system_open = function(_, item)
+    vim.notify("Open file: " .. item.file)
+    vim.ui.open(item.file)
   end,
 }
 
