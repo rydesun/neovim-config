@@ -99,11 +99,13 @@ nnoremap <silent>  <C-k>       <Cmd>Gitsigns nav_hunk prev<CR>
 nnoremap <silent>  <C-S-j>     <Cmd>Gitsigns nav_hunk next target=staged<CR>
 nnoremap <silent>  <C-S-k>     <Cmd>Gitsigns nav_hunk prev target=staged<CR>
 
-" Ctrl+Alt组：语法跳转
+" Ctrl+Alt组：语法节点跳转，修改节点
 noremap  <silent>  <C-A-j>     <Cmd>Treewalker Down<CR>
 noremap  <silent>  <C-A-k>     <Cmd>Treewalker Up<CR>
 noremap  <silent>  <C-A-u>     <Cmd>Treewalker Left<CR>
 noremap  <silent>  <C-A-d>     <Cmd>Treewalker Right<CR>
+noremap  <silent>  <C-A-o>     <Cmd>lua require'treesitter-context'.go_to_context(vim.v.count1)<CR>
+nnoremap <silent>  <C-A-a>     <Cmd>lua require'ts-node-action'.node_action()<CR>
 
 " Alt组：移动语法节点，移动光标，调整窗口大小，关闭
 nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>

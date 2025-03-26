@@ -66,8 +66,9 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
   -- 导航AST节点
   { 'aaronik/treewalker.nvim', config = true },
 
-  -- SplitJoin
+  -- 修改节点
   { 'Wansmer/treesj', config = true, opts = { use_default_keymaps = false } },
+  { 'ckolkey/ts-node-action', config = true },
 
   -- 大纲视图
   { 'oskarrrrrrr/symbols.nvim', config_file = true },
