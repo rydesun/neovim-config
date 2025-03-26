@@ -289,6 +289,7 @@ function! RustKeymap() abort
 	nnoremap <buffer><silent> <LocalLeader>e <Cmd>RustLsp expandMacro<CR>
 	nnoremap <buffer><silent> <LocalLeader>u <Cmd>RustLsp parentModule<CR>
 	nnoremap <buffer><silent> <LocalLeader>c <Cmd>RustLsp openCargo<CR>
+	nnoremap <buffer><silent> <LocalLeader>p <Cmd>RustPlayground<CR>
 endfunction
 autocmd filetype rust call RustKeymap()
 

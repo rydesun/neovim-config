@@ -49,6 +49,8 @@ end
 
 -- obsidian目录
 vim.g.obsidian_dir = vim.fn.expand '~/Data/Documents/Obsidian Vault'
+
+vim.g.rust_playground_dir = '~/test/playground'
 -- }}}
 
 -- {{{ 选项 (自身界面)
