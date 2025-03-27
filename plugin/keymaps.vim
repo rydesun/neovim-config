@@ -11,16 +11,6 @@ xnoremap >  >gv
 map                m   <Plug>(leap-forward-to)
 map                M   <Plug>(leap-backward-to)
 
-" g组：按当前词跳转
-" 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
-" mini.align提供ga gA，mini.ai提供g[ g]
-nnoremap <silent>  gd  <Cmd>lua Snacks.picker.lsp_definitions()<CR>
-nnoremap <silent>  gD  <Cmd>lua Snacks.picker.lsp_declarations()<CR>
-nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
-nnoremap <silent>  gi  <Cmd>lua Snacks.picker.lsp_implementations()<CR>
-nnoremap <silent>  gr  <Cmd>lua Snacks.picker.lsp_references()<CR>
-noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
-
 " 分页时按q直接退出
 if get(g:, 'pager', v:false) | nnoremap q <Cmd>exit<CR> | endif
 
@@ -51,6 +41,14 @@ nnoremap <silent>  svK <Cmd>lua Snacks.picker.keymaps()<CR>
 nnoremap <silent>  svk <Cmd>lua Snacks.picker.grep { dirs={
 			\ vim.fn.stdpath'config'..'/plugin/keymaps.vim'}}<CR>
 
+" 跳转
+nnoremap <silent>  [d  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1, float=true}<CR>
+nnoremap <silent>  ]d  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1, float=true}<CR>
+nnoremap <silent>  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1, float=true,
+			\ severity=vim.diagnostic.severity.ERROR}<CR>
+nnoremap <silent>  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1, float=true,
+			\ severity=vim.diagnostic.severity.ERROR}<CR>
+
 " OMNI组：特殊种类的补全
 imap     <silent>  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
 
@@ -69,15 +67,16 @@ EOF
 " }}}
 
 " {{{ 按键 (新增行为)
+" g组：按当前词跳转
+" 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
+" mini.align提供ga gA，mini.ai提供g[ g]
+" snacks.picker覆盖了默认的LSP跳转键位
+nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
+noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
+
 " []组：前后跳转，切换选项
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
 " vim-unimpaired提供更多映射
-nnoremap <silent>  [g          <Cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent>  ]g          <Cmd>lua vim.diagnostic.goto_next()<CR>
-nnoremap <silent>  [G          <Cmd>lua vim.diagnostic.goto_prev{
-				\ severity=vim.diagnostic.severity.ERROR}<CR>
-nnoremap <silent>  ]G          <Cmd>lua vim.diagnostic.goto_next{
-				\ severity=vim.diagnostic.severity.ERROR}<CR>
 nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
@@ -197,8 +196,6 @@ nnoremap <silent>  <leader>o   <Cmd>SymbolsToggle<CR>
 nnoremap <silent>  <leader>K   <Cmd>normal! K<CR>
 
 " LSP
-nnoremap <silent>  <leader>a  <Cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent>  <leader>r  <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent>  <leader>f  <Cmd>LspFormat<CR>
 xnoremap <silent>  <leader>f  <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 nnoremap <silent>  <leader>F  <Cmd>LspFixAll<CR>

@@ -1,9 +1,6 @@
 local lspconfig = require 'lspconfig'
 
 local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
-capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false, lineFoldingOnly = true,
-}
 
 local handlers = {
   -- mason安装的ls如果没有单独配置，则使用此配置自动setup

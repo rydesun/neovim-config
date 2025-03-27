@@ -125,6 +125,12 @@ picker.previewers = {
 picker.sources = vim.tbl_extend('error', picker.sources,
   require 'plugins.configs.snacks.picker.sources')
 
+-- 覆盖默认键位
+vim.keymap.set('n', 'grr', Snacks.picker.lsp_references)
+vim.keymap.set('n', 'gri', Snacks.picker.lsp_implementations)
+vim.keymap.set('n', 'gd', Snacks.picker.lsp_definitions)
+vim.keymap.set('n', 'gD', Snacks.picker.lsp_declarations)
+
 return {
   bigfile = {},
   image = {},
