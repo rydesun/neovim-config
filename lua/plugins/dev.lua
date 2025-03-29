@@ -11,8 +11,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
       -- 集成LSP和DAP等工具
       { 'williamboman/mason.nvim', config = true },
       'neovim/nvim-lspconfig',
-      -- 提供被cmp修改后的default_capabilities
-      'hrsh7th/cmp-nvim-lsp',
       -- JSON schema
       'b0o/schemastore.nvim',
     },

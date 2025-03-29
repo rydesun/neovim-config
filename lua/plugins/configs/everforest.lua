@@ -26,9 +26,12 @@ local function custom_basic()
   hi('CursorLine', palette.none, palette.bg_green)
   hi('QuickFixLine', palette.none, palette.bg_green)
 
-  -- 浮动窗口: 不要bg
+  -- 有边框的浮动窗口: 边框不要bg
   hi('FloatBorder', palette.grey0, palette.none)
   hi('FloatTitle', palette.fg, palette.none, 'bold')
+
+  -- Pmenu无bg
+  vim.cmd 'hi! link PmenuExtra Comment'
 
   -- TabLine使用更暗的背景色
   hi('TabLine', palette.grey1, palette.bg_dim)
@@ -67,8 +70,9 @@ local function custom_plugin()
   -- noice: 更暗的底部消息背景
   hi('NoiceMini', palette.none, palette.bg_dim)
 
-  -- nvim-cmp: text类型不使用fg
-  vim.cmd 'hi! link CmpItemKindText CmpItemKind'
+  -- blink.cmp
+  vim.cmd 'hi! link BlinkCmpKindText Yellow'
+  vim.cmd 'hi! link BlinkCmpDocSeparator Blue'
 
   -- nvim-treesitter
   hi('TSNote', palette.none, palette.none, 'bold,underline', palette.green)

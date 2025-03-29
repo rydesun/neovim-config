@@ -31,19 +31,10 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
   { 'monaqa/dial.nvim', config_file = true },
 
   -- 补全
-  {
-    'hrsh7th/nvim-cmp',
-    config_file = true,
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'saadparwaiz1/cmp_luasnip',
-    },
-  },
+  { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp' },
 
-  -- snippets (不需要nvim-cmp也能用)
-  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', lazy = false },
+  -- snippets
+  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', version = 'v2.*' },
 
   -- 输入闭合符号
   { 'altermo/ultimate-autopair.nvim', branch = 'v0.6', config = true },

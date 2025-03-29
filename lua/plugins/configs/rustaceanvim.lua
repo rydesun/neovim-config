@@ -3,8 +3,6 @@ vim.g.rustaceanvim = {
     settings = {
       ['rust-analyzer'] = {
         completion = {
-          -- 去掉postfix snippet
-          postfix = { enable = false },
           -- 允许补全私有字段
           privateEditable = { enable = true },
         },
