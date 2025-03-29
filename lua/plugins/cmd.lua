@@ -1,4 +1,5 @@
-return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
+local cond = vim.g.plug_cmd
+return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 异步执行
   { 'skywind3000/asyncrun.vim' },
 
@@ -16,15 +17,11 @@ return require 'libs.lazy'.setdefault(vim.g.plug_cmd, 'VeryLazy', {
   -- 切换输入法
   {
     'lilydjwg/fcitx.vim',
-    enabled = vim.fn.executable('fcitx5') > 0,
+    enabled = vim.fn.executable 'fcitx5' > 0,
     -- 不用dbus-python
     init = function() vim.g.fcitx5_remote = 'fcitx5-remote' end,
   },
 
   -- Obsidian笔记
-  {
-    'obsidian-nvim/obsidian.nvim',
-    enabled = vim.fn.executable('obsidian') > 0,
-    opts_file = true,
-  },
-})
+  { 'obsidian-nvim/obsidian.nvim', opts_file = true },
+} }

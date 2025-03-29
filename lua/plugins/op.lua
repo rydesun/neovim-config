@@ -1,4 +1,5 @@
-return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
+local cond = vim.g.plug_op
+return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 增强%
   { 'andymass/vim-matchup', lazy = false, config_file = true },
 
@@ -44,4 +45,4 @@ return require 'libs.lazy'.setdefault(vim.g.plug_op, 'VeryLazy', {
 
   -- Tim Pope's dot.
   { 'tpope/vim-repeat' },
-})
+} }

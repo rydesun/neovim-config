@@ -1,4 +1,5 @@
-return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
+local cond = vim.g.plug_view
+return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 平滑滚动
   { 'karb94/neoscroll.nvim', opts_file = true },
 
@@ -30,4 +31,4 @@ return require 'libs.lazy'.setdefault(vim.g.plug_view, 'VeryLazy', {
 
   -- 显示颜色
   { 'brenoprata10/nvim-highlight-colors', lazy = false, opts_file = true },
-})
+} }

@@ -1,17 +1,22 @@
 local M = {}
 
-function M.setdefault(cond, event, spec)
-  for _, plugin in pairs(spec) do
-    if plugin.lazy == nil
+---@class LazyHelperOpts
+---@field cond? boolean
+---@field very_lazy? boolean
+---@field spec table[]
+---@param opts LazyHelperOpts
+function M.hook(opts)
+  for _, plugin in pairs(opts.spec) do
+    if opts.very_lazy and plugin.lazy == nil
         and not plugin.cmd and not plugin.ft
         and not plugin.keys and plugin.event == nil then
-      plugin.event = event
+      plugin.event = 'VeryLazy'
     end
 
     if plugin.cond == nil then
-      plugin.cond = cond
+      plugin.cond = opts.cond
     else
-      plugin.cond = cond and plugin.cond
+      plugin.cond = opts.cond and plugin.cond
     end
 
     M.set_config_file(plugin)
@@ -21,7 +26,7 @@ function M.setdefault(cond, event, spec)
       end
     end
   end
-  return spec
+  return opts.spec
 end
 
 function M.set_config_file(plugin)
@@ -49,4 +54,4 @@ function M.loading(name)
   end
 end
 
-return M
+return M.hook

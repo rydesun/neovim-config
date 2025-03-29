@@ -1,7 +1,8 @@
 -- 非开发环境中，不安装下面的插件
 if not vim.g.env_dev then return {} end
 
-return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
+local cond = vim.g.plug_dev
+return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- {{{ 本地开发 (LSP)
   {
     'williamboman/mason-lspconfig.nvim',
@@ -106,6 +107,6 @@ return require 'libs.lazy'.setdefault(vim.g.plug_dev, 'VeryLazy', {
 
   -- Code Runner
   { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh' },
-})
+} }
 
 -- vim: foldmethod=marker:foldlevel=0

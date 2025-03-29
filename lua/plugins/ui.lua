@@ -4,7 +4,8 @@ vim.o.winbar = ' '
 -- 不在右下角提示搜索
 vim.opt.shortmess:append 'sS'
 
-return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
+local cond = vim.g.plug_ui
+return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'folke/snacks.nvim', lazy = false, priority = 1000, opts_file = true },
 
   -- 配色主题
@@ -55,4 +56,4 @@ return require 'libs.lazy'.setdefault(vim.g.plug_ui, 'VeryLazy', {
   -- 改进quickfix
   { 'stevearc/quicker.nvim', ft = 'qf', opts_file = true },
   { 'kevinhwang91/nvim-bqf', ft = 'qf', opts_file = true },
-})
+} }
