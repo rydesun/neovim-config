@@ -10,7 +10,7 @@ local winbar = {
     cond = function() return vim.bo.buftype ~= 'nofile' end,
     symbols = { modified = '*', readonly = '!', unnamed = '' },
   } },
-  lualine_c = {},
+  lualine_c = { { require 'plugins.configs.lualine.components.gitsigns-bar' } },
   lualine_x = {
     components.encoding,
     {
