@@ -1,3 +1,5 @@
+---@module 'gitsigns'
+
 local M = require 'lualine.component':extend()
 
 local default_options = {
@@ -5,6 +7,7 @@ local default_options = {
   window_edge_head = '(',
   window_edge_tail = ')',
   sign = { add = '+', change = '~', delete = '-' },
+  enable_count = true,
 }
 
 local cached_gitsigns_hunks = {}
@@ -89,9 +92,11 @@ function M:update_status()
     end
     if not cursor_idx and
         hunk.head <= cursor_line and hunk.tail >= cursor_line then
-      ret[#ret+1] = hunk.hl_with_cursor .. hunk.sign
+      ret[#ret+1] = hunk.hl_with_cursor .. hunk.sign ..
+          (self.options.enable_count and hunk.count or '')
     else
-      ret[#ret+1] = hunk.hl .. hunk.sign
+      ret[#ret+1] = hunk.hl .. hunk.sign ..
+          (self.options.enable_count and hunk.count or '')
     end
   end
   if not start_idx then ret[#ret+1] = self.window_edge_head end
@@ -101,18 +106,21 @@ function M:update_status()
   return table.concat(ret, '')
 end
 
+---@param hunk Gitsigns.Hunk.Hunk
 function M:transform(hunk)
   local ret = {}
   local type = hunk.type
   if type == 'add' then
     ret.head = hunk.added.start
     ret.tail = hunk.added.start + hunk.added.count - 1
+    ret.count = hunk.added.count
     ret.sign = self.options.sign.add
     ret.hl = self.hl_groups.add
     ret.hl_with_cursor = self.hl_groups.add_with_cursor
   elseif type == 'change' then
     ret.head = hunk.added.start
     ret.tail = hunk.added.start + hunk.added.count - 1
+    ret.count = hunk.added.count
     ret.sign = self.options.sign.change
     ret.hl = self.hl_groups.change
     ret.hl_with_cursor = self.hl_groups.change_with_cursor
@@ -122,6 +130,7 @@ function M:transform(hunk)
     else
       ret.head, ret.tail = hunk.added.start, hunk.added.start
     end
+    ret.count = hunk.removed.count
     ret.sign = self.options.sign.delete
     ret.hl = self.hl_groups.delete
     ret.hl_with_cursor = self.hl_groups.delete_with_cursor
