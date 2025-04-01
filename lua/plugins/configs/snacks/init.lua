@@ -105,8 +105,18 @@ picker.actions = {
     vim.cmd('DiffviewFileHistory -g --range=' .. item.stash)
   end,
   system_open = function(_, item)
-    vim.notify("Open file: " .. item.file)
+    vim.notify('Open file: ' .. item.file)
     vim.ui.open(item.file)
+  end,
+  -- 只给插入模式用
+  put = function(p, item, action)
+    p:close()
+    if not item then return end
+    local value = item[action.field] or item.data or item.text
+    vim.schedule(function()
+      vim.api.nvim_put({ value }, '', true, true)
+      vim.cmd.startinsert()
+    end)
   end,
 }
 

@@ -49,13 +49,16 @@ nnoremap <silent>  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1, float=t
 nnoremap <silent>  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1, float=true,
 			\ severity=vim.diagnostic.severity.ERROR}<CR>
 
-" OMNI组：特殊种类的补全
-imap     <silent>  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
+" 特殊种类的补全
+imap     <silent>  <C-x><C-i>  <Cmd>lua Snacks.picker.icons()<CR>
+imap     <silent>  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
+imap     <silent>  <C-x><C-s>  <Cmd>lua require'blink.cmp'.show{providers={'snippets'}}<CR>
+imap     <silent>  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', function()
   pcall(function()
-    require 'notify'.dismiss { silent = true, pending = true }
+    require 'notify'.dismiss { silent = true }
   end)
   vim.cmd.nohlsearch()
   vim.cmd.diffupdate()
@@ -89,6 +92,7 @@ nnoremap <silent>  [of         <Cmd>FormatOnSaveEnable<CR>
 nnoremap <silent>  ]of         <Cmd>FormatOnSaveDisable<CR>
 
 " Ctrl组：前后跳转
+" 移除luasnip的跳转？优先使用blink.cmp提供的Tab和S-Tab
 inoremap <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 inoremap <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 snoremap <silent>  <C-j>       <cmd>lua require'luasnip'.jump(1)<Cr>
@@ -282,6 +286,8 @@ nnoremap <silent>  <leader>nC  <Cmd>ObsidianCommit<CR>
 " }}}
 
 " {{{ 按键 (LocalLeader) 特定文件类型
+nnoremap <silent>  <LocalLeader>p  <Cmd>lua Snacks.scratch()<CR>
+
 " Rust
 function! RustKeymap() abort
 	nnoremap <buffer><silent> <LocalLeader>r <Cmd>RustLsp runnables<CR>

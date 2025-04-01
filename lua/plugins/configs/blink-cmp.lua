@@ -1,3 +1,5 @@
+---@module 'blink.cmp'
+---@type blink.cmp.Config
 local opts = { completion = {} }
 opts.completion.menu = {
   border = 'rounded',
@@ -11,6 +13,8 @@ opts.completion.documentation = {
   auto_show = true,
 }
 opts.appearance = { kind_icons = require 'libs.style'.symbols() }
+
+opts.completion.accept = { auto_brackets = { enabled = false } }
 
 opts.snippets = { preset = 'luasnip' }
 opts.sources = {
@@ -57,7 +61,7 @@ opts.sources.providers = {
 
 opts.keymap = {
   ['<C-e>'] = {},
-  ['<C-l>'] = { 'select_and_accept', 'fallback' },
+  ['<C-l>'] = { 'show', 'select_and_accept', 'fallback' },
   ['<C-u>'] = { 'cancel', 'fallback' },
 }
 
