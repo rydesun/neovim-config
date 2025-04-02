@@ -58,7 +58,7 @@ end, {})
 vim.api.nvim_create_user_command('FormatOnSaveEnable', function()
   local ext = vim.fn.expand '%:e'
   if ext == '' then
-    vim.notify('FormatOnSave: Not a valid ext', vim.log.levels.ERROR)
+    vim.notify('FormatOnSave: Invalid ext', vim.log.levels.ERROR)
     return
   end
   vim.api.nvim_create_autocmd('BufWritePre', {
@@ -83,3 +83,30 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     { clear = true }),
   callback = function() vim.cmd 'LspFormat' end,
 })
+
+vim.api.nvim_create_user_command('CodelensEnable', function()
+  vim.lsp.codelens.refresh()
+
+  local augroup = vim.api.nvim_create_augroup('Codelens', {})
+  vim.api.nvim_create_autocmd({ 'BufReadPost', 'InsertLeave' }, {
+    pattern = '*',
+    group = augroup,
+    callback = vim.lsp.codelens.refresh,
+  })
+  local timer = assert(vim.uv.new_timer())
+  vim.api.nvim_create_autocmd('TextChanged', {
+    pattern = '*',
+    group = augroup,
+    callback = function()
+      timer:stop()
+      timer:start(500, 0, vim.schedule_wrap(function()
+        vim.lsp.codelens.refresh()
+      end))
+    end,
+  })
+end, {})
+
+vim.api.nvim_create_user_command('CodelensDisable', function()
+  vim.api.nvim_clear_autocmds { group = 'Codelens' }
+  vim.lsp.codelens.clear()
+end, {})

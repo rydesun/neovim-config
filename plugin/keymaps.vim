@@ -73,8 +73,11 @@ EOF
 " g组：按当前词跳转
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
 " mini.align提供ga gA，mini.ai提供g[ g]
-" snacks.picker覆盖了默认的LSP跳转键位
-nnoremap <silent>  gy  <Cmd>lua Snacks.picker.lsp_type_definitions()<CR>
+" snacks.picker覆盖了LSP跳转键位
+nnoremap <silent>  grt <Cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent>  grI <Cmd>lua vim.lsp.buf.incoming_calls()<CR>
+nnoremap <silent>  grO <Cmd>lua vim.lsp.buf.outgoing_calls()<CR>
+nnoremap <silent>  grl <Cmd>lua vim.lsp.codelens.run()<CR>
 noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 
 " []组：前后跳转，切换选项
@@ -90,6 +93,8 @@ nnoremap <silent>  [ow         <Cmd>lua vim.lsp.buf.document_highlight()<CR>
 nnoremap <silent>  ]ow         <Cmd>lua vim.lsp.buf.clear_references()<CR>
 nnoremap <silent>  [of         <Cmd>FormatOnSaveEnable<CR>
 nnoremap <silent>  ]of         <Cmd>FormatOnSaveDisable<CR>
+nnoremap <silent>  [oL         <Cmd>CodelensEnable<CR>
+nnoremap <silent>  ]oL         <Cmd>CodelensDisable<CR>
 
 " Ctrl组：前后跳转
 " 移除luasnip的跳转？优先使用blink.cmp提供的Tab和S-Tab
