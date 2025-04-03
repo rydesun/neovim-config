@@ -82,6 +82,7 @@ noremap  <silent>  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 
 " []组：前后跳转，切换选项
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
+" nvim-treesitter-textobjects提供 [[ ]] [m ]m
 " vim-unimpaired提供更多映射
 nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>

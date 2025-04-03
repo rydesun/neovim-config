@@ -50,22 +50,23 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   },
 
   -- 自动输入闭合tag
-  { 'windwp/nvim-ts-autotag', lazy = false, config = true },
+  { 'windwp/nvim-ts-autotag', lazy = true, config = true },
 
-  -- 上下文
-  { 'nvim-treesitter/nvim-treesitter-context', lazy = false },
+  -- 显示上下文
+  { 'nvim-treesitter/nvim-treesitter-context', opts_file = true },
 
-  -- AST文本对象(精确)
-  -- 不需要开启，因为有mini.ai在使用query
-  { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  -- 语法节点文本对象
+  -- 另外有mini.ai在使用query
+  { 'nvim-treesitter/nvim-treesitter-textobjects',
+    main = 'nvim-treesitter.configs', opts_file = true },
 
-  -- 交换AST节点(标签选择)
-  { 'mizlan/iswap.nvim', config = true },
-
-  -- 导航AST节点
+  -- 导航语法节点
   { 'aaronik/treewalker.nvim', config = true },
 
-  -- 修改节点
+  -- 交换语法节点(标签选择)
+  { 'mizlan/iswap.nvim', config = true },
+
+  -- 修改语法节点(自动切换)
   { 'Wansmer/treesj', config = true, opts = { use_default_keymaps = false } },
   { 'ckolkey/ts-node-action', config = true },
 
