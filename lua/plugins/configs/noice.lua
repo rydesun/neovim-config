@@ -1,5 +1,8 @@
 return {
-  routes = { { filter = { min_height = 20 }, view = 'cmdline_output' } },
+  routes = {
+    { filter = { event = 'notify', min_height = 20 }, view = 'cmdline_output' },
+    { filter = { event = 'msg_show', min_height = 20 }, view = 'cmdline_output' },
+  },
   views = {
     mini = { win_options = { winblend = 0 }, format = { ' {message}' } },
     -- 不要背景色
