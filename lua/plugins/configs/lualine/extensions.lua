@@ -1,12 +1,12 @@
 local components = require 'plugins.configs.lualine.components'
-local blob_color = require 'plugins.configs.lualine.lib'.blob_color
+local ft_color_blob = require 'plugins.configs.lualine.lib'.ft_color_blob
 
 local M = {}
 
 M.man = {
   filetypes = { 'man' },
   winbar = {
-    lualine_a = { { function() return ' Man' end, color = blob_color } },
+    lualine_a = { { function() return ' Man' end, color = ft_color_blob } },
     lualine_b = { { 'filename', file_status = false } },
     lualine_x = { '%2l/%L' },
     lualine_y = { 'progress' },

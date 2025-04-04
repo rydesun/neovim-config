@@ -61,6 +61,8 @@ opts.sources.providers = {
 
 opts.keymap = {
   ['<C-e>'] = {},
+  ['<Tab>'] = {},
+  ['<S-Tab>'] = {},
   ['<C-l>'] = { 'show', 'select_and_accept', 'fallback' },
   ['<C-u>'] = { 'cancel', 'fallback' },
 }

@@ -97,6 +97,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- }}}
 
   -- {{{ 本地开发 (其他)
+  { 'danymat/neogen', opts = { snippet_engine = 'luasnip' } },
+
   -- 测试
   { 'vim-test/vim-test', init_file = true },
 

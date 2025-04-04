@@ -70,10 +70,12 @@ EOF
 " }}}
 
 " {{{ 按键 (新增行为)
-" g组：按当前词跳转
+" g组：注释、按当前词跳转
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
 " mini.align提供ga gA，mini.ai提供g[ g]
 " snacks.picker覆盖了LSP跳转键位
+nnoremap <silent>  gbO <Cmd>Neogen<CR>
+nnoremap <silent>  gbo <Cmd>Neogen<CR>
 nnoremap <silent>  grt <Cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent>  grI <Cmd>lua vim.lsp.buf.incoming_calls()<CR>
 nnoremap <silent>  grO <Cmd>lua vim.lsp.buf.outgoing_calls()<CR>
@@ -98,7 +100,6 @@ nnoremap <silent>  [oL         <Cmd>CodelensEnable<CR>
 nnoremap <silent>  ]oL         <Cmd>CodelensDisable<CR>
 
 " Ctrl组：前后跳转
-" 移除luasnip的跳转？优先使用blink.cmp提供的Tab和S-Tab
 inoremap <silent>  <C-j>       <Cmd>lua require'luasnip'.jump(1)<CR>
 inoremap <silent>  <C-k>       <Cmd>lua require'luasnip'.jump(-1)<CR>
 snoremap <silent>  <C-j>       <cmd>lua require'luasnip'.jump(1)<Cr>

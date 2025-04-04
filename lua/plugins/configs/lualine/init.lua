@@ -1,9 +1,9 @@
 local components = require 'plugins.configs.lualine.components'
 local extensions = require 'plugins.configs.lualine.extensions'
-local blob_color = require 'plugins.configs.lualine.lib'.blob_color
+local ft_color_blob = require 'plugins.configs.lualine.lib'.ft_color_blob
 
 local winbar = {
-  lualine_a = { { components.filetype, color = blob_color } },
+  lualine_a = { { components.filetype, color = ft_color_blob } },
   lualine_b = { {
     components.filename,
     path = 1,

@@ -44,6 +44,8 @@ local symbols = {
   Fragment      = { '󰅴 ', 'fragment' },
 }
 
+---@param use_ascii? boolean
+---@return table<string, string>
 function M.symbols(use_ascii)
   local tbl = {}
   -- 在virtual console中使用英文

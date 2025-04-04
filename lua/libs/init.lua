@@ -13,20 +13,25 @@ function M.bool(val)
   end
 end
 
-function M.transform_color(contrast_factor, brightness_offset)
-  return function(hex)
-    local res = {}
-    for i = 2, 6, 2 do
-      local raw = hex:sub(i, i + 1)
-      local val = contrast_factor * (tonumber(raw, 16) - 128)
-          + 128 + brightness_offset
-      if val < 0 then val = 0 elseif val > 255 then val = 255 end
-      table.insert(res, string.format('%02x', math.floor(val + 0.5)))
-    end
-    return '#' .. table.concat(res, '')
+---@param hex string
+---@param contrast_factor number
+---@param brightness_offset integer
+---@return string
+function M.transform_color(hex, contrast_factor, brightness_offset)
+  local res = {}
+  for i = 2, 6, 2 do
+    local raw = hex:sub(i, i + 1)
+    local val = contrast_factor * (tonumber(raw, 16) - 128)
+        + 128 + brightness_offset
+    if val < 0 then val = 0 elseif val > 255 then val = 255 end
+    table.insert(res, string.format('%02x', math.floor(val + 0.5)))
   end
+  return '#' .. table.concat(res, '')
 end
 
+---@param input string
+---@param replace string
+---@return nil
 function M.cmd_alias(input, replace)
   local cmd = 'cnoreabbrev <expr> %s v:lua._cmd_expr("%s", "%s")'
   vim.api.nvim_command(cmd:format(input, input, replace))
@@ -34,7 +39,7 @@ end
 
 function _G._cmd_expr(input, replace)
   if vim.fn.getcmdtype() == ':' and
-    vim.fn.getcmdline():match('^'..input..'$') then
+      vim.fn.getcmdline():match('^' .. input .. '$') then
     return replace
   else
     return input
