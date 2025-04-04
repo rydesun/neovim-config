@@ -38,7 +38,7 @@ return {
     enable = true,
     show_on_dirs = true,
     show_on_open_dirs = false,
-    icons = { error = '●', warning = '▲', info = '■', hint = '■' },
+    icons = { error = '•', warning = '▴', info = '▪', hint = '▪' },
   },
 
   renderer = {

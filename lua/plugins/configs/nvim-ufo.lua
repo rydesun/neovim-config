@@ -30,4 +30,11 @@ return {
   },
   -- 不透明
   preview = { win_config = { winblend = 0 } },
+
+  -- 自定义折叠行的文本
+  fold_virt_text_handler = function(virtual_texts, start_lnum, end_lnum)
+    local suffix = (' (+%dL) '):format(end_lnum - start_lnum)
+    virtual_texts[#virtual_texts+1] = { suffix, 'NonText' }
+    return virtual_texts
+  end,
 }

@@ -12,12 +12,6 @@ local keymap = {
   -- 其他保持默认
   ['<C-u>'] = function() neoscroll.ctrl_u { duration = 250 } end,
   ['<C-d>'] = function() neoscroll.ctrl_d { duration = 250 } end,
-  ['<C-y>'] = function()
-    neoscroll.scroll(-0.1, { move_cursor = false, duration = 100 })
-  end,
-  ['<C-e>'] = function()
-    neoscroll.scroll(0.1, { move_cursor = false, duration = 100 })
-  end,
   ['zt']    = function() neoscroll.zt { half_win_duration = 250 } end,
   ['zz']    = function() neoscroll.zz { half_win_duration = 250 } end,
   ['zb']    = function() neoscroll.zb { half_win_duration = 250 } end,

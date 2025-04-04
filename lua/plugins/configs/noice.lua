@@ -1,6 +1,9 @@
 return {
+  routes = { { filter = { min_height = 20 }, view = 'cmdline_output' } },
   views = {
     mini = { win_options = { winblend = 0 }, format = { ' {message}' } },
+    -- 不要背景色
+    split = { win_options = { winhighlight = { Normal = 'Normal' } } },
   },
   lsp = {
     progress = {

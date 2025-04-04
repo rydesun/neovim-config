@@ -22,6 +22,9 @@ local function custom_basic()
   -- 报错信息去掉下划线
   hi('ErrorMsg', palette.red, palette.none, 'bold')
 
+  -- 折叠行采用深色
+  hi('Folded', palette.grey1, palette.bg_dim)
+
   -- 特殊的选中行改为更明显的绿色背景
   hi('CursorLine', palette.none, palette.bg_green)
   hi('QuickFixLine', palette.none, palette.bg_green)
@@ -69,6 +72,15 @@ local function custom_plugin()
 
   -- noice: 更暗的底部消息背景
   hi('NoiceMini', palette.none, palette.bg_dim)
+  -- 更亮些
+  vim.cmd 'hi! link NoiceFormatLevelError DiagnosticError'
+  vim.cmd 'hi! link NoiceFormatLevelWarn DiagnosticWarn'
+  vim.cmd 'hi! link NoiceFormatLevelInfo DiagnosticInfo'
+  vim.cmd 'hi! link NoiceFormatLevelHint DiagnosticHint'
+  vim.cmd 'hi! link NoiceFormatLevelDebug Comment'
+  vim.cmd 'hi! link NoiceFormatLevelTrace Comment'
+  vim.cmd 'hi! link NoiceFormatEvent Comment'
+  vim.cmd 'hi! link NoiceFormatKind Comment'
 
   -- blink.cmp
   vim.cmd 'hi! link BlinkCmpKindText Yellow'

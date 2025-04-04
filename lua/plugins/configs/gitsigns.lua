@@ -3,7 +3,7 @@ local signs = {
   change = { text = '~│' },
   delete = { text = '_│' },
   topdelete = { text = '‾│' },
-  changedelete = { text = '≈│' },
+  changedelete = { text = '≃│' },
   -- 不提示未追踪的文件
   untracked = { text = '' },
 }

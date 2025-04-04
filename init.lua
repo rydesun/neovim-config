@@ -70,6 +70,8 @@ vim.cmd 'autocmd FileType qf setlocal scrolloff=0'
 vim.o.splitkeep = 'screen'
 -- 弹出菜单的最大高度
 vim.o.pumheight = 16
+-- 预览整个文件范围的替换
+vim.o.inccommand = 'split'
 
 -- 开启侧边栏的相对行号
 vim.o.relativenumber = true
