@@ -16,4 +16,11 @@ return {
       winbar_info = false,
     },
   },
+
+  hooks = {
+    -- statuscolumn已经包含折叠符号
+    diff_buf_read = function()
+      if vim.wo.statuscolumn ~= '' then vim.wo.foldcolumn = '0' end
+    end,
+  },
 }

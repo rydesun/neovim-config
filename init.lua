@@ -78,7 +78,8 @@ vim.o.relativenumber = true
 -- 其他的侧边栏符号覆盖在行号上面
 vim.o.signcolumn = 'number'
 -- 行号的最低宽度
-vim.o.numberwidth = 3
+vim.o.numberwidth = 2
+-- 然后交给plugin/statuscolumn.lua设置stc
 
 local function disable_number()
   vim.opt_local.number = false

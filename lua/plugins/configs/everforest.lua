@@ -23,7 +23,7 @@ local function custom_basic()
   hi('ErrorMsg', palette.red, palette.none, 'bold')
 
   -- 折叠行采用深色
-  hi('Folded', palette.grey1, palette.bg_dim)
+  hi('Folded', palette.orange, palette.bg_dim)
 
   -- 特殊的选中行改为更明显的绿色背景
   hi('CursorLine', palette.none, palette.bg_green)
