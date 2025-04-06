@@ -3,19 +3,22 @@ local M = {
   fold_sign_nested = '%#Folded#%=*',
   wrap_fillchar = '│',
   virt_fillchar = '',
-  cursorline = '➜',
+  cursor_char = '➜',
+  cursor_padding_char = ' ',
+  number_padding_char = '0',
 }
 
 vim.o.statuscolumn = '%{%v:lua.StatusColumn()%}'
 function StatusColumn()
-  local text = M.relnum_signcolumn()
+  local text = M.number_signcolumn()
   if not text then return '' end
-  text = '%=' .. text .. ' '
+  text = '%=' .. text
+  if vim.wo.number or vim.wo.relativenumber then text = text .. ' ' end
   if vim.wo.foldcolumn ~= '0' then text = '%C ' .. text end
   return text
 end
 
-function M.relnum_signcolumn()
+function M.number_signcolumn()
   -- 填充虚拟行
   if vim.v.virtnum > 0 then return M.wrap_fillchar end
   if vim.v.virtnum < 0 then return M.virt_fillchar end
@@ -25,23 +28,29 @@ function M.relnum_signcolumn()
   if fold_sign then return fold_sign end
   -- 非折叠行显示其他符号
   if #signs > 0 then
-    if vim.wo.signcolumn == 'number' and
-        (vim.wo.number or vim.wo.relativenumber) then
-      return '%l'
-    end
-    return '%s'
+    local with_number = vim.wo.number or vim.wo.relativenumber
+    if vim.wo.signcolumn == 'number' and with_number then return '%l' end
+    local number = with_number and M.numbercolumn() or ''
+    return '%s' .. number
   end
+  return M.numbercolumn()
+end
 
+function M.numbercolumn()
   -- 带填充的相对行号
   if vim.wo.relativenumber then
-    if vim.v.relnum == 0 then return M.cursorline end
-    local relnum = tostring(vim.v.relnum)
-    local padding_len = vim.wo.numberwidth - #relnum
-    if padding_len > 0 then
-      local padding = string.rep('0', padding_len)
-      return padding .. relnum
+    local padding_char, text
+    if vim.v.relnum == 0 then
+      padding_char, text = M.cursor_padding_char, M.cursor_char
     else
-      return '%l'
+      padding_char, text = M.number_padding_char, tostring(vim.v.relnum)
+    end
+    local padding_len = vim.wo.numberwidth - vim.fn.strdisplaywidth(text)
+    if padding_len > 0 then
+      local padding = string.rep(padding_char, padding_len)
+      return padding .. text
+    else
+      return text
     end
   end
 
