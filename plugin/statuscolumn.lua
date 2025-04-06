@@ -95,9 +95,10 @@ local sign_fmt = '%%#%s#%s'
 ---@param auto_signs integer 选取最高优先级的个数
 ---@return string
 function M.format_signs(signs, auto_signs)
-  if auto_signs > 0 then
+  if auto_signs > 1 then
     table.sort(signs, function(a, b) return a[4].priority > b[4].priority end)
-    return vim.iter(signs):take(auto_signs):map(function(sign)
+    return vim.iter(signs):filter(function(sign) return not sign[4].invalid end)
+    :take(auto_signs):map(function(sign)
       local sign_text = sign[4].sign_text
       if not sign_text then return '' end
       return sign_fmt:format(sign[4].sign_hl_group, sign_text)
@@ -106,7 +107,7 @@ function M.format_signs(signs, auto_signs)
   -- 只取优先级最高的sign
   local found_sign
   for _, sign in ipairs(signs) do
-    if sign[4].sign_text and (
+    if not sign[4].invalid and sign[4].sign_text and (
           not found_sign or sign[4].priority > found_sign[4].priority) then
       found_sign = sign
     end
