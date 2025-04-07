@@ -120,7 +120,7 @@ nnoremap <silent>  <C-A-a>     <Cmd>lua require'ts-node-action'.node_action()<CR
 " Alt组：移动语法节点，移动光标，调整窗口大小，关闭
 nnoremap <silent>  <A-s>       <Cmd>ISwapNode<CR>
 nnoremap <silent>  <A-m>       <Cmd>IMoveNode<CR>
-nnoremap <silent>  <A-o>       <Cmd>lua require'symbols'.api.action'show-symbol-under-cursor'<CR>
+nnoremap <silent>  <A-o>       <Cmd>lua Symbols.sidebar.symbols.goto_symbol_under_cursor(0)<CR>
 map      <silent>  <A-p>       <Plug>(matchup-[%)
 map      <silent>  <A-n>       <Plug>(matchup-]%)
 imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
@@ -273,6 +273,30 @@ nnoremap <silent>  <leader>tn  :TestNearest<CR>
 nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
+
+" d组：调试
+nnoremap <silent>  <leader>dd  <Cmd>DapNew<CR>
+nnoremap <silent>  <leader>dc  <Cmd>DapContinue<CR>
+nnoremap <silent>  <leader>di  <Cmd>DapStepInto<CR>
+nnoremap <silent>  <leader>do  <Cmd>DapStepOut<CR>
+nnoremap <silent>  <leader>dn  <Cmd>DapStepOver<CR>
+nnoremap <silent>  <leader>db  <Cmd>DapToggleBreakpoint<CR>
+nnoremap <silent>  <leader>dx  <Cmd>DapClearBreakpoints<CR>
+nnoremap <silent>  <leader>de  <Cmd>DapEval<CR>
+nnoremap <silent>  <leader>dr  <Cmd>DapToggleRepl<CR>
+nnoremap <silent>  <leader>du  <Cmd>DapViewToggle<CR>
+nnoremap <silent>  <leader>dv  <Cmd>lua require'dap.ui.widgets'.
+			\ centered_float(require'dap.ui.widgets'.scopes)<CR>
+function! RustDapKeymap() abort
+    nnoremap <buffer><silent>  <leader>dd  <Cmd>RustLsp debug<CR>
+endfunction
+autocmd filetype rust call RustDapKeymap()
+function! PythonDapKeymap() abort
+    xnoremap <buffer><silent>  <leader>dd  :lua require'dap-python'.debug_selection()<CR>
+    nnoremap <buffer><silent>  <leader>dt  <Cmd>lua require'dap-python'.test_method()<CR>
+    nnoremap <buffer><silent>  <leader>dT  <Cmd>lua require'dap-python'.test_class()<CR>
+endfunction
+autocmd filetype python call PythonDapKeymap()
 
 " l组：调试打印日志
 nnoremap <silent>  <leader>ll  <Cmd>Chainsaw messageLog<CR>

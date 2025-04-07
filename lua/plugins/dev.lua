@@ -3,22 +3,35 @@ if not vim.g.env_dev then return {} end
 
 local cond = vim.g.plug_dev
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
-  -- {{{ 本地开发 (LSP)
-  {
-    'williamboman/mason-lspconfig.nvim',
+  -- {{{ 本地开发 (LSP+DAP)
+  -- 自动集成Mason安装的LSP
+  { 'williamboman/mason-lspconfig.nvim',
     lazy = false,
     config_file = true,
     dependencies = {
-      -- 集成LSP和DAP等工具
       { 'williamboman/mason.nvim', config = true },
       'neovim/nvim-lspconfig',
       -- JSON schema
       'b0o/schemastore.nvim',
-    },
-  },
+    } },
+
+  -- 自动集成Mason安装的DAP
+  { 'jay-babu/mason-nvim-dap.nvim',
+    opts = { handlers = {} },
+    dependencies = {
+      { 'williamboman/mason.nvim', config = true },
+      { 'mfussenegger/nvim-dap',
+        dependencies = {
+          { 'mfussenegger/nvim-dap-python' },
+          { 'igorlfs/nvim-dap-view', config = true },
+          { 'theHamsta/nvim-dap-virtual-text', config = true },
+        } },
+    } },
 
   -- 单独配置Rust
-  { 'mrcjkb/rustaceanvim', version = '^5', lazy = false, config_file = true },
+  -- LSP使用系统端安装的nightly rust-analyzer，不要从Mason安装
+  -- DAP从Mason安装并且会自动集成
+  { 'mrcjkb/rustaceanvim', version = '^6', lazy = false, config_file = true },
 
   -- 单独配置Typescript
   { 'pmizio/typescript-tools.nvim', lazy = false, opts_file = true },
