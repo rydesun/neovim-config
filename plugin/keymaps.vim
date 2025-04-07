@@ -90,6 +90,8 @@ nnoremap <silent>  ]w          <Cmd>NextTrailingWhitespace<CR>
 nnoremap <silent>  [w          <Cmd>PrevTrailingWhitespace<CR>
 nnoremap <silent>  [om         <Cmd>set colorcolumn=80<CR>
 nnoremap <silent>  ]om         <Cmd>set colorcolumn=<CR>
+nnoremap <silent>  [os         <Cmd>StatusColumnSignsInc<CR>
+nnoremap <silent>  ]os         <Cmd>StatusColumnSignsReset<CR>
 nnoremap <silent>  [oh         <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nnoremap <silent>  ]oh         <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
 nnoremap <silent>  [ow         <Cmd>lua vim.lsp.buf.document_highlight()<CR>

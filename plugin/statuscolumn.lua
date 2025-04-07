@@ -8,8 +8,15 @@ local M = {
   number_padding_char = '0',
 
   -- signcolumn=number时，允许signs动态增加列
-  signcolumn_number_auto = 2,
+  signcolumn_number_auto = 1,
 }
+
+vim.api.nvim_create_user_command('StatusColumnSignsInc', function()
+  M.signcolumn_number_auto = M.signcolumn_number_auto + 1
+end, {})
+vim.api.nvim_create_user_command('StatusColumnSignsReset', function()
+  M.signcolumn_number_auto = 1
+end, {})
 
 vim.o.statuscolumn = '%{%v:lua.StatusColumn()%}'
 function StatusColumn()
@@ -98,11 +105,11 @@ function M.format_signs(signs, auto_signs)
   if auto_signs > 1 then
     table.sort(signs, function(a, b) return a[4].priority > b[4].priority end)
     return vim.iter(signs):filter(function(sign) return not sign[4].invalid end)
-    :take(auto_signs):map(function(sign)
-      local sign_text = sign[4].sign_text
-      if not sign_text then return '' end
-      return sign_fmt:format(sign[4].sign_hl_group, sign_text)
-    end):join ''
+        :take(auto_signs):map(function(sign)
+          local sign_text = sign[4].sign_text
+          if not sign_text then return '' end
+          return sign_fmt:format(sign[4].sign_hl_group, sign_text)
+        end):join ''
   end
   -- 只取优先级最高的sign
   local found_sign
