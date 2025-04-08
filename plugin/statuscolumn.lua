@@ -20,7 +20,8 @@ end, {})
 
 vim.o.statuscolumn = '%{%v:lua.StatusColumn()%}'
 function StatusColumn()
-  local text = M.number_signcolumn()
+  local has_number = vim.wo.number or vim.wo.relativenumber
+  local text = M.number_signcolumn(has_number)
   if not text then return '' end
   text = '%=' .. text
   if vim.wo.number or vim.wo.relativenumber then text = text .. ' ' end
@@ -28,26 +29,27 @@ function StatusColumn()
   return text
 end
 
+---@param has_number boolean
 ---@return string?
-function M.number_signcolumn()
+function M.number_signcolumn(has_number)
   -- 填充虚拟行
-  if vim.v.virtnum > 0 then return M.wrap_fillchar end
-  if vim.v.virtnum < 0 then return M.virt_fillchar end
+  local virtnum = vim.v.virtnum
+  if virtnum > 0 and has_number then return M.wrap_fillchar end
+  if virtnum < 0 then return M.virt_fillchar end
 
   local fold_sign, signs = M.get_fold_signs(vim.v.lnum)
   -- 折叠行只显示折叠符号
   if fold_sign then return fold_sign end
   -- 非折叠行显示其他符号
   if #signs > 0 then
-    local with_number = vim.wo.number or vim.wo.relativenumber
-    if vim.wo.signcolumn == 'number' and with_number then
+    if has_number and vim.wo.signcolumn == 'number' then
       -- 手动拼接signs
       local signs_text = M.format_signs(signs, M.signcolumn_number_auto)
       -- TODO: 什么情况下有sign无sign_text？
       if signs_text ~= '' then return signs_text end
     end
     -- fallback: 交给nvim处理
-    local number = with_number and M.numbercolumn() or ''
+    local number = has_number and M.numbercolumn() or ''
     return '%s' .. number
   end
   return M.numbercolumn()
