@@ -57,6 +57,7 @@ imap     <silent>  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buff
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', function()
+-- {{{ 额外关闭通知浮窗
   pcall(function()
     require 'notify'.dismiss { silent = true }
   end)
@@ -65,6 +66,7 @@ vim.keymap.set('n', '<C-l>', function()
   vim.cmd.normal {
     vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
   }
+-- }}}
 end)
 EOF
 " }}}
@@ -129,6 +131,7 @@ imap     <silent>  <A-p>       <C-o><Plug>(matchup-[%)
 imap     <silent>  <A-n>       <C-o><Plug>(matchup-]%)
 inoremap           <A-i>       <C-k>
 nnoremap           <A-w>       <C-w>c
+nnoremap           <A-S-w>     <Cmd>only<CR>
 nnoremap           <A-j>       <Cmd>wincmd j<CR>
 nnoremap           <A-k>       <Cmd>wincmd k<CR>
 nnoremap           <A-h>       <Cmd>wincmd h<CR>
@@ -249,22 +252,8 @@ nnoremap <silent>  <leader>gd  <Cmd>GitDiffCurrent<CR>
 nnoremap <silent>  <leader>ga  <Cmd>GitDiffAll<CR>
 nnoremap <silent>  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>
 nnoremap <silent>  <leader>gT  <Cmd>GitDiffStagedAll<CR>
-" 搜索git所有的提交内容
-lua << EOF
-function git_pickaxe(all)
-  return function()
-    prompt = all and 'Git Pickaxe' or 'Git Pickaxe %'
-    vim.ui.input({ prompt = prompt }, function(query)
-      if not query or query == '' then return end
-      arg = string.format("-G'%s'", query)
-      if not all then arg = '% ' .. arg end
-      vim.cmd.DiffviewFileHistory (arg)
-    end)
-  end
-end
-vim.keymap.set('n', '<leader>gs', git_pickaxe(false))
-vim.keymap.set('n', '<leader>gS', git_pickaxe(true))
-EOF
+nnoremap <silent>  <leader>gs  <Cmd>DiffViewPickaxeCurrent<CR>
+nnoremap <silent>  <leader>gS  <Cmd>DiffViewPickaxeAll<CR>
 
 " t组：操作终端、测试
 nnoremap <silent>  <leader>tt  <Cmd>ToggleTerm direction=float<CR>
