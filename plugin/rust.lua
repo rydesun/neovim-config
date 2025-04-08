@@ -1,7 +1,12 @@
 if not vim.g.rust_playground_dir then return end
 local root_dir = vim.fs.normalize(vim.g.rust_playground_dir)
 
-local function get_scratch_dir(count)
+local function get_scratch_dir(name, count)
+  if name ~= '' then
+    local package_name = name
+    if count > 0 then package_name = package_name .. '.' .. count end
+    return vim.fs.joinpath(root_dir, package_name)
+  end
   local parent_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
   local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
   local res = vim.system(cmd, { cwd = parent_dir }):wait()
@@ -35,9 +40,9 @@ vim.api.nvim_create_user_command(
   'RustPlayground',
   function(opts)
     if opts.count == 0 then opts.count = vim.v.count end
-    local dir = get_scratch_dir(opts.count)
+    local dir = get_scratch_dir(opts.args, opts.count)
     if not dir then return end
     cargo_init_scratch(dir)
     open_scratch(dir)
-  end, { count = true }
+  end, { count = true, nargs = '?' }
 )
