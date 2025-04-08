@@ -284,6 +284,9 @@ nnoremap <silent>  <leader>do  <Cmd>DapStepOut<CR>
 nnoremap <silent>  <leader>dn  <Cmd>DapStepOver<CR>
 nnoremap <silent>  <leader>db  <Cmd>DapToggleBreakpoint<CR>
 nnoremap <silent>  <leader>dx  <Cmd>DapClearBreakpoints<CR>
+nnoremap <silent>  <leader>dl  <Cmd>lua require'dap'.run_last()<CR>
+nnoremap <silent>  <leader>dL  <Cmd>lua require'dap'.
+			\ set_breakpoint(nil, nil, vim.fn.input'Log: ')<CR>
 nnoremap <silent>  <leader>de  <Cmd>DapEval<CR>
 nnoremap <silent>  <leader>dr  <Cmd>DapToggleRepl<CR>
 nnoremap <silent>  <leader>du  <Cmd>DapViewToggle<CR>
