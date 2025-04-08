@@ -1,5 +1,26 @@
 local M = {}
 
+M.alternative_file = {
+  multi = { 'buffers', 'files' },
+  transform = 'unique_file',
+  pattern = function(picker)
+    local name = vim.fn.expand(picker.opts.without_ext and '%:t:r' or '%:t')
+    if not picker.opts.affix then return name end
+
+    local affix_pat
+    if name:find(picker.opts.affix) then
+      name = name:gsub(picker.opts.affix, '')
+          :gsub('^[-_]', ''):gsub('[-_]$', '')
+      affix_pat = '!' .. picker.opts.affix
+    elseif vim.fn.expand '%:h':find(picker.opts.affix) then
+      affix_pat = '!' .. picker.opts.affix
+    else
+      affix_pat = picker.opts.affix
+    end
+    return ('%s %s'):format(affix_pat, name)
+  end,
+}
+
 M.tagstack = {
   finder = function()
     local curidx = vim.fn.gettagstack().curidx

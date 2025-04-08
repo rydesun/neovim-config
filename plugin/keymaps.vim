@@ -264,6 +264,7 @@ nnoremap <silent>  <leader>tn  :TestNearest<CR>
 nnoremap <silent>  <leader>tf  :TestFile<CR>
 nnoremap <silent>  <leader>tl  :TestLast<CR>
 nnoremap <silent>  <leader>tv  :TestVisit<CR>
+nnoremap <silent>  <leader>ta  <Cmd>lua Snacks.picker.alternative_file{affix='test'}<CR>
 
 " d组：调试
 nnoremap <silent>  <leader>dd  <Cmd>DapNew<CR>
