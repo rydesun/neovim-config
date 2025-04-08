@@ -47,13 +47,9 @@ local symbols = {
 ---@param use_ascii? boolean
 ---@return table<string, string>
 function M.symbols(use_ascii)
+  local column_idx = (vim.g.env_no_icon or use_ascii) and 2 or 1
   local tbl = {}
-  -- 在virtual console中使用英文
-  if vim.g.env_console or use_ascii then
-    for k, v in pairs(symbols) do tbl[k] = v[2] end
-  else
-    for k, v in pairs(symbols) do tbl[k] = v[1] end
-  end
+  for k, v in pairs(symbols) do tbl[k] = v[column_idx] end
   return tbl
 end
 

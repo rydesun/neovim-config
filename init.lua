@@ -29,6 +29,8 @@ vim.g.env_dev = bool(vim.fn.filereadable(
 -- 是否处于Linux console
 vim.g.env_console = vim.env.TERM == 'linux' and vim.fn.has 'gui_running' == 0
 
+vim.g.env_no_icon = vim.g.env_console
+
 -- 是否启用该类型的插件
 -- 自身界面
 vim.g.plug_ui = true
@@ -144,7 +146,7 @@ vim.opt.packpath:prepend(vim.fn.stdpath 'config')
 
 -- 标签栏
 vim.cmd 'packadd tabline'
-require 'tabline'.setup(vim.g.env_console and {} or {
+require 'tabline'.setup(vim.g.env_no_icon and {} or {
   terminal_ok = '✔', terminal_fail = '✖',
 })
 

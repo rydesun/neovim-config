@@ -31,13 +31,13 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 图标字体
   {
     'nvim-tree/nvim-web-devicons',
-    cond = not vim.g.env_console,
+    cond = not vim.g.env_no_icon,
     opts_file = true,
   },
-  -- 图标字体回退(仅在virtual console中生效)
+  -- 图标字体回退到ASCII
   {
     'echasnovski/mini.icons',
-    cond = vim.g.env_console,
+    cond = vim.g.env_no_icon,
     config = function()
       require 'mini.icons'.setup { style = 'ascii' }
       MiniIcons.mock_nvim_web_devicons()
