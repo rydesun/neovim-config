@@ -29,7 +29,7 @@ return {
   update_focused_file = { enable = true },
 
   -- 自动调整宽度
-  view = { width = {} },
+  view = { width = { max = 50 } },
 
   -- 已经打开的目录不显示git符号
   git = { show_on_open_dirs = false },
@@ -44,6 +44,9 @@ return {
   renderer = {
     -- 压缩目录层次
     group_empty = true,
+
+    -- 在浮动窗口显示过长的文件名
+    full_name = true,
 
     -- 开启缩进线
     indent_markers = { enable = true },
