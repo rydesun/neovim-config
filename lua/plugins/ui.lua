@@ -53,7 +53,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 编辑目录
   { 'stevearc/oil.nvim', lazy = false, opts_file = true },
 
-  -- 改进quickfix
+  -- QuickFix
   { 'stevearc/quicker.nvim', ft = 'qf', opts_file = true },
   { 'kevinhwang91/nvim-bqf', ft = 'qf', opts_file = true },
+
+  -- Session
+  { 'jedrzejboczar/possession.nvim', opts_file = true },
 } }

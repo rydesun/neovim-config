@@ -301,6 +301,11 @@ noremap  <silent>  <leader>ly  <Cmd>Chainsaw typeLog<CR>
 noremap  <silent>  <leader>la  <Cmd>Chainsaw assertLog<CR>
 noremap  <silent>  <leader>lx  <Cmd>Chainsaw removeLogs<CR>
 
+" q组：Session
+nnoremap <silent>  <leader>ql  <Cmd>PossessionLoad<CR>
+nnoremap <silent>  <leader>qL  <Cmd>PossessionLoadCwd<CR>
+nnoremap <silent>  <leader>qp  <Cmd>PossessionPick<CR>
+
 " n组：笔记
 nnoremap <silent>  <leader>nn  <Cmd>ObsidianDraft<CR>
 nnoremap <silent>  <leader>ns  <Cmd>ObsidianSearch<CR>
