@@ -37,15 +37,13 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'pmizio/typescript-tools.nvim', lazy = false, opts_file = true },
 
   -- lua_ls：面向nvim编程
-  {
-    'folke/lazydev.nvim',
+  { 'folke/lazydev.nvim',
     ft = 'lua',
     opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
   },
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
-  {
-    'jayp0521/mason-null-ls.nvim',
+  { 'jayp0521/mason-null-ls.nvim',
     opts_file = true,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
@@ -55,8 +53,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- }}}
 
   -- {{{ 本地开发 (tree-sitter)
-  {
-    'nvim-treesitter/nvim-treesitter',
+  { 'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = { highlight = { enable = true } },
@@ -89,8 +86,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
 
   -- {{{ 本地开发 (特定语言)
   -- 预览Markdown
-  {
-    'iamcco/markdown-preview.nvim',
+  { 'iamcco/markdown-preview.nvim',
     ft = 'markdown',
     build = function() vim.fn['mkdp#util#install']() end,
   },
@@ -102,10 +98,16 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable 'latex' > 0 },
 
   -- Hugo
-  {
-    'phelipetls/vim-hugo',
+  { 'phelipetls/vim-hugo',
     enabled = vim.fn.executable 'hugo' > 0,
     lazy = false,
+  },
+
+  -- REST
+  { 'mistweaverco/kulala.nvim',
+    ft = { 'http', 'rest' },
+    keys = '<leader>R',
+    opts = { global_keymaps = true },
   },
   -- }}}
 
