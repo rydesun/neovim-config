@@ -204,7 +204,7 @@ function s:SnipRunFile() abort
 endfunction
 
 xnoremap <silent>  <leader>y   "+y
-nnoremap <silent>  <leader>p   "+p
+nnoremap <expr>    <leader>p   empty(getreg('+')) ? '<Cmd>PasteImage<CR>' : '"+p'
 nnoremap <silent>  <leader>P   "+P
 nnoremap <silent>  <leader>e   <Cmd>NvimTreeFindFileToggle!<CR>
 nnoremap <silent>  <leader>u   <Cmd>lua Snacks.picker.undo {layout='sidebar'}<CR>
