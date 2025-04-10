@@ -32,7 +32,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'monaqa/dial.nvim', config_file = true },
 
   -- 补全
-  { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp' },
+  { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp',
+    dependencies = {
+      'mikavilpas/blink-ripgrep.nvim',
+    },
+  },
 
   -- snippets
   { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', version = 'v2.*' },

@@ -54,6 +54,7 @@ imap     <silent>  <C-x><C-i>  <Cmd>lua Snacks.picker.icons()<CR>
 imap     <silent>  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
 imap     <silent>  <C-x><C-s>  <Cmd>lua require'blink.cmp'.show{providers={'snippets'}}<CR>
 imap     <silent>  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
+imap     <silent>  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', function()

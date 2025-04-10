@@ -26,6 +26,19 @@ opts.sources.providers = {
     module = 'lazydev.integrations.blink',
     score_offset = 100,
   },
+  ripgrep = {
+    name = 'Ripgrep',
+    module = 'blink-ripgrep',
+    ---@module "blink-ripgrep"
+    ---@type blink-ripgrep.Options
+    opts = {
+      prefix_min_len = 1,
+    },
+    transform_items = function(_, items)
+      for _, item in ipairs(items) do item.kind_icon = 'rg' end
+      return items
+    end,
+  },
   snippets = {
     should_show_items = function(ctx)
       return ctx.trigger.initial_kind ~= 'trigger_character'
