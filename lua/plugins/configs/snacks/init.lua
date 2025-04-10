@@ -143,7 +143,6 @@ vim.keymap.set('n', 'gd', Snacks.picker.lsp_definitions)
 vim.keymap.set('n', 'gD', Snacks.picker.lsp_declarations)
 
 return {
-  bigfile = {},
   image = {},
   input = {},
   picker = picker,

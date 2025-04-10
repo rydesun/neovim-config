@@ -60,7 +60,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   },
 
   -- 自动输入闭合tag
-  { 'windwp/nvim-ts-autotag', lazy = true, config = true },
+  { 'windwp/nvim-ts-autotag', lazy = false, config = true },
 
   -- 显示上下文
   { 'nvim-treesitter/nvim-treesitter-context', opts_file = true },

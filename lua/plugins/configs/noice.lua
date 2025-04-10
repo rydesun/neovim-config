@@ -9,6 +9,7 @@ return {
     split = { win_options = { winhighlight = { Normal = 'Normal' } } },
   },
   lsp = {
+    signature = { auto_open = { enabled = false } },
     progress = {
       format = {
         -- 去掉进度条

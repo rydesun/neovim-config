@@ -1,4 +1,4 @@
-vim.o.sessionoptions = 'curdir,folds,help,tabpages,winsize'
+vim.o.sessionoptions = 'folds,help,tabpages,winsize'
 
 return {
   silent = true,
