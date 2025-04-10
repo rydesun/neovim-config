@@ -9,5 +9,5 @@ space_around_table_append_operator = true
 align_array_table = false
 
 [*.vim]
-indent_style = tab
-indent_size = 8
+indent_style = space
+indent_size = 4
