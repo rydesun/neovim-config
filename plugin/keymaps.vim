@@ -368,7 +368,4 @@ ono ih  <Cmd>Gitsigns select_hunk<CR>
 Xns ih  :Gitsigns select_hunk<CR>
 " }}}
 
-delcommand Xns
-delcommand Nne
-
 " vim: foldmethod=marker:foldlevel=0
