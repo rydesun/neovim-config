@@ -31,4 +31,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'pwntester/octo.nvim', opts_file = true,
     cmd = 'Octo', enabled = vim.fn.executable 'gh' > 0,
   },
+
+  -- 数据库
+  { 'kndndrj/nvim-dbee', config = true,
+    build = function() require 'dbee'.install() end,
+    dependencies = 'MunifTanjim/nui.nvim',
+    cmd = 'Dbee',
+  },
 } }
