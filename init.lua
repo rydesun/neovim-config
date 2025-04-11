@@ -50,7 +50,7 @@ if vim.g.pager then
 end
 
 -- obsidian目录
-vim.g.obsidian_dir = vim.fn.expand '~/Data/Documents/Obsidian Vault'
+vim.g.obsidian_dir = '~/Data/Documents/Obsidian Vault'
 
 vim.g.rust_playground_dir = '~/test/playground'
 -- }}}

@@ -2,7 +2,6 @@
 noremap  H  ^
 noremap  L  $
 noremap  ;  :
-noremap  :  ;
 " 修改缩进后保持选中
 xnoremap <  <gv
 xnoremap >  >gv
@@ -57,8 +56,8 @@ imap  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
 imap  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
 
 lua << EOF
-vim.keymap.set('n', '<C-l>', function()
--- {{{ 额外关闭通知浮窗
+vim.keymap.set('n', '<C-l>', -- {{{ 额外关闭通知浮窗
+function()
   pcall(function()
     require 'notify'.dismiss { silent = true }
   end)
@@ -67,8 +66,7 @@ vim.keymap.set('n', '<C-l>', function()
   vim.cmd.normal {
     vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
   }
--- }}}
-end)
+end) -- }}}
 EOF
 " }}}
 
@@ -194,7 +192,7 @@ nnoremap   <leader>8   <Cmd>AsyncTask file-build<CR>
 nnoremap   <leader>9   <Cmd>AsyncTask file-test<CR>
 
 nnoremap   <leader>0   <Cmd>AsyncTask repl<CR>
-nnoremap   <leader>-   <Cmd>AsyncTaskTogglePos<CR>
+nnoremap   <leader>-   <Cmd>AsyncTaskPos<CR>
 
 noremap    <leader><Enter>    <Cmd>SnipRun<CR>
 noremap    <leader><S-Enter>  <Cmd>call <SID>SnipRunFile()<CR>
