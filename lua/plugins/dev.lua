@@ -18,9 +18,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 自动集成Mason安装的DAP
   { 'jay-babu/mason-nvim-dap.nvim',
     opts = { handlers = {} },
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
-      { 'mfussenegger/nvim-dap',
+      { 'mfussenegger/nvim-dap', lazy = true,
         dependencies = {
           { 'mfussenegger/nvim-dap-python' },
           { 'igorlfs/nvim-dap-view', config = true },
@@ -34,22 +35,23 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'mrcjkb/rustaceanvim', version = '^6', lazy = false, config_file = true },
 
   -- 单独配置Typescript
-  { 'pmizio/typescript-tools.nvim', lazy = false, opts_file = true },
+  { 'pmizio/typescript-tools.nvim', opts_file = true,
+    ft = { 'javascript', 'typescript' } },
 
   -- lua_ls：面向nvim编程
-  { 'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+  { 'folke/lazydev.nvim', ft = 'lua',
+    opts = { library = { {
+      path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
   },
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
   { 'jayp0521/mason-null-ls.nvim',
     opts_file = true,
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       { 'nvimtools/none-ls.nvim', config = true },
-    },
-  },
+    } },
   -- }}}
 
   -- {{{ 本地开发 (tree-sitter)
@@ -77,8 +79,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'mizlan/iswap.nvim', config = true },
 
   -- 修改语法节点(自动切换)
-  { 'Wansmer/treesj', config = true, opts = { use_default_keymaps = false } },
-  { 'ckolkey/ts-node-action', config = true },
+  { 'ckolkey/ts-node-action', config = true, lazy = true },
+  { 'Wansmer/treesj', config = true, lazy = true,
+    opts = { use_default_keymaps = false } },
 
   -- 大纲视图
   { 'oskarrrrrrr/symbols.nvim', config_file = true },
