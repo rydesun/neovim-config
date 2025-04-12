@@ -1,5 +1,5 @@
 command -nargs=+ Xns xnoremap <silent> <args>
-command -nargs=+ Nne nnoremap <silent><expr> <args>
+command -nargs=+ Nse nm <silent><expr> <args>
 
 " {{{ 按键 (覆盖默认行为)
 no  H  ^
@@ -35,6 +35,7 @@ nn  sp  <Cmd>lua Snacks.picker.projects()<CR>
 nn  s/  <Cmd>lua Snacks.picker.lines()<CR>
 nn  s;  <Cmd>lua Snacks.picker.command_history()<CR>
 nn  sq  <Cmd>lua Snacks.picker.diagnostics()<CR>
+nn  sy  <Cmd>YankyRingHistory<CR>
 " Vim
 nn  svm <Cmd>lua Snacks.picker.noice()<CR>
 nn  svv <Cmd>lua Snacks.picker.help()<CR>
@@ -123,7 +124,9 @@ no  <C-A-d> <Cmd>Treewalker Right<CR>
 no  <C-A-o> <Cmd>lua require'treesitter-context'.go_to_context(vim.v.count1)<CR>
 nn  <C-A-a> <Cmd>lua require'ts-node-action'.node_action()<CR>
 
-" Alt组：移动语法节点，移动光标，调整窗口大小，关闭
+" Alt组：切换复制内容，移动语法节点，移动光标，调整窗口大小，关闭
+nn  <A-p>   <Plug>(YankyPreviousEntry)
+nn  <A-n>   <Plug>(YankyNextEntry)
 nn  <A-s>   <Cmd>ISwapNode<CR>
 nn  <A-m>   <Cmd>IMoveNode<CR>
 nn  <A-o>   <Cmd>lua Symbols.sidebar.symbols.goto_symbol_under_cursor(0)<CR>
@@ -202,7 +205,7 @@ function s:SnipRunFile() abort
 endfunction
 
 xn  <leader>y   "+y
-Nne <leader>p   empty(getreg('+')) ? '<Cmd>PasteImage<CR>' : '"+p'
+Nse <leader>p   empty(getreg('+')) ? '<Cmd>PasteImage<CR>' : '"+p'
 nn  <leader>P   "+P
 nn  <leader>e   <Cmd>NvimTreeFindFileToggle!<CR>
 nn  <leader>u   <Cmd>lua Snacks.picker.undo {layout='sidebar'}<CR>

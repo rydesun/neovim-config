@@ -1,5 +1,9 @@
 local cond = vim.g.plug_op
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
+  -- 增强复制粘贴：存储复制内容
+  { 'gbprod/yanky.nvim', opts_file = true,
+    dependencies = 'kkharji/sqlite.lua' },
+
   -- 增强%
   { 'andymass/vim-matchup', lazy = false, config_file = true },
 
