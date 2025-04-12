@@ -127,10 +127,6 @@ nn  <C-A-a> <Cmd>lua require'ts-node-action'.node_action()<CR>
 nn  <A-s>   <Cmd>ISwapNode<CR>
 nn  <A-m>   <Cmd>IMoveNode<CR>
 nn  <A-o>   <Cmd>lua Symbols.sidebar.symbols.goto_symbol_under_cursor(0)<CR>
-map <A-p>   <Plug>(matchup-[%)
-map <A-n>   <Plug>(matchup-]%)
-im  <A-p>   <C-o><Plug>(matchup-[%)
-im  <A-n>   <C-o><Plug>(matchup-]%)
 ino <A-i>   <C-k>
 nn  <A-w>   <C-w>c
 nn  <A-S-w> <Cmd>only<CR>

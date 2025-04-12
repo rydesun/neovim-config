@@ -27,7 +27,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'fidian/hexmode', lazy = false },
 
   -- 预览markdown
-  { 'OXY2DEV/markview.nvim', lazy = false, config = true },
+  { 'OXY2DEV/markview.nvim', config = true, ft = 'markdown' },
 
   -- 显示颜色
   { 'brenoprata10/nvim-highlight-colors', lazy = false, opts_file = true },

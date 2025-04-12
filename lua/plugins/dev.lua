@@ -58,7 +58,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
-    opts = { highlight = { enable = true } },
+    opts = { highlight = { enable = true }, matchup = { enable = true } },
   },
 
   -- 自动输入闭合tag
@@ -127,7 +127,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'chrisgrieser/nvim-chainsaw', config = true },
 
   -- Code Runner
-  { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh' },
+  { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh',
+    cmd = 'SnipRun' },
 } }
 
 -- vim: foldmethod=marker:foldlevel=0
