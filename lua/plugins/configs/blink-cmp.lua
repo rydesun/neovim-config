@@ -18,7 +18,10 @@ opts.completion.accept = { auto_brackets = { enabled = false } }
 
 opts.snippets = { preset = 'luasnip' }
 opts.sources = {
-  default = { 'lsp', 'buffer', 'snippets', 'path', 'lazydev' },
+  default = { 'lsp', 'buffer', 'snippets', 'path' },
+  per_filetype = {
+    lua = { 'lazydev', 'lsp', 'buffer', 'snippets', 'path' },
+  },
 }
 opts.sources.providers = {
   lazydev = {
