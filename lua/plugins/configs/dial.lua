@@ -49,13 +49,9 @@ require 'dial.config'.augends:register_group {
     augend.constant.new { elements = { 'AND', 'OR' } },
     augend.constant.new { elements = { 'And', 'Or' }, word = false },
     augend.constant.new { elements = { '&&', '||' }, word = false },
-    augend.constant.new { elements = { '&', '|', '^' }, word = false },
-    augend.constant.new { elements = { '&=', '|=', '^=' }, word = false },
     augend.constant.new { elements = { '==', '!=' }, word = false },
     augend.constant.new { elements = { '===', '!==' }, word = false },
-    augend.constant.new { elements = { '>=', '<=', '>', '<' }, word = false },
     augend.constant.new { elements = { '->', '<-' }, word = false },
-    augend.constant.new { elements = { '++', '--' }, word = false },
 
     -- 关键字
     augend.constant.new { elements = { 'let', 'const', 'var', 'static' } },
@@ -66,7 +62,6 @@ require 'dial.config'.augends:register_group {
     augend.constant.new { elements = { 'top', 'bottom' } },
     augend.constant.new { elements = { 'left', 'right' } },
     augend.constant.new { elements = { 'margin', 'padding' } },
-    augend.constant.new { elements = { 'disable', 'enable' }, word = false },
 
     -- 日志等级
     augend.constant.new { elements = {
