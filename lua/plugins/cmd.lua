@@ -15,6 +15,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 集成Git
   { 'lewis6991/gitsigns.nvim', opts_file = true },
   { 'NeogitOrg/neogit', opts_file = true, cmd = 'Neogit' },
+  { 'akinsho/git-conflict.nvim', opts_file = true, lazy = false },
   { 'sindrets/diffview.nvim', opts_file = true,
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' } },
 
