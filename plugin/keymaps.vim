@@ -2,16 +2,17 @@ command -nargs=+ Xns xnoremap <silent> <args>
 command -nargs=+ Nse nm <silent><expr> <args>
 
 " {{{ 按键 (覆盖默认行为)
+no  ;  :
 no  H  ^
 no  L  $
-no  ;  :
+
+" leap.nvim跳转
+map m  <Plug>(leap-anywhere)
+nn  M  m
+
 " 修改缩进后保持选中
 xn  <  <gv
 xn  >  >gv
-
-" leap.nvim跳转
-map m  <Plug>(leap-forward-to)
-map M  <Plug>(leap-backward-to)
 
 " 分页时按q直接退出
 if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
