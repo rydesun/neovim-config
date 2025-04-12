@@ -18,6 +18,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'sindrets/diffview.nvim', opts_file = true,
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' } },
 
+  -- 搜索替换
+  { 'MagicDuck/grug-far.nvim', config = true },
+
   -- 切换输入法
   { 'lilydjwg/fcitx.vim',
     enabled = vim.fn.executable 'fcitx5' > 0,
