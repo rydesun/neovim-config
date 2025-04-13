@@ -1,6 +1,11 @@
 local cfg = { settings = {} }
-cfg.settings.yaml = {
-  schemaStore = { enable = false, url = '' },
-  schemas = require 'schemastore'.yaml.schemas(),
-}
+
+local ok, schemastore = pcall(require, 'schemastore')
+if ok then
+  cfg.settings.yaml = {
+    schemaStore = { enable = false, url = '' },
+    schemas = schemastore.yaml.schemas(),
+  }
+end
+
 return cfg

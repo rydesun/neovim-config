@@ -5,29 +5,19 @@ local cond = vim.g.plug_dev
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- {{{ 本地开发 (LSP+DAP)
   -- 自动集成Mason安装的LSP
-  { 'williamboman/mason-lspconfig.nvim',
-    lazy = false,
-    opts_file = true,
+  { 'williamboman/mason-lspconfig.nvim', lazy = false,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'neovim/nvim-lspconfig',
-      -- JSON schema
-      'b0o/schemastore.nvim',
+    },
+    opts = { handlers = {
+      -- 自动enable所有通过Mason安装的LSP
+      function(name) vim.lsp.enable(name) end,
+      -- 自动enable可以被空handler取消
+      rust_analyzer = function() end, -- 交给rustaceanvim管理
+      ts_ls = function() end,         -- 交给typescript-tools.nvim管理
     } },
-
-  -- 自动集成Mason安装的DAP
-  { 'jay-babu/mason-nvim-dap.nvim',
-    opts = { handlers = {} },
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
-    dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      { 'mfussenegger/nvim-dap', lazy = true,
-        dependencies = {
-          { 'mfussenegger/nvim-dap-python' },
-          { 'igorlfs/nvim-dap-view', config = true },
-          { 'theHamsta/nvim-dap-virtual-text', config = true },
-        } },
-    } },
+  },
 
   -- 单独配置Rust
   -- LSP使用系统端安装的nightly rust-analyzer，不要从Mason安装
@@ -44,9 +34,25 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
       path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
   },
 
+  -- JSON+YAML schema
+  { 'b0o/schemastore.nvim', lazy = true },
+
+  -- 自动集成Mason安装的DAP
+  { 'jay-babu/mason-nvim-dap.nvim',
+    opts = { handlers = {} },
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
+    dependencies = {
+      { 'williamboman/mason.nvim', config = true },
+      { 'mfussenegger/nvim-dap', lazy = true,
+        dependencies = {
+          { 'mfussenegger/nvim-dap-python' },
+          { 'igorlfs/nvim-dap-view', config = true },
+          { 'theHamsta/nvim-dap-virtual-text', config = true },
+        } },
+    } },
+
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
-  { 'jayp0521/mason-null-ls.nvim',
-    opts_file = true,
+  { 'jayp0521/mason-null-ls.nvim', opts = { handlers = {} },
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
