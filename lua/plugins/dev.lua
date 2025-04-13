@@ -7,7 +7,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 自动集成Mason安装的LSP
   { 'williamboman/mason-lspconfig.nvim',
     lazy = false,
-    config_file = true,
+    opts_file = true,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'neovim/nvim-lspconfig',
