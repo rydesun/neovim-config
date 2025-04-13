@@ -135,6 +135,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- Code Runner
   { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh',
     cmd = 'SnipRun' },
+
+  -- Code action diff
+  { 'aznhe21/actions-preview.nvim', opts_file = true },
 } }
 
 -- vim: foldmethod=marker:foldlevel=0
