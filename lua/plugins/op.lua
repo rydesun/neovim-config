@@ -33,7 +33,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'echasnovski/mini.align', config = true },
 
   -- 切换单词
-  { 'monaqa/dial.nvim', config_file = true },
+  { 'monaqa/dial.nvim', config_file = true,
+    keys = { '<c-a>', '<c-x>', 'g<c-a>', 'g<c-x>' } },
 
   -- 补全
   { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp' },

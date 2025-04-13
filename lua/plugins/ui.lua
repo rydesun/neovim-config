@@ -48,7 +48,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'kevinhwang91/nvim-hlslens', config_file = true },
 
   -- 文件浏览器
-  { 'nvim-tree/nvim-tree.lua', opts_file = true },
+  { 'nvim-tree/nvim-tree.lua', opts_file = true,
+    cmd = { 'NvimTreeOpen', 'NvimTreeFindFile', 'NvimTreeFindFileToggle' } },
 
   -- 编辑目录
   { 'stevearc/oil.nvim', lazy = false, opts_file = true },
