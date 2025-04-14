@@ -98,6 +98,7 @@ vim.diagnostic.config {
   -- 不在侧边栏显示符号
   signs = false,
   virtual_text = { prefix = '🞬' },
+  jump = { float = true },
 }
 -- }}}
 

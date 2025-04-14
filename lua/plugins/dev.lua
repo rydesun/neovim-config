@@ -3,7 +3,7 @@ if not vim.g.env_dev then return {} end
 
 local cond = vim.g.plug_dev
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
-  -- {{{ 本地开发 (LSP+DAP)
+  -- {{{ LSP+DAP
   -- 自动集成Mason安装的LSP
   { 'williamboman/mason-lspconfig.nvim', lazy = false,
     dependencies = {
@@ -60,7 +60,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     } },
   -- }}}
 
-  -- {{{ 本地开发 (tree-sitter)
+  -- {{{ tree-sitter
   { 'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
@@ -93,7 +93,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'oskarrrrrrr/symbols.nvim', config_file = true },
   -- }}}
 
-  -- {{{ 本地开发 (特定语言)
+  -- {{{ 特定语言
   -- 预览Markdown
   { 'iamcco/markdown-preview.nvim',
     ft = 'markdown',
@@ -115,14 +115,27 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- REST
   { 'mistweaverco/kulala.nvim',
     ft = { 'http', 'rest' },
-    keys = '<leader>R',
+    keys = { { '<leader>R', mode = { 'n', 'v' } } },
     opts = { global_keymaps = true },
   },
   -- }}}
 
-  -- {{{ 本地开发 (其他)
+  -- {{{ Snippets
+  -- snippets引擎
+  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', version = 'v2.*' },
+
+  -- 编辑snippets
+  { 'chrisgrieser/nvim-scissors',
+    cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' } },
+
+  -- 文档注释
   { 'danymat/neogen', opts = { snippet_engine = 'luasnip' } },
 
+  -- emmet
+  { 'mattn/emmet-vim', keys = { { '<c-y>', mode = { 'n', 'v', 'i' } } } },
+  -- }}}
+
+  -- {{{ 其他
   -- 测试
   { 'vim-test/vim-test', init_file = true },
 

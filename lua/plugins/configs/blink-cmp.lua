@@ -16,11 +16,13 @@ opts.appearance = { kind_icons = require 'libs.style'.symbols() }
 
 opts.completion.accept = { auto_brackets = { enabled = false } }
 
+-- 使用luasnip API跳转LSP提供的snippets
 opts.snippets = { preset = 'luasnip' }
 opts.sources = {
-  default = { 'lsp', 'buffer', 'snippets', 'path' },
+  -- 不要显示luasnip提供的snippets，只用luasnip API展开
+  default = { 'lsp', 'buffer', 'path' },
   per_filetype = {
-    lua = { 'lazydev', 'lsp', 'buffer', 'snippets', 'path' },
+    lua = { 'lazydev', 'lsp', 'buffer', 'path' },
   },
 }
 opts.sources.providers = {
@@ -40,11 +42,6 @@ opts.sources.providers = {
     transform_items = function(_, items)
       for _, item in ipairs(items) do item.kind_icon = 'rg' end
       return items
-    end,
-  },
-  snippets = {
-    should_show_items = function(ctx)
-      return ctx.trigger.initial_kind ~= 'trigger_character'
     end,
   },
   buffer = {
@@ -76,7 +73,8 @@ opts.sources.providers = {
 }
 
 opts.keymap = {
-  ['<C-e>'] = {},
+  ['<C-e>'] = {}, -- 留给<End>
+  ['<C-y>'] = {}, -- 留给emmet
   ['<Tab>'] = {},
   ['<S-Tab>'] = {},
   ['<C-l>'] = { 'show', 'select_and_accept', 'fallback' },

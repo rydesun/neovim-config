@@ -46,19 +46,8 @@ nn  svk <Cmd>lua Snacks.picker.grep { dirs={
         \ vim.fn.stdpath'config' .. '/plugin/keymaps.vim' }}<CR>
 
 " 跳转
-nn  [d  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1, float=true}<CR>
-nn  ]d  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1, float=true}<CR>
-nn  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1, float=true,
-        \ severity=vim.diagnostic.severity.ERROR}<CR>
-nn  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1, float=true,
-        \ severity=vim.diagnostic.severity.ERROR}<CR>
-
-" 特殊种类的补全
-im  <C-x><C-i>  <Cmd>lua Snacks.picker.icons()<CR>
-im  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
-im  <C-x><C-s>  <Cmd>lua require'blink.cmp'.show{providers={'snippets'}}<CR>
-im  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
-im  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
+nn  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
+nn  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', -- {{{ 额外关闭通知浮窗
@@ -92,8 +81,8 @@ no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
 " nvim-treesitter-textobjects提供 [[ ]] [m ]m
 " vim-unimpaired提供更多映射
-nn  ]w  <Cmd>NextTrailingWhitespace<CR>
-nn  [w  <Cmd>PrevTrailingWhitespace<CR>
+nn  ]R  <Cmd>lua require'kulala.ui'.show_next()<CR>
+nn  [R  <Cmd>lua require'kulala.ui'.show_previous()<CR>
 nn  [om <Cmd>set colorcolumn=80<CR>
 nn  ]om <Cmd>set colorcolumn=<CR>
 nn  [os <Cmd>StatusColumnSignsInc<CR>
@@ -108,14 +97,28 @@ nn  [oL <Cmd>CodelensEnable<CR>
 nn  ]oL <Cmd>CodelensDisable<CR>
 
 " Ctrl组：前后跳转
-ino <C-j>   <Cmd>lua require'luasnip'.jump(1)<CR>
-ino <C-k>   <Cmd>lua require'luasnip'.jump(-1)<CR>
-snor<C-j>   <cmd>lua require'luasnip'.jump(1)<Cr>
-snor<C-k>   <cmd>lua require'luasnip'.jump(-1)<Cr>
+" emmet占用<C-y>
+" 另见blink.cmp
 nn  <C-j>   <Cmd>Gitsigns nav_hunk next<CR>
 nn  <C-k>   <Cmd>Gitsigns nav_hunk prev<CR>
 nn  <C-S-j> <Cmd>Gitsigns nav_hunk next target=staged<CR>
 nn  <C-S-k> <Cmd>Gitsigns nav_hunk prev target=staged<CR>
+ino <C-j>   <Cmd>lua require'luasnip'.jump(1)<CR>
+ino <C-k>   <Cmd>lua require'luasnip'.jump(-1)<CR>
+snor<C-j>   <cmd>lua require'luasnip'.jump(1)<Cr>
+snor<C-k>   <cmd>lua require'luasnip'.jump(-1)<Cr>
+snor<C-l>   <Esc>`>a
+ino <C-n>   <Plug>luasnip-next-choice
+ino <C-p>   <Plug>luasnip-prev-choice
+
+" Ctrl-x组：特殊种类的补全
+im  <C-x><C-j>  <Cmd>lua require'luasnip'.expand()<CR>
+nn  <C-x><C-j>  <Cmd>ScissorsEditSnippet<CR>
+xn  <C-x><C-j>  <Cmd>ScissorsAddNewSnippet<CR>
+im  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
+im  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
+im  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
+im  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
 
 " Ctrl+Alt组：语法节点跳转，修改节点
 no  <C-A-j> <Cmd>Treewalker Down<CR>
@@ -281,9 +284,7 @@ nn  <leader>dL  <Cmd>lua require'dap'.
                 \ set_breakpoint(nil, nil, vim.fn.input'Log: ')<CR>
 nn  <leader>de  <Cmd>DapEval<CR>
 nn  <leader>dr  <Cmd>DapToggleRepl<CR>
-nn  <leader>du  <Cmd>DapViewToggle<CR>
-nn  <leader>dv  <Cmd>lua require'dap.ui.widgets'.
-                \ centered_float(require'dap.ui.widgets'.scopes)<CR>
+nn  <leader>dv  <Cmd>DapViewToggle<CR>
 function! RustDapKeymap() abort
     nn  <buffer> <leader>dd  <Cmd>RustLsp debug<CR>
 endfunction

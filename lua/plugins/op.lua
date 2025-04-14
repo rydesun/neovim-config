@@ -34,14 +34,16 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
 
   -- 切换单词
   { 'monaqa/dial.nvim', config_file = true,
-    keys = { '<c-a>', '<c-x>', 'g<c-a>', 'g<c-x>' } },
+    keys = {
+      { '<c-a>', mode = { 'n', 'v' } },
+      { '<c-x>', mode = { 'n', 'v' } },
+      { 'g<c-a>', mode = { 'n', 'v' } },
+      { 'g<c-x>', mode = { 'n', 'v' } },
+    } },
 
   -- 补全
   { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp' },
   { 'mikavilpas/blink-ripgrep.nvim', lazy = true },
-
-  -- snippets
-  { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', version = 'v2.*' },
 
   -- 输入闭合符号
   { 'altermo/ultimate-autopair.nvim', branch = 'v0.6', config = true },

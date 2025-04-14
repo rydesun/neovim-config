@@ -1,8 +1,7 @@
-require 'luasnip.loaders.from_snipmate'.lazy_load {
-  paths = { '~/.config/snippets' }
-}
+require 'luasnip.loaders.from_vscode'.lazy_load { paths = { './snippets' } }
 
 return {
-  -- 退出后允许回跳
-  history = true,
+  keep_roots = true,
+  link_roots = true,
+  link_children = true,
 }
