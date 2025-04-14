@@ -13,12 +13,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'ntpeters/vim-better-whitespace', lazy = false, init_file = true },
 
   -- 折叠
-  {
-    'kevinhwang91/nvim-ufo',
-    lazy = false,
-    opts_file = true,
-    dependencies = 'kevinhwang91/promise-async',
-  },
+  { 'kevinhwang91/nvim-ufo', opts_file = true, lazy = false,
+    dependencies = 'kevinhwang91/promise-async' },
+  { 'chrisgrieser/nvim-origami', opts = {
+    foldKeymaps = { hOnlyOpensOnFirstColumn = true } } },
 
   -- 选区diff
   { 'AndrewRadev/linediff.vim', config_file = true },
