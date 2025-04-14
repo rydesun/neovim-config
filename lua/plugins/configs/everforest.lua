@@ -113,4 +113,19 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'everforest', callback = custom_plugin,
 })
 
+-- 带边框的窗口不要背景色
+vim.api.nvim_create_autocmd('WinNew', {
+  callback = function()
+    local win = vim.api.nvim_get_current_win()
+    local cfg = vim.api.nvim_win_get_config(win)
+    if cfg.relative == '' or cfg.border == '' or not cfg.border
+        or vim.wo.winhighlight:match 'NormalFloat' then
+      return
+    end
+    vim.wo.winhighlight =
+        vim.wo.winhighlight == '' and 'NormalFloat:Normal' or
+        vim.wo.winhighlight .. ',NormalFloat:Normal'
+  end,
+})
+
 vim.cmd 'colorscheme everforest'
