@@ -125,7 +125,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'L3MON4D3/LuaSnip', opts_file = 'luasnip', version = 'v2.*' },
 
   -- 编辑snippets
-  { 'chrisgrieser/nvim-scissors',
+  { 'chrisgrieser/nvim-scissors', opts = { jsonFormatter = 'jq' },
     cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' } },
 
   -- 文档注释
