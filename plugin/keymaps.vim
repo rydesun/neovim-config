@@ -348,6 +348,18 @@ function! MarkdownKeymap() abort
     nn <buffer> <LocalLeader>g <Cmd>ObsidianFollowLink<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
+
+" package.json
+function! PackageJsonKeymap() abort
+    nn <buffer> <LocalLeader>s <Cmd>lua require'package-info'.show{force=true}<CR>
+    nn <buffer> <LocalLeader>c <Cmd>lua require'package-info'.hide()<CR>
+    nn <buffer> <LocalLeader>t <Cmd>lua require'package-info'.toggle()<CR>
+    nn <buffer> <LocalLeader>u <Cmd>lua require'package-info'.update()<CR>
+    nn <buffer> <LocalLeader>d <Cmd>lua require'package-info'.delete()<CR>
+    nn <buffer> <LocalLeader>i <Cmd>lua require'package-info'.install()<CR>
+    nn <buffer> <LocalLeader>p <Cmd>lua require'package-info'.change_version()<CR>
+endfunction
+autocmd BufRead package.json call PackageJsonKeymap()
 " }}}
 
 " {{{ 按键 (文本对象)

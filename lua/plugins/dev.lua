@@ -121,6 +121,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     keys = { { '<leader>R', mode = { 'n', 'v' } } },
     opts = { global_keymaps = true },
   },
+
+  -- package.json
+  { 'vuki656/package-info.nvim', config = true,
+    event = 'BufRead package.json',
+    dependencies = 'MunifTanjim/nui.nvim' },
   -- }}}
 
   -- {{{ Snippets
