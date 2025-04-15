@@ -37,7 +37,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'numToStr/Comment.nvim', opts_file = true },
 
   -- 表格对齐
-  { 'echasnovski/mini.align', config = true },
+  { 'echasnovski/mini.align', config = true,
+    keys = {
+      { 'ga', mode = { 'n', 'v' } },
+      { 'gA', mode = { 'n', 'v' } },
+    } },
 
   -- 切换单词
   { 'monaqa/dial.nvim', config_file = true,

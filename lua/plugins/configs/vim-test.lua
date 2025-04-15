@@ -1,6 +1,6 @@
 local function asyncrun_reuse(cmd)
   local pos = vim.g.asynctasks_term_pos
-  if pos == '' then pos = 'TAB' end
+  if pos == '' or not pos then pos = 'TAB' end
   vim.cmd.AsyncRun(
     '-mode=term -pos=' .. pos .. ' -focus=0 -listed=0 -reuse ' .. cmd)
 end

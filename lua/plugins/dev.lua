@@ -64,7 +64,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   },
 
   -- 自动输入闭合tag
-  { 'windwp/nvim-ts-autotag', lazy = false, config = true },
+  { 'windwp/nvim-ts-autotag', config = true },
 
   -- 显示上下文
   { 'nvim-treesitter/nvim-treesitter-context', opts_file = true },
@@ -89,7 +89,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'cshuaimin/ssr.nvim', config = true, lazy = true },
 
   -- 大纲视图
-  { 'oskarrrrrrr/symbols.nvim', config_file = true },
+  { 'oskarrrrrrr/symbols.nvim', config_file = true, cmd = 'SymbolsToggle' },
   -- }}}
 
   -- {{{ 特定语言

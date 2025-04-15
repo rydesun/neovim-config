@@ -5,10 +5,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     lazy = false, priority = 1001 },
 
   -- 异步执行
-  { 'skywind3000/asyncrun.vim' },
+  { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' },
 
   -- 构建
-  { 'skywind3000/asynctasks.vim', config_file = true },
+  { 'skywind3000/asynctasks.vim', config_file = true, cmd = 'AsyncTask' },
 
   -- 粘贴图片
   { 'HakonHarnes/img-clip.nvim', config = true, cmd = 'PasteImage' },
@@ -24,7 +24,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' } },
 
   -- 搜索替换
-  { 'MagicDuck/grug-far.nvim', config = true },
+  { 'MagicDuck/grug-far.nvim', config = true,
+    cmd = { 'GrugFar', 'GrugFarWithin' } },
 
   -- 切换输入法
   { 'lilydjwg/fcitx.vim',
