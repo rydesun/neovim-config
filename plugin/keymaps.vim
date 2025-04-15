@@ -226,6 +226,9 @@ nn  <leader>K   <Cmd>normal! K<CR>
 nn  <leader>f   <Cmd>LspFormat<CR>
 xn  <leader>f   <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 nn  <leader>F   <Cmd>LspFixAll<CR>
+
+" SSR
+no  <leader>S   <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)

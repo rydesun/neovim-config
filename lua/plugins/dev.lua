@@ -89,6 +89,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'Wansmer/treesj', config = true, lazy = true,
     opts = { use_default_keymaps = false } },
 
+  -- 根据语法节点替换
+  { 'cshuaimin/ssr.nvim', config = true, lazy = true },
+
   -- 大纲视图
   { 'oskarrrrrrr/symbols.nvim', config_file = true },
   -- }}}
