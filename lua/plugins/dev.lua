@@ -38,17 +38,13 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'b0o/schemastore.nvim', lazy = true },
 
   -- 自动集成Mason安装的DAP
-  { 'jay-babu/mason-nvim-dap.nvim',
-    opts = { handlers = {} },
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
+  { 'mfussenegger/nvim-dap', lazy = true, cmd = 'DapNew',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      { 'mfussenegger/nvim-dap', lazy = true,
-        dependencies = {
-          { 'mfussenegger/nvim-dap-python' },
-          { 'igorlfs/nvim-dap-view', config = true },
-          { 'theHamsta/nvim-dap-virtual-text', config = true },
-        } },
+      { 'jay-babu/mason-nvim-dap.nvim', opts = { handlers = {} },
+        dependencies = { 'williamboman/mason.nvim', config = true } },
+      { 'mfussenegger/nvim-dap-python', lazy = true },
+      { 'igorlfs/nvim-dap-view', config = true },
+      { 'theHamsta/nvim-dap-virtual-text', config = true },
     } },
 
   -- 集成非LSP工具。用none-ls的配置 + mason安装的工具

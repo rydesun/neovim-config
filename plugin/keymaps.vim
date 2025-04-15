@@ -282,12 +282,12 @@ nn  <leader>ta  <Cmd>lua Snacks.picker.alternative_file{affix='test'}<CR>
 
 " d组：调试
 nn  <leader>dd  <Cmd>DapNew<CR>
-nn  <leader>dc  <Cmd>DapContinue<CR>
-nn  <leader>di  <Cmd>DapStepInto<CR>
-nn  <leader>do  <Cmd>DapStepOut<CR>
-nn  <leader>dn  <Cmd>DapStepOver<CR>
-nn  <leader>db  <Cmd>DapToggleBreakpoint<CR>
-nn  <leader>dx  <Cmd>DapClearBreakpoints<CR>
+nn  <leader>dc  <Cmd>lua require'dap'.continue()<CR>
+nn  <leader>di  <Cmd>lua require'dap'.step_into()<CR>
+nn  <leader>do  <Cmd>lua require'dap'.step_out()<CR>
+nn  <leader>dn  <Cmd>lua require'dap'.step_over()<CR>
+nn  <leader>db  <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nn  <leader>dx  <Cmd>lua require'dap'.clear_breakpoints()<CR>
 nn  <leader>dl  <Cmd>lua require'dap'.run_last()<CR>
 nn  <leader>dL  <Cmd>lua require'dap'.
                 \ set_breakpoint(nil, nil, vim.fn.input'Log: ')<CR>
