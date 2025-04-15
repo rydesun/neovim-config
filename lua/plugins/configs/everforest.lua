@@ -98,6 +98,9 @@ local function custom_plugin()
   vim.cmd 'hi! link SniprunFloatingWinOk HintFloat'
   vim.cmd 'hi! link SniprunFloatingWinErr ErrorFloat'
 
+  -- substitute.nvim
+  vim.cmd 'hi! link SubstituteExchange Substitute'
+
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
 

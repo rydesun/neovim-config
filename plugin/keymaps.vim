@@ -64,6 +64,11 @@ EOF
 " }}}
 
 " {{{ 按键 (新增行为)
+" c组：交换
+nn  cx  <Cmd>lua require'substitute.exchange'.operator()<CR>
+xn  cx  <Cmd>lua require'substitute.exchange'.visual()<CR>
+nn  cxx <Cmd>lua require'substitute.exchange'.line()<CR>
+
 " g组：注释、按当前词跳转
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
 " mini.align提供ga gA，mini.ai提供g[ g]
