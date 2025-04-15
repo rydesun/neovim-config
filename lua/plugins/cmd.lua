@@ -1,5 +1,9 @@
 local cond = vim.g.plug_cmd
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
+  -- 终端打开文件在当前nvim实例打开
+  { 'willothy/flatten.nvim', opts = { window = { open = 'tab' } },
+    lazy = false, priority = 1001 },
+
   -- 异步执行
   { 'skywind3000/asyncrun.vim' },
 
