@@ -147,4 +147,5 @@ return {
   input = {},
   picker = picker,
   scope = {},
+  zen = { toggles = { dim = false } },
 }

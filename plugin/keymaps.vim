@@ -124,6 +124,9 @@ im  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
 im  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
 im  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
 
+" Ctrl-w组：窗口
+nn  <C-w><Enter>  <Cmd>lua Snacks.zen.zen()<CR>
+
 " Ctrl+Alt组：语法节点跳转，修改节点
 no  <C-A-j> <Cmd>Treewalker Down<CR>
 no  <C-A-k> <Cmd>Treewalker Up<CR>
@@ -140,7 +143,6 @@ nn  <A-m>   <Cmd>IMoveNode<CR>
 nn  <A-o>   <Cmd>lua Symbols.sidebar.symbols.goto_symbol_under_cursor(0)<CR>
 ino <A-i>   <C-k>
 nn  <A-w>   <C-w>c
-nn  <A-S-w> <Cmd>only<CR>
 nn  <A-j>   <Cmd>wincmd j<CR>
 nn  <A-k>   <Cmd>wincmd k<CR>
 nn  <A-h>   <Cmd>wincmd h<CR>
@@ -245,7 +247,7 @@ nn  <leader>hU  <Cmd>Gitsigns undo_stage_hunk<CR>
 nn  <leader>hR  <Cmd>Gitsigns reset_buffer<CR>
 nn  <leader>hi  <Cmd>Gitsigns preview_hunk<CR>
 nn  <leader>hb  <Cmd>lua require'gitsigns'.blame_line{full=true}<CR>
-nn  <leader>hB  <Cmd>Gitsigns toggle_current_line_blame<CR>
+nn  <leader>hB  <Cmd>Gitsigns blame<CR>
 nn  <leader>hd  <Cmd>Gitsigns toggle_deleted<CR>
 nn  <leader>hw  <Cmd>Gitsigns toggle_word_diff<CR>
 nn  <leader>hq  <Cmd>Gitsigns setqflist all<CR>
@@ -256,7 +258,7 @@ Xns <leader>gl  :DiffviewFileHistory<CR>
 nn  <leader>gl  <Cmd>lua Snacks.picker.git_log_file()<CR>
 nn  <leader>gL  <Cmd>lua Snacks.picker.git_log()<CR>
 nn  <leader>gb  <Cmd>lua Snacks.picker.git_branches()<CR>
-nn  <leader>gB  <Cmd>lua Snacks.gitbrowse()<CR>
+no  <leader>gB  <Cmd>lua Snacks.gitbrowse()<CR>
 nn  <leader>gd  <Cmd>GitDiffCurrent<CR>
 nn  <leader>ga  <Cmd>GitDiffAll<CR>
 nn  <leader>gt  <Cmd>GitDiffStagedCurrent<CR>
