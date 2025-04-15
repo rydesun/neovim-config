@@ -10,6 +10,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 增强[
   { 'tpope/vim-unimpaired' },
 
+  -- 增强gu (gu -> gul, guu -> Vgul)
+  { 'johmsalas/text-case.nvim', opts = { prefix = 'gu' },
+    keys = { { 'gu', mode = { 'n', 'v' } } }, cmd = 'Subs' },
+
   -- 移动光标
   { 'ggandor/leap.nvim', opts_file = true },
   { 'ggandor/flit.nvim', opts_file = true, dependencies = 'leap.nvim' },

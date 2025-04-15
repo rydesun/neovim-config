@@ -9,12 +9,14 @@ no  L  $
 " leap.nvim跳转
 map m  <Plug>(leap-anywhere)
 nn  M  m
+nn  `  '
+nn  '  `
 
 " 修改缩进后保持选中
 xn  <  <gv
 xn  >  >gv
 
-" 分页时按q直接退出
+" 作为pager时按q直接退出
 if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
 
 " s组：搜索/位置/文件跳转
@@ -39,6 +41,7 @@ nn  sq  <Cmd>lua Snacks.picker.diagnostics()<CR>
 nn  sy  <Cmd>YankyRingHistory<CR>
 " Vim
 nn  svm <Cmd>lua Snacks.picker.noice()<CR>
+nn  svM <Cmd>NoiceAll<CR>
 nn  svv <Cmd>lua Snacks.picker.help()<CR>
 nn  svh <Cmd>lua Snacks.picker.highlights()<CR>
 nn  svK <Cmd>lua Snacks.picker.keymaps()<CR>
@@ -50,16 +53,12 @@ nn  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
 nn  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
 
 lua << EOF
-vim.keymap.set('n', '<C-l>', -- {{{ 额外关闭通知浮窗
-function()
-  pcall(function()
-    require 'notify'.dismiss { silent = true }
-  end)
+vim.keymap.set('n', '<C-l>', function() -- {{{ 额外关闭通知浮窗
+  pcall(function() require 'notify'.dismiss { silent = true } end)
   vim.cmd.nohlsearch()
   vim.cmd.diffupdate()
-  vim.cmd.normal {
-    vim.api.nvim_replace_termcodes('<C-l>', true, true, true), bang = true
-  }
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(
+    '<C-l>', true, false, true), 'n', true)
 end) -- }}}
 EOF
 " }}}
