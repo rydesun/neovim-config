@@ -22,6 +22,7 @@ return {
     storage = 'sqlite',
     update_register_on_cycle = true,
   },
+  -- 在init.lua中已经设置
   highlight = { on_yank = false },
   system_clipboard = { sync_with_ring = false },
 }

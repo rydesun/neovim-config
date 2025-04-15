@@ -12,6 +12,12 @@ vim.g.everforest_background = 'hard'
 vim.g.everforest_disable_terminal_colors = 1
 vim.g.everforest_disable_italic_comment = 1
 
+local function new_hl()
+  -- 模拟highlight-undo.nvim
+  vim.api.nvim_set_hl(0, 'TextChanged', {
+    fg = '#dcd7ba', bg = '#2d4f67', default = true })
+end
+
 local function custom_basic()
   local palette, soft_palette = get_palette()
 
@@ -107,13 +113,19 @@ local function custom_plugin()
   -- vim-matchup
   vim.cmd 'hi! link MatchWord CurrentWord'
   vim.cmd 'hi! link MatchWordCur CurrentWord'
+
+  -- yanky.nvim
+  vim.cmd 'hi! link YankyPut TextChanged'
+end
+
+local function setup()
+  new_hl()
+  custom_basic()
+  custom_plugin()
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = 'everforest', callback = custom_basic,
-})
-vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = 'everforest', callback = custom_plugin,
+  pattern = 'everforest', callback = setup,
 })
 
 -- 带边框的窗口不要背景色

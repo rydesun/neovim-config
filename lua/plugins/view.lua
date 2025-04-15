@@ -1,5 +1,8 @@
 local cond = vim.g.plug_view
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
+  -- 高亮变化的文本
+  { 'rachartier/tiny-glimmer.nvim', opts_file = true },
+
   -- 平滑滚动
   { 'karb94/neoscroll.nvim', opts_file = true },
 
