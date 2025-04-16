@@ -227,6 +227,10 @@ nn  <leader>f   <Cmd>LspFormat<CR>
 xn  <leader>f   <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 nn  <leader>F   <Cmd>LspFixAll<CR>
 
+" 查询
+nn  <leader>k   <Cmd>lua require 'hover'.hover()<CR>
+nn  <leader>K   <Cmd>lua require 'hover'.hover_select()<CR>
+
 " SSR
 no  <leader>S   <Cmd>lua require'ssr'.open()<CR>
 " }}}

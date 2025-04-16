@@ -60,4 +60,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
 
   -- Session
   { 'jedrzejboczar/possession.nvim', opts_file = true },
+
+  -- 查询
+  { 'lewis6991/hover.nvim', opts_file = true, lazy = true },
 } }
