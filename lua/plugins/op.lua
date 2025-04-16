@@ -12,6 +12,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     indent  = { suffix = '' }, -- snacks.scope
     window  = { suffix = '' }, -- document_highlight
     oldfile = { suffix = '' }, -- toggle options
+    undo    = { suffix = '' }, -- vim-repeat
   } },
 
   -- 增强gu (gu -> gul, guu -> Vgul)
