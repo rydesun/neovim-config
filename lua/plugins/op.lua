@@ -18,8 +18,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'johmsalas/text-case.nvim', opts = { prefix = 'gu' },
     keys = { { 'gu', mode = { 'n', 'v' } } }, cmd = 'Subs' },
 
-  -- 交换
-  { 'gbprod/substitute.nvim', config = true },
+  -- 替换
+  { 'echasnovski/mini.operators', opts = {
+    evaluate = { prefix = 's=' }, exchange = { prefix = 'sx' },
+    sort = { prefix = 's<' },
+    multiply = { prefix = '' }, replace = { prefix = '' } } },
 
   -- 移动光标
   { 'ggandor/leap.nvim', opts_file = true },

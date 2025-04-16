@@ -92,6 +92,9 @@ local function custom_plugin()
   vim.cmd 'hi! link BlinkCmpKindText Yellow'
   vim.cmd 'hi! link BlinkCmpDocSeparator Blue'
 
+  -- mini.operators
+  vim.cmd 'hi! link MiniOperatorsExchangeFrom Substitute'
+
   -- nvim-treesitter
   hi('TSNote', palette.none, palette.none, 'bold,underline', palette.green)
   hi('TSWarning', palette.none, palette.none, 'bold,underline', palette.yellow)
@@ -103,9 +106,6 @@ local function custom_plugin()
   -- sniprun：修改默认配色
   vim.cmd 'hi! link SniprunFloatingWinOk HintFloat'
   vim.cmd 'hi! link SniprunFloatingWinErr ErrorFloat'
-
-  -- substitute.nvim
-  vim.cmd 'hi! link SubstituteExchange Substitute'
 
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)

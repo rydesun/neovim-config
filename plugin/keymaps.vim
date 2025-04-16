@@ -1,7 +1,7 @@
 command -nargs=+ Xns xnoremap <silent> <args>
 command -nargs=+ Nse nm <silent><expr> <args>
 
-" {{{ 按键 (覆盖默认行为)
+" {{{ 按键 (覆盖原始行为)
 no  ;  :
 no  H  ^
 no  L  $
@@ -21,6 +21,7 @@ if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
 
 " s组：搜索/位置/文件跳转
 " 另外有插件vim-sandwich占用sa、sd、sr
+" mini.operators占用sx、s=、s<
 nn  s   <NOP>
 nn  S   <Cmd>lua Snacks.picker()<CR>
 nn  sl  <Cmd>lua Snacks.picker.resume()<CR>
@@ -48,10 +49,6 @@ nn  svK <Cmd>lua Snacks.picker.keymaps()<CR>
 nn  svk <Cmd>lua Snacks.picker.grep { dirs={
         \ vim.fn.stdpath'config' .. '/plugin/keymaps.vim' }}<CR>
 
-" 跳转
-nn  [D  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
-nn  ]D  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
-
 lua << EOF
 vim.keymap.set('n', '<C-l>', function() -- {{{ 额外关闭通知浮窗
   pcall(function() require 'notify'.dismiss { silent = true } end)
@@ -64,11 +61,6 @@ EOF
 " }}}
 
 " {{{ 按键 (新增行为)
-" c组：交换
-nn  cx  <Cmd>lua require'substitute.exchange'.operator()<CR>
-xn  cx  <Cmd>lua require'substitute.exchange'.visual()<CR>
-nn  cxx <Cmd>lua require'substitute.exchange'.line()<CR>
-
 " g组：注释、按当前词跳转
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
 " mini.align提供ga gA，mini.ai提供g[ g]
@@ -85,10 +77,12 @@ no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
 " nvim-treesitter-textobjects提供 [[ ]] [m ]m
 " mini.bracketed提供更多映射
-nn  [w  <Cmd>lua vim.lsp.buf.document_highlight()<CR>
-nn  ]w  <Cmd>lua vim.lsp.buf.clear_references()<CR>
+nn  [e  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
+nn  ]e  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
 nn  ]R  <Cmd>lua require'kulala.ui'.show_next()<CR>
 nn  [R  <Cmd>lua require'kulala.ui'.show_previous()<CR>
+nn  [w  <Cmd>lua vim.lsp.buf.document_highlight()<CR>
+nn  ]w  <Cmd>lua vim.lsp.buf.clear_references()<CR>
 nn  [ob <Cmd>set background=light<CR>
 nn  ]ob <Cmd>set background=dark<CR>
 nn  [oc <Cmd>set colorcolumn=80<CR>
