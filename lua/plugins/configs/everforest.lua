@@ -95,6 +95,9 @@ local function custom_plugin()
   -- mini.operators
   vim.cmd 'hi! link MiniOperatorsExchangeFrom Substitute'
 
+  -- nvim-coverage
+  vim.cmd 'hi! link CoverageSummaryNormal Normal'
+
   -- nvim-treesitter
   hi('TSNote', palette.none, palette.none, 'bold,underline', palette.green)
   hi('TSWarning', palette.none, palette.none, 'bold,underline', palette.yellow)
