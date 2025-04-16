@@ -84,21 +84,27 @@ no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 " []组：前后跳转，切换选项
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
 " nvim-treesitter-textobjects提供 [[ ]] [m ]m
-" vim-unimpaired提供更多映射
+" mini.bracketed提供更多映射
+nn  [w  <Cmd>lua vim.lsp.buf.document_highlight()<CR>
+nn  ]w  <Cmd>lua vim.lsp.buf.clear_references()<CR>
 nn  ]R  <Cmd>lua require'kulala.ui'.show_next()<CR>
 nn  [R  <Cmd>lua require'kulala.ui'.show_previous()<CR>
-nn  [om <Cmd>set colorcolumn=80<CR>
-nn  ]om <Cmd>set colorcolumn=<CR>
-nn  [os <Cmd>StatusColumnSignsInc<CR>
-nn  ]os <Cmd>StatusColumnSignsReset<CR>
-nn  [oh <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
-nn  ]oh <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
-nn  [ow <Cmd>lua vim.lsp.buf.document_highlight()<CR>
-nn  ]ow <Cmd>lua vim.lsp.buf.clear_references()<CR>
+nn  [ob <Cmd>set background=light<CR>
+nn  ]ob <Cmd>set background=dark<CR>
+nn  [oc <Cmd>set colorcolumn=80<CR>
+nn  ]oc <Cmd>set colorcolumn=<CR>
 nn  [of <Cmd>FormatOnSaveEnable<CR>
 nn  ]of <Cmd>FormatOnSaveDisable<CR>
+nn  [oh <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
+nn  ]oh <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
+nn  [ol <Cmd>setlocal list<CR>
+nn  ]ol <Cmd>setlocal nolist<CR>
 nn  [oL <Cmd>CodelensEnable<CR>
 nn  ]oL <Cmd>CodelensDisable<CR>
+nn  [os <Cmd>StatusColumnSignsInc<CR>
+nn  ]os <Cmd>StatusColumnSignsReset<CR>
+nn  [ow <Cmd>setlocal wrap<CR>
+nn  ]ow <Cmd>setlocal nowrap<CR>
 
 " Ctrl组：前后跳转
 " emmet占用<C-y>

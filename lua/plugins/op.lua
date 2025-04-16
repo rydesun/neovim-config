@@ -8,7 +8,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'andymass/vim-matchup', lazy = false, config_file = true },
 
   -- 增强[
-  { 'tpope/vim-unimpaired' },
+  { 'echasnovski/mini.bracketed', opts = {
+    indent  = { suffix = '' }, -- snacks.scope
+    window  = { suffix = '' }, -- document_highlight
+    oldfile = { suffix = '' }, -- toggle options
+  } },
 
   -- 增强gu (gu -> gul, guu -> Vgul)
   { 'johmsalas/text-case.nvim', opts = { prefix = 'gu' },
