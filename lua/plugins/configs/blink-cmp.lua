@@ -23,6 +23,7 @@ opts.sources = {
   default = { 'lsp', 'buffer', 'path' },
   per_filetype = {
     lua = { 'lazydev', 'lsp', 'buffer', 'path' },
+    ['rip-substitute'] = {}, -- 应该手动调用show函数
   },
 }
 opts.sources.providers = {

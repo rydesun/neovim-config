@@ -236,7 +236,11 @@ no  <leader>S   <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)
-" c组：复制
+" c组：替换、复制
+nn  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
+xn  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
+nn  <leader>cS  <Cmd>GrugFar<CR>
+Xns <leader>cS  :GrugFar<CR>
 nn  <leader>cN  <Cmd>echo     expand('%:t')<CR>
 nn  <leader>cn  <Cmd>let @+ = expand('%:t')<CR>
 nn  <leader>cF  <Cmd>echo     expand('%:p:~')<CR>

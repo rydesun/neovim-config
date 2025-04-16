@@ -27,6 +27,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 搜索替换
   { 'MagicDuck/grug-far.nvim', config = true,
     cmd = { 'GrugFar', 'GrugFarWithin' } },
+  { 'chrisgrieser/nvim-rip-substitute', opts_file = true,
+    lazy = true, cmd = 'RipSubstitute' },
 
   -- 切换输入法
   { 'lilydjwg/fcitx.vim',
