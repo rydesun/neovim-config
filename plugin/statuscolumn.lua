@@ -13,9 +13,12 @@ local M = {
 
 vim.api.nvim_create_user_command('StatusColumnSignsInc', function()
   M.signcolumn_number_auto = M.signcolumn_number_auto + 1
+  vim.cmd 'redraw!'
 end, {})
 vim.api.nvim_create_user_command('StatusColumnSignsReset', function()
   M.signcolumn_number_auto = 1
+  -- HACK: redraw无效
+  vim.o.statuscolumn = '%{%v:lua.StatusColumn()%}'
 end, {})
 
 vim.o.statuscolumn = '%{%v:lua.StatusColumn()%}'
