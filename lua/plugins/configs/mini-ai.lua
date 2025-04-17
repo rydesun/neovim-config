@@ -22,6 +22,7 @@ return {
     f = spec_treesitter { a = '@call.outer', i = '@call.inner' },
     r = spec_treesitter { a = '@return.outer', i = '@return.inner' },
 
+    B = spec_treesitter { a = '@block.outer', i = '@block.inner' },
     C = spec_treesitter { a = '@class.outer', i = '@class.inner' },
     F = spec_treesitter { a = '@function.outer', i = '@function.inner' },
   },

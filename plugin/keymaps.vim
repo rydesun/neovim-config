@@ -104,6 +104,7 @@ nn  ]ow <Cmd>setlocal nowrap<CR>
 
 " Ctrl组：前后跳转
 " emmet占用<C-y>
+" nvim-recorder占用<C-q>
 " 另见blink.cmp
 nn  <C-j>   <Cmd>Gitsigns nav_hunk next<CR>
 nn  <C-k>   <Cmd>Gitsigns nav_hunk prev<CR>

@@ -37,6 +37,9 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
 
 local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   very_lazy = true, spec = {
+  -- 增强q
+  { 'chrisgrieser/nvim-recorder', config = true },
+
   -- 增强gu (gu -> gul, guu -> Vgul)
   { 'johmsalas/text-case.nvim', opts = { prefix = 'gu' },
     keys = { { 'gu', mode = { 'n', 'v' } } }, cmd = 'Subs' },
