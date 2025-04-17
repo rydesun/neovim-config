@@ -37,6 +37,7 @@ nn  so  <Cmd>lua Snacks.picker.smart()<CR>
 nn  st  <Cmd>lua Snacks.picker.tagstack()<CR>
 nn  sp  <Cmd>lua Snacks.picker.projects()<CR>
 nn  s/  <Cmd>lua Snacks.picker.lines()<CR>
+nn  s?  <Cmd>lua Snacks.picker.search_history()<CR>
 nn  s;  <Cmd>lua Snacks.picker.command_history()<CR>
 nn  sq  <Cmd>lua Snacks.picker.diagnostics()<CR>
 nn  sy  <Cmd>YankyRingHistory<CR>
@@ -225,17 +226,16 @@ nn  <leader>F   <Cmd>LspFixAll<CR>
 " 查询
 nn  <leader>k   <Cmd>lua require 'hover'.hover()<CR>
 nn  <leader>K   <Cmd>lua require 'hover'.hover_select()<CR>
-
-" SSR
-no  <leader>S   <Cmd>lua require'ssr'.open()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)
 " c组：替换、复制
-nn  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
-xn  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
-nn  <leader>cS  <Cmd>GrugFar<CR>
-Xns <leader>cS  :GrugFar<CR>
+no  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
+nn  <leader>cS  <Cmd>lua require'grug-far'.open{prefills={paths=vim.fn.expand'%'}}<CR>
+Xns <leader>cS  :GrugFarWithin<CR>
+nn  <leader>cg  <Cmd>GrugFar<CR>
+Xns <leader>cg  :GrugFar<CR>
+no  <leader>cr  <Cmd>lua require'ssr'.open()<CR>
 nn  <leader>cN  <Cmd>echo     expand('%:t')<CR>
 nn  <leader>cn  <Cmd>let @+ = expand('%:t')<CR>
 nn  <leader>cF  <Cmd>echo     expand('%:p:~')<CR>
