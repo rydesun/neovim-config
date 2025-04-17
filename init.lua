@@ -32,19 +32,19 @@ vim.g.env_console = vim.env.TERM == 'linux' and vim.fn.has 'gui_running' == 0
 vim.g.env_no_icon = vim.g.env_console
 
 -- 是否启用该类型的插件
--- 自身界面
+-- Bar、面板、视觉效果
 vim.g.plug_ui = true
--- 查看文本
-vim.g.plug_view = true
--- 操作文本
-vim.g.plug_op = true
--- 命令集成
+-- 改进文本操作方式
+vim.g.plug_op_motion = true
+vim.g.plug_op_edit = true
+-- 与外部命令和资源集成
 vim.g.plug_cmd = true
 -- 本地开发
 vim.g.plug_dev = vim.g.env_dev
 
 -- pager不需要启用这些插件
 if vim.g.pager then
+  vim.g.plug_op_edit = false
   vim.g.plug_cmd = false
   vim.g.plug_dev = false
 end

@@ -12,3 +12,6 @@ for _, key in pairs { 'n', 'N', '*', '#', 'g*', 'g#' } do
     if ok then hlslens.start() else vim.api.nvim_err_writeln(res) end
   end, { noremap = true, silent = true })
 end
+
+-- 关闭消息栏的搜索提示
+vim.opt.shortmess:append 'sS'
