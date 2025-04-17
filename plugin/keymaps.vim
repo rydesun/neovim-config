@@ -79,6 +79,8 @@ no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
 " mini.bracketed提供更多映射
 nn  [e  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
 nn  ]e  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
+nn  [r  <Cmd>MoltenPrev<CR>
+nn  ]r  <Cmd>MoltenNext<CR>
 nn  ]R  <Cmd>lua require'kulala.ui'.show_next()<CR>
 nn  [R  <Cmd>lua require'kulala.ui'.show_previous()<CR>
 nn  [w  <Cmd>lua vim.lsp.buf.document_highlight()<CR>
@@ -206,14 +208,6 @@ nn  <leader>9   <Cmd>AsyncTask file-test<CR>
 nn  <leader>0   <Cmd>AsyncTask repl<CR>
 nn  <leader>-   <Cmd>AsyncTaskPos<CR>
 
-no  <leader><Enter>    <Cmd>SnipRun<CR>
-no  <leader><S-Enter>  <Cmd>call <SID>SnipRunFile()<CR>
-function s:SnipRunFile() abort
-    let l:caret=winsaveview()
-    execute '%SnipRun'
-    call winrestview(l:caret)
-endfunction
-
 xn  <leader>y   "+y
 Nse <leader>p   empty(getreg('+')) ? '<Cmd>PasteImage<CR>' : '"+p'
 nn  <leader>P   "+P
@@ -287,6 +281,19 @@ nn  <leader>tf  <Cmd>TestFile<CR>
 nn  <leader>tl  <Cmd>TestLast<CR>
 nn  <leader>tv  <Cmd>TestVisit<CR>
 nn  <leader>ta  <Cmd>lua Snacks.picker.alternative_file{affix='test'}<CR>
+
+" r组：运行
+nn  <leader>rO  <Cmd>lua require'otter'.activate()<CR>
+Xns <leader>r   :<C-u>MoltenEvaluateVisual<CR>
+nn  <leader>rr  <Cmd>MoltenReevaluateCell<CR>
+nn  <leader>rl  <Cmd>MoltenEvaluateLine<CR>
+nn  <leader>ro  <Cmd>noautocmd MoltenEnterOutput<CR>
+nn  <leader>rc  <Cmd>MoltenHideOutput<CR>
+nn  <leader>rC  <Cmd>MoltenDelete<CR>
+nn  <leader>rS  <Cmd>MoltenSave<CR>
+nn  <leader>rL  <Cmd>MoltenLoad<CR>
+nn  <leader>rE  <Cmd>MoltenExportOutput<CR>
+nn  <leader>rI  <Cmd>MoltenImportOutput<CR>
 
 " d组：调试
 nn  <leader>dd  <Cmd>DapNew<CR>

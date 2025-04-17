@@ -149,9 +149,13 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- 调试打印
   { 'chrisgrieser/nvim-chainsaw', config = true },
 
-  -- Code Runner
-  { 'michaelb/sniprun', opts_file = true, build = 'sh install.sh',
-    cmd = 'SnipRun' },
+  -- Jupyter
+  { 'benlubas/molten-nvim', init_file = true,
+    version = '^1.0.0', build = ':UpdateRemotePlugins',
+    enabled = vim.fn.executable 'jupyter' > 0 },
+
+  -- 代码块加载LSP
+  { 'jmbuhr/otter.nvim', config = true, lazy = true },
 
   -- Code action diff
   { 'aznhe21/actions-preview.nvim', opts_file = true },

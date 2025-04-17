@@ -44,7 +44,7 @@ return {
     lualine_a = { components.git_branch },
     lualine_b = { components.cwd },
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = { require 'plugins.configs.lualine.components.molten' },
     lualine_y = {
       {
         function() return require 'noice'.api.status.command.get() end,

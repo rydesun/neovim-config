@@ -92,6 +92,9 @@ local function custom_plugin()
   vim.cmd 'hi! link BlinkCmpKindText Yellow'
   vim.cmd 'hi! link BlinkCmpDocSeparator Blue'
 
+  -- molten
+  vim.cmd 'hi! link MoltenOutputWin Normal'
+
   -- mini.operators
   vim.cmd 'hi! link MiniOperatorsExchangeFrom Substitute'
 
@@ -105,10 +108,6 @@ local function custom_plugin()
 
   -- nvim-treesitter-context: 行号同色
   hi('TreesitterContextLineNumber', palette.bg5, palette.bg2)
-
-  -- sniprun：修改默认配色
-  vim.cmd 'hi! link SniprunFloatingWinOk HintFloat'
-  vim.cmd 'hi! link SniprunFloatingWinErr ErrorFloat'
 
   -- vim-better-whitespace
   hi('ExtraWhitespace', palette.bg4, palette.bg_red)
