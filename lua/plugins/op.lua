@@ -6,7 +6,10 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
     dependencies = 'kkharji/sqlite.lua' },
 
   -- 增强%
-  { 'andymass/vim-matchup', lazy = false, config_file = true },
+  { 'andymass/vim-matchup', lazy = false, config_file = true,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      opts = { matchup = { enable = true } } } },
 
   -- 增强[
   { 'echasnovski/mini.bracketed', opts = {
@@ -21,9 +24,15 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
   -- 增强f和t
   { 'ggandor/flit.nvim', opts_file = true, dependencies = 'leap.nvim' },
 
+  -- 移动至任意语法节点
+  { 'aaronik/treewalker.nvim', config = true },
+
   -- 文本对象
   { 'echasnovski/mini.ai', opts_file = 'mini-ai' },
   { 'chrisgrieser/nvim-various-textobjs', config = true },
+  -- mini.ai也可以使用来自此插件的queries
+  { 'nvim-treesitter/nvim-treesitter-textobjects',
+    main = 'nvim-treesitter.configs', opts_file = true },
 } }
 
 local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
@@ -47,6 +56,12 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   { 'chrisgrieser/nvim-rip-substitute', opts_file = true,
     lazy = true, cmd = 'RipSubstitute' },
 
+  -- 替换：匹配引用语法节点
+  { 'cshuaimin/ssr.nvim', config = true, lazy = true },
+
+  -- 替换：移动语法节点(标签选择)
+  { 'mizlan/iswap.nvim', config = true },
+
   -- 修改配对符号
   { 'machakann/vim-sandwich' },
 
@@ -64,6 +79,11 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
       { '<c-x>', mode = { 'n', 'v' } }, { 'g<c-x>', mode = { 'n', 'v' } },
     } },
 
+  -- 切换语法节点
+  { 'ckolkey/ts-node-action', config = true, lazy = true },
+  { 'Wansmer/treesj', config = true, lazy = true,
+    opts = { use_default_keymaps = false } },
+
   -- 检测缩进
   { 'nmac427/guess-indent.nvim', lazy = false, config = true },
 
@@ -76,7 +96,9 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   -- 输入模式：补全
   { 'saghen/blink.cmp', version = '1.*', opts_file = 'blink-cmp' },
   { 'mikavilpas/blink-ripgrep.nvim', lazy = true },
+  -- 输入模式：自动配对
   { 'altermo/ultimate-autopair.nvim', branch = 'v0.6', config = true },
+  { 'windwp/nvim-ts-autotag', config = true },
 } }
 
 return vim.list_extend(spec_op_motion, spec_op_edit)

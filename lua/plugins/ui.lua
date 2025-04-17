@@ -48,6 +48,9 @@ local spec_ui_panel = require 'libs.lazy-helper' { cond = cond,
   -- 文件浏览器：编辑目录
   { 'stevearc/oil.nvim', lazy = false, opts_file = true },
 
+  -- 代码大纲结构
+  { 'oskarrrrrrr/symbols.nvim', config_file = true, cmd = 'SymbolsToggle' },
+
   -- QuickFix
   { 'stevearc/quicker.nvim', ft = 'qf', opts_file = true },
   { 'kevinhwang91/nvim-bqf', ft = 'qf', opts_file = true },
@@ -76,6 +79,9 @@ local spec_ui_content = require 'libs.lazy-helper' { cond = cond,
 
   -- 缩进线
   { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts_file = true },
+
+  -- 顶部显示上下文
+  { 'nvim-treesitter/nvim-treesitter-context', opts_file = true },
 
   -- 搜索
   { 'kevinhwang91/nvim-hlslens', config_file = true },
