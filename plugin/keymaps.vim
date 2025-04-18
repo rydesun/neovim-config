@@ -123,8 +123,6 @@ ino <C-p>   <Plug>luasnip-prev-choice
 
 " Ctrl-x组：特殊种类的补全
 im  <C-x><C-j>  <Cmd>lua require'luasnip'.expand()<CR>
-nn  <C-x><C-j>  <Cmd>ScissorsEditSnippet<CR>
-xn  <C-x><C-j>  <Cmd>ScissorsAddNewSnippet<CR>
 im  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
 im  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
 im  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
@@ -196,6 +194,9 @@ let g:maplocalleader='\'
 
 nn  <leader>s   <Cmd>lua require'treesj'.split()<CR>
 nn  <leader>j   <Cmd>lua require'treesj'.join()<CR>
+
+xn  <leader>S   <Cmd>ScissorsAddNewSnippet<CR>
+nn  <leader>S   <Cmd>ScissorsEditSnippet<CR>
 
 " 数字组：编译运行
 nn  <leader>1   <Cmd>AsyncTask cwd-run<CR>
