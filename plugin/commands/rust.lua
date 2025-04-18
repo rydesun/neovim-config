@@ -34,6 +34,7 @@ local function open_scratch(dir)
     cmd = vim.o.columns < 140 and 'split' or 'vsplit'
   end
   vim.cmd { cmd = cmd, args = { file } }
+  vim.g.asynctasks_term_pos = 'bottom'
 end
 
 vim.api.nvim_create_user_command(

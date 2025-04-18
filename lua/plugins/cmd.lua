@@ -8,7 +8,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' },
 
   -- 构建
-  { 'skywind3000/asynctasks.vim', config_file = true, cmd = 'AsyncTask' },
+  { 'skywind3000/asynctasks.vim', init_file = true, cmd = 'AsyncTask' },
 
   -- 粘贴图片
   { 'HakonHarnes/img-clip.nvim', config = true, cmd = 'PasteImage' },
