@@ -94,6 +94,8 @@ nn  [of <Cmd>FormatOnSaveEnable<CR>
 nn  ]of <Cmd>FormatOnSaveDisable<CR>
 nn  [oh <Cmd>lua vim.lsp.inlay_hint.enable(true)<CR>
 nn  ]oh <Cmd>lua vim.lsp.inlay_hint.enable(false)<CR>
+nn  [oH <Cmd>HexDump<CR>
+nn  ]oH <Cmd>HexAssemble<CR>
 nn  [ol <Cmd>setlocal list<CR>
 nn  ]ol <Cmd>setlocal nolist<CR>
 nn  [oL <Cmd>CodelensEnable<CR>

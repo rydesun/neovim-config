@@ -93,7 +93,8 @@ local spec_ui_content = require 'libs.lazy-helper' { cond = cond,
     foldKeymaps = { hOnlyOpensOnFirstColumn = true } } },
 
   -- HexEditor
-  { 'fidian/hexmode', lazy = false, enabled = vim.fn.executable 'xxd' > 0 },
+  { 'RaafatTurki/hex.nvim', config = true, lazy = false,
+    enabled = vim.fn.executable 'xxd' > 0 },
 
   -- 预览Markdown
   { 'OXY2DEV/markview.nvim', config = true, ft = 'markdown' },

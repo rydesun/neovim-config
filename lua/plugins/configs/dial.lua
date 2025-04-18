@@ -75,3 +75,15 @@ require 'dial.config'.augends:register_group {
     }, word = false },
   },
 }
+
+require 'dial.config'.augends:on_filetype {
+  xxd = {
+    augend.user.new {
+      find = require 'dial.augend.common'.find_pattern '%x%x',
+      add = function(text, addend)
+        local n = tonumber(text, 16) + addend
+        text = string.format('%x', n):upper()
+        return { text = text }
+      end },
+  },
+}
