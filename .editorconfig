@@ -11,3 +11,7 @@ align_array_table = false
 [*.vim]
 indent_style = space
 indent_size = 4
+
+[*.scm]
+indent_style = space
+indent_size = 2

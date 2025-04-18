@@ -69,12 +69,6 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- LaTex
   { 'lervag/vimtex', ft = 'tex', enabled = vim.fn.executable 'latex' > 0 },
 
-  -- Hugo
-  { 'phelipetls/vim-hugo',
-    enabled = vim.fn.executable 'hugo' > 0,
-    lazy = false,
-  },
-
   -- REST
   { 'mistweaverco/kulala.nvim',
     ft = { 'http', 'rest' },

@@ -165,6 +165,10 @@ require 'rooter'.setup {
     'src', 'etc' },
 }
 
+-- 检测gotmpl文件类型
+-- TS需要安装gotmpl和html
+vim.cmd.packadd 'gotmpl'
+
 -- 其他小工具
 vim.cmd 'packadd utils'
 require 'utils'.setup()
