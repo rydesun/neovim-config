@@ -12,15 +12,15 @@ vim.g.everforest_background = 'hard'
 vim.g.everforest_disable_terminal_colors = 1
 vim.g.everforest_disable_italic_comment = 1
 
-local function new_hl()
+local function new_hl(palette)
   -- 模拟highlight-undo.nvim
   vim.api.nvim_set_hl(0, 'TextChanged', {
     fg = '#dcd7ba', bg = '#2d4f67', default = true })
+
+  hi('FoldSign', palette.orange, palette.bg_dim)
 end
 
-local function custom_basic()
-  local palette, soft_palette = get_palette()
-
+local function custom_basic(palette, soft_palette)
   -- lualine加载前的临时配色，需要与lualine_c保持一致
   hi('statusline', palette.grey1, palette.bg1)
   hi('WinBar', palette.grey1, palette.bg1)
@@ -29,7 +29,7 @@ local function custom_basic()
   hi('ErrorMsg', palette.red, palette.none, 'bold')
 
   -- 折叠行采用深色
-  hi('Folded', palette.orange, palette.bg_dim)
+  hi('Folded', palette.grey1, palette.bg_dim)
 
   -- 特殊的选中行改为更明显的绿色背景
   hi('CursorLine', palette.none, palette.bg_green)
@@ -70,9 +70,7 @@ local function custom_basic()
     'undercurl', soft_palette.bg_green)
 end
 
-local function custom_plugin()
-  local palette, _ = get_palette()
-
+local function custom_plugin(palette)
   -- diffview: 更暗的空文本区域
   vim.cmd 'hi! link DiffviewDiffDeleteDim NonText'
 
@@ -121,9 +119,10 @@ local function custom_plugin()
 end
 
 local function setup()
-  new_hl()
-  custom_basic()
-  custom_plugin()
+  local palette, soft_palette = get_palette()
+  new_hl(palette)
+  custom_basic(palette, soft_palette)
+  custom_plugin(palette, soft_palette)
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {

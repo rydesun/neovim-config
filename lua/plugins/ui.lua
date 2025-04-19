@@ -1,9 +1,12 @@
 local cond = vim.g.plug_ui
 
--- 先占位等待lualine加载，防止加载前的闪烁
+-- 先占位等待插件加载，防止加载前的闪烁
 if cond then
+  -- 等待lualine
   vim.o.statusline = ' '
   vim.o.winbar = ' '
+  -- 等待noice
+  vim.o.cmdheight = 0
 end
 
 local spec_ui = require 'libs.lazy-helper' { cond = cond,
@@ -17,12 +20,11 @@ local spec_ui = require 'libs.lazy-helper' { cond = cond,
   { 'nvim-lualine/lualine.nvim', opts_file = true },
 
   -- 命令行
-  { 'folke/noice.nvim', opts_file = true, lazy = false,
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      { 'rcarriga/nvim-notify',
-        opts = { render = 'wrapped-compact', stages = 'fade' } },
-    } },
+  { 'folke/noice.nvim', opts_file = true },
+
+  -- 通知
+  { 'rcarriga/nvim-notify',
+    opts = { render = 'wrapped-compact', stages = 'fade' } },
 
   -- 图标字体
   { 'nvim-tree/nvim-web-devicons', opts_file = true,

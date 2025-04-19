@@ -1,6 +1,6 @@
 local M = {
-  fold_sign = '%#Folded#%=',
-  fold_sign_nested = '%#Folded#%=*',
+  fold_sign = '%#FoldSign#%=',
+  fold_sign_nested = '%#FoldSign#%=*',
   wrap_fillchar = '│',
   virt_fillchar = '',
   cursor_char = '➜',
