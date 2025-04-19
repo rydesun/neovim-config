@@ -23,6 +23,7 @@ function M.init(bufnr)
   vim.keymap.set('n', '<C-j>', api.node.navigate.git.next, opts 'Next Git')
   vim.keymap.set('n', ']b', api.marks.navigate.next, opts 'Next bookmark')
   vim.keymap.set('n', '[b', api.marks.navigate.prev, opts 'Prev bookmark')
+  vim.keymap.set('n', '<C-o>', api.node.run.system, opts 'Run System')
 
   vim.keymap.set('n', 'sf', function()
     local node = api.tree.get_node_under_cursor()

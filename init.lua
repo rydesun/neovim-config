@@ -156,7 +156,7 @@ vim.cmd 'packadd rooter'
 require 'rooter'.setup {
   -- 目录内包含(向上检查每一级父目录)
   { mode = 'contains', upward = true,
-    'package.json', 'Cargo.toml', 'pyproject.toml', '.git', 'Makefile' },
+    '.git', 'package.json', 'Cargo.toml', 'pyproject.toml', 'Makefile' },
   -- 目录内包含(向下检查每一级子目录)
   { mode = 'contains', upward = false,
     '__init__.py' },
