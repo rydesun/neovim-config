@@ -30,7 +30,7 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
   -- 文本对象
   { 'echasnovski/mini.ai', opts_file = 'mini-ai' },
   { 'chrisgrieser/nvim-various-textobjs', config = true },
-  -- mini.ai也可以使用来自此插件的queries
+  -- mini.ai和mini.surround也可以使用来自此插件的queries
   { 'nvim-treesitter/nvim-treesitter-textobjects',
     main = 'nvim-treesitter.configs', opts_file = true },
 } }
@@ -44,7 +44,7 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   { 'johmsalas/text-case.nvim', opts = { prefix = 'gu' },
     keys = { { 'gu', mode = { 'n', 'v' } } }, cmd = 'Subs' },
 
-  -- 替换：选中
+  -- 替换：计算器，交换，排序
   { 'echasnovski/mini.operators', opts = {
     evaluate = { prefix = 's=' }, exchange = { prefix = 'sx' },
     sort = { prefix = 's<' },
@@ -66,7 +66,7 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   { 'mizlan/iswap.nvim', config = true },
 
   -- 修改配对符号
-  { 'machakann/vim-sandwich' },
+  { 'echasnovski/mini.surround', opts_file = 'mini-surround' },
 
   -- 表格对齐
   { 'echasnovski/mini.align', config = true,

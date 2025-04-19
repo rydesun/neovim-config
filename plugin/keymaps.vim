@@ -20,7 +20,7 @@ xn  >  >gv
 if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
 
 " s组：搜索/位置/文件跳转
-" 另外有插件vim-sandwich占用sa、sd、sr
+" mini.surround占用sa、sd、sr、sh、s+
 " mini.operators占用sx、s=、s<
 nn  s   <NOP>
 nn  S   <Cmd>lua Snacks.picker()<CR>
