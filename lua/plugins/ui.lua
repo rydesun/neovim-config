@@ -89,10 +89,7 @@ local spec_ui_content = require 'libs.lazy-helper' { cond = cond,
   { 'kevinhwang91/nvim-hlslens', config_file = true },
 
   -- 折叠
-  { 'kevinhwang91/nvim-ufo', opts_file = true, lazy = false,
-    dependencies = 'kevinhwang91/promise-async' },
-  { 'chrisgrieser/nvim-origami', opts = {
-    foldKeymaps = { hOnlyOpensOnFirstColumn = true } } },
+  { 'chrisgrieser/nvim-origami', opts_file = true, lazy = false },
 
   -- HexEditor
   { 'RaafatTurki/hex.nvim', config = true, lazy = false,
