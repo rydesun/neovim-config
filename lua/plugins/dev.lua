@@ -46,14 +46,29 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
       { 'igorlfs/nvim-dap-view', config = true },
       { 'theHamsta/nvim-dap-virtual-text', config = true },
     } },
+  -- }}}
 
-  -- 集成非LSP工具。用none-ls的配置 + mason安装的工具
-  { 'jayp0521/mason-null-ls.nvim', opts = { handlers = {} },
+  -- {{{ Linter+Formatter
+  -- 自动集成Mason安装的Linter+Formatter
+  { 'jayp0521/mason-null-ls.nvim', opts = { handlers = {
+    -- 不需要自动setup的工具，可以被空handler取消，然后交给nvim-lint处理
+    markdownlint_cli2 = function() end,
+  } },
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       { 'nvimtools/none-ls.nvim', config = true },
     } },
+
+  -- Linter(按需手动调用)
+  { 'mfussenegger/nvim-lint', lazy = true, config = function()
+    require 'lint'.linters_by_ft = {
+      markdown = { 'markdownlint-cli2' },
+      -- 不要把rust-analyzer.check.command改成clippy
+      -- 而是手动调用clippy
+      rust = { 'clippy' },
+    }
+  end },
   -- }}}
 
   -- {{{ 特定语言
@@ -97,14 +112,14 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'mattn/emmet-vim', keys = { { '<c-y>', mode = { 'n', 'v', 'i' } } } },
   -- }}}
 
-  -- {{{ 其他
+  -- {{{ 构建执行
   -- 测试
   { 'vim-test/vim-test', init_file = true },
 
-  -- 覆盖率
+  -- 测试覆盖率
   { 'andythigpen/nvim-coverage', opts_file = true },
 
-  -- 调试打印
+  -- Debug print
   { 'chrisgrieser/nvim-chainsaw', config = true },
 
   -- Jupyter
@@ -112,11 +127,14 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     version = '^1.0.0', build = ':UpdateRemotePlugins',
     enabled = vim.fn.executable 'jupyter' > 0 },
 
-  -- 代码块加载LSP
+  -- 代码块+LSP
   { 'jmbuhr/otter.nvim', config = true, lazy = true },
+  -- }}}
 
+  -- {{{ UI
   -- Code action diff
   { 'aznhe21/actions-preview.nvim', opts_file = true },
+  -- }}}
 } }
 
 -- vim: foldmethod=marker:foldlevel=0

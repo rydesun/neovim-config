@@ -221,10 +221,11 @@ nn  <leader>u   <Cmd>lua Snacks.picker.undo {layout='sidebar'}<CR>
 nn  <leader>o   <Cmd>SymbolsToggle<CR>
 nn  <leader>K   <Cmd>normal! K<CR>
 
-" LSP
+" LSP+Linter+Formatter
 nn  <leader>f   <Cmd>LspFormat<CR>
 xn  <leader>f   <Cmd>lua vim.lsp.buf.format{async=true}<CR>
 nn  <leader>F   <Cmd>LspFixAll<CR>
+nn  <leader>C   <Cmd>lua require'lint'.try_lint()<CR>
 
 " 查询
 nn  <leader>k   <Cmd>lua require 'hover'.hover()<CR>
