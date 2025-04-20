@@ -22,6 +22,15 @@ if bool(vim.g.pipe_fd) then
   })
 end
 
+-- Snacks Profiler
+if vim.env.PROF then
+  local snacks = vim.fn.stdpath 'data' .. '/lazy/snacks.nvim'
+  vim.opt.rtp:append(snacks)
+  local ok, profiler = pcall(require, 'snacks.profiler')
+  ---@diagnostic disable-next-line: missing-fields
+  if ok then profiler.startup { startup = { event = 'VeryLazy' } } end
+end
+
 -- 是否在开发环境中 (判断依据为文件.install_dev)
 vim.g.env_dev = bool(vim.fn.filereadable(
   vim.fn.stdpath 'data' .. '/lazy/.install_dev'))

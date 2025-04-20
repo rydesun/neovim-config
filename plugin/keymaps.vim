@@ -345,6 +345,10 @@ nn  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nn  <leader>nS  <Cmd>ObsidianSync<CR>
 nn  <leader>nc  <Cmd>ObsidianGitAdd<CR>
 nn  <leader>nC  <Cmd>ObsidianCommit<CR>
+
+" P组：Profiler
+nn  <leader>PP  <Cmd>lua Snacks.profiler.toggle()<CR>
+nn  <leader>PS  <Cmd>lua Snacks.profiler.scratch()<CR>
 " }}}
 
 " {{{ 按键 (LocalLeader) 特定文件类型

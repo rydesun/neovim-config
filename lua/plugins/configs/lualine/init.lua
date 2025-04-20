@@ -28,7 +28,7 @@ local winbar = {
   lualine_z = {},
 }
 
-return {
+local opts = {
   options = {
     -- 只显示一个窗口的状态栏
     globalstatus = true,
@@ -78,3 +78,9 @@ return {
     'lazy',
   },
 }
+
+if Snacks then
+  table.insert(opts.sections.lualine_x, Snacks.profiler.status())
+end
+
+return opts
