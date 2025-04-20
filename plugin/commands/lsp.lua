@@ -8,19 +8,34 @@ local function fixall_js()
 end
 
 local function format()
-  vim.lsp.buf.format {}
+  local ok, conform = pcall(require, 'conform')
+  if ok then
+    conform.format({}, function(err)
+      if err then
+        vim.notify(err, vim.log.levels.WARN)
+        return
+      end
+      local mode = vim.api.nvim_get_mode().mode
+      if vim.startswith(string.lower(mode), 'v') then
+        vim.api.nvim_feedkeys(
+          vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
+      end
+    end)
+  else
+    vim.lsp.buf.format {}
+  end
 end
 
 local function sortimports_and_format()
   -- FIXME: 必须提供sync版本
   vim.lsp.buf.code_action { apply = true, context = {
     diagnostics = {}, only = { 'source.organizeImports' } } }
-  vim.lsp.buf.format {}
+  format()
 end
 
 local function format_js()
   vim.cmd 'TSToolsOrganizeImports'
-  vim.lsp.buf.format {}
+  format()
 end
 
 -- 不同语言封装成统一的命令LspFixAll和LspFormat
@@ -50,9 +65,7 @@ vim.api.nvim_create_autocmd('filetype', {
 vim.api.nvim_create_user_command('LspFixAll', function()
   vim.notify('[LSP] FixAll not configured', vim.log.levels.INFO)
 end, {})
-vim.api.nvim_create_user_command('LspFormat', function()
-  vim.lsp.buf.format {}
-end, {})
+vim.api.nvim_create_user_command('LspFormat', format, {})
 
 -- 特定语言按需手动开启
 vim.api.nvim_create_user_command('FormatOnSaveEnable', function()

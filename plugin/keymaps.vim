@@ -222,8 +222,7 @@ nn  <leader>o   <Cmd>SymbolsToggle<CR>
 nn  <leader>K   <Cmd>normal! K<CR>
 
 " LSP+Linter+Formatter
-nn  <leader>f   <Cmd>LspFormat<CR>
-xn  <leader>f   <Cmd>lua vim.lsp.buf.format{async=true}<CR>
+no  <leader>f   <Cmd>LspFormat<CR>
 nn  <leader>F   <Cmd>LspFixAll<CR>
 nn  <leader>C   <Cmd>lua require'lint'.try_lint()<CR>
 

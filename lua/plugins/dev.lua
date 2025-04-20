@@ -69,6 +69,12 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
       rust = { 'clippy' },
     }
   end },
+
+  -- Formatter
+  -- 可以直接用none-ls伪装的LSP formatting
+  { 'stevearc/conform.nvim', lazy = true, opts = {
+    default_format_opts = { lsp_format = 'fallback' },
+  } },
   -- }}}
 
   -- {{{ 特定语言
