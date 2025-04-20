@@ -17,6 +17,7 @@ function M:init(options)
   self.options = vim.tbl_extend('keep', self.options or {}, default_options)
 
   vim.api.nvim_create_autocmd('User', {
+    group = vim.api.nvim_create_augroup('lualine.gitsigns', { clear = true }),
     pattern = 'GitSignsUpdate',
     callback = function(args)
       local bufnr = args.data and args.data.buffer

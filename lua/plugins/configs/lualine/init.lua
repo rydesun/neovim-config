@@ -21,6 +21,7 @@ local winbar = {
     {
       'diagnostics',
       symbols = { error = '● ', warn = '▲ ', info = '■ ', hint = '■ ' },
+      cond = function () return #vim.diagnostic.count(0) > 0 end
     },
     { '%2l/%L', cond = function() return vim.fn.line '$' > 1 end },
   },
