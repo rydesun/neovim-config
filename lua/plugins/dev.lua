@@ -21,7 +21,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
 
   -- 单独配置Rust
   -- LSP使用系统端安装的nightly rust-analyzer，不要从Mason安装
-  -- DAP从Mason安装并且会自动集成
+  -- DAP可以从Mason安装并且会自动集成
   { 'mrcjkb/rustaceanvim', version = '^6', lazy = false, config_file = true },
 
   -- 单独配置Typescript
@@ -71,7 +71,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   end },
 
   -- Formatter
-  -- 可以直接用none-ls伪装的LSP formatting
+  -- conform能调用none-ls伪装的LSP formatting
   { 'stevearc/conform.nvim', lazy = true, opts = {
     default_format_opts = { lsp_format = 'fallback' },
   } },
@@ -139,6 +139,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- }}}
 
   -- {{{ UI
+  -- Peek
+  { 'dnlhc/glance.nvim', cmd = 'Glance' },
+
   -- Code action diff
   { 'aznhe21/actions-preview.nvim', opts_file = true },
   -- }}}

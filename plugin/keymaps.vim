@@ -1,6 +1,9 @@
 command -nargs=+ Xns xnoremap <silent> <args>
 command -nargs=+ Nse nm <silent><expr> <args>
 
+let g:mapleader=' ' | nn <Space> <Nop>
+let g:maplocalleader='\'
+
 " {{{ 按键 (覆盖原始行为)
 no  ;  :
 no  H  ^
@@ -90,6 +93,11 @@ nn  grI <Cmd>lua vim.lsp.buf.incoming_calls()<CR>
 nn  grO <Cmd>lua vim.lsp.buf.outgoing_calls()<CR>
 nn  grl <Cmd>lua vim.lsp.codelens.run()<CR>
 no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
+nn  g<leader>r <Cmd>Glance references<CR>
+nn  g<leader>d <Cmd>Glance definitions<CR>
+nn  g<leader>t <Cmd>Glance type_definitions<CR>
+nn  g<leader>i <Cmd>Glance implementations<CR>
+nn  g<leader>l <Cmd>Glance resume<CR>
 
 " []组：前后跳转，切换选项
 " 插件vim-matchup/matchit提供 [% ]%, snacks.scope提供[i ]i
@@ -186,9 +194,6 @@ endfunction
 " }}}
 
 " {{{ 按键 (Leader单键)
-let g:mapleader=' ' | nn <Space> <Nop>
-let g:maplocalleader='\'
-
 nn  <leader>s   <Cmd>lua require'treesj'.split()<CR>
 nn  <leader>j   <Cmd>lua require'treesj'.join()<CR>
 
