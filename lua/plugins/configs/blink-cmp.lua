@@ -75,7 +75,6 @@ opts.sources.providers = {
 
 opts.keymap = {
   ['<C-e>'] = {}, -- 留给<End>
-  ['<C-y>'] = {}, -- 留给emmet
   ['<Tab>'] = {},
   ['<S-Tab>'] = {},
   ['<C-l>'] = { 'show', 'select_and_accept', 'fallback' },

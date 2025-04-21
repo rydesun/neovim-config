@@ -49,6 +49,23 @@ nn  svh <Cmd>lua Snacks.picker.highlights()<CR>
 nn  svK <Cmd>lua Snacks.picker.keymaps()<CR>
 nn  svk <Cmd>lua Snacks.picker.grep { dirs={
         \ vim.fn.stdpath'config' .. '/plugin/keymaps.vim' }}<CR>
+nn  svp <Cmd>lua Snacks.profiler.toggle()<CR>
+nn  svP <Cmd>lua Snacks.profiler.scratch()<CR>
+
+" Emacs风格
+" <C-f>和<C-b>见keymaps-scroll.lua
+map! <C-a>  <Home>
+map! <C-e>  <End>
+smap <C-a>  <Home>
+smap <C-e>  <End>
+map! <A-b>  <C-Left>
+map! <A-f>  <C-Right>
+smap <A-b>  <C-Left>
+smap <A-f>  <C-Right>
+
+" 根据前缀补全历史命令
+cno  <C-p>  <Up>
+cno  <C-n>  <Down>
 
 lua << EOF
 vim.keymap.set('n', '<C-l>', function() -- {{{ 额外关闭通知浮窗
@@ -106,7 +123,7 @@ nn  [ow <Cmd>setlocal wrap<CR>
 nn  ]ow <Cmd>setlocal nowrap<CR>
 
 " Ctrl组：前后跳转
-" emmet占用<C-y>
+" emmet占用<C-S-y>
 " nvim-recorder占用<C-q>
 " 另见blink.cmp
 nn  <C-j>   <Cmd>Gitsigns nav_hunk next<CR>
@@ -166,26 +183,6 @@ nn  <A-q>   <Cmd>call <SID>toggleQuickFix()<CR>
 function! s:toggleQuickFix()
     if getqflist({'winid' : 0}).winid | cclose | else | copen | endif
 endfunction
-" }}}
-
-" {{{ 按键 (Emacs风格)
-no! <C-a>   <Home>
-no! <C-e>   <End>
-no! <A-b>   <C-Left>
-no! <A-f>   <C-Right>
-
-" 允许滚动函数传参时出现的文档
-no! <C-b>   <Cmd>lua NoiceScrollDoc(-4, '<Left>', 'i')<CR>
-no! <C-f>   <Cmd>lua NoiceScrollDoc(4, '<Right>', 'i')<CR>
-snor<C-b>   <Cmd>lua NoiceScrollDoc(-4, '<Left>', 'i')<CR>
-snor<C-f>   <Cmd>lua NoiceScrollDoc(4, '<Right>', 'i')<CR>
-" 注意开启插件Neoscroll会覆盖此设置，所以Neosroll的配置内需要再次设置一次
-nn  <C-b>   <Cmd>lua NoiceScrollDoc(-4, '<C-b>', 'n')<CR>
-nn  <C-f>   <Cmd>lua NoiceScrollDoc(4, '<C-f>', 'n')<CR>
-
-" 根据前缀补全
-cno <C-p>   <Up>
-cno <C-n>   <Down>
 " }}}
 
 " {{{ 按键 (Leader单键)
@@ -345,10 +342,6 @@ nn  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nn  <leader>nS  <Cmd>ObsidianSync<CR>
 nn  <leader>nc  <Cmd>ObsidianGitAdd<CR>
 nn  <leader>nC  <Cmd>ObsidianCommit<CR>
-
-" P组：Profiler
-nn  <leader>PP  <Cmd>lua Snacks.profiler.toggle()<CR>
-nn  <leader>PS  <Cmd>lua Snacks.profiler.scratch()<CR>
 " }}}
 
 " {{{ 按键 (LocalLeader) 特定文件类型

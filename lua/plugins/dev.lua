@@ -115,7 +115,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'danymat/neogen', opts = { snippet_engine = 'luasnip' } },
 
   -- emmet
-  { 'mattn/emmet-vim', keys = { { '<c-y>', mode = { 'n', 'v', 'i' } } } },
+  { 'mattn/emmet-vim', keys = { { '<C-S-y>', mode = { 'n', 'v', 'i' } } },
+    init = function() vim.g.user_emmet_leader_key = '<C-S-y>' end },
   -- }}}
 
   -- {{{ 构建执行
