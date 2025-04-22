@@ -109,6 +109,11 @@ vim.diagnostic.config {
   virtual_text = { prefix = '🞬' },
   jump = { float = true },
 }
+
+-- 没有主题插件时设置默认主题
+vim.schedule(function()
+  if not vim.g.colors_name then vim.cmd.colorscheme 'retrobox' end
+end)
 -- }}}
 
 -- {{{ 选项 (文本内容)

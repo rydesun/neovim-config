@@ -34,7 +34,7 @@ local opts = {
     -- 只显示一个窗口的状态栏
     globalstatus = true,
     disabled_filetypes = {
-      winbar = { 'dap-view', 'dap-repl', 'dbee' },
+      winbar = { 'dap-view', 'dap-repl', 'dbee', 'snacks_layout_box' },
     },
     component_separators = '',
     section_separators = '',

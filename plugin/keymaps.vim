@@ -19,6 +19,9 @@ nn  '  `
 xn  <  <gv
 xn  >  >gv
 
+" 只在选中区域搜索
+xn  /  <Esc>/\%V
+
 " 作为pager时按q直接退出
 if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
 
@@ -49,9 +52,7 @@ nn  svm <Cmd>lua Snacks.picker.noice()<CR>
 nn  svM <Cmd>NoiceAll<CR>
 nn  svv <Cmd>lua Snacks.picker.help()<CR>
 nn  svh <Cmd>lua Snacks.picker.highlights()<CR>
-nn  svK <Cmd>lua Snacks.picker.keymaps()<CR>
-nn  svk <Cmd>lua Snacks.picker.grep { dirs={
-        \ vim.fn.stdpath'config' .. '/plugin/keymaps.vim' }}<CR>
+nn  svk <Cmd>lua Snacks.picker.keymaps()<CR>
 nn  svp <Cmd>lua Snacks.profiler.toggle()<CR>
 nn  svP <Cmd>lua Snacks.profiler.scratch()<CR>
 
@@ -86,6 +87,9 @@ EOF
 " 插件vim-matchup/matchit提供g%，Comment.nvim提供gc gb
 " mini.align提供ga gA，mini.ai提供g[ g]
 " snacks.picker覆盖了LSP跳转键位
+nn  g?  <Cmd>lua Snacks.picker.keymap_file()<CR>
+nm  gyc yygccp
+xm  gyc y<Cmd>'><CR>=pgvgc<Cmd>'><CR>j
 nn  gbO <Cmd>Neogen<CR>
 nn  gbo <Cmd>Neogen<CR>
 nn  grt <Cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -131,6 +135,7 @@ nn  [ow <Cmd>setlocal wrap<CR>
 nn  ]ow <Cmd>setlocal nowrap<CR>
 
 " Ctrl组：前后跳转
+" kitty_mod默认为C-S-前缀，需要注意冲突
 " emmet占用<C-S-y>
 " nvim-recorder占用<C-q>
 " 另见blink.cmp

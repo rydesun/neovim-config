@@ -1,7 +1,8 @@
 vim.keymap.set({ 'i', 'c', 's' }, '<C-f>', '<Right>')
 vim.keymap.set({ 'i', 'c', 's' }, '<C-b>', '<Left>')
 
-local lazy_config = require 'lazy.core.config'
+local has_lazy, lazy_config = pcall(require, 'lazy.core.config')
+if not has_lazy then return end
 local neoscroll_enabled = lazy_config.plugins['neoscroll.nvim'] ~= nil
 local noice_enabled = lazy_config.plugins['noice.nvim'] ~= nil
 

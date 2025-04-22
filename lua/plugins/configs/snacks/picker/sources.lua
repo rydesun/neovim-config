@@ -57,4 +57,13 @@ M.tagstack = {
   },
 }
 
+M.keymap_file = {
+  finder = 'grep',
+  layout = 'ivy_split',
+  need_search = false,
+  regex = false,
+  dirs = { vim.fn.stdpath 'config' .. '/plugin/keymaps.vim' },
+  sort = { fields = { 'score:desc', 'idx' } },
+}
+
 return M
