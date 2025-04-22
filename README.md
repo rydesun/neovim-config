@@ -72,23 +72,18 @@ scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 交换右 Ctrl 和右 Alt，激活右手的拇指来按 Ctrl。
 不仅可以左右开弓，
 甚至可以让手指几乎**不移出标准指位**的情况下按出
-<kbd>Shfit</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd>。
+<kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd>。
 另外好处还有，对键盘的影响最小。别人用你的键盘时
 不会轻易察觉到有改动，不像改动左侧按键那样让人不适应。
-任何普通键盘都能这样改，HHKB 反而成了没用的键盘。
-
-> 没有 HHKB 难道便无法按键吗？Ctrl 岂是如此不便之物。
-
-终端内可以用 <kbd>Ctrl</kbd> + <kbd>[</kbd> 代替 <kbd>Escape</kbd>。
-如果不习惯的话，交换 <kbd>CapsLock</kbd> 和
-<kbd>Escape</kbd> 也行。
 
 不必交换 <kbd>CapsLock</kbd> 和 <kbd>Ctrl</kbd>。
 比如 <kbd>Ctrl</kbd> + <kbd>z</kbd> 没之前说的方法好按，
 而且左手小指已经承担了太多的任务，
 尽量不要再给左手小指增加负担了。
 
-其实我在用 [keyd](https://github.com/rvaiya/keyd)
+终端内可以用 <kbd>Ctrl</kbd> + <kbd>[</kbd> 代替 <kbd>Escape</kbd>。
+或者，其实我在用 [keyd](https://github.com/rvaiya/keyd)，
+右 <kbd>Alt</kbd> 可以同时作为 <kbd>Escape</kbd> 和 <kbd>Ctrl</kbd> 使用。
 <details>
   <summary>我的 keyd 配置</summary>
 
@@ -112,47 +107,26 @@ scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 至于用 Vimscript 还是 Lua 编写，全凭个人喜好。
 我偏好用 Vimscript 写按键映射，因为一目了然。
 
-按键的报错信息是负反馈，不是该被驱逐的东西。
-没有加载特定插件导致的按键映射无效，按键时能报错，则**必须报错**，
-明确的负反馈可以提醒使用者缺少特定插件。
-这就是为什么我反对在插件 attach 时才加载该插件的 key mappings。
+按键的报错信息是负反馈。
+没有加载插件导致的按键映射无效，按键必须报错，
+负反馈可以提醒使用者缺少特定插件。
+不应在插件节奏时才加载该插件对应的映射。
 否则，在按键没有任何反馈时，无法知道是因为插件没有加载；
 还是该功能已经成功运行，只是没有任何输出。
-更糟糕的是，如果按键搞乱了正在编辑的文本，
-还要费脑子反推原因竟然是插件没有加载。
+如果按键搞乱了正在编辑的文本，
+还要反推原因竟是插件没有加载。
 只有 dial.nvim 或者 nvim-hlslens 这类在原按键上增强功能的插件，
-才适合在插件加载时加载 key mappings。
-
-> 你按得很好，下次不许再按了。
->
-> —— <cite>nvim</cite>
+才适合在插件加载时加载自己的映射。
 
 ## 目录结构
-
-复杂的配置应该按功能划分，拆成高内聚的小插件。
-可以放在 `pack/` 目录里，用 neovim 内置的包管理。
-或者用传统的 rtp 也行。
-再把插件的文件分散到 `lua/`、`autoload/`、`ftplugin/`、`plugin/`
-等目录当中去。
 
 **最少维护：简单的目录结构**
 
 [`lua/plugins/`](lua/plugins/) 插件列表  
 [`lua/plugins/configs/`](lua/plugins/configs/) 每个插件的设置  
-
 [`pack/`](pack/) 自己管理的插件  
-- [`pack/local/opt/rooter/`](pack/local/opt/rooter/)  
-一个简单的自动设置工作目录的插件。
-当前 buffer 的上级目录匹配 pattern 时，自动执行 lcd
-
-- [`pack/local/opt/tabline/`](pack/local/opt/tabline/)  
-标签栏样式 (不是 bufferline)。
-我喜欢在另一个 Tab 中运行测试。
-这个插件和 asynctasks.vim 插件结合使用时十分方便，
-直接在标签栏上显示后台 terminal 的运行情况，不用切过去看。
-
 [`plugin/`](plugin/) 是传统的 Vim 目录。
-本来是作为插件目录被使用，也可以用来放配置文件。
+本来是作为插件目录被使用，可以放单个独立的插件，也可以用来放配置文件。
 如果 init.lua 的内容太多，
 可以拆出一部分放在这个目录里面，
 只是 `plugin/*` 各个文件的加载顺序无法保证。
