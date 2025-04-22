@@ -79,10 +79,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
 
   -- {{{ 特定语言
   -- 预览Markdown
-  { 'iamcco/markdown-preview.nvim',
-    ft = 'markdown',
-    build = function() vim.fn['mkdp#util#install']() end,
-  },
+  { 'iamcco/markdown-preview.nvim', ft = 'markdown',
+    build = 'cd app && npm install' },
 
   -- Rust
   { 'saecki/crates.nvim', event = 'BufRead Cargo.toml', opts_file = true },
