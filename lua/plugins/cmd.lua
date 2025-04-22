@@ -1,5 +1,14 @@
 local cond = vim.g.plug_cmd
 return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
+  -- 与kitty scrollback集成
+  { 'mikesmithgh/kitty-scrollback.nvim', opts_file = true,
+    event = 'User KittyScrollbackLaunch',
+    cmd = {
+      'KittyScrollbackGenerateKittens',
+      'KittyScrollbackCheckHealth',
+      'KittyScrollbackGenerateCommandLineEditing',
+    } },
+
   -- 终端打开文件在当前nvim实例打开
   { 'willothy/flatten.nvim', opts = { window = { open = 'tab' } },
     lazy = false, priority = 1001 },

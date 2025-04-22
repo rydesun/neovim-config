@@ -75,6 +75,7 @@ local opts = {
     extensions.nvim_tree,
     extensions.quickfix,
     extensions.termcat,
+    extensions.kitty_scrollback,
     extensions.toggleterm,
     'lazy',
   },

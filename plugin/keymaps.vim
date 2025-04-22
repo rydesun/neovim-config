@@ -22,8 +22,11 @@ xn  >  >gv
 " 只在选中区域搜索
 xn  /  <Esc>/\%V
 
-" 作为pager时按q直接退出
-if get(g:, 'pager', v:false) | nn q <Cmd>exit<CR> | endif
+" 作为pager时按q或者<C-c>直接退出
+if get(g:, 'pager', v:false)
+    nn q <Cmd>exit<CR>
+    nn <C-c> <Cmd>exit<CR>
+endif
 
 " s组：搜索/位置/文件跳转
 " mini.surround占用sa、sd、sr、sh、s+

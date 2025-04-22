@@ -43,6 +43,15 @@ M.termcat = {
   },
 }
 
+M.kitty_scrollback = {
+  filetypes = { 'kitty-scrollback' },
+  winbar = {
+    lualine_a = { function() return '󰄛 kitty-scrollback' end },
+    lualine_x = { '%2l/%L' },
+    lualine_y = { 'progress' },
+  },
+}
+
 M.toggleterm = {
   filetypes = { 'toggleterm' },
   winbar = {

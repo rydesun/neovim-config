@@ -51,10 +51,14 @@ vim.g.plug_cmd = true
 -- 本地开发
 vim.g.plug_dev = vim.g.env_dev
 
--- pager不需要启用这些插件
+-- 特殊环境不需要启用这些插件
 if vim.g.pager then
   vim.g.plug_op_edit = false
   vim.g.plug_cmd = false
+  vim.g.plug_dev = false
+end
+if vim.env.KITTY_SCROLLBACK_NVIM == 'true'
+    and not vim.env.KITTY_SCROLLBACK_NVIM_EDIT_INPUT then
   vim.g.plug_dev = false
 end
 

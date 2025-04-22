@@ -37,7 +37,10 @@ nvim 还是熟悉的 nvim，除了不需要进行代码开发以外。
 
 ## 支持 Pager
 
-把 nvim 当成 pager 来使用时，禁用一些插件来提升启动速度
+参考：<https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731>
+
+把 nvim 当成 pager 来使用时，在配置里识别变量 vim.g.pager，
+相应地改变选项，并且禁用一些用不上的插件来提升启动速度
 
 ```bash
 ls ~ | nvim -R --cmd 'let pager=1'
@@ -50,13 +53,15 @@ ls --color=always ~ | sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 ```
 
 因为可以支持 ANSI 转义码，所以可以作为 kitty 的 scrollback pager 来使用。
-在配置文件 `kitty.conf` 中添加一行
+
+(方法一)在配置文件 `kitty.conf` 中添加一行
 
 ```bash
 scrollback_pager sh -c "exec nvim 63<&0 </dev/null --cmd 'let termcat=63'"
 ```
 
-参考：<https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731>
+(方法二)或者，kitty scrollback 也可以使用更强大的插件
+[kitty-scrollback.nvim](https://github.com/mikesmithgh/kitty-scrollback.nvim)(正在用)
 
 ## 按键映射
 

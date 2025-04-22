@@ -19,6 +19,7 @@ return {
   },
   hooks = {
     before_save = function()
+      if vim.env.KITTY_SCROLLBACK_NVIM == 'true' then return end
       local win_bufs = vim.iter(vim.api.nvim_list_tabpages())
           :map(vim.api.nvim_tabpage_list_wins)
           :flatten()
