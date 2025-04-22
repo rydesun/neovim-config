@@ -17,7 +17,9 @@ opts.appearance = { kind_icons = require 'libs.style'.symbols() }
 opts.completion.accept = { auto_brackets = { enabled = false } }
 
 -- 使用luasnip API跳转LSP提供的snippets
-opts.snippets = { preset = 'luasnip' }
+if require 'lazy.core.config'.plugins['LuaSnip'] then
+  opts.snippets = { preset = 'luasnip' }
+end
 opts.sources = {
   -- 不要显示luasnip提供的snippets，只用luasnip API展开
   default = { 'lsp', 'buffer', 'path' },
