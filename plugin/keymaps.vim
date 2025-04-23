@@ -134,6 +134,8 @@ nn  [oL <Cmd>CodelensEnable<CR>
 nn  ]oL <Cmd>CodelensDisable<CR>
 nn  [oM <Cmd>DoMatchParen<CR>
 nn  ]oM <Cmd>NoMatchParen<CR>
+nn  [on <Cmd>set norelativenumber\|set number<CR>
+nn  ]on <Cmd>set relativenumber\|set nonumber<CR>
 nn  [os <Cmd>StatusColumnSignsInc<CR>
 nn  ]os <Cmd>StatusColumnSignsReset<CR>
 nn  [ow <Cmd>setlocal wrap<CR>
@@ -162,6 +164,7 @@ im  <C-x><C-s>  <Cmd>lua Snacks.picker.icons()<CR>
 im  <C-x><C-x>  <Cmd>lua require'blink.cmp'.show{providers={'lsp'}}<CR>
 im  <C-x><C-b>  <Cmd>lua require'blink.cmp'.show{providers={'buffer'}}<CR>
 im  <C-x><C-r>  <Cmd>lua require'blink.cmp'.show{providers={'ripgrep'}}<CR>
+cno <C-x><C-e>  <C-f>
 
 " Ctrl-w组：窗口
 nn  <C-w><Enter>  <Cmd>lua Snacks.zen.zen()<CR>
