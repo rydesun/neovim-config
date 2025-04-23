@@ -1,5 +1,10 @@
 if vim.b.did_gotmpl_ftplugin then return end
 
+local threshold = 2 ^ 20
+local file = vim.api.nvim_buf_get_name(0)
+local stat = vim.uv.fs_stat(file)
+if stat and stat.size > threshold then return end
+
 ---@return boolean
 local function detect_gotmpl_ft()
   local ts = vim.treesitter

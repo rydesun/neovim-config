@@ -132,6 +132,8 @@ nn  [ol <Cmd>setlocal list<CR>
 nn  ]ol <Cmd>setlocal nolist<CR>
 nn  [oL <Cmd>CodelensEnable<CR>
 nn  ]oL <Cmd>CodelensDisable<CR>
+nn  [oM <Cmd>DoMatchParen<CR>
+nn  ]oM <Cmd>NoMatchParen<CR>
 nn  [os <Cmd>StatusColumnSignsInc<CR>
 nn  ]os <Cmd>StatusColumnSignsReset<CR>
 nn  [ow <Cmd>setlocal wrap<CR>
