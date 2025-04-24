@@ -89,5 +89,3 @@ function M.get_term_status(bufid)
     return string.format('%s (%d)', M.opts.terminal_fail, exit_code)
   end
 end
-
-return M

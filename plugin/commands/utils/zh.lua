@@ -1,5 +1,12 @@
 local M = {}
 
+vim.api.nvim_create_user_command('CountZhChars',
+  function() M.count() end, {})
+
+-- 修复中英文间空格
+vim.api.nvim_create_user_command('TypoSpace',
+  function() M.typo_space() end, {})
+
 local han = '[\\u3400-\\u4DBF\\u4E00-\\u9FFF\\uF900-\\uFAFF\\U20000-\\U323AF]'
 local latin = '[a-zA-Z0-9\'"$&`]'
 
@@ -13,21 +20,3 @@ function M.typo_space()
   vim.cmd(cmd:format('%s', latin, han))
   vim.cmd.nohlsearch()
 end
-
-function M.setup()
-  -- 统计中文字符数量
-  vim.api.nvim_create_user_command(
-    'CountZhChars',
-    function() M.count() end,
-    {}
-  )
-
-  -- 修复中英文间空格
-  vim.api.nvim_create_user_command(
-    'TypoSpace',
-    function() M.typo_space() end,
-    {}
-  )
-end
-
-return M
