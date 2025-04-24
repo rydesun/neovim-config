@@ -71,6 +71,9 @@ local function custom_basic(palette, soft_palette)
 end
 
 local function custom_plugin(palette)
+  -- ccc.nvim
+  vim.cmd 'hi! link CccFloatNormal Normal'
+
   -- diffview: 更暗的空文本区域
   vim.cmd 'hi! link DiffviewDiffDeleteDim NonText'
 

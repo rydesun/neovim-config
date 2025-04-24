@@ -247,7 +247,7 @@ nn  <leader>K   <Cmd>lua require 'hover'.hover_select()<CR>
 " }}}
 
 " {{{ 按键 (Leader多键)
-" c组：替换、复制
+" c组：替换、复制文本；编辑颜色
 no  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
 nn  <leader>cS  <Cmd>lua require'grug-far'.open{prefills={paths=vim.fn.expand'%'}}<CR>
 Xns <leader>cS  :GrugFarWithin<CR>
@@ -260,6 +260,10 @@ nn  <leader>cF  <Cmd>echo     expand('%:p:~')<CR>
 nn  <leader>cf  <Cmd>let @+ = expand('%:p:~')<CR>
 nn  <leader>cD  <Cmd>echo     expand('%:p:~:h')..'/'<CR>
 nn  <leader>cd  <Cmd>let @+ = expand('%:p:~:h')..'/'<CR>
+nn  <leader>cc  <Cmd>CccPick<CR>
+nn  <leader>CC  <Cmd>CccConvert<CR>
+nn  <leader>ch  <Cmd>Huefy<CR>
+nn  <leader>cH  <Cmd>Shades<CR>
 
 " h组g组：Git Hunk
 nn  <leader>hs  <Cmd>Gitsigns stage_hunk<CR>

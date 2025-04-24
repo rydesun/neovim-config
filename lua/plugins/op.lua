@@ -6,7 +6,7 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
     dependencies = 'kkharji/sqlite.lua' },
 
   -- 增强%
-  { 'andymass/vim-matchup', lazy = false, config_file = true,
+  { 'andymass/vim-matchup', lazy = false, init_file = true,
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       opts = { matchup = { enable = true } } } },
@@ -51,7 +51,7 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
     multiply = { prefix = '' }, replace = { prefix = '' } } },
 
   -- 替换：多重光标
-  { 'mg979/vim-visual-multi' },
+  { 'mg979/vim-visual-multi', keys = { { '<C-n>', mode = { 'n', 'v' } } } },
 
   -- 替换：用ripgrep搜索
   { 'MagicDuck/grug-far.nvim', config = true,
@@ -90,8 +90,9 @@ local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
   -- 检测缩进
   { 'nmac427/guess-indent.nvim', lazy = false, config = true },
 
-  -- 编辑颜色
-  { 'max397574/colortils.nvim', cmd = 'Colortils', config = true },
+  -- Color Picker
+  { 'uga-rosa/ccc.nvim', opts_file = true, cmd = { 'CccPick', 'CccConvert' } },
+  { 'nvzone/minty', cmd = { 'Shades', 'Huefy' }, dependencies = 'nvzone/volt' },
 
   -- Tim Pope's dot.
   { 'tpope/vim-repeat' },
