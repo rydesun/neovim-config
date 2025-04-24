@@ -1,32 +1,24 @@
 local M = {}
 
-local default_opts = {
+M.opts = {
   sep = ' ',
   terminal_running = '%%',
-  terminal_ok = 'O',
-  terminal_fail = 'X',
+  terminal_ok = vim.g.env_no_icon and 'O' or '✔',
+  terminal_fail = vim.g.env_no_icon and 'X' or '✖',
 }
 
-function M.setup(opts)
-  vim.o.tabline = [[%{%v:lua.require('tabline').draw()%}]]
-  M.opts = vim.tbl_deep_extend('keep', opts or {}, default_opts)
+vim.o.tabline = [[%{%v:lua.Tabline()%}]]
 
-  -- Terminal在退出时记录状态
-  vim.api.nvim_create_autocmd('TermClose', {
-    pattern = '*',
-    callback = function(msg)
-      pcall(
-        vim.api.nvim_buf_set_var,
-        msg.buf,
-        'term_exit_code',
-        vim.v.event.status
-      )
-      vim.cmd 'redrawtabline'
-    end,
-  })
-end
+-- Terminal在退出时记录状态
+vim.api.nvim_create_autocmd('TermClose', {
+  pattern = '*',
+  callback = function(msg)
+    pcall(vim.api.nvim_buf_set_var, msg.buf, 'exit_code', vim.v.event.status)
+    vim.cmd 'redrawtabline'
+  end,
+})
 
-function M.draw()
+function Tabline()
   local tabline = {}
 
   local cur_tabid = vim.api.nvim_get_current_tabpage()
@@ -89,7 +81,7 @@ function M.find_valid_buf_title(tabid, exclude_bufid)
 end
 
 function M.get_term_status(bufid)
-  local ok, exit_code = pcall(vim.api.nvim_buf_get_var, bufid, 'term_exit_code')
+  local ok, exit_code = pcall(vim.api.nvim_buf_get_var, bufid, 'exit_code')
   if not ok then return M.opts.terminal_running end
   if exit_code == 0 then
     return M.opts.terminal_ok

@@ -165,12 +165,6 @@ end
 -- 恢复lazy.nvim修改过的packpath
 vim.opt.packpath:prepend(vim.fn.stdpath 'config')
 
--- 标签栏
-vim.cmd 'packadd tabline'
-require 'tabline'.setup(vim.g.env_no_icon and {} or {
-  terminal_ok = '✔', terminal_fail = '✖',
-})
-
 -- 自动设置工作目录
 vim.cmd 'packadd rooter'
 require 'rooter'.setup {
