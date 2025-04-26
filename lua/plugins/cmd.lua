@@ -48,4 +48,9 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     build = function() require 'dbee'.install() end,
     dependencies = 'MunifTanjim/nui.nvim',
     cmd = 'Dbee' },
+
+  -- AI
+  { 'olimorris/codecompanion.nvim', opts_file = true,
+    cmd = { 'CodeCompanion', 'CodeCompanionChat',
+      'CodeCompanionActions', 'CodeCompanionCmd' } },
 } }

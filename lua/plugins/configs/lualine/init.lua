@@ -21,7 +21,7 @@ local winbar = {
     {
       'diagnostics',
       symbols = { error = '● ', warn = '▲ ', info = '■ ', hint = '■ ' },
-      cond = function () return #vim.diagnostic.count(0) > 0 end
+      cond = function() return #vim.diagnostic.count(0) > 0 end,
     },
     { '%2l/%L', cond = function() return vim.fn.line '$' > 1 end },
   },
@@ -42,7 +42,13 @@ local opts = {
   winbar = winbar,
   inactive_winbar = winbar,
   sections = {
-    lualine_a = { components.git_branch },
+    lualine_a = {
+      {
+        require 'plugins.configs.lualine.components.codecompanion',
+        color = 'DiffText'
+      },
+      components.git_branch,
+    },
     lualine_b = { components.cwd },
     lualine_c = {},
     lualine_x = { require 'plugins.configs.lualine.components.molten' },
