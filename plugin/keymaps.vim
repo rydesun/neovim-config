@@ -92,7 +92,7 @@ EOF
 " snacks.picker覆盖了LSP跳转键位
 nn  g?  <Cmd>lua Snacks.picker.keymap_file()<CR>
 nm  gyc yygccp
-xm  gyc y<Cmd>'><CR>=pgvgc<Cmd>'><CR>j
+xm  gyc ygvgc'>=p
 nn  gbO <Cmd>Neogen<CR>
 nn  gbo <Cmd>Neogen<CR>
 nn  grt <Cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -100,6 +100,8 @@ nn  grI <Cmd>lua vim.lsp.buf.incoming_calls()<CR>
 nn  grO <Cmd>lua vim.lsp.buf.outgoing_calls()<CR>
 nn  grl <Cmd>lua vim.lsp.codelens.run()<CR>
 no  gs  <Cmd>lua Snacks.picker.grep_word()<CR>
+no  gS  <Cmd>lua Snacks.picker.lsp_workspace_symbols {
+        \ search = function(picker) return picker:word() end }<CR>
 nn  g<leader>r <Cmd>Glance references<CR>
 nn  g<leader>d <Cmd>Glance definitions<CR>
 nn  g<leader>t <Cmd>Glance type_definitions<CR>
@@ -120,7 +122,7 @@ nn  [w  <Cmd>lua vim.lsp.buf.document_highlight()<CR>
 nn  ]w  <Cmd>lua vim.lsp.buf.clear_references()<CR>
 nn  [ob <Cmd>set background=light<CR>
 nn  ]ob <Cmd>set background=dark<CR>
-nn  [oc <Cmd>set colorcolumn=80<CR>
+nn  [oc <Cmd>SetColorColumn<CR>
 nn  ]oc <Cmd>set colorcolumn=<CR>
 nn  [of <Cmd>FormatOnSaveEnable<CR>
 nn  ]of <Cmd>FormatOnSaveDisable<CR>
