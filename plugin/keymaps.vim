@@ -114,6 +114,8 @@ nn  g<leader>l <Cmd>Glance resume<CR>
 " mini.bracketed提供更多映射
 nn  [e  <Cmd>lua vim.diagnostic.jump{count=-vim.v.count1,severity=1}<CR>
 nn  ]e  <Cmd>lua vim.diagnostic.jump{count=vim.v.count1,severity=1}<CR>
+nn  [I  <Cmd>IndentNavPrev<CR>
+nn  ]I  <Cmd>IndentNavNext<CR>
 nn  [r  <Cmd>MoltenPrev<CR>
 nn  ]r  <Cmd>MoltenNext<CR>
 nn  ]R  <Cmd>lua require'kulala.ui'.show_next()<CR>
