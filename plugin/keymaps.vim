@@ -368,8 +368,8 @@ nn  <leader>qp  <Cmd>PossessionPick<CR>
 
 " n组：笔记
 nn  <leader>nn  <Cmd>ObsidianDraft<CR>
-nn  <leader>ns  <Cmd>ObsidianSearch<CR>
-nn  <leader>nf  <Cmd>ObsidianQuickSwitch<CR>
+nn  <leader>ns  <Cmd>Obsidian search<CR>
+nn  <leader>nf  <Cmd>Obsidian quick_switch<CR>
 nn  <leader>ne  <Cmd>NvimTreeObsidian<CR>
 nn  <leader>nS  <Cmd>ObsidianSync<CR>
 nn  <leader>nc  <Cmd>ObsidianGitAdd<CR>
@@ -393,7 +393,7 @@ autocmd filetype rust call RustKeymap()
 function! MarkdownKeymap() abort
     nm <buffer> <LocalLeader>p <Plug>MarkdownPreviewToggle
     nn <buffer> <LocalLeader>f <Cmd>TypoSpace<CR>
-    nn <buffer> <LocalLeader>g <Cmd>ObsidianFollowLink<CR>
+    nn <buffer> <LocalLeader>g <Cmd>Obsidian follow_link<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
 

@@ -37,7 +37,8 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     init = function() vim.g.fcitx5_remote = 'fcitx5-remote' end },
 
   -- Obsidian
-  { 'obsidian-nvim/obsidian.nvim', opts_file = true },
+  { 'obsidian-nvim/obsidian.nvim', opts_file = true,
+    ft = 'markdown', cmd = 'Obsidian' },
 
   -- GitHub
   { 'pwntester/octo.nvim', opts_file = true,
