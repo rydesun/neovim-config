@@ -8,16 +8,11 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'williamboman/mason-lspconfig.nvim', lazy = false,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
-      'neovim/nvim-lspconfig',
-    },
-    opts = { handlers = {
-      -- 自动enable所有通过Mason安装的LSP
-      function(name) vim.lsp.enable(name) end,
-      -- 自动enable可以被空handler取消
-      rust_analyzer = function() end, -- 交给rustaceanvim管理
-      ts_ls = function() end,         -- 交给typescript-tools.nvim管理
-    } },
-  },
+      'neovim/nvim-lspconfig' },
+    opts = { automatic_enable = { exclude = {
+      'rust_analyzer', -- 交给rustaceanvim管理
+      'ts_ls',         -- 交给typescript-tools.nvim管理
+    } } } },
 
   -- 单独配置Rust
   -- LSP使用系统端安装的nightly rust-analyzer，不要从Mason安装
