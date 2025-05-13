@@ -60,7 +60,7 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     require 'lint'.linters_by_ft = {
       markdown = { 'markdownlint-cli2' },
       -- 不要把rust-analyzer.check.command改成clippy
-      -- 而是手动调用clippy
+      -- 而是通过nvim-lint手动调用clippy
       rust = { 'clippy' },
     }
   end },
@@ -127,8 +127,10 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
     version = '^1.0.0', build = ':UpdateRemotePlugins',
     enabled = vim.fn.executable 'jupyter' > 0 },
 
-  -- 代码块+LSP
-  { 'jmbuhr/otter.nvim', config = true, lazy = true },
+  -- Code Block
+  { 'quarto-dev/quarto-nvim', lazy = true, cmd = 'QuartoPreview',
+    opts = { codeRunner = { default_method = 'molten' } },
+    dependencies = { 'jmbuhr/otter.nvim' } }, -- 启动对应语言的LSP
   -- }}}
 
   -- {{{ UI

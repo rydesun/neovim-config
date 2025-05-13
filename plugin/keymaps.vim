@@ -256,8 +256,8 @@ nn  <leader>aa  <Cmd>CodeCompanionChat Toggle<CR>
 xn  <leader>aa  <Cmd>CodeCompanionChat Add<CR>
 nn  <leader>aA  <Cmd>CodeCompanionActions<CR>
 Xns <leader>at  :CodeCompanion /translate<CR>
-nn  <leader>ai  <Cmd>CodeCompanion<CR>#buffer
-Xns <leader>ai  :CodeCompanion<CR>replace
+nn  <leader>ai  <Cmd>CodeCompanion<CR>#buffer 
+Xns <leader>ai  :CodeCompanion<CR>replace 
 
 " c组：替换、复制文本；编辑颜色
 no  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
@@ -318,13 +318,14 @@ nn  <leader>tv  <Cmd>TestVisit<CR>
 nn  <leader>ta  <Cmd>lua Snacks.picker.alternative_file{affix='test'}<CR>
 
 " r组：运行
-nn  <leader>rO  <Cmd>lua require'otter'.activate()<CR>
+nn  <leader>ri  <Cmd>MoltenInit<CR>
 Xns <leader>r   :<C-u>MoltenEvaluateVisual<CR>
 nn  <leader>rr  <Cmd>MoltenReevaluateCell<CR>
 nn  <leader>rl  <Cmd>MoltenEvaluateLine<CR>
 nn  <leader>ro  <Cmd>noautocmd MoltenEnterOutput<CR>
 nn  <leader>rc  <Cmd>MoltenHideOutput<CR>
 nn  <leader>rC  <Cmd>MoltenDelete<CR>
+nn  <leader>rs  <Cmd>MoltenInterrupt<CR>
 nn  <leader>rS  <Cmd>MoltenSave<CR>
 nn  <leader>rL  <Cmd>MoltenLoad<CR>
 nn  <leader>rE  <Cmd>MoltenExportOutput<CR>
@@ -393,9 +394,17 @@ autocmd filetype rust call RustKeymap()
 
 " Markdown
 function! MarkdownKeymap() abort
-    nm <buffer> <LocalLeader>p <Plug>MarkdownPreviewToggle
-    nn <buffer> <LocalLeader>f <Cmd>TypoSpace<CR>
-    nn <buffer> <LocalLeader>g <Cmd>Obsidian follow_link<CR>
+    nm <buffer> <LocalLeader>p  <Plug>MarkdownPreviewToggle
+    nn <buffer> <LocalLeader>f  <Cmd>TypoSpace<CR>
+    nn <buffer> <LocalLeader>g  <Cmd>Obsidian follow_link<CR>
+    nn <buffer> <LocalLeader>ri <Cmd>lua require'otter'.activate()<CR><Cmd>MoltenInit<CR>
+    nn <buffer> <LocalLeader>ro <Cmd>lua require'otter'.activate()<CR>
+    nn <buffer> <LocalLeader>rr <Cmd>lua require'quarto.runner'.run_cell()<CR>
+    xn <buffer> <LocalLeader>r  <Cmd>lua require'quarto.runner'.run_range()<CR>
+    nn <buffer> <LocalLeader>ra <Cmd>lua require'quarto.runner'.run_above()<CR>
+    nn <buffer> <LocalLeader>rb <Cmd>lua require'quarto.runner'.run_below()<CR>
+    nn <buffer> <LocalLeader>rA <Cmd>lua require'quarto.runner'.run_all()<CR>
+    nn <buffer> <LocalLeader>rl <Cmd>lua require'quarto.runner'.run_line()<CR>
 endfunction
 autocmd filetype markdown call MarkdownKeymap()
 
