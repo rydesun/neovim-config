@@ -69,9 +69,6 @@ vim.g.rust_playground_dir = '~/test/playground'
 -- }}}
 
 -- {{{ 选项 (自身界面)
-if not vim.g.env_console then
-  vim.o.termguicolors = true
-end
 -- 去除启动页面的介绍
 vim.opt.shortmess:append 'I'
 -- 不在lastline显示当前模式
@@ -153,9 +150,11 @@ local ok, lazy = pcall(require, 'lazy')
 if ok then
   vim.g.mapleader = ' ' -- lazy需要
   vim.g.maplocalleader = '\\'
-  lazy.setup 'plugins'
+  if not bool(vim.g.disable_lazy_plugins) then
+    lazy.setup 'plugins'
+  end
 else
-  local msg = '插件没有加载(缺失插件管理器lazy.nvim): 需要执行bootstrap.lua'
+  local msg = '插件没有加载：没有找到插件管理器lazy.nvim'
   vim.schedule(function()
     vim.defer_fn(function() vim.notify(msg, vim.log.levels.WARN) end, 10)
   end)
