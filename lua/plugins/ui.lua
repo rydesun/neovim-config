@@ -30,7 +30,7 @@ local spec_ui = require 'libs.lazy-helper' { cond = cond,
   { 'nvim-tree/nvim-web-devicons', opts_file = true,
     cond = not vim.g.env_no_icon },
   -- 图标字体回退到ASCII
-  { 'echasnovski/mini.icons',
+  { 'nvim-mini/mini.icons',
     cond = vim.g.env_no_icon,
     config = function()
       require 'mini.icons'.setup { style = 'ascii' }
