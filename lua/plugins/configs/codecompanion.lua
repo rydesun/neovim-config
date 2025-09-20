@@ -5,10 +5,12 @@ return {
     cmd = { adapter = 'gemini' },
   },
   adapters = {
-    gemini = function()
-      return require 'codecompanion.adapters'.extend('gemini', {
-        env = { api_key = 'cmd:rbw get --folder=API-KEY Gemini' } })
-    end,
+    http = {
+      gemini = function()
+        return require 'codecompanion.adapters'.extend('gemini', {
+          env = { api_key = 'cmd:rbw get --folder=API-KEY Gemini' } })
+      end,
+    },
   },
   prompt_library = {
     Translate = {
@@ -20,7 +22,7 @@ return {
       },
       prompts = { {
         role = 'user',
-        content = '只写出翻译文本，不要其他表达',
+        content = '翻译成中文(只需输出翻译文本，输出完后立即结束)：',
       } },
     },
   },
