@@ -59,7 +59,8 @@ local function custom_basic(palette, soft_palette)
   hi('VirtualTextError', soft_palette.bg_red, palette.none)
   hi('VirtualTextWarning', soft_palette.bg_yellow, palette.none)
   hi('VirtualTextInfo', soft_palette.bg_blue, palette.none)
-  hi('VirtualTextHint', soft_palette.bg_green, palette.none)
+  hi('VirtualTextHint', soft_palette.bg_purple, palette.none)
+
   hi('DiagnosticUnderlineError', palette.none, palette.none,
     'undercurl', soft_palette.bg_red)
   hi('DiagnosticUnderlineWarn', palette.none, palette.none,
@@ -67,7 +68,7 @@ local function custom_basic(palette, soft_palette)
   hi('DiagnosticUnderlineInfo', palette.none, palette.none,
     'undercurl', soft_palette.bg_blue)
   hi('DiagnosticUnderlineHint', palette.none, palette.none,
-    'undercurl', soft_palette.bg_green)
+    'undercurl', soft_palette.bg_purple)
 end
 
 local function custom_plugin(palette)
