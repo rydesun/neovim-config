@@ -126,9 +126,8 @@ picker.layouts = {
 }
 
 picker.previewers = {
-  -- 关闭builtin，使用delta
-  diff = { builtin = false },
-  git = { builtin = false },
+  -- 和终端输出保持一致
+  diff = { style = 'terminal' },
 }
 
 -- 添加自制的源

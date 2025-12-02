@@ -41,7 +41,8 @@ nn  sn  <Cmd>lua Snacks.picker.lsp_symbols()<CR>
 nn  sN  <Cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>
 nn  sf  <Cmd>lua Snacks.picker.files()<CR>
 nn  sF  <Cmd>lua Snacks.picker.files{exclude={},ignored=true,hidden=true}<CR>
-nn  sg  <Cmd>lua Snacks.picker.git_status()<CR>
+nn  sg  <Cmd>lua Snacks.picker.git_diff()<CR>
+nn  sG  :lua Snacks.picker.git_diff{group=true, base='HEAD~'}<Left><Left>
 nn  so  <Cmd>lua Snacks.picker.smart()<CR>
 nn  st  <Cmd>lua Snacks.picker.tagstack()<CR>
 nn  sp  <Cmd>lua Snacks.picker.projects()<CR>
@@ -156,8 +157,8 @@ nn  <C-S-j> <Cmd>Gitsigns nav_hunk next target=staged<CR>
 nn  <C-S-k> <Cmd>Gitsigns nav_hunk prev target=staged<CR>
 ino <C-j>   <Cmd>lua require'luasnip'.jump(1)<CR>
 ino <C-k>   <Cmd>lua require'luasnip'.jump(-1)<CR>
-snor<C-j>   <cmd>lua require'luasnip'.jump(1)<Cr>
-snor<C-k>   <cmd>lua require'luasnip'.jump(-1)<Cr>
+snor<C-j>   <cmd>lua require'luasnip'.jump(1)<CR>
+snor<C-k>   <cmd>lua require'luasnip'.jump(-1)<CR>
 snor<C-l>   <Esc>`>a
 ino <C-n>   <Plug>luasnip-next-choice
 ino <C-p>   <Plug>luasnip-prev-choice
