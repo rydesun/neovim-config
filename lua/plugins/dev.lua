@@ -131,6 +131,12 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   { 'quarto-dev/quarto-nvim', lazy = true, cmd = 'QuartoPreview',
     opts = { codeRunner = { default_method = 'molten' } },
     dependencies = { 'jmbuhr/otter.nvim' } }, -- 启动对应语言的LSP
+
+  -- ctags
+  { 'ludovicchabant/vim-gutentags', lazy = false, init = function()
+    vim.g.gutentags_project_root = { 'ctags.d', '.ctags.d' }
+    vim.g.gutentags_add_default_project_roots = 0
+  end },
   -- }}}
 
   -- {{{ UI

@@ -63,10 +63,7 @@ function M.init(bufnr)
     else
       target_dir = core.get_cwd()
     end
-    api.tree.toggle()
-    vim.notify('RooterPin ' .. target_dir)
     vim.cmd.RooterPin(target_dir)
-    api.tree.toggle()
   end, opts 'Rooter Pin Cwd')
 
   vim.keymap.set('n', 'g+', function()
