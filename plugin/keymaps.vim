@@ -44,7 +44,7 @@ nn  sN  <Cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>
 nn  sf  <Cmd>lua Snacks.picker.files()<CR>
 nn  sF  <Cmd>lua Snacks.picker.files{exclude={},ignored=true,hidden=true}<CR>
 nn  sg  <Cmd>lua Snacks.picker.git_diff()<CR>
-nn  sG  :lua Snacks.picker.git_diff{group=true, base='HEAD~'}<Left><Left>
+nn  sG  <Cmd>lua Snacks.picker.git_diff{group=true, base='ORIG_HEAD'}<CR>
 nn  so  <Cmd>lua Snacks.picker.smart()<CR>
 nn  st  <Cmd>lua Snacks.picker.tagstack()<CR>
 nn  sp  <Cmd>lua Snacks.picker.projects()<CR>
@@ -155,6 +155,7 @@ nn  ]ow <Cmd>setlocal nowrap<CR>
 " 另见blink.cmp
 nn  <C-j>   <Cmd>Gitsigns nav_hunk next<CR>
 nn  <C-k>   <Cmd>Gitsigns nav_hunk prev<CR>
+" 需要去掉fcitx输入法-键盘-触发一次提示模式
 nn  <C-S-j> <Cmd>Gitsigns nav_hunk next target=staged<CR>
 nn  <C-S-k> <Cmd>Gitsigns nav_hunk prev target=staged<CR>
 ino <C-j>   <Cmd>lua require'luasnip'.jump(1)<CR>
@@ -239,6 +240,8 @@ xn  <leader>y   "+y
 Nse <leader>p   empty(getreg('+')) ? '<Cmd>PasteImage<CR>' : '"+p'
 nn  <leader>P   "+P
 nn  <leader>e   <Cmd>NvimTreeFindFileToggle!<CR>
+nn  <leader>E   <Cmd>lua require'nvim-tree.api'.tree.toggle{
+                \ path=vim.env.PWD, find_file=true, focus=true }<CR>
 nn  <leader>u   <Cmd>lua Snacks.picker.undo {layout='sidebar'}<CR>
 nn  <leader>o   <Cmd>SymbolsToggle<CR>
 nn  <leader>K   <Cmd>normal! K<CR>

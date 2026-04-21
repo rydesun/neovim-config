@@ -11,4 +11,6 @@ local signs = {
 return {
   signs = signs,
   signs_staged = signs,
+  -- https://github.com/lewis6991/gitsigns.nvim/issues/1344
+  diff_opts = { internal = true, linematch = false },
 }

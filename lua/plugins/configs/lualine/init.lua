@@ -3,7 +3,11 @@ local extensions = require 'plugins.configs.lualine.extensions'
 local ft_color_blob = require 'plugins.configs.lualine.lib'.ft_color_blob
 
 local winbar = {
-  lualine_a = { { components.filetype, color = ft_color_blob } },
+  lualine_a = { {
+    components.filetype,
+    color = ft_color_blob,
+    on_click = function() vim.cmd 'NvimTreeFindFileToggle!' end,
+  } },
   lualine_b = { {
     components.filename,
     path = 1,
