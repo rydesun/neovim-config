@@ -140,6 +140,23 @@ vim.o.smartcase = true
 vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
 -- 更好看的diff
 vim.opt.diffopt:append 'linematch:60'
+-- 切换buffer不自动折叠
+vim.o.foldlevelstart = 99
+
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    if vim.wo.diff then return end
+    -- 尊重modeline的设置
+    if vim.wo.foldmethod ~= 'manual' then return end
+
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then return end
+    if not client:supports_method 'textDocument/foldingRange' then return end
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+  end,
+})
 
 -- 加载tree-sitter
 vim.api.nvim_create_autocmd('FileType', {

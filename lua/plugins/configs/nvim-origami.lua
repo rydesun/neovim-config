@@ -1,6 +1,6 @@
 return {
-  useLspFoldsWithTreesitterFallback = false,
-  foldtext = { padding = 1, lineCount = { template = '(+%dL)' } },
-  autoFold = { enabled = false },
-  foldKeymaps = { hOnlyOpensOnFirstColumn = true },
+  useLspFoldsWithTreesitterFallback = { enabled = false },
+  foldtext = { padding = { width = 1 }, lineCount = { template = '(+%dL)' } },
+  autoFold = { kinds = { 'imports' } },
+  foldKeymaps = { closeOnlyOnFirstColumn = true },
 }
