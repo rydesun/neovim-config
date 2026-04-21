@@ -1,8 +1,11 @@
+local gemini = { name = 'gemini', model = 'gemini-3.1-flash-lite-preview' }
+
 return {
-  strategies = {
-    chat = { adapter = 'gemini' },
-    inline = { adapter = 'gemini' },
-    cmd = { adapter = 'gemini' },
+  interactions = {
+    chat = { adapter = gemini },
+    inline = { adapter = gemini },
+    cmd = { adapter = gemini },
+    background = { adapter = gemini },
   },
   adapters = {
     http = {
@@ -13,17 +16,17 @@ return {
     },
   },
   prompt_library = {
-    Translate = {
-      strategy = 'chat',
-      opts = {
-        auto_submit = true,
-        is_slash_cmd = true,
-        short_name = 'translate',
-      },
-      prompts = { {
-        role = 'user',
-        content = '翻译成中文(只需输出翻译文本，输出完后立即结束)：',
-      } },
+    markdown = {
+      dirs = { '~/.config/ai/prompts' },
+    },
+  },
+  opts = {
+    language = 'zh',
+  },
+
+  display = {
+    chat = {
+      start_in_insert_mode = true,
     },
   },
 }

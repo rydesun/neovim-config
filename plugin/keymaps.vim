@@ -259,8 +259,8 @@ nn  <leader>aa  <Cmd>CodeCompanionChat Toggle<CR>
 xn  <leader>aa  <Cmd>CodeCompanionChat Add<CR>
 nn  <leader>aA  <Cmd>CodeCompanionActions<CR>
 Xns <leader>at  :CodeCompanion /translate<CR>
-nn  <leader>ai  <Cmd>CodeCompanion<CR>#buffer 
-Xns <leader>ai  :CodeCompanion<CR>replace 
+nn  <leader>ai  <Cmd>CodeCompanion<CR>#{buffer} add: 
+Xns <leader>ai  :CodeCompanion<CR>replace: 
 
 " c组：替换、复制文本；编辑颜色
 no  <leader>cs  <Cmd>lua require'rip-substitute'.sub()<CR>
