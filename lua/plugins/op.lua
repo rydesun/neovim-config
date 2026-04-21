@@ -20,9 +20,7 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
   } },
 
   -- 移动光标
-  { 'ggandor/leap.nvim', opts_file = true },
-  -- 增强f和t
-  { 'ggandor/flit.nvim', opts_file = true, dependencies = 'leap.nvim' },
+  { url = 'https://codeberg.org/andyg/leap.nvim', opts_file = true },
 
   -- 移动至任意语法节点
   { 'aaronik/treewalker.nvim', config = true },

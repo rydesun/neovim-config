@@ -10,6 +10,8 @@ no  H  ^
 no  L  $
 
 " leap.nvim跳转
+map f  <Cmd>lua require'leap'.leap{inputlen=1}<CR>
+map F  <Cmd>lua require'leap'.leap{inputlen=1,backward=true}<CR>
 map m  <Plug>(leap-anywhere)
 nn  M  m
 nn  `  '
