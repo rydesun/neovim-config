@@ -140,6 +140,15 @@ vim.o.smartcase = true
 vim.o.wildignore = '*~,*.swp,*.o,*.py[co],__pycache__'
 -- 更好看的diff
 vim.opt.diffopt:append 'linematch:60'
+
+-- 加载tree-sitter
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(args.match)
+    if not lang or not vim.treesitter.language.add(lang) then return end
+    vim.treesitter.start(args.buf)
+  end,
+})
 -- }}}
 
 -- {{{ 插件

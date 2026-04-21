@@ -32,7 +32,7 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
   { 'chrisgrieser/nvim-various-textobjs', config = true },
   -- mini.ai和mini.surround也可以使用来自此插件的queries
   { 'nvim-treesitter/nvim-treesitter-textobjects',
-    main = 'nvim-treesitter.configs', opts_file = true },
+    branch = 'main', opts_file = true },
 } }
 
 local spec_op_edit = require 'libs.lazy-helper' { cond = vim.g.plug_op_edit,
