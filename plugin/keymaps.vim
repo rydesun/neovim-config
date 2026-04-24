@@ -10,8 +10,6 @@ no  H  ^
 no  L  $
 
 " leap.nvim跳转
-map f  <Cmd>lua require'leap'.leap{inputlen=1}<CR>
-map F  <Cmd>lua require'leap'.leap{inputlen=1,backward=true}<CR>
 map m  <Plug>(leap-anywhere)
 nn  M  m
 nn  `  '
@@ -454,5 +452,10 @@ xn  !   <Cmd>lua require'various-textobjs'.diagnostic()<CR>
 ono ih  <Cmd>Gitsigns select_hunk<CR>
 Xns ih  :Gitsigns select_hunk<CR>
 " }}}
+
+let s:f = expand('<sfile>:p')
+execute 'autocmd BufRead ' . s:f .
+    \ ' nn <buffer> <LocalLeader>r <Cmd>source %<CR>' .
+    \ '<Cmd>lua vim.notify("Reloaded")<CR>'
 
 " vim: foldmethod=marker:foldlevel=0
