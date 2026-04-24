@@ -1,17 +1,27 @@
-local gemini = { name = 'gemini', model = 'gemini-3.1-flash-lite-preview' }
-
 return {
   interactions = {
-    chat = { adapter = gemini },
-    inline = { adapter = gemini },
-    cmd = { adapter = gemini },
-    background = { adapter = gemini },
+    chat = { adapter = 'deepseek' },
+    inline = { adapter = 'deepseek' },
+    cmd = { adapter = 'deepseek' },
+    cli = {
+      agent = 'codex',
+      agents = {
+        codex = { cmd = 'codex' },
+      },
+      opts = {
+        auto_insert = true,
+      },
+    },
   },
   adapters = {
     http = {
       gemini = function()
         return require 'codecompanion.adapters'.extend('gemini', {
           env = { api_key = 'cmd:rbw get --folder=API-KEY Gemini' } })
+      end,
+      deepseek = function()
+        return require 'codecompanion.adapters'.extend('deepseek', {
+          env = { api_key = 'cmd:rbw get --folder=API-KEY deepseek' } })
       end,
     },
   },

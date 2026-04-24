@@ -53,5 +53,5 @@ return require 'libs.lazy-helper' { cond = cond, very_lazy = true, spec = {
   -- AI
   { 'olimorris/codecompanion.nvim', opts_file = true,
     cmd = { 'CodeCompanion', 'CodeCompanionChat',
-      'CodeCompanionActions', 'CodeCompanionCmd' } },
+      'CodeCompanionActions', 'CodeCompanionCmd', 'CodeCompanionCLI' } },
 } }
