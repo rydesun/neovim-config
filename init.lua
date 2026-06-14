@@ -161,9 +161,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- 加载tree-sitter
 vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
-    local lang = vim.treesitter.language.get_lang(args.match)
-    if not lang or not vim.treesitter.language.add(lang) then return end
-    vim.treesitter.start(args.buf)
+    pcall(vim.treesitter.start, args.buf)
   end,
 })
 -- }}}

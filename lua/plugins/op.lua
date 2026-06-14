@@ -6,10 +6,7 @@ local spec_op_motion = require 'libs.lazy-helper' { cond = vim.g.plug_op_motion,
     dependencies = 'kkharji/sqlite.lua' },
 
   -- 增强%
-  { 'andymass/vim-matchup', init_file = true,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      opts = { matchup = { enable = true } } } },
+  { 'andymass/vim-matchup', init_file = true },
 
   -- 增强[
   { 'nvim-mini/mini.bracketed', opts = {

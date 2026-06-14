@@ -93,6 +93,9 @@ local spec_ui_content = require 'libs.lazy-helper' { cond = cond,
 
   -- 预览Markdown
   { 'OXY2DEV/markview.nvim', config = true, ft = 'markdown' },
+
+  -- tree-sitter
+  { 'romus204/tree-sitter-manager.nvim', opts = { highlight = false } },
 } }
 
 -- 不可见的交互方式

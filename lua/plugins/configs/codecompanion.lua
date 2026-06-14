@@ -37,6 +37,7 @@ return {
   display = {
     chat = {
       start_in_insert_mode = true,
+      auto_scroll = false,
     },
   },
 }
