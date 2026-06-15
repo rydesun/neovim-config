@@ -48,7 +48,7 @@ local spec_ui_panel = require 'libs.lazy-helper' { cond = cond,
     cmd = { 'NvimTreeOpen', 'NvimTreeFindFile', 'NvimTreeFindFileToggle' } },
 
   -- 文件浏览器：编辑目录
-  { 'stevearc/oil.nvim', lazy = false, opts_file = true },
+  { 'FylerOrg/fyler.nvim', lazy = false, config = true },
 
   -- 代码大纲结构
   { 'oskarrrrrrr/symbols.nvim', config_file = true, cmd = 'SymbolsToggle' },
@@ -92,7 +92,14 @@ local spec_ui_content = require 'libs.lazy-helper' { cond = cond,
   { 'chrisgrieser/nvim-origami', opts_file = true, lazy = false },
 
   -- 预览Markdown
-  { 'OXY2DEV/markview.nvim', config = true, ft = 'markdown' },
+  { 'OXY2DEV/markview.nvim',
+    ft = { 'markdown', 'codecompanion' },
+    cmd = 'Markview',
+    config = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'codecompanion', command = 'Markview attach',
+      })
+    end },
 
   -- tree-sitter
   { 'romus204/tree-sitter-manager.nvim', opts = { highlight = false } },

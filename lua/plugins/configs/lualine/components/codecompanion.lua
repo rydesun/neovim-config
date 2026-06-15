@@ -1,11 +1,5 @@
 local M = require 'lualine.component':extend()
 
-M.processing = false
-M.spinner_index = 1
-
-local spinner_symbols = { '', '', '', '', '', '' }
-local spinner_symbols_len = #spinner_symbols
-
 function M:init(options)
   M.super.init(self, options)
 
@@ -24,8 +18,7 @@ end
 
 function M:update_status()
   if self.processing then
-    self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
-    return spinner_symbols[self.spinner_index] .. 'AI'
+    return 'AI活跃中…'
   end
 end
 
